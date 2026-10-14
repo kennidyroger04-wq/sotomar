@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "source": "js/data/fimbria-canonical.js",
+  "bosses": {
+    "CRE_SINEIRA": {
+      "bossId": "CRE_SINEIRA",
+      "name": "Sineira",
+      "kind": "BOSS",
+      "arenaId": "MAP_11",
+      "nonLethal": true,
+      "phases": [
+        "GUARDIA",
+        "ALVOROCO",
+        "ALIVIO"
+      ],
+      "identity": {
+        "description": "Grande cágado-de-sino; casco calcificado em forma de sino, musgo luminoso e veios pálidos.",
+        "alignment": "não maligna",
+        "exposure": "pressão de Sereno aumentada"
+      },
+      "exposure": {
+        "id": "SINEIRA_SERENO_PRESSURE",
+        "min": 0,
+        "max": 100,
+        "initial": 50,
+        "note": "PROVISÓRIO — BALANCEAMENTO FUTURO"
+      },
+      "mechanicsStatus": "contract_only"
+    }
+  },
+  "specialEncounter": {
+    "id": "SINEIRA_BOSS_SPECIAL",
+    "mapId": "MAP_11",
+    "creatureId": "CRE_SINEIRA",
+    "status": "boss_deferred"
+  },
+  "owlEncounter": {
+    "id": "CORUJA_MUDA_SPECIAL",
+    "mapId": "MAP_09",
+    "creatureId": "CRE_CORUJA_MUDA",
+    "status": "deferred"
+  }
+}

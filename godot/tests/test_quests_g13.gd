@@ -29,6 +29,10 @@ func _initialize() -> void:
 	_check(npc_event.accepted and state.progress("SIDE_02", "side02_bram") == 0, "NPC events match canonical IDs rather than role or display text")
 	var gated := state.process_event({"eventId": "boss:nonlethal-missing", "type": "BOSS_DEFEATED", "target": "CRE_SINEIRA", "nonLethal": false})
 	_check(gated.accepted and state.progress("MAIN_07", "main07_sineira") == 0, "lethal boss event cannot satisfy nonlethal canonical requirement")
+	var boss_contract_state = QuestState.new()
+	boss_contract_state._states["MAIN_07"].accepted = true
+	var nonlethal_boss := boss_contract_state.process_event({"eventId": "boss:contract-nonlethal", "type": "BOSS_DEFEATED", "target": "CRE_SINEIRA", "nonLethal": true})
+	_check(nonlethal_boss.accepted and boss_contract_state.progress("MAIN_07", "main07_sineira") == 1 and not boss_contract_state.is_completed("MAIN_07"), "Sineira contract accepts a nonlethal resolution but does not skip remaining MAIN_07 objectives")
 	_check(state.tracker_text().contains("A Cerca Quebrada") or state.tracker_text().contains("Rastros Subindo"), "objective summary is available for compact mobile tracker")
 	var gated_state = QuestState.new()
 	gated_state._states["MAIN_07"]["completed"] = true
@@ -62,6 +66,8 @@ func _initialize() -> void:
 		map_assigned_state._states[prerequisite]["completed"] = true
 	map_assigned_state.record_map_entry("MAP_10", "map:10:assigned")
 	_check(map_assigned_state._states["MAIN_07"]["accepted"], "map-assigned quest without TALK objective is accepted through the canonical map adapter")
+	var restored_state = QuestState.new()
+	_check(restored_state.restore_snapshot(deferred_state.snapshot()) and restored_state.progress("MAIN_02", "main02_tufo") == 1, "G17 quest snapshot restores progress and deduplication state")
 	if failures == 0:
 		print("PASS: G13 quest state, aliases, event idempotency, prerequisites and nonlethal requirements")
 		quit(0)

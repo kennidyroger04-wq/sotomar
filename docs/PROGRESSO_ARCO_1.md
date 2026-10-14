@@ -16,7 +16,7 @@
 | G13 — missões/progressão | IMPLEMENTADO, TESTADO; narrativa PARCIAL | QuestState, aceite, eventos G11, tracker, gate MAIN_04, diálogos condicionais e inspeções provisórias. Reivindicações de itens aguardam transação G14; ver `RELATORIO_G13.md`. |
 | G14 — inventário/serviços | IMPLEMENTADO, TESTADO; integração visual PARCIAL | 61 itens sincronizados; modelos de inventário/equipamento/stats, rewards idempotentes, consumíveis e serviços; mochila acessível por toque e inspeções concedem item após transação. Sem persistência (G17) nem UI de equipar/comércio. Ver `RELATORIO_G14.md`. |
 | G15 — habilidades/criaturas/IA | PARCIAL, AUDITADO | Catálogo de cinco habilidades sincronizado; comparação identificou lacuna entre efeitos/IA JS e combate Godot. Habilidades não suportadas seguem inativas até paridade. Ver `RELATORIO_G15.md`. |
-| G16 — boss/final do arco | PENDENTE | Auditoria canônica segue após checkpoint G15. |
+| G16 — boss/final do arco | PARCIAL, AUDITADO | Sineira é o único boss explícito, mas a fonte não confirma que seja o boss final nem define luta/epílogo. Coruja-muda segue deferida. Ver `RELATORIO_G16.md`. |
 | G17 — save/continuidade | PENDENTE | Após conteúdo de boss ser delimitado, integrar schema versionado. |
 
 ## Limites atuais
