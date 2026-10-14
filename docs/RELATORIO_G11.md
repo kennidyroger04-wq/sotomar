@@ -73,7 +73,7 @@ python3 tools/validate_g09_web_export.py build/web
 ### Classificação
 
 - **IMPLEMENTADO:** catálogo derivado, controlador reutilizável, suporte multi-inimigo, marcadores por mapa, estado/resultados em sessão e contrato de eventos.
-- **TESTADO:** regressões G01–G10, paridade JavaScript/Godot, 24 verificações G11 e validação estrutural do pacote Web.
+- **TESTADO:** regressões G01–G10, paridade JavaScript/Godot, 25 verificações G11 e validação estrutural do pacote Web.
 - **VALIDADO:** Chromium desktop, interação touch simulada, entrada e vitória em ENC_01, retorno à exploração; ENC_05 validado headless.
 - **PENDENTE:** ativação/repetição/recompensas canônicas, mapas e encontros restantes, consumidores de missões/inventário e persistência em disco.
 - **FALHOU:** nenhuma falha remanescente na execução final registrada.
