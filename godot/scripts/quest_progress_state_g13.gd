@@ -102,6 +102,18 @@ func pending_item_claims() -> Array[Dictionary]:
 		result.append(claim.duplicate(true))
 	return result
 
+func commit_item_claim(claim_id: String, transaction_id: String, granted: bool) -> Dictionary:
+	if not _pending_item_claims.has(claim_id):
+		return _result(false, "UNKNOWN_CLAIM")
+	var claim: Dictionary = _pending_item_claims[claim_id]
+	if String(claim.get("status", "")) != "PENDING_G14_TRANSACTION":
+		return _result(false, "CLAIM_ALREADY_RESOLVED")
+	if not granted or transaction_id.is_empty():
+		claim.status = "PENDING_G14_TRANSACTION"
+		return _result(false, "TRANSACTION_NOT_COMMITTED")
+	claim.status = "COMMITTED"
+	return process_event({"eventId": "collect:%s" % transaction_id, "type": "COLLECT", "target": String(claim.item_id), "amount": int(claim.amount)})
+
 func set_flag(flag_id: String, enabled := true) -> void:
 	if not flag_id.is_empty():
 		_flags[flag_id] = enabled

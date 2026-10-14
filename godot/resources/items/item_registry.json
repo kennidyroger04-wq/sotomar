@@ -1,0 +1,1039 @@
+{
+  "schemaVersion": 1,
+  "source": "js/data/items.js + js/data/economy.js + js/data/fimbria-canonical.js",
+  "currencyId": "base",
+  "provisionalEconomy": true,
+  "items": {
+    "pocao_simples": {
+      "name": "Poção Simples",
+      "icon": "🧪",
+      "rarity": "Comum",
+      "type": "CONSUMABLE",
+      "desc": "Recupera 30 HP. Pode ser usada no mapa ou durante o combate.",
+      "effect": {
+        "type": "HEAL",
+        "amount": 30
+      },
+      "useCostAp": 2,
+      "economy": {
+        "itemId": "pocao_simples",
+        "buyPrice": 12,
+        "sellPrice": 6,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "pocao_simples"
+    },
+    "QITEM_DECALQUE_DO_SELO": {
+      "name": "Decalque do Selo",
+      "icon": "📜",
+      "rarity": "Especial",
+      "desc": "Evidência de quest obtida ao inspecionar o selo da Arena da Sineira.",
+      "questItem": true,
+      "canonical": true,
+      "economy": {
+        "itemId": "QITEM_DECALQUE_DO_SELO",
+        "buyPrice": 0,
+        "sellPrice": 0,
+        "sellable": false,
+        "provisional": true
+      },
+      "itemId": "QITEM_DECALQUE_DO_SELO"
+    },
+    "QITEM_TUFO_PALIDO": {
+      "name": "Tufo Pálido",
+      "icon": "🌿",
+      "rarity": "Especial",
+      "desc": "Quest item canônico encontrado nos Terraços das Roças.",
+      "questItem": true,
+      "canonical": true,
+      "economy": {
+        "itemId": "QITEM_TUFO_PALIDO",
+        "buyPrice": 0,
+        "sellPrice": 0,
+        "sellable": false
+      },
+      "itemId": "QITEM_TUFO_PALIDO"
+    },
+    "QITEM_REGISTRO_DE_NIVEL": {
+      "name": "Registro de Nível",
+      "icon": "📜",
+      "rarity": "Especial",
+      "desc": "Quest item canônico inspecionado no Marco-Prumo.",
+      "questItem": true,
+      "canonical": true,
+      "economy": {
+        "itemId": "QITEM_REGISTRO_DE_NIVEL",
+        "buyPrice": 0,
+        "sellPrice": 0,
+        "sellable": false
+      },
+      "itemId": "QITEM_REGISTRO_DE_NIVEL"
+    },
+    "QITEM_PAGINA_DAS_BATIDAS": {
+      "name": "Página das Batidas",
+      "icon": "📜",
+      "rarity": "Especial",
+      "desc": "Quest item canônico inspecionado na Ponte Quebrada.",
+      "questItem": true,
+      "canonical": true,
+      "economy": {
+        "itemId": "QITEM_PAGINA_DAS_BATIDAS",
+        "buyPrice": 0,
+        "sellPrice": 0,
+        "sellable": false
+      },
+      "itemId": "QITEM_PAGINA_DAS_BATIDAS"
+    },
+    "QITEM_PAGINAS_DE_AURELO": {
+      "name": "Páginas de Aurelo",
+      "icon": "📜",
+      "rarity": "Especial",
+      "desc": "Quest item canônico inspecionado no Acampamento de Aurelo.",
+      "questItem": true,
+      "canonical": true,
+      "economy": {
+        "itemId": "QITEM_PAGINAS_DE_AURELO",
+        "buyPrice": 0,
+        "sellPrice": 0,
+        "sellable": false
+      },
+      "itemId": "QITEM_PAGINAS_DE_AURELO"
+    },
+    "couro_javali": {
+      "name": "Couro de Javali",
+      "icon": "🟫",
+      "rarity": "Comum",
+      "desc": "Pele resistente e áspera. Usada para confeccionar armaduras leves.",
+      "economy": {
+        "itemId": "couro_javali",
+        "buyPrice": 4,
+        "sellPrice": 2,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "couro_javali"
+    },
+    "dente_afiado": {
+      "name": "Dente Afiado",
+      "icon": "🦷",
+      "rarity": "Incomum",
+      "desc": "Presa afiada como uma navalha. Ingrediente valioso para armas rústicas.",
+      "economy": {
+        "itemId": "dente_afiado",
+        "buyPrice": 7,
+        "sellPrice": 3,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "dente_afiado"
+    },
+    "presa_robusta": {
+      "name": "Presa Robusta",
+      "icon": "🦴",
+      "rarity": "Incomum",
+      "desc": "Presa grande e densa, muito procurada por ferreiros da região.",
+      "economy": {
+        "itemId": "presa_robusta",
+        "buyPrice": 9,
+        "sellPrice": 4,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "presa_robusta"
+    },
+    "pata_javali": {
+      "name": "Pata de Javali",
+      "icon": "🐾",
+      "rarity": "Comum",
+      "desc": "Pata do javali, usada em rituais tribais e na culinária local.",
+      "economy": {
+        "itemId": "pata_javali",
+        "buyPrice": 3,
+        "sellPrice": 1,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "pata_javali"
+    },
+    "carne_suculenta": {
+      "name": "Carne Suculenta",
+      "icon": "🍖",
+      "rarity": "Raro",
+      "desc": "Corte nobre e fresco. Restaura energias quando consumido após a batalha.",
+      "economy": {
+        "itemId": "carne_suculenta",
+        "buyPrice": 8,
+        "sellPrice": 4,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "carne_suculenta"
+    },
+    "esporo_brilhante": {
+      "name": "Esporo Brilhante",
+      "icon": "✨",
+      "rarity": "Comum",
+      "desc": "Um esporo luminoso e levemente quente ao toque.",
+      "economy": {
+        "itemId": "esporo_brilhante",
+        "buyPrice": 6,
+        "sellPrice": 3,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "esporo_brilhante"
+    },
+    "nucleo_flamejante": {
+      "name": "Núcleo Flamejante",
+      "icon": "🔥",
+      "rarity": "Raro",
+      "desc": "Núcleo instável que ainda emite calor intenso mesmo fora do corpo do cogumelo.",
+      "economy": {
+        "itemId": "nucleo_flamejante",
+        "buyPrice": 18,
+        "sellPrice": 9,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "nucleo_flamejante"
+    },
+    "chapeu_couro": {
+      "name": "Chapéu de Couro",
+      "icon": "🎩",
+      "rarity": "Incomum",
+      "desc": "Um chapéu resistente feito com couro de javali curtido. Protege a cabeça em combate.",
+      "equip": {
+        "slot": "hat",
+        "bonus": {
+          "hp": 20
+        },
+        "bonusLabel": "+20 HP Máximo"
+      },
+      "economy": {
+        "itemId": "chapeu_couro",
+        "buyPrice": 30,
+        "sellPrice": 15,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "chapeu_couro"
+    },
+    "espada_madeira": {
+      "name": "Espada de Madeira",
+      "icon": "🗡️",
+      "rarity": "Comum",
+      "desc": "Uma espada de treino simples, mas ainda assim cortante o suficiente para lutar.",
+      "equip": {
+        "slot": "weapon",
+        "bonus": {
+          "forca": 3
+        },
+        "bonusLabel": "+3 Força"
+      },
+      "economy": {
+        "itemId": "espada_madeira",
+        "buyPrice": 24,
+        "sellPrice": 12,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "espada_madeira"
+    },
+    "cajado_magico": {
+      "name": "Cajado Mágico",
+      "icon": "🪄",
+      "rarity": "Raro",
+      "desc": "Cajado entalhado que canaliza a energia flamejante extraída do núcleo do cogumelo.",
+      "equip": {
+        "slot": "weapon",
+        "bonus": {
+          "inteligencia": 8
+        },
+        "bonusLabel": "+8 Inteligência"
+      },
+      "economy": {
+        "itemId": "cajado_magico",
+        "buyPrice": 55,
+        "sellPrice": 27,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "cajado_magico"
+    },
+    "anel_forca": {
+      "name": "Anel de Força",
+      "icon": "💍",
+      "rarity": "Raro",
+      "desc": "Um anel simples que fortalece os músculos de quem o usa.",
+      "equip": {
+        "slot": "ring",
+        "bonus": {
+          "forca": 5
+        },
+        "bonusLabel": "+5 Força"
+      },
+      "economy": {
+        "itemId": "anel_forca",
+        "buyPrice": 45,
+        "sellPrice": 22,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "anel_forca"
+    },
+    "anel_magico": {
+      "name": "Anel Mágico",
+      "icon": "💫",
+      "rarity": "Raro",
+      "desc": "Anel enfeitiçado que amplifica os poderes arcanos do seu portador.",
+      "equip": {
+        "slot": "ring",
+        "bonus": {
+          "inteligencia": 5
+        },
+        "bonusLabel": "+5 Inteligência"
+      },
+      "economy": {
+        "itemId": "anel_magico",
+        "buyPrice": 48,
+        "sellPrice": 24,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "anel_magico"
+    },
+    "CON_INFUSAO_DE_ERVA_MANSA": {
+      "name": "Infusão de Erva Mansa",
+      "icon": "🫖",
+      "type": "CONSUMABLE",
+      "effect": {
+        "type": "HEAL",
+        "amount": 25
+      },
+      "useCostAp": 2,
+      "economy": {
+        "itemId": "CON_INFUSAO_DE_ERVA_MANSA",
+        "buyPrice": 20,
+        "sellPrice": 10,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "CON_INFUSAO_DE_ERVA_MANSA"
+    },
+    "CON_PAO_DE_MEL_E_CASTANHA": {
+      "name": "Pão de Mel e Castanha",
+      "icon": "🍯",
+      "type": "CONSUMABLE",
+      "effect": {
+        "type": "HEAL",
+        "amount": 18
+      },
+      "economy": {
+        "itemId": "CON_PAO_DE_MEL_E_CASTANHA",
+        "buyPrice": 25,
+        "sellPrice": 12,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "CON_PAO_DE_MEL_E_CASTANHA"
+    },
+    "EQ_FACAO_DE_ROCA": {
+      "name": "Facão de Roça",
+      "icon": "🔪",
+      "canonicalSlot": "weapon",
+      "mechanicsStatus": "simplificado",
+      "economy": {
+        "itemId": "EQ_FACAO_DE_ROCA",
+        "buyPrice": 30,
+        "sellPrice": 14,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "EQ_FACAO_DE_ROCA"
+    },
+    "EQ_FUNDA_DE_COURO": {
+      "name": "Funda de Couro",
+      "icon": "🪃",
+      "canonicalSlot": "weapon",
+      "mechanicsStatus": "simplificado",
+      "economy": {
+        "itemId": "EQ_FUNDA_DE_COURO",
+        "buyPrice": 35,
+        "sellPrice": 16,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "EQ_FUNDA_DE_COURO"
+    },
+    "EQ_FUNDA_DE_SEDA": {
+      "name": "Funda de Seda",
+      "icon": "🪃",
+      "canonicalSlot": "weapon",
+      "mechanicsStatus": "simplificado",
+      "economy": {
+        "itemId": "EQ_FUNDA_DE_SEDA",
+        "buyPrice": 40,
+        "sellPrice": 18,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "EQ_FUNDA_DE_SEDA"
+    },
+    "EQ_PRUMO_DE_PEDREIRO": {
+      "name": "Prumo de Pedreiro",
+      "icon": "⚖️",
+      "canonicalSlot": "weapon",
+      "mechanicsStatus": "simplificado",
+      "economy": {
+        "itemId": "EQ_PRUMO_DE_PEDREIRO",
+        "buyPrice": 45,
+        "sellPrice": 20,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "EQ_PRUMO_DE_PEDREIRO"
+    },
+    "EQ_CHAPEU_DE_PALHA_CAIADO": {
+      "name": "Chapéu de Palha Caiado",
+      "icon": "👒",
+      "canonicalSlot": "hat",
+      "mechanicsStatus": "simplificado",
+      "economy": {
+        "itemId": "EQ_CHAPEU_DE_PALHA_CAIADO",
+        "buyPrice": 50,
+        "sellPrice": 22,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "EQ_CHAPEU_DE_PALHA_CAIADO"
+    },
+    "EQ_TOUCA_DE_SEDA": {
+      "name": "Touca de Seda",
+      "icon": "🧢",
+      "canonicalSlot": "hat",
+      "mechanicsStatus": "simplificado",
+      "economy": {
+        "itemId": "EQ_TOUCA_DE_SEDA",
+        "buyPrice": 55,
+        "sellPrice": 24,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "EQ_TOUCA_DE_SEDA"
+    },
+    "EQ_GIBAO_DE_LAVRADOR": {
+      "name": "Gibão de Lavrador",
+      "icon": "🧥",
+      "canonicalSlot": "body",
+      "mechanicsStatus": "preservado_sem_slot_v1",
+      "economy": {
+        "itemId": "EQ_GIBAO_DE_LAVRADOR",
+        "buyPrice": 60,
+        "sellPrice": 26,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "EQ_GIBAO_DE_LAVRADOR"
+    },
+    "EQ_COURACA_DE_PLACAS": {
+      "name": "Couraça de Placas",
+      "icon": "🛡️",
+      "canonicalSlot": "body",
+      "mechanicsStatus": "preservado_sem_slot_v1",
+      "economy": {
+        "itemId": "EQ_COURACA_DE_PLACAS",
+        "buyPrice": 65,
+        "sellPrice": 28,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "EQ_COURACA_DE_PLACAS"
+    },
+    "EQ_PRUMO_DE_MEDICAO": {
+      "name": "Prumo de Medição",
+      "icon": "📏",
+      "canonicalSlot": "weapon",
+      "mechanicsStatus": "simplificado",
+      "economy": {
+        "itemId": "EQ_PRUMO_DE_MEDICAO",
+        "buyPrice": 70,
+        "sellPrice": 30,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "EQ_PRUMO_DE_MEDICAO"
+    },
+    "EQ_PODAO": {
+      "name": "Podão",
+      "icon": "🪓",
+      "canonicalSlot": "weapon",
+      "mechanicsStatus": "simplificado",
+      "economy": {
+        "itemId": "EQ_PODAO",
+        "buyPrice": 75,
+        "sellPrice": 32,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "EQ_PODAO"
+    },
+    "EQ_MALHO_DE_CAL": {
+      "name": "Maço de Cal",
+      "icon": "🔨",
+      "canonicalSlot": "weapon",
+      "mechanicsStatus": "simplificado",
+      "economy": {
+        "itemId": "EQ_MALHO_DE_CAL",
+        "buyPrice": 80,
+        "sellPrice": 34,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "EQ_MALHO_DE_CAL"
+    },
+    "EQ_MALHO_DE_CHIFRE": {
+      "name": "Malho de Chifre",
+      "icon": "🔨",
+      "canonicalSlot": "weapon",
+      "mechanicsStatus": "simplificado",
+      "economy": {
+        "itemId": "EQ_MALHO_DE_CHIFRE",
+        "buyPrice": 85,
+        "sellPrice": 36,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "EQ_MALHO_DE_CHIFRE"
+    },
+    "EQ_CAPUZ_DE_COURO_GROSSO": {
+      "name": "Capuz de Couro Grosso",
+      "icon": "🥷",
+      "canonicalSlot": "hat",
+      "mechanicsStatus": "simplificado",
+      "economy": {
+        "itemId": "EQ_CAPUZ_DE_COURO_GROSSO",
+        "buyPrice": 90,
+        "sellPrice": 38,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "EQ_CAPUZ_DE_COURO_GROSSO"
+    },
+    "EQ_MANTO_DE_MUSGO": {
+      "name": "Manto de Musgo",
+      "icon": "🧣",
+      "canonicalSlot": "body",
+      "mechanicsStatus": "preservado_sem_slot_v1",
+      "economy": {
+        "itemId": "EQ_MANTO_DE_MUSGO",
+        "buyPrice": 95,
+        "sellPrice": 40,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "EQ_MANTO_DE_MUSGO"
+    },
+    "EQ_FITA_DE_CERA": {
+      "name": "Fita de Cera",
+      "icon": "🎗️",
+      "canonicalSlot": "ring",
+      "mechanicsStatus": "simplificado",
+      "economy": {
+        "itemId": "EQ_FITA_DE_CERA",
+        "buyPrice": 100,
+        "sellPrice": 42,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "EQ_FITA_DE_CERA"
+    },
+    "EQ_FRAGMENTO_DE_CRAVA": {
+      "name": "Fragmento de Crava",
+      "icon": "🔹",
+      "canonicalSlot": "ring",
+      "mechanicsStatus": "simplificado",
+      "economy": {
+        "itemId": "EQ_FRAGMENTO_DE_CRAVA",
+        "buyPrice": 105,
+        "sellPrice": 44,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "EQ_FRAGMENTO_DE_CRAVA"
+    },
+    "EQ_PENA_MUDA": {
+      "name": "Pena-muda",
+      "icon": "🪶",
+      "canonicalSlot": "ring",
+      "mechanicsStatus": "preservado_sem_slot_v1",
+      "economy": {
+        "itemId": "EQ_PENA_MUDA",
+        "buyPrice": 110,
+        "sellPrice": 46,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "EQ_PENA_MUDA"
+    },
+    "EQ_LASCA_DE_SINO": {
+      "name": "Lasca de Sino",
+      "icon": "🔔",
+      "canonicalSlot": "ring",
+      "mechanicsStatus": "simplificado",
+      "economy": {
+        "itemId": "EQ_LASCA_DE_SINO",
+        "buyPrice": 115,
+        "sellPrice": 48,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "EQ_LASCA_DE_SINO"
+    },
+    "EQ_COLETE_CAIADO": {
+      "name": "Colete Caiado",
+      "icon": "🥋",
+      "canonicalSlot": "body",
+      "mechanicsStatus": "adiado",
+      "economy": {
+        "itemId": "EQ_COLETE_CAIADO",
+        "buyPrice": 120,
+        "sellPrice": 50,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "EQ_COLETE_CAIADO"
+    },
+    "EQ_LENTE_DE_PRUMEIRO": {
+      "name": "Lente de Prumeiro",
+      "icon": "👓",
+      "canonicalSlot": "ring",
+      "mechanicsStatus": "adiado",
+      "economy": {
+        "itemId": "EQ_LENTE_DE_PRUMEIRO",
+        "buyPrice": 125,
+        "sellPrice": 52,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "EQ_LENTE_DE_PRUMEIRO"
+    },
+    "MAT_PLACAS_DE_CASCUDO": {
+      "name": "MAT PLACAS DE CASCUDO",
+      "icon": "📦",
+      "rarity": "Comum",
+      "canonical": true,
+      "economy": {
+        "itemId": "MAT_PLACAS_DE_CASCUDO",
+        "buyPrice": 3,
+        "sellPrice": 1,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "MAT_PLACAS_DE_CASCUDO"
+    },
+    "MAT_GARRAS": {
+      "name": "MAT GARRAS",
+      "icon": "📦",
+      "rarity": "Comum",
+      "canonical": true,
+      "economy": {
+        "itemId": "MAT_GARRAS",
+        "buyPrice": 4,
+        "sellPrice": 1,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "MAT_GARRAS"
+    },
+    "MAT_PO_DE_CAL": {
+      "name": "MAT PO DE CAL",
+      "icon": "📦",
+      "rarity": "Comum",
+      "canonical": true,
+      "economy": {
+        "itemId": "MAT_PO_DE_CAL",
+        "buyPrice": 5,
+        "sellPrice": 1,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "MAT_PO_DE_CAL"
+    },
+    "MAT_PELO": {
+      "name": "MAT PELO",
+      "icon": "📦",
+      "rarity": "Comum",
+      "canonical": true,
+      "economy": {
+        "itemId": "MAT_PELO",
+        "buyPrice": 6,
+        "sellPrice": 2,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "MAT_PELO"
+    },
+    "MAT_CERA": {
+      "name": "MAT CERA",
+      "icon": "📦",
+      "rarity": "Comum",
+      "canonical": true,
+      "economy": {
+        "itemId": "MAT_CERA",
+        "buyPrice": 7,
+        "sellPrice": 2,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "MAT_CERA"
+    },
+    "MAT_GLANDULA_DE_CHEIRO": {
+      "name": "MAT GLANDULA DE CHEIRO",
+      "icon": "📦",
+      "rarity": "Comum",
+      "canonical": true,
+      "economy": {
+        "itemId": "MAT_GLANDULA_DE_CHEIRO",
+        "buyPrice": 8,
+        "sellPrice": 2,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "MAT_GLANDULA_DE_CHEIRO"
+    },
+    "MAT_COURO": {
+      "name": "MAT COURO",
+      "icon": "📦",
+      "rarity": "Comum",
+      "canonical": true,
+      "economy": {
+        "itemId": "MAT_COURO",
+        "buyPrice": 9,
+        "sellPrice": 3,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "MAT_COURO"
+    },
+    "MAT_CHIFRE": {
+      "name": "MAT CHIFRE",
+      "icon": "📦",
+      "rarity": "Comum",
+      "canonical": true,
+      "economy": {
+        "itemId": "MAT_CHIFRE",
+        "buyPrice": 10,
+        "sellPrice": 3,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "MAT_CHIFRE"
+    },
+    "MAT_PELO_GROSSO": {
+      "name": "MAT PELO GROSSO",
+      "icon": "📦",
+      "rarity": "Comum",
+      "canonical": true,
+      "economy": {
+        "itemId": "MAT_PELO_GROSSO",
+        "buyPrice": 11,
+        "sellPrice": 3,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "MAT_PELO_GROSSO"
+    },
+    "MAT_SEDA": {
+      "name": "MAT SEDA",
+      "icon": "📦",
+      "rarity": "Comum",
+      "canonical": true,
+      "economy": {
+        "itemId": "MAT_SEDA",
+        "buyPrice": 12,
+        "sellPrice": 4,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "MAT_SEDA"
+    },
+    "MAT_GLANDULA_DE_FIO": {
+      "name": "MAT GLANDULA DE FIO",
+      "icon": "📦",
+      "rarity": "Comum",
+      "canonical": true,
+      "economy": {
+        "itemId": "MAT_GLANDULA_DE_FIO",
+        "buyPrice": 13,
+        "sellPrice": 4,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "MAT_GLANDULA_DE_FIO"
+    },
+    "MAT_PRESAS": {
+      "name": "MAT PRESAS",
+      "icon": "📦",
+      "rarity": "Comum",
+      "canonical": true,
+      "economy": {
+        "itemId": "MAT_PRESAS",
+        "buyPrice": 14,
+        "sellPrice": 4,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "MAT_PRESAS"
+    },
+    "MAT_PELE_UMIDA": {
+      "name": "MAT PELE UMIDA",
+      "icon": "📦",
+      "rarity": "Comum",
+      "canonical": true,
+      "economy": {
+        "itemId": "MAT_PELE_UMIDA",
+        "buyPrice": 15,
+        "sellPrice": 5,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "MAT_PELE_UMIDA"
+    },
+    "MAT_LINGUA": {
+      "name": "MAT LINGUA",
+      "icon": "📦",
+      "rarity": "Comum",
+      "canonical": true,
+      "economy": {
+        "itemId": "MAT_LINGUA",
+        "buyPrice": 16,
+        "sellPrice": 5,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "MAT_LINGUA"
+    },
+    "MAT_GLANDULA_UMIDA": {
+      "name": "MAT GLANDULA UMIDA",
+      "icon": "📦",
+      "rarity": "Comum",
+      "canonical": true,
+      "economy": {
+        "itemId": "MAT_GLANDULA_UMIDA",
+        "buyPrice": 17,
+        "sellPrice": 5,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "MAT_GLANDULA_UMIDA"
+    },
+    "MAT_MUSGO_LUMINOSO": {
+      "name": "MAT MUSGO LUMINOSO",
+      "icon": "📦",
+      "rarity": "Comum",
+      "canonical": true,
+      "economy": {
+        "itemId": "MAT_MUSGO_LUMINOSO",
+        "buyPrice": 18,
+        "sellPrice": 6,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "MAT_MUSGO_LUMINOSO"
+    },
+    "MAT_FIBRA": {
+      "name": "MAT FIBRA",
+      "icon": "📦",
+      "rarity": "Comum",
+      "canonical": true,
+      "economy": {
+        "itemId": "MAT_FIBRA",
+        "buyPrice": 19,
+        "sellPrice": 6,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "MAT_FIBRA"
+    },
+    "MAT_COURO_FINO": {
+      "name": "MAT COURO FINO",
+      "icon": "📦",
+      "rarity": "Comum",
+      "canonical": true,
+      "economy": {
+        "itemId": "MAT_COURO_FINO",
+        "buyPrice": 20,
+        "sellPrice": 6,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "MAT_COURO_FINO"
+    },
+    "MAT_PENA_CALCIFICADA": {
+      "name": "MAT PENA CALCIFICADA",
+      "icon": "📦",
+      "rarity": "Comum",
+      "canonical": true,
+      "economy": {
+        "itemId": "MAT_PENA_CALCIFICADA",
+        "buyPrice": 21,
+        "sellPrice": 7,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "MAT_PENA_CALCIFICADA"
+    },
+    "MAT_PENA_MUDA": {
+      "name": "MAT PENA MUDA",
+      "icon": "📦",
+      "rarity": "Comum",
+      "canonical": true,
+      "economy": {
+        "itemId": "MAT_PENA_MUDA",
+        "buyPrice": 22,
+        "sellPrice": 7,
+        "sellable": true,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "MAT_PENA_MUDA"
+    },
+    "MAT_SERENO_CRISTALIZADO": {
+      "name": "MAT SERENO CRISTALIZADO",
+      "icon": "📦",
+      "rarity": "Comum",
+      "canonical": true,
+      "economy": {
+        "itemId": "MAT_SERENO_CRISTALIZADO",
+        "buyPrice": 23,
+        "sellPrice": 7,
+        "sellable": false,
+        "provisional": true,
+        "note": "PROVISÓRIO — balanceamento futuro (Missão 8)"
+      },
+      "itemId": "MAT_SERENO_CRISTALIZADO"
+    }
+  },
+  "orders": [
+    {
+      "id": "ORD_MALHO_DE_CHIFRE",
+      "itemId": "EQ_MALHO_DE_CHIFRE",
+      "requires": [
+        "MAT_CHIFRE"
+      ],
+      "status": "deferred"
+    },
+    {
+      "id": "ORD_FUNDA_DE_SEDA",
+      "itemId": "EQ_FUNDA_DE_SEDA",
+      "requires": [
+        "MAT_SEDA"
+      ],
+      "status": "deferred"
+    },
+    {
+      "id": "ORD_COURACA_DE_PLACAS",
+      "itemId": "EQ_COURACA_DE_PLACAS",
+      "requires": [
+        "MAT_PLACAS_DE_CASCUDO"
+      ],
+      "status": "deferred"
+    },
+    {
+      "id": "ORD_TOUCA_DE_SEDA",
+      "itemId": "EQ_TOUCA_DE_SEDA",
+      "requires": [
+        "MAT_SEDA"
+      ],
+      "status": "deferred"
+    },
+    {
+      "id": "ORD_MANTO_DE_MUSGO_LUMINOSO",
+      "itemId": "EQ_MANTO_DE_MUSGO",
+      "requires": [
+        "MAT_MUSGO_LUMINOSO"
+      ],
+      "status": "deferred"
+    },
+    {
+      "id": "ORD_FITA_DE_CERA_ORVALHADA",
+      "itemId": "EQ_FITA_DE_CERA",
+      "requires": [
+        "MAT_CERA"
+      ],
+      "status": "deferred"
+    },
+    {
+      "id": "ORD_CAPUZ_DE_COURO_GROSSO",
+      "itemId": "EQ_CAPUZ_DE_COURO_GROSSO",
+      "requires": [
+        "MAT_COURO",
+        "MAT_PELO_GROSSO"
+      ],
+      "status": "deferred"
+    },
+    {
+      "id": "ORD_COLETE_CAIADO",
+      "itemId": "EQ_COLETE_CAIADO",
+      "requires": [
+        "MAT_PO_DE_CAL"
+      ],
+      "status": "deferred"
+    }
+  ]
+}

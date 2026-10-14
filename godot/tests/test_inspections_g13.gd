@@ -31,7 +31,9 @@ func _run() -> void:
 	scene._load_map_visuals()
 	_check(scene.inspect_button.visible and scene.inspect_button.text.contains("posição provisória"), "nearby point exposes a clear mobile action and provisional-position notice")
 	scene._inspect_nearest_point()
-	_check(scene._quest_state.is_point_inspected("POINT_TUFO_PALIDO") and scene._quest_state.pending_item_claims().size() == 1, "exploration controller records the inspection without adding a fictional inventory item")
+	_check(scene._quest_state.is_point_inspected("POINT_TUFO_PALIDO") and scene._inventory_state.has("QITEM_TUFO_PALIDO"), "exploration controller commits the canonical item to inventory")
+	_check(scene._quest_state.pending_item_claims()[0].status == "COMMITTED", "COLLECT handoff follows the successful inventory transaction")
+	_check(scene.inventory_button.text == "Mochila · 1", "touch inventory button reflects the collected item")
 	scene.queue_free()
 	await process_frame
 	if failures == 0:

@@ -12,14 +12,14 @@
 - Há suporte a objetivos OR de exploração, flags requeridas, flags de progressão e exigência de resolução não letal para objetivos BOSS.
 - Diálogos NPC consultam estados `unavailable`, `available`, `active`, `ready` e `completed`, usando os textos existentes no catálogo G09 quando definidos. Aceite explícito permanece necessário.
 - O registro de inspeção é gerado do adapter canônico JavaScript e verifica mapa, célula walkable, colisões com spawns/saídas e distância de interação. Os quatro pontos carregados estão marcados como posicionamento `PROVISIONAL_LOGICAL`.
-- Inspeções emitem `INSPECT` idempotente e enfileiram o item canônico como `PENDING_G14_TRANSACTION`. Ainda não concedem inventário nem emitem `COLLECT`; G14 deve confirmar a transação antes do evento de coleta.
+- Inspeções emitem `INSPECT` idempotente e enfileiram o item canônico como `PENDING_G14_TRANSACTION`. A integração G14 confirma a transação antes de mudar a reivindicação para `COMMITTED` e emitir `COLLECT`.
 - MAIN_04 tem teste do ramo OR e da flag `FLAG_ESCADA_MARCO_PRUMO_UNLOCKED` usada pelo gate MAP_05↔MAP_07. A flag só surge após a conclusão permitida pelo estado canônico.
 - O HUD mostra até dois títulos/objetivos disponíveis ou aceitos. MAIN_04 concede `FLAG_ESCADA_MARCO_PRUMO_UNLOCKED`, que o gate do mapa G12 consulta.
 - O estado não concede itens, XP ou moeda. A conclusão lógica usa apenas objetivos existentes; `deliveryTbd`, `problemResolutionTbd`, `pendingObjectives` e cenas/confrontos deferidos continuam bloqueando conclusão.
 
 ## Conteúdo G13 pendente
 
-- A concessão de itens e evento COLLECT aguardam o sistema transacional G14. O estado de inspeção expõe reivindicações pendentes em vez de criar itens fictícios.
+- Decalque do Selo permanece sem marcador físico, pois a posição canônica do selo em MAP_11 continua TBD.
 - Parte dos textos/estados de diálogo não está definida em fonte canônica; nenhum texto de lore novo foi criado. Entrega visual em diálogo depende de estados especificados e validação gráfica.
 - MAIN_02, MAIN_03 e outras missões com materiais/entrega TBD continuam incompletas. MAIN_07 não tem combate Sineira/retorno; SIDE_03 não tem encontro não letal da Coruja.
 - Recompensas não são concedidas, aguardando a transação idempotente de itens em G14.

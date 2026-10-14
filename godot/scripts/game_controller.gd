@@ -16,6 +16,8 @@ const EncounterStateStoreScript = preload("res://scripts/encounter_state_store_g
 const QuestProgressStateScript = preload("res://scripts/quest_progress_state_g13.gd")
 const InspectionCatalogScript = preload("res://scripts/inspection_catalog_g13.gd")
 const InspectionMarkerScript = preload("res://scripts/inspection_marker_g13.gd")
+const InventoryStateScript = preload("res://scripts/inventory_state_g14.gd")
+const RewardTransactionScript = preload("res://scripts/reward_transaction_g14.gd")
 
 @onready var board: Node2D = $GroundAndGrid
 @onready var scenery: Node2D = $Scenery
@@ -33,6 +35,9 @@ const InspectionMarkerScript = preload("res://scripts/inspection_marker_g13.gd")
 var logical_position := Vector2i(1, 1)
 var world_flags: Dictionary = {}
 var _quest_state = QuestProgressStateScript.new()
+var _inventory_state = InventoryStateScript.new()
+var _progression_state: Dictionary = {"currency": {"base": 0}, "xp": 0, "level": 1, "xp_next_level": 100}
+var _reward_transactions
 var _inspection_catalog = InspectionCatalogScript.new()
 var _quest_event_sequence := 0
 var movement_in_progress := false
@@ -62,6 +67,9 @@ var dialogue_advance: Button
 var quest_tracker: Label
 var quest_accept_button: Button
 var inspect_button: Button
+var inventory_button: Button
+var inventory_panel: PanelContainer
+var inventory_contents: Label
 var talk_button: Button
 var _dialogue_lines: PackedStringArray = []
 var _dialogue_index := 0
@@ -77,6 +85,7 @@ var _encounter_markers := Node2D.new()
 var _inspection_markers := Node2D.new()
 
 func _ready() -> void:
+	_reward_transactions = RewardTransactionScript.new(_inventory_state, _progression_state)
 	_encounter_markers.name = "EncounterMarkers"
 	add_child(_encounter_markers)
 	_inspection_markers.name = "InspectionMarkersG13"
@@ -586,6 +595,32 @@ func _set_instructions(mobile_layout := false) -> void:
 		instructions.text = "%s · %s · %s   |   Clique: selecionar · NPC: conversar · direito/setas/WASD: mover%s" % [map_id, name, String(character.get("display_name", "Aventureiro")), notice]
 
 func _build_interaction_ui() -> void:
+	inventory_button = Button.new()
+	inventory_button.name = "InventoryButtonG14"
+	inventory_button.text = "Mochila · 0"
+	inventory_button.custom_minimum_size = Vector2(150, 48)
+	inventory_button.pressed.connect(_toggle_inventory_panel)
+	$HUD.add_child(inventory_button)
+	inventory_panel = PanelContainer.new()
+	inventory_panel.name = "InventoryPanelG14"
+	inventory_panel.visible = false
+	var inventory_style := StyleBoxFlat.new()
+	inventory_style.bg_color = Color("18231f")
+	inventory_style.border_color = Color("9dc884")
+	inventory_style.set_border_width_all(2)
+	inventory_style.set_corner_radius_all(10)
+	inventory_style.content_margin_left = 12
+	inventory_style.content_margin_right = 12
+	inventory_style.content_margin_top = 8
+	inventory_style.content_margin_bottom = 8
+	inventory_panel.add_theme_stylebox_override("panel", inventory_style)
+	inventory_contents = Label.new()
+	inventory_contents.name = "InventoryContentsG14"
+	inventory_contents.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	inventory_contents.add_theme_color_override("font_color", Color("f5f1e7"))
+	inventory_panel.add_child(inventory_contents)
+	$HUD.add_child(inventory_panel)
+	_refresh_inventory_panel()
 	quest_tracker = Label.new()
 	quest_tracker.name = "QuestTrackerG13"
 	quest_tracker.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -671,6 +706,14 @@ func _layout_interaction_ui(size_override: Vector2 = Vector2.ZERO) -> void:
 	var gap := 12.0 * ui_scale
 	var available_width := maxf(0.0, view_size.x - margin * 2.0 - gap)
 	var width := maxf(0.0, available_width * 0.5) if confirm_button.visible else minf(240.0 * ui_scale, view_size.x - margin * 2.0)
+	if inventory_button != null:
+		inventory_button.position = Vector2(view_size.x - margin - 150.0 * ui_scale, 12.0 * ui_scale)
+		inventory_button.size = Vector2(150.0 * ui_scale, 48.0 * ui_scale)
+		inventory_button.add_theme_font_size_override("font_size", int(round(15.0 * ui_scale)))
+	if inventory_panel != null:
+		inventory_panel.position = Vector2(maxf(margin, view_size.x - margin - 250.0 * ui_scale), 68.0 * ui_scale)
+		inventory_panel.size = Vector2(minf(250.0 * ui_scale, view_size.x - margin * 2.0), 150.0 * ui_scale)
+		inventory_contents.add_theme_font_size_override("font_size", int(round(14.0 * ui_scale)))
 	talk_button.add_theme_font_size_override("font_size", int(round(16.0 * ui_scale)))
 	confirm_button.add_theme_font_size_override("font_size", int(round(16.0 * ui_scale)))
 	if encounter_button != null and encounter_button.visible:
@@ -807,9 +850,19 @@ func _inspect_nearest_point() -> void:
 	var result := _quest_state.record_inspection(point)
 	if not result.accepted:
 		return
+	var claims := _quest_state.pending_item_claims()
+	if not claims.is_empty():
+		var claim: Dictionary = claims.back()
+		var transaction_id := "inspection:%s" % String(claim.event_id)
+		var grant: Dictionary = _reward_transactions.apply(transaction_id, {"items": [{"itemId": String(claim.item_id), "amount": int(claim.amount)}]})
+		var collected := _quest_state.commit_item_claim(String(claim.event_id), transaction_id, grant.ok)
+		if not grant.ok or not collected.accepted:
+			push_error("Inspection item transaction failed: %s" % String(grant.get("reason", collected.get("reason", "UNKNOWN"))))
+			return
+		_refresh_inventory_panel()
 	marker.set("inspected", true)
 	marker.queue_redraw()
-	_last_notice = "%s registrado; o item aguarda integração do inventário." % String(point.get("item_name", "Ponto de interesse"))
+	_last_notice = "%s registrado e adicionado à mochila." % String(point.get("item_name", "Ponto de interesse"))
 	_set_instructions()
 	_refresh_quest_tracker()
 	_refresh_npc_interaction()
@@ -991,3 +1044,23 @@ func _refresh_quest_tracker() -> void:
 		return
 	quest_tracker.text = _quest_state.tracker_text()
 	quest_tracker.visible = not quest_tracker.text.is_empty()
+
+func _toggle_inventory_panel() -> void:
+	if inventory_panel == null:
+		return
+	inventory_panel.visible = not inventory_panel.visible
+	_refresh_inventory_panel()
+
+func _refresh_inventory_panel() -> void:
+	if inventory_contents == null or _inventory_state == null:
+		return
+	var lines: Array[String] = []
+	for item_id: String in _inventory_state.quantities:
+		var item: Dictionary = _inventory_state.item_registry.get(item_id, {})
+		lines.append("%s ×%d" % [String(item.get("name", item_id)), _inventory_state.count(item_id)])
+	inventory_contents.text = "Mochila vazia" if lines.is_empty() else "\n".join(lines)
+	if inventory_button != null:
+		var count := 0
+		for amount: Variant in _inventory_state.quantities.values():
+			count += int(amount)
+		inventory_button.text = "Mochila · %d" % count
