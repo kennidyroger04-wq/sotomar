@@ -1,0 +1,10 @@
+const assert=require('node:assert/strict');const fs=require('node:fs');const path=require('node:path');
+const source=require('../../js/data/abilities.js');const file=path.join(__dirname,'../resources/combat/ability_registry_g15.json');
+const registry=JSON.parse(fs.readFileSync(file,'utf8'));
+assert.deepEqual(registry.abilities,source);
+assert.equal(Object.keys(registry.abilities).length,5);
+assert.equal(registry.abilities.avanco.effects[0].mode,'DASH');
+assert.equal(registry.abilities.cruz.effects[1].statusId,'VULNERABLE');
+assert.equal(registry.abilities.lanca.effects[1].statusId,'POISON');
+assert.equal(registry.abilities.fortificar.effects[0].statusId,'FORTIFIED');
+console.log('PASS: ability IDs, costs, ranges, targets and effects match JavaScript source.');
