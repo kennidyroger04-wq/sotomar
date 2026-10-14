@@ -83,6 +83,11 @@ func _run() -> void:
 	_check(overlay != null and overlay.combat.encounter_id == "ENC_01", "ENC_01 launches from main exploration scene")
 	passed += 1
 	if overlay != null:
+		_check(String(overlay.log_label.text).begins_with("ENC_01 · Cascudo-de-cal"), "combat header names the active encounter rather than a hardcoded fallback")
+		passed += 1
+		_check(not main_scene.inventory_button.visible and not main_scene.quest_tracker.visible and not main_scene.talk_button.visible, "combat hides the exploration HUD to keep tactical actions clear")
+		passed += 1
+	if overlay != null:
 		overlay.combat.units[0].x = 2
 		overlay.combat.units[0].y = 2
 		overlay._end_turn()
@@ -92,7 +97,7 @@ func _run() -> void:
 		overlay._choose_action("attack")
 		overlay._try_attack(overlay.combat.units[0], overlay.combat.units[1], true)
 		await process_frame
-		_check(main_scene._encounter_resolved and main_scene._combat_overlay == null and main_scene.board.visible and main_scene.actor.visible, "victory restores exploration and resolves encounter for session")
+		_check(main_scene._encounter_resolved and main_scene._combat_overlay == null and main_scene.board.visible and main_scene.actor.visible and main_scene.inventory_button.visible and main_scene.instructions.visible, "victory restores exploration HUD and resolves encounter for session")
 		passed += 1
 	main_scene._encounter_resolved = false
 	main_scene._encounter_state_store = EncounterStateStore.new()

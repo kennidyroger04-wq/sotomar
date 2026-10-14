@@ -101,7 +101,12 @@ func _build_ui() -> void:
 	log_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	log_label.add_theme_color_override("font_color", Color("edf3e5"))
 	log_label.add_theme_font_size_override("font_size", 14)
-	log_label.text = "ENC_01 · encontro comum · Cascudo-de-cal (balanceamento provisório)"
+	var encounter_names: Array[String] = []
+	var provisional_balance := false
+	for member: Dictionary in encounter_definition.get("composition", []):
+		encounter_names.append(String(member.get("name", member.get("creature_id", "Criatura"))))
+		provisional_balance = provisional_balance or bool(member.get("stats", {}).get("provisional_balance", false))
+	log_label.text = "%s · %s%s" % [String(encounter_definition.get("encounter_id", "ENCONTRO")), " + ".join(encounter_names), " (balanceamento provisório)" if provisional_balance else ""]
 	header_stack.add_child(log_label)
 	var actions := HBoxContainer.new()
 	actions.name = "CombatActions"

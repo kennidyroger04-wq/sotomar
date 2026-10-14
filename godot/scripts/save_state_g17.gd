@@ -97,7 +97,41 @@ func export_json(payload: Dictionary) -> Dictionary:
 		return normalized
 	return {"ok": true, "text": JSON.stringify({"schema_version": SCHEMA_VERSION, "payload": normalized.payload}, "\t")}
 
+func create_recovery_backup(payload: Dictionary) -> Dictionary:
+	var exported := export_json(payload)
+	if not exported.get("ok", false):
+		return exported
+	var suffix := generation
+	var path := "%s_preimport_%06d.json" % [base_path, suffix]
+	var collision := 1
+	while FileAccess.file_exists(path):
+		path = "%s_preimport_%06d_%d.json" % [base_path, suffix, collision]
+		collision += 1
+	var temporary := path + ".tmp"
+	var file := FileAccess.open(temporary, FileAccess.WRITE)
+	if file == null:
+		return {"ok": false, "reason": "BACKUP_OPEN_FAILED"}
+	file.store_string(String(exported.text))
+	file.flush()
+	var error := file.get_error()
+	file.close()
+	if error != OK:
+		return {"ok": false, "reason": "BACKUP_WRITE_FAILED"}
+	var rename_error := DirAccess.rename_absolute(ProjectSettings.globalize_path(temporary), ProjectSettings.globalize_path(path))
+	if rename_error != OK:
+		return {"ok": false, "reason": "BACKUP_COMMIT_FAILED"}
+	return {"ok": true, "path": path}
+
 func import_json(raw: String) -> Dictionary:
+	var validation := validate_json(raw)
+	if not validation.get("ok", false):
+		return validation
+	var parsed: Variant = JSON.parse_string(raw)
+	if parsed is Dictionary and int(parsed.get("version", 0)) == 2:
+		_write_backup(LEGACY_BACKUP, raw)
+	return save(validation.payload)
+
+func validate_json(raw: String) -> Dictionary:
 	var parser := JSON.new()
 	if parser.parse(raw) != OK or not parser.data is Dictionary:
 		return {"ok": false, "reason": "INVALID_JSON"}
@@ -111,10 +145,13 @@ func import_json(raw: String) -> Dictionary:
 		if not migration.ok:
 			return migration
 		payload = migration.payload
-		_write_backup(LEGACY_BACKUP, raw)
 	else:
 		return {"ok": false, "reason": "UNSUPPORTED_VERSION"}
-	return save(payload)
+	var normalized := _normalize(payload)
+	if not normalized.get("ok", false):
+		return normalized
+	var clean: Dictionary = normalized.payload
+	return {"ok": true, "payload": clean, "summary": {"map_id": clean.map_id, "cell": clean.cell, "protagonist_id": clean.protagonist_id, "level": clean.progression.get("level", 1), "inventory_items": clean.inventory.size()}}
 
 func _migrate_js_v2(old: Dictionary) -> Dictionary:
 	var player: Dictionary = old.get("player", {})

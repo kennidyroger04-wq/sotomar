@@ -27,12 +27,24 @@ func _run() -> void:
 	_check(second.ok and second.generation == 2, "subsequent save advances journal generation")
 	var loaded := store.load()
 	_check(loaded.ok and loaded.payload.cell.x == 7 and loaded.payload.inventory.QITEM_TUFO_PALIDO == 2, "load restores latest location and inventory")
+	var recovery_backup := store.create_recovery_backup(payload)
+	var second_recovery_backup := store.create_recovery_backup(payload)
+	_check(recovery_backup.ok and second_recovery_backup.ok and recovery_backup.path != second_recovery_backup.path, "pre-import backups use unique paths rather than overwriting earlier recovery data")
+	var recovery_file := FileAccess.open(recovery_backup.path, FileAccess.READ)
+	var recovered_json: Variant = JSON.parse_string(recovery_file.get_as_text()) if recovery_file != null else null
+	if recovery_file != null: recovery_file.close()
+	_check(recovered_json is Dictionary and recovered_json.get("payload", {}).get("cell", {}).get("x", -1) == 5, "pre-import backup contains a valid snapshot of the state before restore")
 	var bad := payload.duplicate(true)
 	bad.cell = {"x": -4, "y": -4}
 	var after_bad := store.load()
 	_check(not store.save(bad).ok and after_bad.get("payload", {}).get("cell", {}).get("x", -1) == 7, "invalid location cannot replace valid save")
 	var export := store.export_json(payload)
 	_check(export.ok and JSON.parse_string(export.text).schema_version == 1, "save exports a validated versioned JSON document")
+	var generation_before_preview: int = store.generation
+	var preview := store.validate_json(export.text)
+	_check(preview.ok and preview.summary.map_id == "MAP_01", "backup preview validates payload and exposes a safe summary")
+	_check(store.generation == generation_before_preview, "previewing an import does not mutate the existing save")
+	_check(not store.validate_json("not json").ok and store.generation == generation_before_preview, "invalid backup preview cannot change the existing save")
 	_check(not store.import_json("not json").ok, "invalid import is rejected")
 	var imported := store.import_json(export.text)
 	var imported_save := store.load()
@@ -61,7 +73,7 @@ func _cleanup() -> void:
 		var path := prefix + suffix
 		if FileAccess.file_exists(path):
 			DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
-	for path: String in ["user://sotomar_save_migration_backup.json", "user://sotomar_save_corrupt_backup.json"]:
+	for path: String in ["user://sotomar_save_migration_backup.json", "user://sotomar_save_corrupt_backup.json", prefix + "_preimport_000002.json", prefix + "_preimport_000002_1.json"]:
 		if FileAccess.file_exists(path):
 			DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
 

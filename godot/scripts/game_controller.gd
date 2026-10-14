@@ -20,6 +20,8 @@ const InventoryStateScript = preload("res://scripts/inventory_state_g14.gd")
 const RewardTransactionScript = preload("res://scripts/reward_transaction_g14.gd")
 const EquipmentStateScript = preload("res://scripts/equipment_state_g14.gd")
 const SaveStateScript = preload("res://scripts/save_state_g17.gd")
+const ServicesControllerScript = preload("res://scripts/services_controller_g14.gd")
+const CharacterStatsScript = preload("res://scripts/character_stats_g14.gd")
 
 @onready var board: Node2D = $GroundAndGrid
 @onready var scenery: Node2D = $Scenery
@@ -72,10 +74,23 @@ var dialogue_text: Label
 var dialogue_advance: Button
 var quest_tracker: Label
 var quest_accept_button: Button
+var healer_service_button: Button
 var inspect_button: Button
 var inventory_button: Button
 var inventory_panel: PanelContainer
 var inventory_contents: Label
+var inventory_rows: VBoxContainer
+var inventory_feedback: Label
+var inventory_export_button: Button
+var inventory_import_button: Button
+var import_preview_panel: PanelContainer
+var import_preview_text: Label
+var import_confirm_button: Button
+var import_cancel_button: Button
+var import_file_dialog: FileDialog
+var _pending_import_text := ""
+var _web_import_callback: JavaScriptObject
+var _web_import_suspended := false
 var talk_button: Button
 var _dialogue_lines: PackedStringArray = []
 var _dialogue_index := 0
@@ -530,9 +545,9 @@ func _layout_viewport() -> void:
 	if not _user_zoomed:
 		var usable_height := view_size.y - (142.0 / screen_scale if view_size.x < view_size.y else 94.0 / screen_scale)
 		var fitted := minf((view_size.x - 30.0 / screen_scale) / view.size.x, (usable_height - 28.0 / screen_scale) / view.size.y)
-		var mobile_zoom_floor := 1.3 if mobile_layout and not mobile_portrait else (1.0 if mobile_layout else 0.72)
-		var zoom_ceiling := 1.3 if mobile_layout else 1.15
-		var default_zoom := clampf(fitted, mobile_zoom_floor, zoom_ceiling)
+		# Fit the complete map first. A hard mobile zoom floor cropped the board in portrait.
+		var zoom_ceiling := 1.25 if mobile_layout else 1.15
+		var default_zoom := clampf(fitted, 0.35, zoom_ceiling)
 		camera.zoom = Vector2(default_zoom, default_zoom)
 	camera.position = view.get_center()
 	var title_height := 66.0 if mobile_layout else 60.0
@@ -540,7 +555,8 @@ func _layout_viewport() -> void:
 	instructions.size = Vector2(maxf(0.0, view_size.x - 32.0 / screen_scale), title_height * ui_scale)
 	instructions.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	instructions.add_theme_font_size_override("font_size", int(round((14 if mobile_layout else 16) * ui_scale)))
-	rotation_hint.visible = view_size.x < view_size.y
+	# The old orientation banner collided with the quest tracker in mobile portrait.
+	rotation_hint.visible = false
 	rotation_hint.position = Vector2(16, 10.0 + title_height + 2.0) * ui_scale
 	rotation_hint.size = Vector2(maxf(0.0, view_size.x - 32.0 / screen_scale), 24 * ui_scale)
 	rotation_hint.add_theme_font_size_override("font_size", int(round(13.0 * ui_scale)))
@@ -604,7 +620,10 @@ func _set_instructions(mobile_layout := false) -> void:
 	var name := String(map_data.get("name", map_id))
 	var notice := "  ·  " + _last_notice if not _last_notice.is_empty() else ""
 	if mobile_layout:
-		instructions.text = "%s · %s   |   Toque: mover · NPC: conversar · arraste/pinça: câmera%s" % [map_id, name, notice]
+		var compact_notice := ""
+		if not _last_notice.is_empty():
+			compact_notice = " · Encontros pendentes" if _last_notice.begins_with("Encontros pendentes") else " · " + _last_notice.substr(0, mini(_last_notice.length(), 22)) + ("…" if _last_notice.length() > 22 else "")
+		instructions.text = "%s · %s   |   Toque: mover · NPC: conversar · arraste/pinça: câmera%s" % [map_id, name, compact_notice]
 	else:
 		var character := CharacterRoster.character_data(CharacterRoster.selected_id)
 		instructions.text = "%s · %s · %s   |   Clique: selecionar · NPC: conversar · direito/setas/WASD: mover%s" % [map_id, name, String(character.get("display_name", "Aventureiro")), notice]
@@ -631,10 +650,85 @@ func _build_interaction_ui() -> void:
 	inventory_panel.add_theme_stylebox_override("panel", inventory_style)
 	inventory_contents = Label.new()
 	inventory_contents.name = "InventoryContentsG14"
-	inventory_contents.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	inventory_contents.autowrap_mode = TextServer.AUTOWRAP_OFF
 	inventory_contents.add_theme_color_override("font_color", Color("f5f1e7"))
-	inventory_panel.add_child(inventory_contents)
+	var inventory_stack := VBoxContainer.new()
+	inventory_stack.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	inventory_stack.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	inventory_stack.add_theme_constant_override("separation", 8)
+	inventory_contents.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	inventory_stack.add_child(inventory_contents)
+	var save_actions := HBoxContainer.new()
+	inventory_export_button = Button.new()
+	inventory_export_button.text = "Exportar backup"
+	inventory_export_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	inventory_export_button.pressed.connect(_export_save)
+	save_actions.add_child(inventory_export_button)
+	inventory_import_button = Button.new()
+	inventory_import_button.text = "Importar backup"
+	inventory_import_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	inventory_import_button.pressed.connect(_request_import_file)
+	save_actions.add_child(inventory_import_button)
+	inventory_stack.add_child(save_actions)
+	inventory_feedback = Label.new()
+	inventory_feedback.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	inventory_feedback.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	inventory_feedback.add_theme_color_override("font_color", Color("fff0b0"))
+	inventory_stack.add_child(inventory_feedback)
+	var inventory_scroll := ScrollContainer.new()
+	inventory_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	inventory_scroll.custom_minimum_size = Vector2(0, 90)
+	inventory_rows = VBoxContainer.new()
+	inventory_rows.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	inventory_rows.add_theme_constant_override("separation", 6)
+	inventory_scroll.add_child(inventory_rows)
+	inventory_stack.add_child(inventory_scroll)
+	inventory_panel.add_child(inventory_stack)
 	$HUD.add_child(inventory_panel)
+	import_preview_panel = PanelContainer.new()
+	import_preview_panel.name = "ImportPreviewG18A"
+	import_preview_panel.hide()
+	import_preview_panel.z_index = 100
+	var preview_style := StyleBoxFlat.new()
+	preview_style.bg_color = Color("18231f")
+	preview_style.border_color = Color("e2b85f")
+	preview_style.set_border_width_all(2)
+	preview_style.set_corner_radius_all(12)
+	preview_style.content_margin_left = 16
+	preview_style.content_margin_right = 16
+	preview_style.content_margin_top = 12
+	preview_style.content_margin_bottom = 12
+	import_preview_panel.add_theme_stylebox_override("panel", preview_style)
+	var preview_stack := VBoxContainer.new()
+	preview_stack.add_theme_constant_override("separation", 10)
+	import_preview_panel.add_child(preview_stack)
+	var preview_scroll := ScrollContainer.new()
+	preview_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	preview_scroll.custom_minimum_size = Vector2(0, 150)
+	preview_stack.add_child(preview_scroll)
+	import_preview_text = Label.new()
+	import_preview_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	import_preview_text.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	import_preview_text.add_theme_color_override("font_color", Color("f5f1e7"))
+	preview_scroll.add_child(import_preview_text)
+	var preview_actions := HBoxContainer.new()
+	preview_actions.alignment = BoxContainer.ALIGNMENT_END
+	import_cancel_button = Button.new()
+	import_cancel_button.text = "Cancelar"
+	import_cancel_button.pressed.connect(_cancel_import_save)
+	preview_actions.add_child(import_cancel_button)
+	import_confirm_button = Button.new()
+	import_confirm_button.text = "Restaurar backup"
+	import_confirm_button.pressed.connect(_confirm_import_save)
+	preview_actions.add_child(import_confirm_button)
+	preview_stack.add_child(preview_actions)
+	$HUD.add_child(import_preview_panel)
+	import_file_dialog = FileDialog.new()
+	import_file_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
+	import_file_dialog.access = FileDialog.ACCESS_FILESYSTEM
+	import_file_dialog.add_filter("*.json", "Sotomar/Fímbria save JSON")
+	import_file_dialog.file_selected.connect(_on_import_file_selected)
+	$HUD.add_child(import_file_dialog)
 	_refresh_inventory_panel()
 	quest_tracker = Label.new()
 	quest_tracker.name = "QuestTrackerG13"
@@ -699,6 +793,13 @@ func _build_interaction_ui() -> void:
 	quest_accept_button.pressed.connect(_accept_quest_from_dialogue)
 	quest_accept_button.hide()
 	$HUD.add_child(quest_accept_button)
+	healer_service_button = Button.new()
+	healer_service_button.name = "UseHealerServiceG18A"
+	healer_service_button.text = "Recuperar forças · grátis"
+	healer_service_button.custom_minimum_size = Vector2(0, 52)
+	healer_service_button.pressed.connect(_use_healer_service)
+	healer_service_button.hide()
+	$HUD.add_child(healer_service_button)
 
 func _build_encounter_ui() -> void:
 	encounter_button = Button.new()
@@ -722,13 +823,34 @@ func _layout_interaction_ui(size_override: Vector2 = Vector2.ZERO) -> void:
 	var available_width := maxf(0.0, view_size.x - margin * 2.0 - gap)
 	var width := maxf(0.0, available_width * 0.5) if confirm_button.visible else minf(240.0 * ui_scale, view_size.x - margin * 2.0)
 	if inventory_button != null:
-		inventory_button.position = Vector2(view_size.x - margin - 150.0 * ui_scale, 12.0 * ui_scale)
-		inventory_button.size = Vector2(150.0 * ui_scale, 48.0 * ui_scale)
+		var inventory_width := minf(160.0 * ui_scale, view_size.x - margin * 2.0)
+		inventory_button.position = Vector2(view_size.x - margin - inventory_width, 68.0 * ui_scale)
+		inventory_button.size = Vector2(inventory_width, 48.0 * ui_scale)
 		inventory_button.add_theme_font_size_override("font_size", int(round(15.0 * ui_scale)))
 	if inventory_panel != null:
-		inventory_panel.position = Vector2(maxf(margin, view_size.x - margin - 250.0 * ui_scale), 68.0 * ui_scale)
-		inventory_panel.size = Vector2(minf(250.0 * ui_scale, view_size.x - margin * 2.0), 150.0 * ui_scale)
+		var panel_width := minf((view_size.x - margin * 2.0) if is_portrait else 400.0 * ui_scale, view_size.x - margin * 2.0)
+		var panel_height := clampf(view_size.y * (0.58 if is_portrait else 0.68), 150.0 * ui_scale, maxf(150.0 * ui_scale, view_size.y - 190.0 * ui_scale))
+		var panel_x := margin if is_portrait else view_size.x - margin - panel_width
+		inventory_panel.position = Vector2(panel_x, 122.0 * ui_scale)
+		inventory_panel.size = Vector2(panel_width, panel_height)
 		inventory_contents.add_theme_font_size_override("font_size", int(round(14.0 * ui_scale)))
+		if inventory_feedback != null:
+			inventory_feedback.add_theme_font_size_override("font_size", int(round(13.0 * ui_scale)))
+		for save_button: Button in [inventory_export_button, inventory_import_button]:
+			if save_button != null:
+				save_button.custom_minimum_size = Vector2(0, 48.0 * ui_scale)
+				save_button.add_theme_font_size_override("font_size", int(round(14.0 * ui_scale)))
+		if inventory_rows != null:
+			for row in inventory_rows.get_children():
+				if row is HBoxContainer:
+					for child in row.get_children():
+						if child is Button:
+							child.custom_minimum_size = Vector2(92.0 * ui_scale, 44.0 * ui_scale)
+							child.add_theme_font_size_override("font_size", int(round(14.0 * ui_scale)))
+						elif child is Label:
+							child.add_theme_font_size_override("font_size", int(round(13.0 * ui_scale)))
+				elif row is Label:
+					row.add_theme_font_size_override("font_size", int(round(13.0 * ui_scale)))
 	talk_button.add_theme_font_size_override("font_size", int(round(16.0 * ui_scale)))
 	confirm_button.add_theme_font_size_override("font_size", int(round(16.0 * ui_scale)))
 	if encounter_button != null and encounter_button.visible:
@@ -759,14 +881,26 @@ func _layout_interaction_ui(size_override: Vector2 = Vector2.ZERO) -> void:
 	if quest_accept_button != null:
 		quest_accept_button.position = Vector2(margin, view_size.y - 64.0 * ui_scale)
 		quest_accept_button.size = Vector2(minf(260.0 * ui_scale, maxf(0.0, view_size.x - action_width - margin * 3.0)), 52.0 * ui_scale)
+	if healer_service_button != null:
+		healer_service_button.position = Vector2(margin, view_size.y - 64.0 * ui_scale)
+		healer_service_button.size = Vector2(minf(260.0 * ui_scale, maxf(0.0, view_size.x - action_width - margin * 3.0)), 52.0 * ui_scale)
 	dialogue_name.add_theme_font_size_override("font_size", int(round(20.0 * ui_scale)))
 	dialogue_text.add_theme_font_size_override("font_size", int(round(17.0 * ui_scale)))
 	dialogue_advance.add_theme_font_size_override("font_size", int(round(16.0 * ui_scale)))
 	dialogue_advance.custom_minimum_size.y = 52.0 * ui_scale
 	if quest_tracker != null:
-		quest_tracker.position = Vector2(margin, 62.0 * ui_scale)
-		quest_tracker.size = Vector2(maxf(0.0, view_size.x - margin * 2.0), 48.0 * ui_scale)
+		quest_tracker.position = Vector2(margin, (122.0 if is_portrait else 66.0) * ui_scale)
+		quest_tracker.size = Vector2(maxf(0.0, view_size.x - margin * 2.0 - (0.0 if is_portrait else 176.0 * ui_scale)), (74.0 if is_portrait else 52.0) * ui_scale)
 		quest_tracker.add_theme_font_size_override("font_size", int(round(14.0 * ui_scale)))
+	if import_preview_panel != null:
+		var preview_size := Vector2(minf(520.0 * ui_scale, view_size.x - margin * 2.0), minf(280.0 * ui_scale, view_size.y - margin * 2.0))
+		import_preview_panel.position = (view_size - preview_size) * 0.5
+		import_preview_panel.size = preview_size
+		import_preview_text.add_theme_font_size_override("font_size", int(round(14.0 * ui_scale)))
+		for button: Button in [import_cancel_button, import_confirm_button]:
+			button.custom_minimum_size = Vector2(130.0 * ui_scale, 44.0 * ui_scale)
+			button.add_theme_font_size_override("font_size", int(round(14.0 * ui_scale)))
+	_sync_web_import_control()
 
 func _dialogue_is_open() -> bool:
 	return dialogue_panel != null and dialogue_panel.visible
@@ -919,6 +1053,7 @@ func _open_npc_dialogue(npc_id: String) -> void:
 	dialogue_panel.show()
 	dialogue_advance.show()
 	_refresh_quest_accept_button()
+	healer_service_button.visible = npc_id == "curandeiro_nilo"
 	talk_button.hide()
 	_layout_interaction_ui()
 	dialogue_advance.grab_focus()
@@ -940,10 +1075,24 @@ func _close_dialogue() -> void:
 	dialogue_panel.hide()
 	dialogue_advance.hide()
 	quest_accept_button.hide()
+	healer_service_button.hide()
 	_active_npc_id = ""
 	_dialogue_lines = []
 	_refresh_npc_interaction()
 	_set_instructions()
+
+func _use_healer_service() -> void:
+	if _active_npc_id != "curandeiro_nilo":
+		return
+	var stats = CharacterStatsScript.new({}, _equipment_state, _inventory_state)
+	var service = ServicesControllerScript.new(_inventory_state, _equipment_state, _progression_state)
+	var result: Dictionary = service.heal(_current_hp, stats.max_hp())
+	_current_hp = int(result.get("hp", _current_hp))
+	dialogue_text.text = "Pronto. Respire fundo e siga com cuidado." if result.get("healed", false) else "Você já está em boas condições."
+	healer_service_button.hide()
+	dialogue_advance.text = "Fechar diálogo"
+	_refresh_inventory_panel()
+	_save_game()
 
 func _refresh_quest_accept_button() -> void:
 	if quest_accept_button == null:
@@ -993,6 +1142,20 @@ func _refresh_encounter_interaction() -> void:
 		talk_button.hide()
 	_layout_interaction_ui()
 
+func _set_exploration_hud_visible(visible: bool) -> void:
+	if not visible:
+		for control: Control in [instructions, inventory_button, inventory_panel, quest_tracker, talk_button, inspect_button, encounter_button, confirm_button, quest_accept_button, healer_service_button]:
+			if control != null:
+				control.hide()
+		return
+	instructions.show()
+	inventory_button.show()
+	inventory_panel.hide()
+	_refresh_inventory_panel()
+	_refresh_quest_tracker()
+	_refresh_npc_interaction()
+	_refresh_encounter_interaction()
+
 func _start_encounter() -> void:
 	if _combat_overlay != null or selected_encounter_id.is_empty() or not _encounter_registry.world_trigger_available(selected_encounter_id) or _encounter_state_store.is_resolved(selected_encounter_id):
 		return
@@ -1006,9 +1169,7 @@ func _start_encounter() -> void:
 	if not started.get("ok", false):
 		return
 	_clear_pending_move()
-	encounter_button.hide()
-	talk_button.hide()
-	instructions.hide()
+	_set_exploration_hud_visible(false)
 	confirm_button.hide()
 	rotation_hint.hide()
 	board.hide()
@@ -1048,6 +1209,7 @@ func _on_combat_finished(result: String, remaining_hp: int) -> void:
 	_load_map_visuals()
 	_layout_viewport()
 	_update_depth()
+	_set_exploration_hud_visible(true)
 	_refresh_npc_interaction()
 	_refresh_encounter_interaction()
 	_last_notice = "%s vencido. O encontro está resolvido nesta sessão." % completed_encounter_id
@@ -1064,27 +1226,205 @@ func _refresh_quest_tracker() -> void:
 	if quest_tracker == null:
 		return
 	quest_tracker.text = _quest_state.tracker_text()
-	quest_tracker.visible = not quest_tracker.text.is_empty()
+	quest_tracker.visible = not quest_tracker.text.is_empty() and (inventory_panel == null or not inventory_panel.visible)
 
 func _toggle_inventory_panel() -> void:
 	if inventory_panel == null:
 		return
 	inventory_panel.visible = not inventory_panel.visible
+	if quest_tracker != null:
+		quest_tracker.visible = not inventory_panel.visible and not quest_tracker.text.is_empty()
 	_refresh_inventory_panel()
+	_sync_web_import_control()
 
 func _refresh_inventory_panel() -> void:
 	if inventory_contents == null or _inventory_state == null:
 		return
-	var lines: Array[String] = []
-	for item_id: String in _inventory_state.quantities:
-		var item: Dictionary = _inventory_state.item_registry.get(item_id, {})
-		lines.append("%s ×%d" % [String(item.get("name", item_id)), _inventory_state.count(item_id)])
-	inventory_contents.text = "Mochila vazia" if lines.is_empty() else "\n".join(lines)
+	if inventory_rows != null:
+		for old_row in inventory_rows.get_children():
+			inventory_rows.remove_child(old_row)
+			old_row.queue_free()
+	var stats = CharacterStatsScript.new({}, _equipment_state, _inventory_state)
+	var effective: Dictionary = stats.effective()
+	var item_total := 0
+	for amount: Variant in _inventory_state.quantities.values():
+		item_total += int(amount)
+	inventory_contents.text = "Mochila %d · Vida %d/%d\nForça %d · Int %d · Agi %d" % [item_total, _current_hp, stats.max_hp(), int(effective.get("forca", 0)), int(effective.get("inteligencia", 0)), int(effective.get("agilidade", 0))]
+	if inventory_rows != null:
+		var heading := Label.new()
+		heading.text = "Equipamento — toque para remover uma peça:"
+		heading.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		inventory_rows.add_child(heading)
+		for slot: String in ["weapon", "hat", "ring"]:
+			var item_id := String(_equipment_state.slots.get(slot, ""))
+			if item_id.is_empty():
+				continue
+			var equipped: Dictionary = _inventory_state.item_registry.get(item_id, {})
+			var remove_button := Button.new()
+			remove_button.text = "Remover %s: %s" % [slot.capitalize(), String(equipped.get("name", item_id))]
+			remove_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			remove_button.pressed.connect(_on_inventory_action.bind(item_id, "unequip"))
+			inventory_rows.add_child(remove_button)
+		for item_id: String in _inventory_state.quantities:
+			var item: Dictionary = _inventory_state.item_registry.get(item_id, {})
+			var row := HBoxContainer.new()
+			row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			var description := Label.new()
+			description.text = "%s ×%d\n%s" % [String(item.get("name", item_id)), _inventory_state.count(item_id), String(item.get("desc", item.get("rarity", "")))]
+			description.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+			description.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			row.add_child(description)
+			var equip_data: Dictionary = item.get("equip", {})
+			var action := "equip" if not equip_data.is_empty() else ("use" if String(item.get("type", "")) == "CONSUMABLE" else "")
+			if not action.is_empty():
+				var action_button := Button.new()
+				action_button.text = "Equipar" if action == "equip" else "Usar"
+				action_button.custom_minimum_size = Vector2(86, 44)
+				action_button.pressed.connect(_on_inventory_action.bind(item_id, action))
+				row.add_child(action_button)
+			inventory_rows.add_child(row)
+		if _inventory_state.quantities.is_empty():
+			var empty_label := Label.new()
+			empty_label.text = "Mochila vazia."
+			inventory_rows.add_child(empty_label)
 	if inventory_button != null:
-		var count := 0
-		for amount: Variant in _inventory_state.quantities.values():
-			count += int(amount)
-		inventory_button.text = "Mochila · %d" % count
+		inventory_button.text = "Mochila · %d" % item_total
+	if talk_button != null:
+		_layout_interaction_ui()
+
+func _on_inventory_action(item_id: String, action: String) -> void:
+	var result: Dictionary
+	if action == "equip":
+		result = _equipment_state.equip(item_id, _inventory_state)
+	elif action == "unequip":
+		var item: Dictionary = _inventory_state.item_registry.get(item_id, {})
+		var slot := String(item.get("equip", {}).get("slot", item.get("canonicalSlot", "")))
+		result = _equipment_state.unequip(slot, _inventory_state)
+	else:
+		var stats = CharacterStatsScript.new({}, _equipment_state, _inventory_state)
+		var service = ServicesControllerScript.new(_inventory_state, _equipment_state, _progression_state)
+		result = service.use_consumable(item_id, _current_hp, stats.max_hp())
+		if result.get("ok", false):
+			_current_hp = int(result.hp)
+	if result.get("ok", false):
+		inventory_feedback.text = "Equipamento atualizado." if action != "use" else "Poção usada: +%d HP." % int(result.get("healed", 0))
+		_save_game()
+	else:
+		inventory_feedback.text = "Não foi possível concluir: %s." % String(result.get("reason", "ERRO"))
+	_refresh_inventory_panel()
+
+func _export_save() -> void:
+	if _save_store == null or map_data.is_empty():
+		inventory_feedback.text = "O save ainda não está disponível."
+		return
+	var result: Dictionary = _save_store.export_json(_current_save_payload())
+	if not result.get("ok", false):
+		inventory_feedback.text = "Exportação recusada: %s." % String(result.get("reason", "ERRO"))
+		return
+	var bytes := String(result.text).to_utf8_buffer()
+	if OS.has_feature("web"):
+		JavaScriptBridge.download_buffer(bytes, "sotomar-fimbria-save.json", "application/json")
+		inventory_feedback.text = "Backup baixado pelo navegador."
+	else:
+		var path := "user://sotomar-fimbria-save.json"
+		var file := FileAccess.open(path, FileAccess.WRITE)
+		if file == null:
+			inventory_feedback.text = "Falha ao criar backup local."
+			return
+		file.store_buffer(bytes)
+		file.close()
+		inventory_feedback.text = "Backup salvo em %s." % ProjectSettings.globalize_path(path)
+
+func _request_import_file() -> void:
+	if OS.has_feature("web"):
+		_web_import_suspended = false
+		_sync_web_import_control()
+	else:
+		import_file_dialog.popup_centered_ratio(0.8)
+
+func _sync_web_import_control() -> void:
+	if not OS.has_feature("web") or inventory_import_button == null:
+		return
+	var active := inventory_panel != null and inventory_panel.visible and not _web_import_suspended
+	if _web_import_callback == null:
+		_web_import_callback = JavaScriptBridge.create_callback(_on_web_import_file)
+		JavaScriptBridge.get_interface("window").set("sotomarImportSelected", _web_import_callback)
+	var panel_rectangle: Rect2 = get_viewport().get_screen_transform() * inventory_panel.get_global_rect()
+	# The import control is the right half of the action row below the two-line summary.
+	# Using the panel rect avoids stale child geometry before Container sort notifications.
+	var rectangle := Rect2(panel_rectangle.position + Vector2(panel_rectangle.size.x * 0.5, 46.0), Vector2(panel_rectangle.size.x * 0.5, 48.0))
+	var script := """
+	(() => {
+	  let input = document.getElementById('sotomar-save-import');
+	  if (!input) { input = document.createElement('input'); input.id = 'sotomar-save-import'; input.type = 'file'; input.accept = 'application/json,.json'; document.body.appendChild(input); }
+	  input.style.position = 'fixed'; input.style.left = '%spx'; input.style.top = '%spx'; input.style.width = '%spx'; input.style.height = '%spx';
+	  input.style.opacity = '0.001'; input.style.zIndex = '2147483647'; input.style.border = '0'; input.style.padding = '0'; input.style.background = 'transparent'; input.style.pointerEvents = %s; input.style.touchAction = 'manipulation';
+	  input.onchange = async () => { const file = input.files && input.files[0]; if (file && window.sotomarImportSelected) window.sotomarImportSelected(await file.text(), file.name); input.value = ''; };
+	})();
+	""" % [str(rectangle.position.x), str(rectangle.position.y), str(rectangle.size.x), str(rectangle.size.y), "'auto'" if active else "'none'"]
+	JavaScriptBridge.eval(script)
+
+func _on_web_import_file(arguments: Array) -> void:
+	if arguments.is_empty():
+		return
+	_handle_import_text(String(arguments[0]), String(arguments[1]) if arguments.size() > 1 else "backup.json")
+
+func _on_import_file_selected(path: String) -> void:
+	var file := FileAccess.open(path, FileAccess.READ)
+	if file == null:
+		inventory_feedback.text = "Não foi possível ler o arquivo selecionado."
+		return
+	_handle_import_text(file.get_as_text(), path.get_file())
+
+func _handle_import_text(raw: String, filename: String) -> void:
+	_web_import_suspended = true
+	_sync_web_import_control()
+	var validation: Dictionary = _save_store.validate_json(raw)
+	if not validation.get("ok", false):
+		_web_import_suspended = false
+		_sync_web_import_control()
+		inventory_feedback.text = "Backup inválido (%s); save atual preservado." % String(validation.get("reason", "ERRO"))
+		return
+	_pending_import_text = raw
+	var summary: Dictionary = validation.summary
+	inventory_feedback.text = "Backup válido: %s · nível %s. Confirme a restauração." % [String(summary.map_id), str(summary.level)]
+	import_preview_text.text = "RESTORE BACKUP?\n%s\nMapa %s · célula %s\nPersonagem %s · nível %s\n%d itens no inventário\n\nUma cópia do estado atual será guardada antes da restauração." % [filename, summary.map_id, str(summary.cell), summary.protagonist_id, int(summary.level), int(summary.inventory_items)]
+	import_preview_panel.show()
+	_layout_interaction_ui()
+
+func _cancel_import_save() -> void:
+	_pending_import_text = ""
+	import_preview_panel.hide()
+	_web_import_suspended = false
+	_sync_web_import_control()
+	inventory_feedback.text = "Restauração cancelada. O save atual foi mantido."
+
+func _confirm_import_save() -> void:
+	if _pending_import_text.is_empty():
+		return
+	var recovery_backup: Dictionary = _save_store.create_recovery_backup(_current_save_payload())
+	if not recovery_backup.get("ok", false):
+		inventory_feedback.text = "Restauração interrompida: não foi possível criar backup do estado atual (%s)." % String(recovery_backup.get("reason", "ERRO"))
+		return
+	import_preview_panel.hide()
+	var imported: Dictionary = _save_store.import_json(_pending_import_text)
+	_pending_import_text = ""
+	if not imported.get("ok", false):
+		_web_import_suspended = false
+		_sync_web_import_control()
+		inventory_feedback.text = "Restauração falhou (%s); save válido anterior preservado." % String(imported.get("reason", "ERRO"))
+		return
+	if _restore_game():
+		map_data = MapCatalog.get_map(map_id)
+		_load_map_visuals()
+		_layout_viewport()
+		_update_depth()
+		inventory_feedback.text = "Backup restaurado. Cópia anterior protegida em %s." % String(recovery_backup.path.get_file())
+	else:
+		inventory_feedback.text = "Backup gravado, mas o estado não foi restaurado. Recarregue para recuperar a última geração válida."
+	_web_import_suspended = false
+	_sync_web_import_control()
+	_refresh_inventory_panel()
 
 func _restore_game() -> bool:
 	if not _save_enabled or _save_store == null:
@@ -1116,7 +1456,12 @@ func _restore_game() -> bool:
 func _save_game() -> void:
 	if not _save_enabled or _save_store == null or map_id.is_empty() or map_data.is_empty():
 		return
-	var payload := {
+	var result: Dictionary = _save_store.save(_current_save_payload())
+	if not result.get("ok", false):
+		push_warning("Could not save current game state: %s" % String(result.get("reason", "UNKNOWN")))
+
+func _current_save_payload() -> Dictionary:
+	return {
 		"schema_version": SaveStateScript.SCHEMA_VERSION,
 		"protagonist_id": CharacterRoster.selected_id,
 		"map_id": map_id,
@@ -1132,6 +1477,3 @@ func _save_game() -> void:
 		"claimed_rewards": _reward_transactions.snapshot(),
 		"arc_complete": false
 	}
-	var result: Dictionary = _save_store.save(payload)
-	if not result.get("ok", false):
-		push_warning("Could not save current game state: %s" % String(result.get("reason", "UNKNOWN")))
