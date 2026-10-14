@@ -82,26 +82,40 @@ func _draw() -> void:
 				draw_rect(Rect2(center - Vector2(9, 6), Vector2(18, 12)), Color("48505a"))
 	if selected_cell.x >= 0:
 		var selected_center := cell_to_local(selected_cell)
-		draw_arc(selected_center, 14, 0, TAU, 24, Color("ffe07a"), 3.0, true)
-	var foe: Dictionary = combat.units[1]
-	var foe_pos := cell_to_local(Vector2i(int(foe.x), int(foe.y)))
-	if not sprites.has("cascudo"):
-		_draw_cascudo(foe_pos)
+		draw_arc(selected_center, 14 * cell_scale, 0, TAU, 24, Color("ffe07a"), 3.0, true)
 	var font := ThemeDB.fallback_font
 	var player: Dictionary = combat.units[0]
 	var player_pos := cell_to_local(Vector2i(int(player.x), int(player.y)))
-	draw_string(font, player_pos + Vector2(-32, 28), "%d/%d" % [player.hp, player.max_hp], HORIZONTAL_ALIGNMENT_CENTER, 64, 13, Color.WHITE)
-	draw_string(font, foe_pos + Vector2(-42, 28), "%d/%d" % [foe.hp, foe.max_hp], HORIZONTAL_ALIGNMENT_CENTER, 84, 13, Color.WHITE)
+	draw_string(font, player_pos + Vector2(-45, 28) * cell_scale, "%d/%d" % [player.hp, player.max_hp], HORIZONTAL_ALIGNMENT_CENTER, 90 * cell_scale, int(13 * cell_scale), Color.WHITE)
+	for foe: Dictionary in combat.units:
+		if String(foe.get("side", "")) != "mob" or int(foe.get("hp", 0)) <= 0:
+			continue
+		var foe_pos := cell_to_local(Vector2i(int(foe.x), int(foe.y)))
+		_draw_enemy(foe_pos, String(foe.get("canonical_id", "")))
+		draw_string(font, foe_pos + Vector2(-48, 28) * cell_scale, "%d/%d" % [foe.hp, foe.max_hp], HORIZONTAL_ALIGNMENT_CENTER, 96 * cell_scale, int(13 * cell_scale), Color.WHITE)
 
-func _draw_cascudo(feet: Vector2) -> void:
-	_draw_ellipse(feet + Vector2(0, -5), Vector2(25, 9), Color("314b40"))
-	var shell := PackedVector2Array([feet + Vector2(-20, -8), feet + Vector2(-16, -26), feet + Vector2(-6, -39), feet + Vector2(11, -38), feet + Vector2(22, -24), feet + Vector2(20, -9)])
-	draw_colored_polygon(shell, Color("547f4c"))
-	draw_polyline(PackedVector2Array([shell[0], shell[1], shell[2], shell[3], shell[4], shell[5]]), Color("243d36"), 3.0, true)
-	draw_circle(feet + Vector2(-5, -24), 3.0, Color("f1d36b"))
-	draw_circle(feet + Vector2(8, -25), 3.0, Color("f1d36b"))
-	draw_line(feet + Vector2(-4, -12), feet + Vector2(-10, -3), Color("3f5b43"), 4.0)
-	draw_line(feet + Vector2(10, -12), feet + Vector2(16, -3), Color("3f5b43"), 4.0)
+func unit_at(cell: Vector2i) -> Dictionary:
+	for unit: Dictionary in combat.get("units", []):
+		if int(unit.get("hp", 0)) > 0 and Vector2i(int(unit.x), int(unit.y)) == cell:
+			return unit
+	return {}
+
+func _draw_enemy(feet: Vector2, creature_id: String) -> void:
+	var hue := float(absi(creature_id.hash()) % 100) / 100.0
+	var shell_color := Color.from_hsv(hue, 0.42, 0.56)
+	var outline_color := shell_color.darkened(0.48)
+	_draw_ellipse(feet + Vector2(0, -5) * cell_scale, Vector2(25, 9) * cell_scale, outline_color)
+	var shell := PackedVector2Array([
+		feet + Vector2(-20, -8) * cell_scale, feet + Vector2(-16, -26) * cell_scale,
+		feet + Vector2(-6, -39) * cell_scale, feet + Vector2(11, -38) * cell_scale,
+		feet + Vector2(22, -24) * cell_scale, feet + Vector2(20, -9) * cell_scale
+	])
+	draw_colored_polygon(shell, shell_color)
+	draw_polyline(PackedVector2Array([shell[0], shell[1], shell[2], shell[3], shell[4], shell[5]]), outline_color, 3.0 * cell_scale, true)
+	draw_circle(feet + Vector2(-5, -24) * cell_scale, 3.0 * cell_scale, Color("f1d36b"))
+	draw_circle(feet + Vector2(8, -25) * cell_scale, 3.0 * cell_scale, Color("f1d36b"))
+	draw_line(feet + Vector2(-4, -12) * cell_scale, feet + Vector2(-10, -3) * cell_scale, outline_color, 4.0 * cell_scale)
+	draw_line(feet + Vector2(10, -12) * cell_scale, feet + Vector2(16, -3) * cell_scale, outline_color, 4.0 * cell_scale)
 
 func _draw_ellipse(at: Vector2, radius: Vector2, color: Color) -> void:
 	var points := PackedVector2Array()

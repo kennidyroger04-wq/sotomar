@@ -1,0 +1,1164 @@
+{
+  "schema_version": 1,
+  "source_files": [
+    "js/data/fimbria-canonical.js",
+    "js/data/fimbria-runtime.js",
+    "js/data/abilities.js",
+    "godot/resources/maps/map_registry.json"
+  ],
+  "source_status_note": "Canonical encounters have data_only status. Triggers, repeat policies, specific positions and encounter reward tables are not authored canon. Runtime assignments are explicitly provisional.",
+  "available_godot_maps": [
+    "MAP_01",
+    "MAP_02",
+    "MAP_04"
+  ],
+  "reserved_placement_candidates": {
+    "MAP_01": [],
+    "MAP_02": [
+      {
+        "id": "ENCOUNTER_PLACEMENT_01",
+        "x": 6,
+        "y": 4,
+        "sourceStatus": "PROVISIONAL_RESERVED_CELL"
+      }
+    ],
+    "MAP_04": [
+      {
+        "id": "ENCOUNTER_PLACEMENT_01",
+        "x": 6,
+        "y": 4,
+        "sourceStatus": "PROVISIONAL_RESERVED_CELL"
+      }
+    ]
+  },
+  "encounters": {
+    "ENC_01": {
+      "id": "ENC_01",
+      "map_id": "MAP_02",
+      "canonical_status": "data_only",
+      "godot_status": "PROVISIONAL_PLAYABLE",
+      "pending_reasons": [],
+      "activation_condition": "UNSPECIFIED_IN_CANON",
+      "repetition_policy": "UNSPECIFIED_IN_CANON",
+      "runtime_policy": "MANUAL_INTERACTION_SESSION_ONCE",
+      "spawn_placement": {
+        "id": "ENCOUNTER_PLACEMENT_01",
+        "x": 6,
+        "y": 4,
+        "sourceStatus": "PROVISIONAL_RESERVED_CELL"
+      },
+      "composition": [
+        {
+          "unit_id": "ENC_01_1",
+          "creature_id": "CRE_CASCUDO_DE_CAL",
+          "canonical_base_id": "CRE_CASCUDO_DE_CAL",
+          "name": "Cascudo-de-cal",
+          "exposure": "NORMAL",
+          "stats": {
+            "hp": 70,
+            "pa": 6,
+            "pm": 3,
+            "agility": 5,
+            "strength": 0,
+            "physical_resistance": 0,
+            "magical_resistance": 0,
+            "provisional_balance": true
+          },
+          "ability": {
+            "id": "golpe",
+            "name": "Golpe Pesado",
+            "ap_cost": 4,
+            "cooldown": 2,
+            "range_min": 1,
+            "range_max": 1,
+            "damage": [
+              35,
+              45
+            ],
+            "damage_type": "PHYSICAL",
+            "mechanics_status": "BASIC_EFFECTS_AVAILABLE"
+          }
+        }
+      ],
+      "encounter_rewards": [],
+      "reward_status": "NONE_DEFINED_ON_ENCOUNTER;QUEST_REWARDS_SEPARATE;NO_REWARD_GRANT_IN_G11",
+      "quest_dependencies": [
+        {
+          "id": "MAIN_01",
+          "prerequisites": [],
+          "related_objective_ids": [
+            "main01_cascudo"
+          ]
+        }
+      ],
+      "narrative_events": [
+        {
+          "quest_id": "MAIN_01",
+          "objective_id": "main01_cascudo",
+          "source_event": "MOB_KILLED"
+        }
+      ]
+    },
+    "ENC_02": {
+      "id": "ENC_02",
+      "map_id": "MAP_02",
+      "canonical_status": "data_only",
+      "godot_status": "PENDING",
+      "pending_reasons": [
+        "CANONICAL_TRIGGER_OR_UNIQUE_PLACEMENT_UNSPECIFIED"
+      ],
+      "activation_condition": "UNSPECIFIED_IN_CANON",
+      "repetition_policy": "UNSPECIFIED_IN_CANON",
+      "runtime_policy": "NO_WORLD_TRIGGER",
+      "spawn_placement": null,
+      "composition": [
+        {
+          "unit_id": "ENC_02_1",
+          "creature_id": "CRE_CASCUDO_DE_CAL",
+          "canonical_base_id": "CRE_CASCUDO_DE_CAL",
+          "name": "Cascudo-de-cal",
+          "exposure": "NORMAL",
+          "stats": {
+            "hp": 70,
+            "pa": 6,
+            "pm": 3,
+            "agility": 5,
+            "strength": 0,
+            "physical_resistance": 0,
+            "magical_resistance": 0,
+            "provisional_balance": true
+          },
+          "ability": {
+            "id": "golpe",
+            "name": "Golpe Pesado",
+            "ap_cost": 4,
+            "cooldown": 2,
+            "range_min": 1,
+            "range_max": 1,
+            "damage": [
+              35,
+              45
+            ],
+            "damage_type": "PHYSICAL",
+            "mechanics_status": "BASIC_EFFECTS_AVAILABLE"
+          }
+        },
+        {
+          "unit_id": "ENC_02_2",
+          "creature_id": "CRE_CASCUDO_DE_CAL",
+          "canonical_base_id": "CRE_CASCUDO_DE_CAL",
+          "name": "Cascudo-de-cal",
+          "exposure": "NORMAL",
+          "stats": {
+            "hp": 70,
+            "pa": 6,
+            "pm": 3,
+            "agility": 5,
+            "strength": 0,
+            "physical_resistance": 0,
+            "magical_resistance": 0,
+            "provisional_balance": true
+          },
+          "ability": {
+            "id": "golpe",
+            "name": "Golpe Pesado",
+            "ap_cost": 4,
+            "cooldown": 2,
+            "range_min": 1,
+            "range_max": 1,
+            "damage": [
+              35,
+              45
+            ],
+            "damage_type": "PHYSICAL",
+            "mechanics_status": "BASIC_EFFECTS_AVAILABLE"
+          }
+        }
+      ],
+      "encounter_rewards": [],
+      "reward_status": "NONE_DEFINED_ON_ENCOUNTER;QUEST_REWARDS_SEPARATE;NO_REWARD_GRANT_IN_G11",
+      "quest_dependencies": [
+        {
+          "id": "MAIN_01",
+          "prerequisites": [],
+          "related_objective_ids": [
+            "main01_cascudo"
+          ]
+        }
+      ],
+      "narrative_events": [
+        {
+          "quest_id": "MAIN_01",
+          "objective_id": "main01_cascudo",
+          "source_event": "MOB_KILLED"
+        }
+      ]
+    },
+    "ENC_03": {
+      "id": "ENC_03",
+      "map_id": "MAP_03",
+      "canonical_status": "data_only",
+      "godot_status": "PENDING",
+      "pending_reasons": [
+        "MAP_NOT_IN_GODOT_RUNTIME",
+        "CANONICAL_TRIGGER_OR_UNIQUE_PLACEMENT_UNSPECIFIED"
+      ],
+      "activation_condition": "UNSPECIFIED_IN_CANON",
+      "repetition_policy": "UNSPECIFIED_IN_CANON",
+      "runtime_policy": "NO_WORLD_TRIGGER",
+      "spawn_placement": null,
+      "composition": [
+        {
+          "unit_id": "ENC_03_1",
+          "creature_id": "CRE_PAPA_MEL",
+          "canonical_base_id": "CRE_PAPA_MEL",
+          "name": "Papa-mel",
+          "exposure": "NORMAL",
+          "stats": {
+            "hp": 60,
+            "pa": 6,
+            "pm": 4,
+            "agility": 8,
+            "strength": 0,
+            "physical_resistance": 0,
+            "magical_resistance": 0,
+            "provisional_balance": true
+          },
+          "ability": {
+            "id": "golpe",
+            "name": "Golpe Pesado",
+            "ap_cost": 4,
+            "cooldown": 2,
+            "range_min": 1,
+            "range_max": 1,
+            "damage": [
+              35,
+              45
+            ],
+            "damage_type": "PHYSICAL",
+            "mechanics_status": "BASIC_EFFECTS_AVAILABLE"
+          }
+        },
+        {
+          "unit_id": "ENC_03_2",
+          "creature_id": "CRE_CASCUDO_DE_CAL",
+          "canonical_base_id": "CRE_CASCUDO_DE_CAL",
+          "name": "Cascudo-de-cal",
+          "exposure": "NORMAL",
+          "stats": {
+            "hp": 70,
+            "pa": 6,
+            "pm": 3,
+            "agility": 5,
+            "strength": 0,
+            "physical_resistance": 0,
+            "magical_resistance": 0,
+            "provisional_balance": true
+          },
+          "ability": {
+            "id": "golpe",
+            "name": "Golpe Pesado",
+            "ap_cost": 4,
+            "cooldown": 2,
+            "range_min": 1,
+            "range_max": 1,
+            "damage": [
+              35,
+              45
+            ],
+            "damage_type": "PHYSICAL",
+            "mechanics_status": "BASIC_EFFECTS_AVAILABLE"
+          }
+        }
+      ],
+      "encounter_rewards": [],
+      "reward_status": "NONE_DEFINED_ON_ENCOUNTER;QUEST_REWARDS_SEPARATE;NO_REWARD_GRANT_IN_G11",
+      "quest_dependencies": [
+        {
+          "id": "MAIN_01",
+          "prerequisites": [],
+          "related_objective_ids": [
+            "main01_cascudo"
+          ]
+        }
+      ],
+      "narrative_events": [
+        {
+          "quest_id": "MAIN_01",
+          "objective_id": "main01_cascudo",
+          "source_event": "MOB_KILLED"
+        }
+      ]
+    },
+    "ENC_04": {
+      "id": "ENC_04",
+      "map_id": "MAP_03",
+      "canonical_status": "data_only",
+      "godot_status": "PENDING",
+      "pending_reasons": [
+        "MAP_NOT_IN_GODOT_RUNTIME",
+        "CANONICAL_TRIGGER_OR_UNIQUE_PLACEMENT_UNSPECIFIED"
+      ],
+      "activation_condition": "UNSPECIFIED_IN_CANON",
+      "repetition_policy": "UNSPECIFIED_IN_CANON",
+      "runtime_policy": "NO_WORLD_TRIGGER",
+      "spawn_placement": null,
+      "composition": [
+        {
+          "unit_id": "ENC_04_1",
+          "creature_id": "CRE_PAPA_MEL_ORVALHADO",
+          "canonical_base_id": "CRE_PAPA_MEL",
+          "name": "Papa-mel",
+          "exposure": "ORVALHADO",
+          "stats": {
+            "hp": 60,
+            "pa": 6,
+            "pm": 4,
+            "agility": 8,
+            "strength": 0,
+            "physical_resistance": 0,
+            "magical_resistance": 0,
+            "provisional_balance": true
+          },
+          "ability": {
+            "id": "golpe",
+            "name": "Golpe Pesado",
+            "ap_cost": 4,
+            "cooldown": 2,
+            "range_min": 1,
+            "range_max": 1,
+            "damage": [
+              35,
+              45
+            ],
+            "damage_type": "PHYSICAL",
+            "mechanics_status": "BASIC_EFFECTS_AVAILABLE"
+          }
+        }
+      ],
+      "encounter_rewards": [],
+      "reward_status": "NONE_DEFINED_ON_ENCOUNTER;QUEST_REWARDS_SEPARATE;NO_REWARD_GRANT_IN_G11",
+      "quest_dependencies": [],
+      "narrative_events": []
+    },
+    "ENC_05": {
+      "id": "ENC_05",
+      "map_id": "MAP_04",
+      "canonical_status": "data_only",
+      "godot_status": "PROVISIONAL_PLAYABLE",
+      "pending_reasons": [],
+      "activation_condition": "UNSPECIFIED_IN_CANON",
+      "repetition_policy": "UNSPECIFIED_IN_CANON",
+      "runtime_policy": "MANUAL_INTERACTION_SESSION_ONCE",
+      "spawn_placement": {
+        "id": "ENCOUNTER_PLACEMENT_01",
+        "x": 6,
+        "y": 4,
+        "sourceStatus": "PROVISIONAL_RESERVED_CELL"
+      },
+      "composition": [
+        {
+          "unit_id": "ENC_05_1",
+          "creature_id": "CRE_TOPETAO",
+          "canonical_base_id": "CRE_TOPETAO",
+          "name": "Topetão",
+          "exposure": "NORMAL",
+          "stats": {
+            "hp": 90,
+            "pa": 6,
+            "pm": 3,
+            "agility": 6,
+            "strength": 0,
+            "physical_resistance": 0,
+            "magical_resistance": 0,
+            "provisional_balance": true
+          },
+          "ability": {
+            "id": "golpe",
+            "name": "Golpe Pesado",
+            "ap_cost": 4,
+            "cooldown": 2,
+            "range_min": 1,
+            "range_max": 1,
+            "damage": [
+              35,
+              45
+            ],
+            "damage_type": "PHYSICAL",
+            "mechanics_status": "BASIC_EFFECTS_AVAILABLE"
+          }
+        }
+      ],
+      "encounter_rewards": [],
+      "reward_status": "NONE_DEFINED_ON_ENCOUNTER;QUEST_REWARDS_SEPARATE;NO_REWARD_GRANT_IN_G11",
+      "quest_dependencies": [
+        {
+          "id": "MAIN_02",
+          "prerequisites": [
+            "MAIN_01"
+          ],
+          "related_objective_ids": [
+            "main02_topetao"
+          ]
+        }
+      ],
+      "narrative_events": [
+        {
+          "quest_id": "MAIN_02",
+          "objective_id": "main02_topetao",
+          "source_event": "MOB_KILLED"
+        }
+      ]
+    },
+    "ENC_06": {
+      "id": "ENC_06",
+      "map_id": "MAP_04",
+      "canonical_status": "data_only",
+      "godot_status": "PENDING",
+      "pending_reasons": [
+        "CANONICAL_TRIGGER_OR_UNIQUE_PLACEMENT_UNSPECIFIED",
+        "CREATURE_ABILITY_MECHANICS_NOT_FULLY_IMPLEMENTED"
+      ],
+      "activation_condition": "UNSPECIFIED_IN_CANON",
+      "repetition_policy": "UNSPECIFIED_IN_CANON",
+      "runtime_policy": "NO_WORLD_TRIGGER",
+      "spawn_placement": null,
+      "composition": [
+        {
+          "unit_id": "ENC_06_1",
+          "creature_id": "CRE_TOPETAO",
+          "canonical_base_id": "CRE_TOPETAO",
+          "name": "Topetão",
+          "exposure": "NORMAL",
+          "stats": {
+            "hp": 90,
+            "pa": 6,
+            "pm": 3,
+            "agility": 6,
+            "strength": 0,
+            "physical_resistance": 0,
+            "magical_resistance": 0,
+            "provisional_balance": true
+          },
+          "ability": {
+            "id": "golpe",
+            "name": "Golpe Pesado",
+            "ap_cost": 4,
+            "cooldown": 2,
+            "range_min": 1,
+            "range_max": 1,
+            "damage": [
+              35,
+              45
+            ],
+            "damage_type": "PHYSICAL",
+            "mechanics_status": "BASIC_EFFECTS_AVAILABLE"
+          }
+        },
+        {
+          "unit_id": "ENC_06_2",
+          "creature_id": "CRE_FIANDEIRA",
+          "canonical_base_id": "CRE_FIANDEIRA",
+          "name": "Fiandeira",
+          "exposure": "NORMAL",
+          "stats": {
+            "hp": 65,
+            "pa": 6,
+            "pm": 3,
+            "agility": 10,
+            "strength": 0,
+            "physical_resistance": 0,
+            "magical_resistance": 0,
+            "provisional_balance": true
+          },
+          "ability": {
+            "id": "lanca",
+            "name": "Arremesso de Lança",
+            "ap_cost": 3,
+            "cooldown": 0,
+            "range_min": 2,
+            "range_max": 3,
+            "damage": [
+              18,
+              26
+            ],
+            "damage_type": "PHYSICAL",
+            "mechanics_status": "PARTIAL_EFFECTS_PENDING"
+          }
+        }
+      ],
+      "encounter_rewards": [],
+      "reward_status": "NONE_DEFINED_ON_ENCOUNTER;QUEST_REWARDS_SEPARATE;NO_REWARD_GRANT_IN_G11",
+      "quest_dependencies": [
+        {
+          "id": "MAIN_02",
+          "prerequisites": [
+            "MAIN_01"
+          ],
+          "related_objective_ids": [
+            "main02_topetao"
+          ]
+        }
+      ],
+      "narrative_events": [
+        {
+          "quest_id": "MAIN_02",
+          "objective_id": "main02_topetao",
+          "source_event": "MOB_KILLED"
+        }
+      ]
+    },
+    "ENC_07": {
+      "id": "ENC_07",
+      "map_id": "MAP_05",
+      "canonical_status": "data_only",
+      "godot_status": "PENDING",
+      "pending_reasons": [
+        "MAP_NOT_IN_GODOT_RUNTIME",
+        "CANONICAL_TRIGGER_OR_UNIQUE_PLACEMENT_UNSPECIFIED",
+        "CREATURE_ABILITY_MECHANICS_NOT_FULLY_IMPLEMENTED"
+      ],
+      "activation_condition": "UNSPECIFIED_IN_CANON",
+      "repetition_policy": "UNSPECIFIED_IN_CANON",
+      "runtime_policy": "NO_WORLD_TRIGGER",
+      "spawn_placement": null,
+      "composition": [
+        {
+          "unit_id": "ENC_07_1",
+          "creature_id": "CRE_FIANDEIRA",
+          "canonical_base_id": "CRE_FIANDEIRA",
+          "name": "Fiandeira",
+          "exposure": "NORMAL",
+          "stats": {
+            "hp": 65,
+            "pa": 6,
+            "pm": 3,
+            "agility": 10,
+            "strength": 0,
+            "physical_resistance": 0,
+            "magical_resistance": 0,
+            "provisional_balance": true
+          },
+          "ability": {
+            "id": "lanca",
+            "name": "Arremesso de Lança",
+            "ap_cost": 3,
+            "cooldown": 0,
+            "range_min": 2,
+            "range_max": 3,
+            "damage": [
+              18,
+              26
+            ],
+            "damage_type": "PHYSICAL",
+            "mechanics_status": "PARTIAL_EFFECTS_PENDING"
+          }
+        },
+        {
+          "unit_id": "ENC_07_2",
+          "creature_id": "CRE_FIANDEIRA_MAREJADA",
+          "canonical_base_id": "CRE_FIANDEIRA",
+          "name": "Fiandeira",
+          "exposure": "MAREJADO",
+          "stats": {
+            "hp": 65,
+            "pa": 6,
+            "pm": 3,
+            "agility": 10,
+            "strength": 0,
+            "physical_resistance": 0,
+            "magical_resistance": 0,
+            "provisional_balance": true
+          },
+          "ability": {
+            "id": "lanca",
+            "name": "Arremesso de Lança",
+            "ap_cost": 3,
+            "cooldown": 0,
+            "range_min": 2,
+            "range_max": 3,
+            "damage": [
+              18,
+              26
+            ],
+            "damage_type": "PHYSICAL",
+            "mechanics_status": "PARTIAL_EFFECTS_PENDING"
+          }
+        }
+      ],
+      "encounter_rewards": [],
+      "reward_status": "NONE_DEFINED_ON_ENCOUNTER;QUEST_REWARDS_SEPARATE;NO_REWARD_GRANT_IN_G11",
+      "quest_dependencies": [],
+      "narrative_events": []
+    },
+    "ENC_08": {
+      "id": "ENC_08",
+      "map_id": "MAP_06",
+      "canonical_status": "data_only",
+      "godot_status": "PENDING",
+      "pending_reasons": [
+        "MAP_NOT_IN_GODOT_RUNTIME",
+        "CANONICAL_TRIGGER_OR_UNIQUE_PLACEMENT_UNSPECIFIED",
+        "CREATURE_ABILITY_MECHANICS_NOT_FULLY_IMPLEMENTED"
+      ],
+      "activation_condition": "UNSPECIFIED_IN_CANON",
+      "repetition_policy": "UNSPECIFIED_IN_CANON",
+      "runtime_policy": "NO_WORLD_TRIGGER",
+      "spawn_placement": null,
+      "composition": [
+        {
+          "unit_id": "ENC_08_1",
+          "creature_id": "CRE_SAPO_DE_POCA",
+          "canonical_base_id": "CRE_SAPO_DE_POCA",
+          "name": "Sapo-de-poça",
+          "exposure": "MAREJADO",
+          "stats": {
+            "hp": 75,
+            "pa": 6,
+            "pm": 3,
+            "agility": 7,
+            "strength": 0,
+            "physical_resistance": 0,
+            "magical_resistance": 0,
+            "provisional_balance": true
+          },
+          "ability": {
+            "id": "golpe",
+            "name": "Golpe Pesado",
+            "ap_cost": 4,
+            "cooldown": 2,
+            "range_min": 1,
+            "range_max": 1,
+            "damage": [
+              35,
+              45
+            ],
+            "damage_type": "PHYSICAL",
+            "mechanics_status": "BASIC_EFFECTS_AVAILABLE"
+          }
+        },
+        {
+          "unit_id": "ENC_08_2",
+          "creature_id": "CRE_SAPO_DE_POCA",
+          "canonical_base_id": "CRE_SAPO_DE_POCA",
+          "name": "Sapo-de-poça",
+          "exposure": "MAREJADO",
+          "stats": {
+            "hp": 75,
+            "pa": 6,
+            "pm": 3,
+            "agility": 7,
+            "strength": 0,
+            "physical_resistance": 0,
+            "magical_resistance": 0,
+            "provisional_balance": true
+          },
+          "ability": {
+            "id": "golpe",
+            "name": "Golpe Pesado",
+            "ap_cost": 4,
+            "cooldown": 2,
+            "range_min": 1,
+            "range_max": 1,
+            "damage": [
+              35,
+              45
+            ],
+            "damage_type": "PHYSICAL",
+            "mechanics_status": "BASIC_EFFECTS_AVAILABLE"
+          }
+        },
+        {
+          "unit_id": "ENC_08_3",
+          "creature_id": "CRE_FIANDEIRA_MAREJADA",
+          "canonical_base_id": "CRE_FIANDEIRA",
+          "name": "Fiandeira",
+          "exposure": "MAREJADO",
+          "stats": {
+            "hp": 65,
+            "pa": 6,
+            "pm": 3,
+            "agility": 10,
+            "strength": 0,
+            "physical_resistance": 0,
+            "magical_resistance": 0,
+            "provisional_balance": true
+          },
+          "ability": {
+            "id": "lanca",
+            "name": "Arremesso de Lança",
+            "ap_cost": 3,
+            "cooldown": 0,
+            "range_min": 2,
+            "range_max": 3,
+            "damage": [
+              18,
+              26
+            ],
+            "damage_type": "PHYSICAL",
+            "mechanics_status": "PARTIAL_EFFECTS_PENDING"
+          }
+        }
+      ],
+      "encounter_rewards": [],
+      "reward_status": "NONE_DEFINED_ON_ENCOUNTER;QUEST_REWARDS_SEPARATE;NO_REWARD_GRANT_IN_G11",
+      "quest_dependencies": [],
+      "narrative_events": []
+    },
+    "ENC_09": {
+      "id": "ENC_09",
+      "map_id": "MAP_07",
+      "canonical_status": "data_only",
+      "godot_status": "PENDING",
+      "pending_reasons": [
+        "MAP_NOT_IN_GODOT_RUNTIME",
+        "CANONICAL_TRIGGER_OR_UNIQUE_PLACEMENT_UNSPECIFIED",
+        "CREATURE_ABILITY_MECHANICS_NOT_FULLY_IMPLEMENTED"
+      ],
+      "activation_condition": "UNSPECIFIED_IN_CANON",
+      "repetition_policy": "UNSPECIFIED_IN_CANON",
+      "runtime_policy": "NO_WORLD_TRIGGER",
+      "spawn_placement": null,
+      "composition": [
+        {
+          "unit_id": "ENC_09_1",
+          "creature_id": "CRE_LERDO_DE_MUSGO_MAREJADO",
+          "canonical_base_id": "CRE_LERDO_DE_MUSGO",
+          "name": "Lerdo-de-musgo",
+          "exposure": "MAREJADO",
+          "stats": {
+            "hp": 100,
+            "pa": 6,
+            "pm": 2,
+            "agility": 3,
+            "strength": 0,
+            "physical_resistance": 0,
+            "magical_resistance": 0,
+            "provisional_balance": true
+          },
+          "ability": {
+            "id": "fortificar",
+            "name": "Postura Fortificada",
+            "ap_cost": 2,
+            "cooldown": 2,
+            "range_min": 0,
+            "range_max": 0,
+            "damage": null,
+            "damage_type": null,
+            "mechanics_status": "PARTIAL_EFFECTS_PENDING"
+          }
+        },
+        {
+          "unit_id": "ENC_09_2",
+          "creature_id": "CRE_FAREJADOR_DE_BREJO",
+          "canonical_base_id": "CRE_FAREJADOR_DE_BREJO",
+          "name": "Farejador-de-brejo",
+          "exposure": "MAREJADO",
+          "stats": {
+            "hp": 72,
+            "pa": 6,
+            "pm": 4,
+            "agility": 11,
+            "strength": 0,
+            "physical_resistance": 0,
+            "magical_resistance": 0,
+            "provisional_balance": true
+          },
+          "ability": {
+            "id": "golpe",
+            "name": "Golpe Pesado",
+            "ap_cost": 4,
+            "cooldown": 2,
+            "range_min": 1,
+            "range_max": 1,
+            "damage": [
+              35,
+              45
+            ],
+            "damage_type": "PHYSICAL",
+            "mechanics_status": "BASIC_EFFECTS_AVAILABLE"
+          }
+        },
+        {
+          "unit_id": "ENC_09_3",
+          "creature_id": "CRE_FAREJADOR_DE_BREJO",
+          "canonical_base_id": "CRE_FAREJADOR_DE_BREJO",
+          "name": "Farejador-de-brejo",
+          "exposure": "MAREJADO",
+          "stats": {
+            "hp": 72,
+            "pa": 6,
+            "pm": 4,
+            "agility": 11,
+            "strength": 0,
+            "physical_resistance": 0,
+            "magical_resistance": 0,
+            "provisional_balance": true
+          },
+          "ability": {
+            "id": "golpe",
+            "name": "Golpe Pesado",
+            "ap_cost": 4,
+            "cooldown": 2,
+            "range_min": 1,
+            "range_max": 1,
+            "damage": [
+              35,
+              45
+            ],
+            "damage_type": "PHYSICAL",
+            "mechanics_status": "BASIC_EFFECTS_AVAILABLE"
+          }
+        }
+      ],
+      "encounter_rewards": [],
+      "reward_status": "NONE_DEFINED_ON_ENCOUNTER;QUEST_REWARDS_SEPARATE;NO_REWARD_GRANT_IN_G11",
+      "quest_dependencies": [],
+      "narrative_events": []
+    },
+    "ENC_10": {
+      "id": "ENC_10",
+      "map_id": "MAP_08",
+      "canonical_status": "data_only",
+      "godot_status": "PENDING",
+      "pending_reasons": [
+        "MAP_NOT_IN_GODOT_RUNTIME",
+        "CANONICAL_TRIGGER_OR_UNIQUE_PLACEMENT_UNSPECIFIED",
+        "CREATURE_ABILITY_MECHANICS_NOT_FULLY_IMPLEMENTED"
+      ],
+      "activation_condition": "UNSPECIFIED_IN_CANON",
+      "repetition_policy": "UNSPECIFIED_IN_CANON",
+      "runtime_policy": "NO_WORLD_TRIGGER",
+      "spawn_placement": null,
+      "composition": [
+        {
+          "unit_id": "ENC_10_1",
+          "creature_id": "CRE_LERDO_DE_MUSGO_ENCHARCADO",
+          "canonical_base_id": "CRE_LERDO_DE_MUSGO",
+          "name": "Lerdo-de-musgo",
+          "exposure": "ENCHARCADO",
+          "stats": {
+            "hp": 100,
+            "pa": 6,
+            "pm": 2,
+            "agility": 3,
+            "strength": 0,
+            "physical_resistance": 0,
+            "magical_resistance": 0,
+            "provisional_balance": true
+          },
+          "ability": {
+            "id": "fortificar",
+            "name": "Postura Fortificada",
+            "ap_cost": 2,
+            "cooldown": 2,
+            "range_min": 0,
+            "range_max": 0,
+            "damage": null,
+            "damage_type": null,
+            "mechanics_status": "PARTIAL_EFFECTS_PENDING"
+          }
+        },
+        {
+          "unit_id": "ENC_10_2",
+          "creature_id": "CRE_FAREJADOR_DE_BREJO",
+          "canonical_base_id": "CRE_FAREJADOR_DE_BREJO",
+          "name": "Farejador-de-brejo",
+          "exposure": "MAREJADO",
+          "stats": {
+            "hp": 72,
+            "pa": 6,
+            "pm": 4,
+            "agility": 11,
+            "strength": 0,
+            "physical_resistance": 0,
+            "magical_resistance": 0,
+            "provisional_balance": true
+          },
+          "ability": {
+            "id": "golpe",
+            "name": "Golpe Pesado",
+            "ap_cost": 4,
+            "cooldown": 2,
+            "range_min": 1,
+            "range_max": 1,
+            "damage": [
+              35,
+              45
+            ],
+            "damage_type": "PHYSICAL",
+            "mechanics_status": "BASIC_EFFECTS_AVAILABLE"
+          }
+        }
+      ],
+      "encounter_rewards": [],
+      "reward_status": "NONE_DEFINED_ON_ENCOUNTER;QUEST_REWARDS_SEPARATE;NO_REWARD_GRANT_IN_G11",
+      "quest_dependencies": [],
+      "narrative_events": []
+    },
+    "ENC_11": {
+      "id": "ENC_11",
+      "map_id": "MAP_09",
+      "canonical_status": "data_only",
+      "godot_status": "PENDING",
+      "pending_reasons": [
+        "MAP_NOT_IN_GODOT_RUNTIME",
+        "CANONICAL_TRIGGER_OR_UNIQUE_PLACEMENT_UNSPECIFIED"
+      ],
+      "activation_condition": "UNSPECIFIED_IN_CANON",
+      "repetition_policy": "UNSPECIFIED_IN_CANON",
+      "runtime_policy": "NO_WORLD_TRIGGER",
+      "spawn_placement": null,
+      "composition": [
+        {
+          "unit_id": "ENC_11_1",
+          "creature_id": "CRE_FAREJADOR_DE_BREJO",
+          "canonical_base_id": "CRE_FAREJADOR_DE_BREJO",
+          "name": "Farejador-de-brejo",
+          "exposure": "MAREJADO",
+          "stats": {
+            "hp": 72,
+            "pa": 6,
+            "pm": 4,
+            "agility": 11,
+            "strength": 0,
+            "physical_resistance": 0,
+            "magical_resistance": 0,
+            "provisional_balance": true
+          },
+          "ability": {
+            "id": "golpe",
+            "name": "Golpe Pesado",
+            "ap_cost": 4,
+            "cooldown": 2,
+            "range_min": 1,
+            "range_max": 1,
+            "damage": [
+              35,
+              45
+            ],
+            "damage_type": "PHYSICAL",
+            "mechanics_status": "BASIC_EFFECTS_AVAILABLE"
+          }
+        },
+        {
+          "unit_id": "ENC_11_2",
+          "creature_id": "CRE_FAREJADOR_DE_BREJO",
+          "canonical_base_id": "CRE_FAREJADOR_DE_BREJO",
+          "name": "Farejador-de-brejo",
+          "exposure": "MAREJADO",
+          "stats": {
+            "hp": 72,
+            "pa": 6,
+            "pm": 4,
+            "agility": 11,
+            "strength": 0,
+            "physical_resistance": 0,
+            "magical_resistance": 0,
+            "provisional_balance": true
+          },
+          "ability": {
+            "id": "golpe",
+            "name": "Golpe Pesado",
+            "ap_cost": 4,
+            "cooldown": 2,
+            "range_min": 1,
+            "range_max": 1,
+            "damage": [
+              35,
+              45
+            ],
+            "damage_type": "PHYSICAL",
+            "mechanics_status": "BASIC_EFFECTS_AVAILABLE"
+          }
+        },
+        {
+          "unit_id": "ENC_11_3",
+          "creature_id": "CRE_TOPETAO_MAREJADO",
+          "canonical_base_id": "CRE_TOPETAO",
+          "name": "Topetão",
+          "exposure": "MAREJADO",
+          "stats": {
+            "hp": 90,
+            "pa": 6,
+            "pm": 3,
+            "agility": 6,
+            "strength": 0,
+            "physical_resistance": 0,
+            "magical_resistance": 0,
+            "provisional_balance": true
+          },
+          "ability": {
+            "id": "golpe",
+            "name": "Golpe Pesado",
+            "ap_cost": 4,
+            "cooldown": 2,
+            "range_min": 1,
+            "range_max": 1,
+            "damage": [
+              35,
+              45
+            ],
+            "damage_type": "PHYSICAL",
+            "mechanics_status": "BASIC_EFFECTS_AVAILABLE"
+          }
+        }
+      ],
+      "encounter_rewards": [],
+      "reward_status": "NONE_DEFINED_ON_ENCOUNTER;QUEST_REWARDS_SEPARATE;NO_REWARD_GRANT_IN_G11",
+      "quest_dependencies": [],
+      "narrative_events": []
+    },
+    "ENC_12": {
+      "id": "ENC_12",
+      "map_id": "MAP_10",
+      "canonical_status": "data_only",
+      "godot_status": "PENDING",
+      "pending_reasons": [
+        "MAP_NOT_IN_GODOT_RUNTIME",
+        "CANONICAL_TRIGGER_OR_UNIQUE_PLACEMENT_UNSPECIFIED",
+        "CREATURE_ABILITY_MECHANICS_NOT_FULLY_IMPLEMENTED"
+      ],
+      "activation_condition": "UNSPECIFIED_IN_CANON",
+      "repetition_policy": "UNSPECIFIED_IN_CANON",
+      "runtime_policy": "NO_WORLD_TRIGGER",
+      "spawn_placement": null,
+      "composition": [
+        {
+          "unit_id": "ENC_12_1",
+          "creature_id": "CRE_CASCUDO_DE_CAL_ENCHARCADO",
+          "canonical_base_id": "CRE_CASCUDO_DE_CAL",
+          "name": "Cascudo-de-cal",
+          "exposure": "ENCHARCADO",
+          "stats": {
+            "hp": 70,
+            "pa": 6,
+            "pm": 3,
+            "agility": 5,
+            "strength": 0,
+            "physical_resistance": 0,
+            "magical_resistance": 0,
+            "provisional_balance": true
+          },
+          "ability": {
+            "id": "golpe",
+            "name": "Golpe Pesado",
+            "ap_cost": 4,
+            "cooldown": 2,
+            "range_min": 1,
+            "range_max": 1,
+            "damage": [
+              35,
+              45
+            ],
+            "damage_type": "PHYSICAL",
+            "mechanics_status": "BASIC_EFFECTS_AVAILABLE"
+          }
+        },
+        {
+          "unit_id": "ENC_12_2",
+          "creature_id": "CRE_SAPO_DE_POCA",
+          "canonical_base_id": "CRE_SAPO_DE_POCA",
+          "name": "Sapo-de-poça",
+          "exposure": "MAREJADO",
+          "stats": {
+            "hp": 75,
+            "pa": 6,
+            "pm": 3,
+            "agility": 7,
+            "strength": 0,
+            "physical_resistance": 0,
+            "magical_resistance": 0,
+            "provisional_balance": true
+          },
+          "ability": {
+            "id": "golpe",
+            "name": "Golpe Pesado",
+            "ap_cost": 4,
+            "cooldown": 2,
+            "range_min": 1,
+            "range_max": 1,
+            "damage": [
+              35,
+              45
+            ],
+            "damage_type": "PHYSICAL",
+            "mechanics_status": "BASIC_EFFECTS_AVAILABLE"
+          }
+        },
+        {
+          "unit_id": "ENC_12_3",
+          "creature_id": "CRE_FIANDEIRA_ENCHARCADA",
+          "canonical_base_id": "CRE_FIANDEIRA",
+          "name": "Fiandeira",
+          "exposure": "ENCHARCADO",
+          "stats": {
+            "hp": 65,
+            "pa": 6,
+            "pm": 3,
+            "agility": 10,
+            "strength": 0,
+            "physical_resistance": 0,
+            "magical_resistance": 0,
+            "provisional_balance": true
+          },
+          "ability": {
+            "id": "lanca",
+            "name": "Arremesso de Lança",
+            "ap_cost": 3,
+            "cooldown": 0,
+            "range_min": 2,
+            "range_max": 3,
+            "damage": [
+              18,
+              26
+            ],
+            "damage_type": "PHYSICAL",
+            "mechanics_status": "PARTIAL_EFFECTS_PENDING"
+          }
+        }
+      ],
+      "encounter_rewards": [],
+      "reward_status": "NONE_DEFINED_ON_ENCOUNTER;QUEST_REWARDS_SEPARATE;NO_REWARD_GRANT_IN_G11",
+      "quest_dependencies": [],
+      "narrative_events": []
+    }
+  },
+  "deferred_special_encounters": [
+    {
+      "id": "CORUJA_MUDA_SPECIAL",
+      "mapId": "MAP_09",
+      "creatureId": "CRE_CORUJA_MUDA",
+      "status": "deferred"
+    },
+    {
+      "id": "SINEIRA_BOSS_SPECIAL",
+      "mapId": "MAP_11",
+      "creatureId": "CRE_SINEIRA",
+      "status": "boss_deferred"
+    }
+  ],
+  "audit": {
+    "canonical_encounter_count": 12,
+    "godot_available_map_count": 3,
+    "provisional_playable_encounters": [
+      "ENC_01",
+      "ENC_05"
+    ],
+    "pending_encounters": [
+      "ENC_02",
+      "ENC_03",
+      "ENC_04",
+      "ENC_06",
+      "ENC_07",
+      "ENC_08",
+      "ENC_09",
+      "ENC_10",
+      "ENC_11",
+      "ENC_12"
+    ],
+    "canonical_rewards_defined": false,
+    "canonical_trigger_conditions_defined": false,
+    "canonical_repeat_policies_defined": false
+  }
+}

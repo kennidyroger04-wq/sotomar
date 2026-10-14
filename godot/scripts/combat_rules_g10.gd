@@ -67,16 +67,31 @@ static func physical_damage(base: int, strength: int, crit_roll: float, agility:
 	var amount := maxi(0, roundi(float(source) * (1.0 + clampf(damage_bonus, -0.9, 5.0)) * (1.0 - safe_resistance)))
 	return {"amount": amount, "critical": crit, "resistance": safe_resistance}
 
-static func attack(attacker: Dictionary, target: Dictionary, base_min: int, base_max: int, roll: float, crit_roll := 1.0) -> Dictionary:
-	if int(attacker.hp) <= 0 or int(target.hp) <= 0 or int(attacker.pa) < 4:
+static func attack(attacker: Dictionary, target: Dictionary, base_min: int, base_max: int, roll: float, crit_roll := 1.0, range_min := 1, range_max := 1, ap_cost := 4) -> Dictionary:
+	if int(attacker.hp) <= 0 or int(target.hp) <= 0 or int(attacker.pa) < ap_cost:
 		return {"ok": false, "reason": "ACTION"}
-	if manhattan(Vector2i(int(attacker.x), int(attacker.y)), Vector2i(int(target.x), int(target.y))) != 1:
+	var distance := manhattan(Vector2i(int(attacker.x), int(attacker.y)), Vector2i(int(target.x), int(target.y)))
+	if distance < range_min or distance > range_max:
 		return {"ok": false, "reason": "RANGE"}
-	attacker.pa = int(attacker.pa) - 4
+	attacker.pa = int(attacker.pa) - ap_cost
 	var base := base_min + mini(int(floor(roll * float(base_max - base_min + 1))), base_max - base_min)
 	var result := physical_damage(base, int(attacker.strength), crit_roll, int(attacker.agility), float(target.physical_resistance), float(attacker.damage_bonus))
 	target.hp = maxi(0, int(target.hp) - int(result.amount))
 	result.merge({"ok": true, "base": base, "defeated": int(target.hp) == 0}, true)
+	return result
+
+static func occupied_cells(units: Array, except_id := "") -> Array[Vector2i]:
+	var result: Array[Vector2i] = []
+	for unit: Dictionary in units:
+		if int(unit.get("hp", 0)) > 0 and String(unit.get("id", "")) != except_id:
+			result.append(Vector2i(int(unit.x), int(unit.y)))
+	return result
+
+static func alive_enemies(units: Array) -> Array[Dictionary]:
+	var result: Array[Dictionary] = []
+	for unit: Dictionary in units:
+		if String(unit.get("side", "")) == "mob" and int(unit.get("hp", 0)) > 0:
+			result.append(unit)
 	return result
 
 static func apply_fortify(unit: Dictionary) -> bool:

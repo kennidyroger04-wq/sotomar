@@ -11,6 +11,8 @@ const GRASS_VARIANT_SOURCES := [5, 6]
 const ENCOUNTER_MARKER := Vector2i(6, 4)
 const CombatOverlayScript = preload("res://scripts/combat_overlay_g10.gd")
 const EncounterMarkerScript = preload("res://scripts/encounter_marker_g10.gd")
+const EncounterRegistryScript = preload("res://scripts/encounter_registry_g11.gd")
+const EncounterStateStoreScript = preload("res://scripts/encounter_state_store_g11.gd")
 
 @onready var board: Node2D = $GroundAndGrid
 @onready var scenery: Node2D = $Scenery
@@ -57,8 +59,15 @@ var _active_npc_id := ""
 var encounter_button: Button
 var _combat_overlay: CanvasLayer
 var _encounter_resolved := false
+var _encounter_registry = EncounterRegistryScript.new()
+var _encounter_state_store = EncounterStateStoreScript.new()
+var selected_encounter_id := ""
+var _selected_encounter_cell := ENCOUNTER_MARKER
+var _encounter_markers := Node2D.new()
 
 func _ready() -> void:
+	_encounter_markers.name = "EncounterMarkers"
+	add_child(_encounter_markers)
 	confirm_button.pressed.connect(_confirm_pending_move)
 	confirm_button.hide()
 	_build_interaction_ui()
@@ -93,15 +102,31 @@ func _load_map_visuals() -> void:
 		layer.clear()
 	_configure_tile_layers()
 	scenery.configure(map_origin, map_data)
-	if map_id == "MAP_02" and not _encounter_resolved:
-		var marker := Node2D.new()
-		marker.name = "Encounter_ENC_01"
-		marker.set_script(EncounterMarkerScript)
-		marker.position = Logic.cell_to_screen(ENCOUNTER_MARKER, map_origin)
-		marker.z_index = ENCOUNTER_MARKER.x + ENCOUNTER_MARKER.y + 2
-		marker.set_meta("logical_cell", ENCOUNTER_MARKER)
-		marker.set_meta("encounter_id", "ENC_01")
-		scenery.add_child(marker)
+	for old_marker: Node in _encounter_markers.get_children():
+		_encounter_markers.remove_child(old_marker)
+		old_marker.queue_free()
+	selected_encounter_id = ""
+	var pending_ids: Array[String] = []
+	for encounter: Dictionary in _encounter_registry.encounters_for_map(map_id):
+		var encounter_id := String(encounter.id)
+		if _encounter_registry.world_trigger_available(encounter_id) and not _encounter_state_store.is_resolved(encounter_id):
+			var placement: Dictionary = encounter.get("spawn_placement", {})
+			if not placement.is_empty():
+				selected_encounter_id = encounter_id
+				_selected_encounter_cell = Vector2i(int(placement.x), int(placement.y))
+				var marker := Node2D.new()
+				marker.name = "Encounter_" + encounter_id
+				marker.set_script(EncounterMarkerScript)
+				marker.set("encounter_id", encounter_id)
+				marker.set("creature_name", String(encounter.composition[0].name))
+				marker.position = Logic.cell_to_screen(_selected_encounter_cell, map_origin)
+				marker.z_index = _selected_encounter_cell.x + _selected_encounter_cell.y + 2
+				marker.set_meta("logical_cell", _selected_encounter_cell)
+				marker.set_meta("encounter_id", encounter_id)
+				_encounter_markers.add_child(marker)
+		elif String(encounter.get("godot_status", "")) == "PENDING":
+			pending_ids.append(encounter_id)
+	_last_notice = "Encontros pendentes de gatilho/posição canônicos: %s" % ", ".join(pending_ids) if not pending_ids.is_empty() else ""
 	board.origin = map_origin
 	board.queue_redraw()
 	_set_instructions()
@@ -223,7 +248,7 @@ func _handle_mouse_button(event: InputEventMouseButton) -> void:
 	if not Logic.is_inside(cell, map_columns, map_rows):
 		return
 	if event.button_index == MOUSE_BUTTON_LEFT:
-		if map_id == "MAP_02" and cell == ENCOUNTER_MARKER and not _encounter_resolved:
+		if cell == _selected_encounter_cell and not selected_encounter_id.is_empty():
 			_start_encounter()
 			_mark_input_handled()
 			return
@@ -291,7 +316,7 @@ func _handle_touch_tap(screen_position: Vector2) -> void:
 	var cell := _screen_to_cell(screen_position)
 	if not Logic.is_inside(cell, map_columns, map_rows):
 		return
-	if map_id == "MAP_02" and cell == ENCOUNTER_MARKER and not _encounter_resolved:
+	if cell == _selected_encounter_cell and not selected_encounter_id.is_empty():
 		_start_encounter()
 		return
 	var now := Time.get_ticks_msec()
@@ -565,8 +590,8 @@ func _build_interaction_ui() -> void:
 
 func _build_encounter_ui() -> void:
 	encounter_button = Button.new()
-	encounter_button.name = "StartEncounterENC01"
-	encounter_button.text = "Investigar Cascudo-de-cal"
+	encounter_button.name = "StartEncounter"
+	encounter_button.text = "Investigar encontro"
 	encounter_button.custom_minimum_size = Vector2(0, 58)
 	encounter_button.add_theme_font_size_override("font_size", 16)
 	encounter_button.hide()
@@ -720,10 +745,10 @@ func _close_dialogue() -> void:
 	_set_instructions()
 
 func _encounter_at_screen(screen_position: Vector2) -> Node2D:
-	if map_id != "MAP_02" or _encounter_resolved:
+	if selected_encounter_id.is_empty():
 		return null
 	var world_position: Vector2 = get_viewport().get_canvas_transform().affine_inverse() * screen_position
-	for marker in scenery.get_children():
+	for marker in _encounter_markers.get_children():
 		if marker.has_meta("encounter_id"):
 			var local: Vector2 = marker.to_local(world_position)
 			if local.x >= -48 and local.x <= 48 and local.y >= -68 and local.y <= 12:
@@ -738,14 +763,27 @@ func _interact_with_encounter(marker: Node2D) -> void:
 func _refresh_encounter_interaction() -> void:
 	if encounter_button == null or not is_node_ready():
 		return
-	var can_start := map_id == "MAP_02" and not _encounter_resolved and not movement_in_progress and not _dialogue_is_open()
+	var can_start := not selected_encounter_id.is_empty() and _encounter_registry.world_trigger_available(selected_encounter_id) and not _encounter_state_store.is_resolved(selected_encounter_id) and not movement_in_progress and not _dialogue_is_open()
 	encounter_button.visible = can_start
 	if can_start:
+		var entry := _encounter_registry.encounter(selected_encounter_id)
+		var names: Array[String] = []
+		for member: Dictionary in entry.get("composition", []):
+			names.append(String(member.name))
+		encounter_button.text = "Investigar %s · %s" % [selected_encounter_id, " + ".join(names)]
 		talk_button.hide()
 	_layout_interaction_ui()
 
 func _start_encounter() -> void:
-	if _combat_overlay != null or map_id != "MAP_02" or _encounter_resolved:
+	if _combat_overlay != null or selected_encounter_id.is_empty() or not _encounter_registry.world_trigger_available(selected_encounter_id) or _encounter_state_store.is_resolved(selected_encounter_id):
+		return
+	var definition: Dictionary = _encounter_registry.combat_definition(selected_encounter_id)
+	if not definition.get("ok", false):
+		_last_notice = "%s pendente: %s" % [selected_encounter_id, definition.get("reason", "mecânica ausente")]
+		_set_instructions()
+		return
+	var started: Dictionary = _encounter_state_store.start(selected_encounter_id, false)
+	if not started.get("ok", false):
 		return
 	_clear_pending_move()
 	encounter_button.hide()
@@ -758,14 +796,17 @@ func _start_encounter() -> void:
 	actor.hide()
 	for layer: TileMapLayer in _tile_layers():
 		layer.hide()
-	_combat_overlay = CanvasLayer.new()
-	_combat_overlay.set_script(CombatOverlayScript)
+	_combat_overlay = CombatOverlayScript.new()
+	_combat_overlay.configure(definition, _encounter_state_store)
 	_combat_overlay.combat_finished.connect(_on_combat_finished)
 	add_child(_combat_overlay)
 
 func _on_combat_finished(result: String, _remaining_hp: int) -> void:
+	if result == "DEFEAT":
+		return
 	if result != "VICTORY":
 		return
+	var completed_encounter_id := selected_encounter_id
 	_encounter_resolved = true
 	if _combat_overlay != null:
 		_combat_overlay.queue_free()
@@ -780,5 +821,5 @@ func _on_combat_finished(result: String, _remaining_hp: int) -> void:
 	_update_depth()
 	_refresh_npc_interaction()
 	_refresh_encounter_interaction()
-	_last_notice = "ENC_01 vencido. O encontro está resolvido nesta sessão."
+	_last_notice = "%s vencido. O encontro está resolvido nesta sessão." % completed_encounter_id
 	_set_instructions()

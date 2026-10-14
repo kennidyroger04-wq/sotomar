@@ -2,6 +2,7 @@ extends SceneTree
 
 const Rules = preload("res://scripts/combat_rules_g10.gd")
 const Board = preload("res://scripts/combat_board_g10.gd")
+const EncounterStateStore = preload("res://scripts/encounter_state_store_g11.gd")
 const PLAYER := {"id": "player", "agility": 10}
 const ENEMY := {"id": "enemy", "agility": 5}
 
@@ -94,7 +95,9 @@ func _run() -> void:
 		_check(main_scene._encounter_resolved and main_scene._combat_overlay == null and main_scene.board.visible and main_scene.actor.visible, "victory restores exploration and resolves encounter for session")
 		passed += 1
 	main_scene._encounter_resolved = false
+	main_scene._encounter_state_store = EncounterStateStore.new()
 	main_scene.logical_position = Vector2i(6, 3)
+	main_scene._load_map_visuals()
 	main_scene._start_encounter()
 	await process_frame
 	var retry_overlay: Node = main_scene.get_node_or_null("CombatOverlayG10")

@@ -18,6 +18,8 @@ godot --headless --path godot --script res://tests/test_maps_g08.gd
 godot --headless --path godot --script res://tests/benchmark_map_sizes_g08.gd
 godot --headless --path godot --script res://tests/test_combat_g10.gd
 node godot/tests/test_combat_parity_g10.js
+node godot/tests/test_encounter_catalog_g11.js
+godot --headless --path godot --script res://tests/test_encounters_g11.gd
 godot --headless --editor --path godot --quit
 godot --headless --path godot --export-release Web "$PWD/build/web/index.html"
 python3 godot/tests/test_web_export_g07.py
@@ -41,5 +43,7 @@ Para G08, `node tools/sync_godot_map_registry.js` gera o catálogo Godot a parti
 Para G09, `test_npcs_g09.gd` confere as falas canônicas, alcance, toque/teclado, alinhamento dos pés e dimensões da caixa de diálogo. `test_publish_g09.py` e `validate_g09_web_export.py` verificam o deploy gated e o conteúdo real do diretório publicado. Veja [RELATORIO_G09.md](../../docs/RELATORIO_G09.md) e [ACESSO_WEB_G09.md](../../docs/ACESSO_WEB_G09.md).
 
 Para G10, `test_combat_g10.gd` cobre regras, entrada em `ENC_01`, IA, retorno de vitória e nova tentativa após derrota. `test_combat_parity_g10.js` compara fixtures partilhadas com as regras e o planejador JavaScript originais. O combate está acessível na exploração de `MAP_02` pelo botão “Investigar Cascudo-de-cal” ou tocando a célula do marcador. Os valores de combate atuais de `CRE_CASCUDO_DE_CAL` continuam marcados como balanceamento provisório no runtime existente.
+
+Para G11, execute `node tools/build_godot_encounter_catalog.js --check`, `node godot/tests/test_encounter_catalog_g11.js` e `godot --headless --path godot --script res://tests/test_encounters_g11.gd`. O catálogo deriva os 12 encontros JavaScript e deixa explícitas as lacunas de ativação, repetição e recompensas; somente `ENC_01` e `ENC_05` têm gatilhos de exploração provisórios nas células reservadas dos mapas Godot já disponíveis. Os testes sintéticos multi-inimigo não acrescentam conteúdo canônico.
 
 Para o lote G06, gere PNGs/manifesto com `python3 godot/tools/build_character_art_g06.py`, importe-os no editor e gere recursos `SpriteFrames` com `godot --headless --path godot --script res://tools/build_character_resources_g06.gd`. A revisão estática gera pranchas e GIFs com `python3 godot/tools/review_characters_g06.py`; consulte [RELATORIO_G06.md](../../docs/RELATORIO_G06.md) e [reviews/g06/review_index.json](../reviews/g06/review_index.json). As composições são ajudas de revisão, não capturas reais do renderer Godot.
