@@ -17,7 +17,7 @@
 | G14 — inventário/serviços | IMPLEMENTADO, TESTADO; integração visual PARCIAL | 61 itens sincronizados; modelos de inventário/equipamento/stats, rewards idempotentes, consumíveis e serviços; mochila acessível por toque e inspeções concedem item após transação. Sem persistência (G17) nem UI de equipar/comércio. Ver `RELATORIO_G14.md`. |
 | G15 — habilidades/criaturas/IA | PARCIAL, AUDITADO | Catálogo de cinco habilidades sincronizado; comparação identificou lacuna entre efeitos/IA JS e combate Godot. Habilidades não suportadas seguem inativas até paridade. Ver `RELATORIO_G15.md`. |
 | G16 — boss/final do arco | PARCIAL, AUDITADO | Sineira é o único boss explícito, mas a fonte não confirma que seja o boss final nem define luta/epílogo. Coruja-muda segue deferida. Ver `RELATORIO_G16.md`. |
-| G17 — save/continuidade | PENDENTE | Após conteúdo de boss ser delimitado, integrar schema versionado. |
+| G17 — save/continuidade | IMPLEMENTADO, TESTADO; Web VALIDADO, arquivo PARCIAL | Schema v1, dois slots `user://`, checksum, migração JS V2 com backup, reload Chromium/IndexedDB aprovado. JSON import/export ainda sem UI de arquivo. Ver `RELATORIO_G17.md`. |
 
 ## Limites atuais
 

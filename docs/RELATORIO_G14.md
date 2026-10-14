@@ -6,7 +6,7 @@
 
 **TESTADO:** testes headless G14 cobrem IDs/quantidades, equipamento e troca, bônus, consumíveis, custos de PA, cura, compra/venda, itens de missão não vendáveis, fundos insuficientes, replay de recompensa e rejeição atômica de recompensa inválida.
 
-**PENDENTE:** estado de inventário ainda não persiste entre reloads (G17); não há interface visual completa para equipar/vender/comprar; Bram declara no diálogo canônico que ainda não negocia. Os preços existentes são explicitamente provisórios e não foram tratados como balanceamento validado. Serviços e economia não são expostos como oferta de NPC sem configuração canônica.
+**PENDENTE:** não há interface visual completa para equipar/vender/comprar; Bram declara no diálogo canônico que ainda não negocia. Os preços existentes são explicitamente provisórios e não foram tratados como balanceamento validado. Serviços e economia não são expostos como oferta de NPC sem configuração canônica. O save G17 foi validado tecnicamente no Chromium Web; fluxo de compra/equipamento visual continua pendente.
 
 ## Matriz de paridade JavaScript → Godot
 

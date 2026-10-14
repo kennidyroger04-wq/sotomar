@@ -31,3 +31,17 @@ func unequip(slot: String, inventory: InventoryStateG14) -> Dictionary:
 
 func snapshot() -> Dictionary:
 	return slots.duplicate(true)
+
+func restore(snapshot_data: Dictionary, inventory: InventoryStateG14) -> bool:
+	var restored := {}
+	for slot: String in snapshot_data:
+		var item_id := String(snapshot_data[slot])
+		if item_id.is_empty():
+			continue
+		var item: Dictionary = inventory.item_registry.get(item_id, {})
+		var expected_slot := String(item.get("equip", {}).get("slot", item.get("canonicalSlot", "")))
+		if item.is_empty() or expected_slot != slot or inventory.has(item_id):
+			return false
+		restored[slot] = item_id
+	slots = restored
+	return true

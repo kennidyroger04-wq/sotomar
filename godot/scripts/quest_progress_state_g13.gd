@@ -251,6 +251,34 @@ func tracker_text() -> String:
 func snapshot() -> Dictionary:
 	return {"states": _states.duplicate(true), "processed_events": _processed_events.duplicate(true), "flags": _flags.duplicate(true), "inspected_points": _inspected_points.duplicate(true), "pending_item_claims": _pending_item_claims.duplicate(true)}
 
+func restore_snapshot(snapshot_data: Dictionary) -> bool:
+	for key: String in ["states", "processed_events", "flags", "inspected_points", "pending_item_claims"]:
+		if not snapshot_data.get(key, {}) is Dictionary:
+			return false
+	var restored_states: Dictionary = snapshot_data.states.duplicate(true)
+	if restored_states.size() != _quests.size():
+		return false
+	for quest_id: String in restored_states:
+		if not _quests.has(quest_id) or not restored_states[quest_id] is Dictionary:
+			return false
+		var state: Dictionary = restored_states[quest_id]
+		if not state.get("objectives", {}) is Dictionary or not state.get("accepted", false) is bool or not state.get("completed", false) is bool:
+			return false
+		var objective_values: Dictionary = state.objectives
+		for objective: Dictionary in _quests[quest_id].get("objectives", []):
+			var objective_id := String(objective.id)
+			var value := int(objective_values.get(objective_id, -1))
+			if value < 0 or value > maxi(1, int(objective.get("amount", 1))) or float(objective_values.get(objective_id, -1)) != value:
+				return false
+		if objective_values.size() != _quests[quest_id].get("objectives", []).size():
+			return false
+	_states = restored_states
+	_processed_events = snapshot_data.processed_events.duplicate(true)
+	_flags = snapshot_data.flags.duplicate(true)
+	_inspected_points = snapshot_data.inspected_points.duplicate(true)
+	_pending_item_claims = snapshot_data.pending_item_claims.duplicate(true)
+	return true
+
 func _matching_objective(quest_id: String, definition: Dictionary, event: Dictionary) -> Dictionary:
 	var state: Dictionary = _states[quest_id]
 	var event_type := String(event.get("type", ""))

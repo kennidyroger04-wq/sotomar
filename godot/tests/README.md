@@ -57,3 +57,5 @@ Para G13/G14, execute `node tools/build_godot_inspection_registry_g13.js --check
 Para G15, execute `node tools/build_godot_ability_registry_g15.js --check`, `node godot/tests/test_abilities_g15.js`, `node godot/tests/test_encounter_catalog_g11.js` e `godot --headless --path godot --script res://tests/test_combat_g10.gd`. A paridade das definições não significa que os efeitos ainda pendentes estejam habilitados. Consulte `docs/RELATORIO_G15.md`.
 
 Para G16, execute `node tools/build_godot_boss_registry_g16.js --check`, `node godot/tests/test_boss_g16.js` e `godot --headless --path godot --script res://tests/test_quests_g13.gd`. O teste confere contrato não letal; não há luta da Sineira ativa enquanto mecânicas canônicas faltarem. Consulte `docs/RELATORIO_G16.md`.
+
+Para G17, execute `godot --headless --path godot --script res://tests/test_saves_g17.gd`. A API de save usa `user://` e o modo headless desativa a escrita automática do controlador para isolar os testes. Confira também `docs/RELATORIO_G17.md`.

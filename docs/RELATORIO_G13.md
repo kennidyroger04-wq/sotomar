@@ -23,7 +23,7 @@
 - Parte dos textos/estados de diálogo não está definida em fonte canônica; nenhum texto de lore novo foi criado. Entrega visual em diálogo depende de estados especificados e validação gráfica.
 - MAIN_02, MAIN_03 e outras missões com materiais/entrega TBD continuam incompletas. MAIN_07 não tem combate Sineira/retorno; SIDE_03 não tem encontro não letal da Coruja.
 - Recompensas não são concedidas, aguardando a transação idempotente de itens em G14.
-- O estado de missão é somente em memória; G17 deverá persistir e recuperar progresso e deduplicação.
+- A G17 agora salva/restaura progresso, flags, eventos deduplicados, reivindicações e resultados de encontro no snapshot versionado; consultar `RELATORIO_G17.md` para limites de import/export Web.
 - O fluxo visual do botão de aceitar foi exercitado em cena headless, mas não inspecionado em captura gráfica nem validado em aparelho.
 
 ## Testes

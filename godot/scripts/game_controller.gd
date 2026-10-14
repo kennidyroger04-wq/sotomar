@@ -18,6 +18,8 @@ const InspectionCatalogScript = preload("res://scripts/inspection_catalog_g13.gd
 const InspectionMarkerScript = preload("res://scripts/inspection_marker_g13.gd")
 const InventoryStateScript = preload("res://scripts/inventory_state_g14.gd")
 const RewardTransactionScript = preload("res://scripts/reward_transaction_g14.gd")
+const EquipmentStateScript = preload("res://scripts/equipment_state_g14.gd")
+const SaveStateScript = preload("res://scripts/save_state_g17.gd")
 
 @onready var board: Node2D = $GroundAndGrid
 @onready var scenery: Node2D = $Scenery
@@ -38,6 +40,10 @@ var _quest_state = QuestProgressStateScript.new()
 var _inventory_state = InventoryStateScript.new()
 var _progression_state: Dictionary = {"currency": {"base": 0}, "xp": 0, "level": 1, "xp_next_level": 100}
 var _reward_transactions
+var _equipment_state = EquipmentStateScript.new()
+var _save_store
+var _save_enabled := false
+var _current_hp := 100
 var _inspection_catalog = InspectionCatalogScript.new()
 var _quest_event_sequence := 0
 var movement_in_progress := false
@@ -86,6 +92,12 @@ var _inspection_markers := Node2D.new()
 
 func _ready() -> void:
 	_reward_transactions = RewardTransactionScript.new(_inventory_state, _progression_state)
+	_save_enabled = DisplayServer.get_name() != "headless"
+	var save_maps := {}
+	for candidate_map: String in ["MAP_01", "MAP_02", "MAP_03", "MAP_04", "MAP_05", "MAP_06", "MAP_07", "MAP_08", "MAP_09", "MAP_10", "MAP_11"]:
+		save_maps[candidate_map] = MapCatalog.get_map(candidate_map)
+	_save_store = SaveStateScript.new(save_maps, _inventory_state.item_registry, CharacterRoster.character_ids(), "user://sotomar_save", CharacterRoster.selected_id)
+	var resumed := _restore_game()
 	_encounter_markers.name = "EncounterMarkers"
 	add_child(_encounter_markers)
 	_inspection_markers.name = "InspectionMarkersG13"
@@ -94,13 +106,14 @@ func _ready() -> void:
 	confirm_button.hide()
 	_build_interaction_ui()
 	_build_encounter_ui()
-	map_data = MapCatalog.get_map(START_MAP_ID)
+	map_data = MapCatalog.get_map(map_id) if resumed else MapCatalog.get_map(START_MAP_ID)
 	if map_data.is_empty():
 		push_error("Start map MAP_01 is not available in the Godot map registry.")
 		return
-	map_id = START_MAP_ID
-	var spawn: Dictionary = map_data.spawns.get("SPAWN_DEFAULT", {"x": 6, "y": 5})
-	logical_position = Vector2i(int(spawn.x), int(spawn.y))
+	if not resumed:
+		map_id = START_MAP_ID
+		var spawn: Dictionary = map_data.spawns.get("SPAWN_DEFAULT", {"x": 6, "y": 5})
+		logical_position = Vector2i(int(spawn.x), int(spawn.y))
 	_load_map_visuals()
 	_layout_viewport()
 	_update_depth()
@@ -169,6 +182,7 @@ func _load_map_visuals() -> void:
 	board.queue_redraw()
 	_set_instructions()
 	_refresh_npc_interaction()
+	_save_game()
 
 func _tile_layers() -> Array[TileMapLayer]:
 	return [terrain_tiles, path_tiles, border_tiles, decoration_tiles, obstacle_tiles]
@@ -437,6 +451,7 @@ func _walk_route(route: Array[Vector2i]) -> void:
 	_refresh_npc_interaction()
 	if _layout_pending:
 		_layout_viewport()
+	_save_game()
 
 func _exit_at(cell: Vector2i) -> Dictionary:
 	for exit: Dictionary in map_data.exits:
@@ -866,6 +881,7 @@ func _inspect_nearest_point() -> void:
 	_set_instructions()
 	_refresh_quest_tracker()
 	_refresh_npc_interaction()
+	_save_game()
 
 func _interact_with_npc(marker: Node2D) -> void:
 	if movement_in_progress or _dialogue_is_open():
@@ -885,6 +901,7 @@ func _open_npc_dialogue(npc_id: String) -> void:
 	var dialogue_state := _quest_state.dialogue_state_for_npc(npc_id)
 	_quest_event_sequence += 1
 	_apply_quest_result(_quest_state.record_npc_talk(npc_id, "talk:%s:%d" % [npc_id, _quest_event_sequence]))
+	_save_game()
 	_dialogue_lines = PackedStringArray()
 	var states: Dictionary = definition.get("states", {})
 	var greeting := String(states.get(dialogue_state, definition.get("greeting", "")))
@@ -944,6 +961,7 @@ func _accept_quest_from_dialogue() -> void:
 		return
 	_refresh_quest_tracker()
 	_refresh_quest_accept_button()
+	_save_game()
 
 func _encounter_at_screen(screen_position: Vector2) -> Node2D:
 	if selected_encounter_id.is_empty():
@@ -983,6 +1001,7 @@ func _start_encounter() -> void:
 		_last_notice = "%s pendente: %s" % [selected_encounter_id, definition.get("reason", "mecânica ausente")]
 		_set_instructions()
 		return
+	definition["player_hp"] = _current_hp
 	var started: Dictionary = _encounter_state_store.start(selected_encounter_id, false)
 	if not started.get("ok", false):
 		return
@@ -1002,11 +1021,12 @@ func _start_encounter() -> void:
 	_combat_overlay.combat_finished.connect(_on_combat_finished)
 	add_child(_combat_overlay)
 
-func _on_combat_finished(result: String, _remaining_hp: int) -> void:
+func _on_combat_finished(result: String, remaining_hp: int) -> void:
 	if result == "DEFEAT":
 		return
 	if result != "VICTORY":
 		return
+	_current_hp = maxi(1, remaining_hp)
 	var completed_encounter_id := selected_encounter_id
 	if _combat_overlay != null:
 		var combat_record: Dictionary = _combat_overlay.get("result_record")
@@ -1033,6 +1053,7 @@ func _on_combat_finished(result: String, _remaining_hp: int) -> void:
 	_last_notice = "%s vencido. O encontro está resolvido nesta sessão." % completed_encounter_id
 	_set_instructions()
 	_refresh_quest_tracker()
+	_save_game()
 
 func _apply_quest_result(result: Dictionary) -> void:
 	for flag_id: String in result.get("unlocked_flags", []):
@@ -1064,3 +1085,53 @@ func _refresh_inventory_panel() -> void:
 		for amount: Variant in _inventory_state.quantities.values():
 			count += int(amount)
 		inventory_button.text = "Mochila · %d" % count
+
+func _restore_game() -> bool:
+	if not _save_enabled or _save_store == null:
+		return false
+	var result: Dictionary = _save_store.load()
+	if not result.get("ok", false):
+		return false
+	var saved: Dictionary = result.payload
+	if not CharacterRoster.set_selected(String(saved.protagonist_id), false):
+		return false
+	if not _inventory_state.restore(saved.get("inventory", {})):
+		return false
+	if not _equipment_state.restore(saved.get("equipment", {}), _inventory_state):
+		return false
+	if not _quest_state.restore_snapshot(saved.get("quests", {})):
+		return false
+	if not _encounter_state_store.restore_snapshot(saved.get("encounters", {})):
+		return false
+	if not _reward_transactions.restore(saved.get("claimed_rewards", {})):
+		return false
+	_progression_state = saved.get("progression", {}).duplicate(true)
+	world_flags = saved.get("flags", {}).duplicate(true)
+	_current_hp = int(saved.get("current_hp", 100))
+	map_id = String(saved.map_id)
+	logical_position = Vector2i(int(saved.cell.x), int(saved.cell.y))
+	_refresh_inventory_panel()
+	return true
+
+func _save_game() -> void:
+	if not _save_enabled or _save_store == null or map_id.is_empty() or map_data.is_empty():
+		return
+	var payload := {
+		"schema_version": SaveStateScript.SCHEMA_VERSION,
+		"protagonist_id": CharacterRoster.selected_id,
+		"map_id": map_id,
+		"cell": {"x": logical_position.x, "y": logical_position.y},
+		"current_hp": _current_hp,
+		"stats": CharacterRoster.character_data(CharacterRoster.selected_id).get("stats", {}),
+		"inventory": _inventory_state.snapshot(),
+		"equipment": _equipment_state.snapshot(),
+		"quests": _quest_state.snapshot(),
+		"flags": world_flags.duplicate(true),
+		"encounters": _encounter_state_store.snapshot(),
+		"progression": _progression_state.duplicate(true),
+		"claimed_rewards": _reward_transactions.snapshot(),
+		"arc_complete": false
+	}
+	var result: Dictionary = _save_store.save(payload)
+	if not result.get("ok", false):
+		push_warning("Could not save current game state: %s" % String(result.get("reason", "UNKNOWN")))

@@ -55,3 +55,10 @@ func apply(transaction_id: String, reward: Dictionary) -> Dictionary:
 
 func snapshot() -> Dictionary:
 	return applied.duplicate(true)
+
+func restore(snapshot_data: Dictionary) -> bool:
+	for transaction_id: String in snapshot_data:
+		if transaction_id.is_empty() or snapshot_data[transaction_id] != true:
+			return false
+	applied = snapshot_data.duplicate(true)
+	return true

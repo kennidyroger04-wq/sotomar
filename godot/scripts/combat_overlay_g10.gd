@@ -59,7 +59,7 @@ func _build_model() -> void:
 	var character := CharacterRoster.character_data(CharacterRoster.selected_id)
 	var stats: Dictionary = character.get("stats", {})
 	var player_cell: Vector2i = encounter_definition.get("player_cell", Vector2i(1, 2))
-	var player_hp := int(stats.get("health", 100))
+	var player_hp := int(encounter_definition.get("player_hp", stats.get("health", 100)))
 	var player := {"id": "player", "side": "player", "name": String(character.get("name", "Protagonista")), "x": player_cell.x, "y": player_cell.y, "hp": player_hp, "max_hp": player_hp, "strength": int(stats.get("strength", 0)), "agility": int(stats.get("agility", 0)), "pa": 6, "max_pa": 6, "pm": 4, "max_pm": 4, "physical_resistance": 0.0, "magical_resistance": 0.0, "damage_bonus": 0.0, "attack_ability_id": "golpe", "attack_ap": 4, "attack_damage_min": 35, "attack_damage_max": 45, "attack_range_min": 1, "attack_range_max": 1, "attack_cooldown": 2, "cooldowns": {}, "fortify_turns": 0, "fortify_cooldown": 0}
 	var units: Array[Dictionary] = [player]
 	for enemy: Dictionary in encounter_definition.get("enemies", []):
