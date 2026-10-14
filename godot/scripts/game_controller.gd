@@ -13,6 +13,7 @@ const CombatOverlayScript = preload("res://scripts/combat_overlay_g10.gd")
 const EncounterMarkerScript = preload("res://scripts/encounter_marker_g10.gd")
 const EncounterRegistryScript = preload("res://scripts/encounter_registry_g11.gd")
 const EncounterStateStoreScript = preload("res://scripts/encounter_state_store_g11.gd")
+const QuestProgressStateScript = preload("res://scripts/quest_progress_state_g13.gd")
 
 @onready var board: Node2D = $GroundAndGrid
 @onready var scenery: Node2D = $Scenery
@@ -29,6 +30,8 @@ const EncounterStateStoreScript = preload("res://scripts/encounter_state_store_g
 
 var logical_position := Vector2i(1, 1)
 var world_flags: Dictionary = {}
+var _quest_state = QuestProgressStateScript.new()
+var _quest_event_sequence := 0
 var movement_in_progress := false
 var map_origin := Vector2.ZERO
 var map_id := ""
@@ -53,6 +56,8 @@ var dialogue_panel: PanelContainer
 var dialogue_name: Label
 var dialogue_text: Label
 var dialogue_advance: Button
+var quest_tracker: Label
+var quest_accept_button: Button
 var talk_button: Button
 var _dialogue_lines: PackedStringArray = []
 var _dialogue_index := 0
@@ -88,6 +93,8 @@ func _ready() -> void:
 func _load_map_visuals() -> void:
 	map_columns = int(map_data.width)
 	map_rows = int(map_data.height)
+	_quest_event_sequence += 1
+	_apply_quest_result(_quest_state.record_map_entry(map_id, "explore:%s:%d" % [map_id, _quest_event_sequence]))
 	var blocked: Array[Vector2i] = []
 	for entry: Dictionary in map_data.blocked_cells:
 		blocked.append(Vector2i(int(entry.x), int(entry.y)))
@@ -411,6 +418,7 @@ func set_world_flag(flag_id: String, enabled := true) -> void:
 	if flag_id.is_empty():
 		return
 	world_flags[flag_id] = enabled
+	_quest_state.set_flag(flag_id, enabled)
 
 func _enter_exit(exit_data: Dictionary) -> void:
 	var required_flag := String(exit_data.get("requires_flag", ""))
@@ -554,6 +562,12 @@ func _set_instructions(mobile_layout := false) -> void:
 		instructions.text = "%s · %s · %s   |   Clique: selecionar · NPC: conversar · direito/setas/WASD: mover%s" % [map_id, name, String(character.get("display_name", "Aventureiro")), notice]
 
 func _build_interaction_ui() -> void:
+	quest_tracker = Label.new()
+	quest_tracker.name = "QuestTrackerG13"
+	quest_tracker.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	quest_tracker.add_theme_color_override("font_color", Color("fff0b0"))
+	quest_tracker.add_theme_font_size_override("font_size", 14)
+	$HUD.add_child(quest_tracker)
 	talk_button = Button.new()
 	talk_button.name = "TalkToNpc"
 	talk_button.text = "Conversar"
@@ -598,6 +612,12 @@ func _build_interaction_ui() -> void:
 	dialogue_advance.hide()
 	$HUD.add_child(dialogue_panel)
 	$HUD.add_child(dialogue_advance)
+	quest_accept_button = Button.new()
+	quest_accept_button.name = "AcceptQuestG13"
+	quest_accept_button.custom_minimum_size = Vector2(0, 52)
+	quest_accept_button.pressed.connect(_accept_quest_from_dialogue)
+	quest_accept_button.hide()
+	$HUD.add_child(quest_accept_button)
 
 func _build_encounter_ui() -> void:
 	encounter_button = Button.new()
@@ -643,10 +663,17 @@ func _layout_interaction_ui(size_override: Vector2 = Vector2.ZERO) -> void:
 	var action_width := minf(180.0 * ui_scale, view_size.x - margin * 2.0)
 	dialogue_advance.position = Vector2(view_size.x - margin - action_width, view_size.y - 64.0 * ui_scale)
 	dialogue_advance.size = Vector2(action_width, 52.0 * ui_scale)
+	if quest_accept_button != null:
+		quest_accept_button.position = Vector2(margin, view_size.y - 64.0 * ui_scale)
+		quest_accept_button.size = Vector2(minf(260.0 * ui_scale, maxf(0.0, view_size.x - action_width - margin * 3.0)), 52.0 * ui_scale)
 	dialogue_name.add_theme_font_size_override("font_size", int(round(20.0 * ui_scale)))
 	dialogue_text.add_theme_font_size_override("font_size", int(round(17.0 * ui_scale)))
 	dialogue_advance.add_theme_font_size_override("font_size", int(round(16.0 * ui_scale)))
 	dialogue_advance.custom_minimum_size.y = 52.0 * ui_scale
+	if quest_tracker != null:
+		quest_tracker.position = Vector2(margin, 62.0 * ui_scale)
+		quest_tracker.size = Vector2(maxf(0.0, view_size.x - margin * 2.0), 48.0 * ui_scale)
+		quest_tracker.add_theme_font_size_override("font_size", int(round(14.0 * ui_scale)))
 
 func _dialogue_is_open() -> bool:
 	return dialogue_panel != null and dialogue_panel.visible
@@ -715,6 +742,8 @@ func _open_npc_dialogue(npc_id: String) -> void:
 		push_error("No canonical dialogue defined for NPC: " + npc_id)
 		return
 	_active_npc_id = npc_id
+	_quest_event_sequence += 1
+	_apply_quest_result(_quest_state.record_npc_talk(npc_id, "talk:%s:%d" % [npc_id, _quest_event_sequence]))
 	_dialogue_lines = PackedStringArray()
 	var greeting := String(definition.get("greeting", ""))
 	for line: String in greeting.split("\n", false):
@@ -730,6 +759,7 @@ func _open_npc_dialogue(npc_id: String) -> void:
 	dialogue_advance.text = "Fechar diálogo" if _dialogue_lines.size() == 1 else "Continuar"
 	dialogue_panel.show()
 	dialogue_advance.show()
+	_refresh_quest_accept_button()
 	talk_button.hide()
 	_layout_interaction_ui()
 	dialogue_advance.grab_focus()
@@ -750,10 +780,28 @@ func _close_dialogue() -> void:
 		return
 	dialogue_panel.hide()
 	dialogue_advance.hide()
+	quest_accept_button.hide()
 	_active_npc_id = ""
 	_dialogue_lines = []
 	_refresh_npc_interaction()
 	_set_instructions()
+
+func _refresh_quest_accept_button() -> void:
+	if quest_accept_button == null:
+		return
+	var available: Array[String] = _quest_state.available_quests_for_npc(_active_npc_id)
+	quest_accept_button.visible = _dialogue_is_open() and not available.is_empty()
+	if quest_accept_button.visible:
+		var definition: Dictionary = _quest_state._quests[available[0]]
+		quest_accept_button.text = "Aceitar: %s" % String(definition.get("title", available[0]))
+	_layout_interaction_ui()
+
+func _accept_quest_from_dialogue() -> void:
+	var available: Array[String] = _quest_state.available_quests_for_npc(_active_npc_id)
+	if available.is_empty() or not _quest_state.accept_quest(available[0]):
+		return
+	_refresh_quest_tracker()
+	_refresh_quest_accept_button()
 
 func _encounter_at_screen(screen_position: Vector2) -> Node2D:
 	if selected_encounter_id.is_empty():
@@ -818,6 +866,14 @@ func _on_combat_finished(result: String, _remaining_hp: int) -> void:
 	if result != "VICTORY":
 		return
 	var completed_encounter_id := selected_encounter_id
+	if _combat_overlay != null:
+		var combat_record: Dictionary = _combat_overlay.get("result_record")
+		for event: Dictionary in combat_record.get("events", []):
+			var event_type := String(event.get("type", ""))
+			var target := String(event.get("creatureId", event.get("encounterId", "")))
+			var source_id := String(event.get("combatantId", event.get("encounterId", completed_encounter_id)))
+			_quest_event_sequence += 1
+			_apply_quest_result(_quest_state.process_event({"eventId": "combat:%s:%s" % [completed_encounter_id, source_id], "type": event_type, "target": target}))
 	_encounter_resolved = true
 	if _combat_overlay != null:
 		_combat_overlay.queue_free()
@@ -834,3 +890,15 @@ func _on_combat_finished(result: String, _remaining_hp: int) -> void:
 	_refresh_encounter_interaction()
 	_last_notice = "%s vencido. O encontro está resolvido nesta sessão." % completed_encounter_id
 	_set_instructions()
+	_refresh_quest_tracker()
+
+func _apply_quest_result(result: Dictionary) -> void:
+	for flag_id: String in result.get("unlocked_flags", []):
+		set_world_flag(flag_id, true)
+	_refresh_quest_tracker()
+
+func _refresh_quest_tracker() -> void:
+	if quest_tracker == null:
+		return
+	quest_tracker.text = _quest_state.tracker_text()
+	quest_tracker.visible = not quest_tracker.text.is_empty()

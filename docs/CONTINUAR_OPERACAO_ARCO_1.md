@@ -11,7 +11,7 @@
 
 ## O que foi feito
 
-G12: ver `docs/RELATORIO_G12.md`. G13 teve auditoria da fonte, mas sua implementação ainda não começou: ver `docs/RELATORIO_G13_AUDITORIA.md`. Os principais arquivos alterados incluem o gerador do catálogo, `map_registry.json`, `encounter_registry.json`, controlador da cena principal e testes G08/G12. As fontes canônicas JavaScript não foram modificadas.
+G12: ver `docs/RELATORIO_G12.md`. G13 tem uma primeira fatia funcional ainda incompleta: ver `docs/RELATORIO_G13.md` e auditoria de fonte em `docs/RELATORIO_G13_AUDITORIA.md`. Os principais arquivos alterados incluem o gerador do catálogo, `map_registry.json`, `encounter_registry.json`, controlador da cena principal e testes G08/G12. As fontes canônicas JavaScript não foram modificadas.
 
 ## Retomada segura
 
@@ -21,7 +21,7 @@ G12: ver `docs/RELATORIO_G12.md`. G13 teve auditoria da fonte, mas sua implement
 4. Executar `node tools/sync_godot_map_registry.js --check`, `node tools/build_godot_encounter_catalog.js --check`, `node godot/tests/test_maps_g12.js`, `godot --headless --path godot --script res://tests/test_maps_g08.gd` e `godot --headless --path godot --script res://tests/test_maps_g12.gd`.
 5. Configurar `XDG_DATA_HOME=/tmp/sotomar-godot-data`, `XDG_CONFIG_HOME=/tmp/sotomar-godot-config`, `XDG_CACHE_HOME=/tmp/sotomar-godot-cache` e `HOME=/tmp/sotomar-home` para Godot no container.
 6. Completar revisão de diff; criar commit da G12 e fazer push somente para `operation/g12-g17` se a autenticação estiver presente.
-7. Avançar G13: implementar registry de quests derivado da fonte, estado idempotente isolado, conexões de eventos/diálogos e UI mobile; respeitar os bloqueios documentados.
+7. Completar G13 com coleta/inspeção e falas condicionais; manter recompensas pendentes até G14 e persistência até G17.
 
 ## Pendências conhecidas
 
@@ -29,4 +29,4 @@ G12: ver `docs/RELATORIO_G12.md`. G13 teve auditoria da fonte, mas sua implement
 - MAP_05↔MAP_07 requer a flag canônica; G13 precisa conectá-la à quest correspondente, após identificá-la na fonte.
 - A suíte JavaScript histórica tem 11 assets Kenney ausentes, conforme o histórico da operação; não ignorar essas falhas.
 - Revisão visual humana, aparelho físico e hospedagem HTTPS continuam pendentes.
-- G13–G17 não iniciadas.
+- G13 está parcial; G14–G17 não iniciadas.

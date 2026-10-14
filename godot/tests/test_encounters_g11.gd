@@ -117,6 +117,12 @@ func _run() -> void:
 	var map_scene: Node = load("res://scenes/main.tscn").instantiate()
 	root.add_child(map_scene)
 	await process_frame
+	map_scene._quest_state.accept_quest("MAIN_01")
+	map_scene._quest_state.record_npc_talk("guarda_mira", "fixture:main01:mira1")
+	map_scene._quest_state.record_map_entry("MAP_02", "fixture:main01:map02")
+	map_scene._quest_state.process_event({"eventId": "fixture:main01:cascudo", "type": "MOB_KILLED", "target": "CRE_CASCUDO_DE_CAL"})
+	map_scene._quest_state.record_npc_talk("guarda_mira", "fixture:main01:mira2")
+	map_scene._quest_state.accept_quest("MAIN_02")
 	map_scene.map_id = "MAP_04"
 	map_scene.map_data = MapCatalog.get_map("MAP_04")
 	var protagonist_before: Vector2i = map_scene.logical_position
@@ -140,6 +146,8 @@ func _run() -> void:
 		map_overlay._try_attack(map_overlay.combat.units[0], map_overlay.combat.units[1], true)
 		await process_frame
 		_check(map_scene._combat_overlay == null and map_scene.map_id == "MAP_04" and map_scene.logical_position == protagonist_before and map_scene.actor.visible and map_scene._encounter_state_store.is_resolved("ENC_05"), "victory returns to the same map and protagonist cell")
+		passed += 1
+		_check(map_scene._quest_state.progress("MAIN_02", "main02_topetao") == 1, "victory MOB_KILLED event reaches the canonical Topetão quest objective")
 		passed += 1
 	map_scene.queue_free()
 	print("G11 encounter tests: %d passed" % passed)

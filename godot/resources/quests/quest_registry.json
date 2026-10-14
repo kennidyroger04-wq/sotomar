@@ -1,0 +1,552 @@
+{
+  "schema_version": 1,
+  "source": "js/data/fimbria-canonical.js",
+  "quests": {
+    "MAIN_01": {
+      "id": "MAIN_01",
+      "title": "A Cerca Quebrada",
+      "description": "A Cerca Quebrada",
+      "prerequisites": [],
+      "rewards": [
+        {
+          "itemId": "ITEM_COLETE_CAIADO",
+          "amount": 1
+        }
+      ],
+      "objectives": [
+        {
+          "id": "main01_talk_mira",
+          "type": "TALK",
+          "target": "NPC_MIRA",
+          "amount": 1
+        },
+        {
+          "id": "main01_map02",
+          "type": "EXPLORE",
+          "target": "MAP_02",
+          "amount": 1
+        },
+        {
+          "id": "main01_cascudo",
+          "type": "KILL",
+          "target": "CRE_CASCUDO_DE_CAL",
+          "amount": 1
+        },
+        {
+          "id": "main01_turnin",
+          "type": "TALK",
+          "target": "NPC_MIRA",
+          "amount": 1
+        }
+      ],
+      "canonical": true,
+      "contentStatus": "registered",
+      "rewardStatus": "canonical_item_deferred",
+      "runtimeStatus": "PARTIAL",
+      "remainingBlocker": "canonical map/mob/NPC adapters"
+    },
+    "MAIN_02": {
+      "id": "MAIN_02",
+      "title": "Rastros Subindo",
+      "description": "Rastros Subindo",
+      "prerequisites": [
+        "MAIN_01"
+      ],
+      "rewards": {
+        "xp": 0,
+        "items": [],
+        "currency": []
+      },
+      "objectives": [
+        {
+          "id": "main02_map04",
+          "type": "EXPLORE",
+          "target": "MAP_04",
+          "amount": 1
+        },
+        {
+          "id": "main02_tufo",
+          "type": "COLLECT",
+          "target": "QITEM_TUFO_PALIDO",
+          "amount": 1
+        },
+        {
+          "id": "main02_topetao",
+          "type": "KILL",
+          "target": "CRE_TOPETAO",
+          "amount": 1
+        },
+        {
+          "id": "main02_turnin",
+          "type": "TALK",
+          "target": "NPC_LIA",
+          "amount": 1
+        }
+      ],
+      "canonical": true,
+      "contentStatus": "registered",
+      "deliveryTbd": true,
+      "worldFlagReward": "FLAG_CARROCAL_UNLOCKED",
+      "runtimeStatus": "DATA-ONLY",
+      "remainingBlocker": "canonical map/mob adapters"
+    },
+    "MAIN_03": {
+      "id": "MAIN_03",
+      "title": "Sopa com Sal Demais",
+      "description": "Sopa com Sal Demais",
+      "prerequisites": [
+        "MAIN_02"
+      ],
+      "rewards": {
+        "xp": 0,
+        "items": [],
+        "currency": []
+      },
+      "objectives": [
+        {
+          "id": "main03_show_nilo",
+          "type": "TALK",
+          "target": "NPC_NILO",
+          "amount": 1
+        },
+        {
+          "id": "main03_turnin",
+          "type": "TALK",
+          "target": "NPC_NILO",
+          "amount": 1
+        }
+      ],
+      "canonical": true,
+      "contentStatus": "partial_registered",
+      "pendingObjectives": [
+        "COLLECT: materiais não definidos pelo cânone"
+      ],
+      "runtimeStatus": "PARTIAL",
+      "remainingBlocker": "materials and canonical NPC adapter"
+    },
+    "MAIN_04": {
+      "id": "MAIN_04",
+      "title": "O Prumo Molhado",
+      "description": "O Prumo Molhado",
+      "prerequisites": [
+        "MAIN_03"
+      ],
+      "rewards": {
+        "xp": 0,
+        "items": [],
+        "currency": []
+      },
+      "objectives": [
+        {
+          "id": "main04_route",
+          "type": "OR",
+          "alternatives": [
+            {
+              "type": "EXPLORE",
+              "target": "MAP_05"
+            },
+            {
+              "type": "EXPLORE",
+              "target": "MAP_06"
+            }
+          ],
+          "amount": 1,
+          "label": "Marco-Prumo ou Ponte Quebrada"
+        },
+        {
+          "id": "main04_registro",
+          "type": "COLLECT",
+          "target": "QITEM_REGISTRO_DE_NIVEL",
+          "amount": 1
+        },
+        {
+          "id": "main04_batidas",
+          "type": "COLLECT",
+          "target": "QITEM_PAGINA_DAS_BATIDAS",
+          "amount": 1
+        },
+        {
+          "id": "main04_turnin",
+          "type": "TALK",
+          "target": "NPC_LIA",
+          "amount": 1
+        }
+      ],
+      "canonical": true,
+      "contentStatus": "or_supported",
+      "worldFlagReward": "FLAG_ESCADA_MARCO_PRUMO_UNLOCKED",
+      "runtimeStatus": "PARTIAL",
+      "remainingBlocker": "canonical map adapter"
+    },
+    "MAIN_05": {
+      "id": "MAIN_05",
+      "title": "Abaixo da Fronteira",
+      "description": "Abaixo da Fronteira",
+      "prerequisites": [
+        "MAIN_04"
+      ],
+      "rewards": {
+        "xp": 0,
+        "items": [],
+        "currency": []
+      },
+      "objectives": [
+        {
+          "id": "main05_talk_mira",
+          "type": "TALK",
+          "target": "NPC_MIRA",
+          "amount": 1
+        },
+        {
+          "id": "main05_map07",
+          "type": "EXPLORE",
+          "target": "MAP_07",
+          "amount": 1
+        },
+        {
+          "id": "main05_map08",
+          "type": "EXPLORE",
+          "target": "MAP_08",
+          "amount": 1
+        },
+        {
+          "id": "main05_paginas",
+          "type": "COLLECT",
+          "target": "QITEM_PAGINAS_DE_AURELO",
+          "amount": 1
+        },
+        {
+          "id": "main05_return",
+          "type": "EXPLORE",
+          "target": "MAP_01",
+          "amount": 1
+        }
+      ],
+      "canonical": true,
+      "contentStatus": "registered",
+      "optionalObjectives": [
+        {
+          "type": "EXPLORE",
+          "target": "MAP_09"
+        }
+      ],
+      "runtimeStatus": "DATA-ONLY",
+      "remainingBlocker": "canonical map adapter"
+    },
+    "MAIN_06": {
+      "id": "MAIN_06",
+      "title": "O Que Mira Calou",
+      "description": "O Que Mira Calou",
+      "prerequisites": [
+        "MAIN_05"
+      ],
+      "rewards": {
+        "xp": 0,
+        "items": [],
+        "currency": []
+      },
+      "objectives": [
+        {
+          "id": "main06_cisterna",
+          "type": "EXPLORE",
+          "target": "MAP_01",
+          "amount": 1
+        },
+        {
+          "id": "main06_mira",
+          "type": "TALK",
+          "target": "NPC_MIRA",
+          "amount": 1
+        }
+      ],
+      "canonical": true,
+      "contentStatus": "scene_deferred",
+      "sceneParticipants": [
+        "NPC_MIRA",
+        "NPC_BRAM",
+        "NPC_LIA"
+      ],
+      "runtimeStatus": "DATA-ONLY",
+      "remainingBlocker": "multi-NPC scene"
+    },
+    "MAIN_07": {
+      "id": "MAIN_07",
+      "title": "Osúma",
+      "description": "Osúma",
+      "prerequisites": [
+        "MAIN_06"
+      ],
+      "rewards": {
+        "xp": 0,
+        "items": [],
+        "currency": []
+      },
+      "objectives": [
+        {
+          "id": "main07_map10",
+          "type": "EXPLORE",
+          "target": "MAP_10",
+          "amount": 1
+        },
+        {
+          "id": "main07_map11",
+          "type": "EXPLORE",
+          "target": "MAP_11",
+          "amount": 1
+        },
+        {
+          "id": "main07_sineira",
+          "type": "BOSS",
+          "target": "CRE_SINEIRA",
+          "amount": 1,
+          "requireNonLethal": true
+        },
+        {
+          "id": "main07_seal",
+          "type": "INSPECT",
+          "target": "SELO_CENTRAL",
+          "amount": 1
+        }
+      ],
+      "canonical": true,
+      "contentStatus": "narrative_ready",
+      "runtimeStatus": "PARTIAL",
+      "remainingBlocker": "MAIN_07 completion/return"
+    },
+    "MAIN_08": {
+      "id": "MAIN_08",
+      "title": "Cal na Porta",
+      "description": "Cal na Porta",
+      "prerequisites": [
+        "MAIN_07"
+      ],
+      "rewards": {
+        "xp": 0,
+        "items": [],
+        "currency": []
+      },
+      "objectives": [
+        {
+          "id": "main08_decalque",
+          "type": "COLLECT",
+          "target": "QITEM_DECALQUE_DO_SELO",
+          "amount": 1
+        },
+        {
+          "id": "main08_mira",
+          "type": "TALK",
+          "target": "NPC_MIRA",
+          "amount": 1
+        }
+      ],
+      "canonical": true,
+      "contentStatus": "registered",
+      "requiredFlags": [
+        "FLAG_SINEIRA_RESOLVED",
+        "FLAG_SEAL_INSPECTED"
+      ],
+      "runtimeStatus": "PARTIAL",
+      "remainingBlocker": "MAIN_07"
+    },
+    "SIDE_01": {
+      "id": "SIDE_01",
+      "title": "Mel e Cera",
+      "description": "Mel e Cera",
+      "prerequisites": [],
+      "rewards": {
+        "xp": 0,
+        "items": [],
+        "currency": []
+      },
+      "objectives": [
+        {
+          "id": "side01_map03",
+          "type": "EXPLORE",
+          "target": "MAP_03",
+          "amount": 1
+        },
+        {
+          "id": "side01_nilo",
+          "type": "TALK",
+          "target": "NPC_NILO",
+          "amount": 1
+        }
+      ],
+      "canonical": true,
+      "contentStatus": "partial_registered",
+      "pendingObjectives": [
+        "COLLECT: mel/cera não definidos"
+      ],
+      "runtimeStatus": "DATA-ONLY",
+      "remainingBlocker": "MAP_03 topology/materials"
+    },
+    "SIDE_02": {
+      "id": "SIDE_02",
+      "title": "Contrato Atrasado",
+      "description": "Contrato Atrasado",
+      "prerequisites": [],
+      "rewards": {
+        "xp": 0,
+        "items": [],
+        "currency": []
+      },
+      "objectives": [
+        {
+          "id": "side02_map04",
+          "type": "EXPLORE",
+          "target": "MAP_04",
+          "amount": 1
+        },
+        {
+          "id": "side02_bram",
+          "type": "TALK",
+          "target": "NPC_BRAM",
+          "amount": 1
+        }
+      ],
+      "canonical": true,
+      "contentStatus": "registered",
+      "problemResolutionTbd": true,
+      "runtimeStatus": "PARTIAL",
+      "remainingBlocker": "canonical MAP_04 runtime adapter"
+    },
+    "SIDE_03": {
+      "id": "SIDE_03",
+      "title": "A Clareira Branca",
+      "description": "A Clareira Branca",
+      "prerequisites": [],
+      "rewards": [
+        {
+          "itemId": "ITEM_PENA_MUDA",
+          "amount": 1
+        }
+      ],
+      "objectives": [
+        {
+          "id": "side03_map09",
+          "type": "EXPLORE",
+          "target": "MAP_09",
+          "amount": 1
+        },
+        {
+          "id": "side03_lia",
+          "type": "TALK",
+          "target": "NPC_LIA",
+          "amount": 1
+        }
+      ],
+      "canonical": true,
+      "contentStatus": "nonlethal_encounter_deferred",
+      "pendingEvents": [
+        "ENCOUNTER_RESOLVED"
+      ],
+      "runtimeStatus": "BLOCKED",
+      "remainingBlocker": "Coruja/M10"
+    },
+    "SIDE_04": {
+      "id": "SIDE_04",
+      "title": "Caiação Adiantada",
+      "description": "Caiação Adiantada",
+      "prerequisites": [],
+      "rewards": {
+        "xp": 0,
+        "items": [],
+        "currency": []
+      },
+      "objectives": [
+        {
+          "id": "side04_mira",
+          "type": "TALK",
+          "target": "NPC_MIRA",
+          "amount": 1
+        }
+      ],
+      "canonical": true,
+      "contentStatus": "partial_registered",
+      "pendingObjectives": [
+        "COLLECT: cal não definido"
+      ],
+      "runtimeStatus": "DATA-ONLY",
+      "remainingBlocker": "canonical materials"
+    },
+    "SIDE_05": {
+      "id": "SIDE_05",
+      "title": "Pote Vazio",
+      "description": "Pote Vazio",
+      "prerequisites": [],
+      "rewards": [
+        {
+          "itemId": "ITEM_UNGUENTO_MUSGO_CLARO",
+          "amount": 1
+        }
+      ],
+      "objectives": [
+        {
+          "id": "side05_nilo",
+          "type": "TALK",
+          "target": "NPC_NILO",
+          "amount": 1
+        }
+      ],
+      "canonical": true,
+      "contentStatus": "partial_registered",
+      "pendingObjectives": [
+        "COLLECT: musgo/materiais não definidos"
+      ],
+      "runtimeStatus": "BLOCKED",
+      "remainingBlocker": "habitat/materials TBD"
+    }
+  },
+  "npc_aliases": {
+    "NPC_MIRA": "guarda_mira",
+    "NPC_LIA": "exploradora_lia",
+    "NPC_NILO": "curandeiro_nilo",
+    "NPC_BRAM": "mercador_bram"
+  },
+  "map_quests": {
+    "MAP_01": [
+      "MAIN_01",
+      "MAIN_03",
+      "MAIN_06",
+      "MAIN_08",
+      "SIDE_01",
+      "SIDE_02",
+      "SIDE_03",
+      "SIDE_04",
+      "SIDE_05"
+    ],
+    "MAP_02": [
+      "MAIN_01"
+    ],
+    "MAP_03": [
+      "SIDE_01"
+    ],
+    "MAP_04": [
+      "MAIN_02",
+      "SIDE_02"
+    ],
+    "MAP_05": [
+      "MAIN_04"
+    ],
+    "MAP_06": [
+      "MAIN_04"
+    ],
+    "MAP_07": [
+      "MAIN_05"
+    ],
+    "MAP_08": [
+      "MAIN_05",
+      "SIDE_05"
+    ],
+    "MAP_09": [
+      "MAIN_05",
+      "SIDE_03"
+    ],
+    "MAP_10": [
+      "MAIN_07"
+    ],
+    "MAP_11": [
+      "MAIN_07"
+    ]
+  }
+}

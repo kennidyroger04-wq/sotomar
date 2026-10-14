@@ -32,9 +32,9 @@
 - `node godot/tests/test_maps_g12.js`: paridade dos onze mapas, nomes/dimensões, bloqueios, spawns, saídas e flags; BFS em grade de cada spawn até cada portal; destino de cada portal dentro dos limites e desobstruído; caminho por grafo respeita a flag; MAP_03/MAP_09 não recebem navegação inventada; texturas de props referenciadas existem.
 - `godot --headless --path godot --script res://tests/test_maps_g08.gd`: regressões G08 e transições MAP_01→MAP_02/MAP_04→MAP_05→MAP_07 (bloqueio e desbloqueio sintético)→MAP_08→MAP_10→MAP_11 e retorno aprovados.
 - `godot --headless --path godot --script res://tests/test_maps_g12.gd`: os onze mapas renderizaram pela cena principal com contagem de células de terreno, props/NPCs, colisões e apenas portais existentes.
-- Regressões G01–G11: tabuleiro, arte G03–G06, touch G07, NPC G09, publicação gated, mapas G08, benchmark, combate/paridade G10 e catálogo/encontros G11 aprovados. G10: 22 testes; G11: 25 testes.
+- Regressões G01–G11: tabuleiro, arte G03–G06, touch G07, NPC G09, publicação gated, mapas G08, benchmark, combate/paridade G10 e catálogo/encontros G11 aprovados. G10: 22 testes; o relatório G11 original aprovou 25, e o teste G11 agora contém 26 verificações ao incluir a conexão de eventos G13.
 - Importação headless Godot, inicialização das cenas de seleção e principal, exportação Web Release e `tools/validate_g09_web_export.py build/web` aprovados.
-- Catálogo G11 foi inicialmente apontado como desatualizado depois de atualizar sua dependência (o mapa registry); regenerado com o gerador oficial, e `--check`, paridade e 25 testes G11 passaram na repetição.
+- Catálogo G11 foi inicialmente apontado como desatualizado depois de atualizar sua dependência (o mapa registry); regenerado com o gerador oficial, e `--check`, paridade e 26 testes G11 passaram na última regressão depois da conexão G13; no checkpoint G12, a repetição havia aprovado as 25 verificações G11 vigentes então.
 - `git diff --check` aprovado.
 
 **Não validado nesta missão:** aparência visual por captura/inspeção humana e execução em aparelho físico. A exportação Web foi estruturalmente validada, não publicada.

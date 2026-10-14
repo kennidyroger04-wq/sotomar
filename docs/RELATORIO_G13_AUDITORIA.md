@@ -1,6 +1,6 @@
 # G13 — auditoria de missões e progressão narrativa
 
-**Estado:** fonte auditada; integração de gameplay PENDENTE. G13 não está concluída.  
+**Estado do snapshot inicial:** fonte auditada, antes da integração. A implementação parcial posterior está descrita em `RELATORIO_G13.md`; G13 segue incompleta.
 **Branch-base:** `operation/g12-g17` no checkpoint G12 `834ae3d4f6048ebf7c0a75b99dfa224e26b672b8`.
 
 ## Fonte e evidências
@@ -38,4 +38,4 @@ MAP_03 e MAP_09 também não possuem entrada alcançável no runtime atual; G12 
 5. Expor acompanhamento mobile sem sugerir que objetivos TBD estão concluíveis.
 6. Não aplicar recompensas até G14 fornecer uma transação de item/currency validada.
 
-Nenhum estado de missão ou regra foi alterado nesta auditoria.
+No momento deste snapshot, nenhum estado de missão ou regra tinha sido alterado; consulte o relatório de implementação posterior para o estado atual.
