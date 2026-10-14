@@ -13,8 +13,8 @@
 | G11 — encontros | IMPLEMENTADO, VALIDADO | ENC_01/MAP_02, ENC_05/MAP_04; dez encontros pendentes. |
 | G11B — checkpoint | IMPLEMENTADO, TESTADO | Tag `g11-stable-20261014`, branch `operation/g12-g17`, build Web local. |
 | G12 — mapas restantes | IMPLEMENTADO, TESTADO | Relatório `RELATORIO_G12.md`; importação, cena compartilhada, navegação existente, gate e export Web passaram. Inspeção visual humana pendente. |
-| G13 — missões/progressão | PARCIALMENTE IMPLEMENTADO, TESTADO | QuestState, aceite explícito, eventos G11, tracker e flags. Coleta/inspeção, falas condicionais, recompensas e persistência pendentes; ver `RELATORIO_G13.md`. |
-| G14 — inventário/serviços | PENDENTE | Depende de G13 e contrato de rewards idempotente. |
+| G13 — missões/progressão | IMPLEMENTADO, TESTADO; narrativa PARCIAL | QuestState, aceite, eventos G11, tracker, gate MAIN_04, diálogos condicionais e inspeções provisórias. Reivindicações de itens aguardam transação G14; ver `RELATORIO_G13.md`. |
+| G14 — inventário/serviços | EM ANDAMENTO | Auditoria da fonte JavaScript iniciada após checkpoint de infraestrutura G13. |
 | G15 — habilidades/criaturas/IA | PENDENTE | Requer auditoria dos efeitos JavaScript e integração incremental. |
 | G16 — boss/final do arco | PENDENTE | Boss e conclusão devem ser auditados antes de implementar narrativa. |
 | G17 — save/continuidade | PENDENTE | Requer schema versionado para mapa, personagem, missões, itens e encontros. |

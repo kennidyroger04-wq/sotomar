@@ -8,6 +8,8 @@ var _map_quests: Dictionary = {}
 var _states: Dictionary = {}
 var _processed_events: Dictionary = {}
 var _flags: Dictionary = {}
+var _inspected_points: Dictionary = {}
+var _pending_item_claims: Dictionary = {}
 
 func _init() -> void:
 	var file := FileAccess.open(REGISTRY_PATH, FileAccess.READ)
@@ -74,6 +76,32 @@ func record_npc_talk(npc_runtime_id: String, event_id: String) -> Dictionary:
 		return _result(false, "UNKNOWN_NPC")
 	return process_event({"eventId": event_id, "type": "TALK", "target": canonical_id})
 
+func record_inspection(point: Dictionary) -> Dictionary:
+	var point_id := String(point.get("id", ""))
+	if point_id.is_empty() or _inspected_points.has(point_id):
+		return _result(false, "ALREADY_INSPECTED" if not point_id.is_empty() else "UNKNOWN_POINT")
+	var event_id := "inspection:%s" % point_id
+	var result := process_event({"eventId": event_id, "type": "INSPECT", "target": point_id})
+	if not result.accepted:
+		return result
+	_inspected_points[point_id] = true
+	var item_id := String(point.get("itemId", ""))
+	if not item_id.is_empty():
+		_pending_item_claims[event_id] = {"event_id": event_id, "point_id": point_id, "item_id": item_id, "amount": 1, "status": "PENDING_G14_TRANSACTION"}
+	var flag_id := String(point.get("flag", ""))
+	if not flag_id.is_empty():
+		set_flag(flag_id)
+	return result
+
+func is_point_inspected(point_id: String) -> bool:
+	return bool(_inspected_points.get(point_id, false))
+
+func pending_item_claims() -> Array[Dictionary]:
+	var result: Array[Dictionary] = []
+	for claim: Dictionary in _pending_item_claims.values():
+		result.append(claim.duplicate(true))
+	return result
+
 func set_flag(flag_id: String, enabled := true) -> void:
 	if not flag_id.is_empty():
 		_flags[flag_id] = enabled
@@ -106,6 +134,52 @@ func available_quests_for_npc(npc_runtime_id: String) -> Array[String]:
 				result.append(quest_id)
 				break
 	return result
+
+func dialogue_state_for_npc(npc_runtime_id: String) -> String:
+	var has_available := not available_quests_for_npc(npc_runtime_id).is_empty()
+	var canonical_id := ""
+	for candidate: String in _aliases:
+		if String(_aliases[candidate]) == npc_runtime_id:
+			canonical_id = candidate
+			break
+	if canonical_id.is_empty():
+		return ""
+	var has_active := false
+	var has_completed := false
+	for quest_id: String in _quests:
+		var definition: Dictionary = _quests[quest_id]
+		var state: Dictionary = _states[quest_id]
+		var talks_to_npc := false
+		for objective: Dictionary in definition.get("objectives", []):
+			if String(objective.get("type", "")) == "TALK" and String(objective.get("target", "")) == canonical_id:
+				talks_to_npc = true
+				break
+		if not talks_to_npc:
+			continue
+		if bool(state.completed):
+			has_completed = true
+		elif bool(state.accepted):
+			has_active = true
+			if _ready_to_turn_in_at_npc(quest_id, definition, canonical_id):
+				return "ready"
+	if has_active:
+		return "active"
+	if has_available:
+		return "available"
+	return "completed" if has_completed else "unavailable"
+
+func _ready_to_turn_in_at_npc(quest_id: String, definition: Dictionary, canonical_id: String) -> bool:
+	var unresolved_turnins := 0
+	for objective: Dictionary in definition.get("objectives", []):
+		var objective_id := String(objective.id)
+		var needed := maxi(1, int(objective.get("amount", 1)))
+		if progress(quest_id, objective_id) >= needed:
+			continue
+		if String(objective.get("type", "")) == "TALK" and String(objective.get("target", "")) == canonical_id:
+			unresolved_turnins += 1
+		else:
+			return false
+	return unresolved_turnins == 1
 
 func _has_talk_objective(definition: Dictionary) -> bool:
 	for objective: Dictionary in definition.get("objectives", []):
@@ -163,7 +237,7 @@ func tracker_text() -> String:
 	return "\n".join(rows)
 
 func snapshot() -> Dictionary:
-	return {"states": _states.duplicate(true), "processed_events": _processed_events.duplicate(true), "flags": _flags.duplicate(true)}
+	return {"states": _states.duplicate(true), "processed_events": _processed_events.duplicate(true), "flags": _flags.duplicate(true), "inspected_points": _inspected_points.duplicate(true), "pending_item_claims": _pending_item_claims.duplicate(true)}
 
 func _matching_objective(quest_id: String, definition: Dictionary, event: Dictionary) -> Dictionary:
 	var state: Dictionary = _states[quest_id]

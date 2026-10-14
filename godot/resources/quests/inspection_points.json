@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "source": "js/systems/fimbria-inspections.js",
+  "points": [
+    {
+      "id": "POINT_TUFO_PALIDO",
+      "mapId": "MAP_02",
+      "x": 2,
+      "y": 2,
+      "itemId": "QITEM_TUFO_PALIDO",
+      "flag": "FLAG_INSPECTED_TUFO_PALIDO",
+      "item_name": "Tufo Pálido",
+      "position_status": "PROVISIONAL_LOGICAL"
+    },
+    {
+      "id": "POINT_MARCO_PRUMO_REGISTRO",
+      "mapId": "MAP_05",
+      "x": 3,
+      "y": 2,
+      "itemId": "QITEM_REGISTRO_DE_NIVEL",
+      "flag": "FLAG_INSPECTED_REGISTRO_DE_NIVEL",
+      "item_name": "Registro de Nível",
+      "position_status": "PROVISIONAL_LOGICAL"
+    },
+    {
+      "id": "POINT_PONTE_PAGINA_BATIDAS",
+      "mapId": "MAP_06",
+      "x": 3,
+      "y": 2,
+      "itemId": "QITEM_PAGINA_DAS_BATIDAS",
+      "flag": "FLAG_INSPECTED_PAGINA_DAS_BATIDAS",
+      "item_name": "Página das Batidas",
+      "position_status": "PROVISIONAL_LOGICAL"
+    },
+    {
+      "id": "POINT_ACAMPAMENTO_PAGINAS_AURELO",
+      "mapId": "MAP_08",
+      "x": 2,
+      "y": 2,
+      "itemId": "QITEM_PAGINAS_DE_AURELO",
+      "flag": "FLAG_INSPECTED_PAGINAS_DE_AURELO",
+      "item_name": "Páginas de Aurelo",
+      "position_status": "PROVISIONAL_LOGICAL"
+    }
+  ]
+}

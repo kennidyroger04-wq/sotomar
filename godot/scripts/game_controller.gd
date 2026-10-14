@@ -14,6 +14,8 @@ const EncounterMarkerScript = preload("res://scripts/encounter_marker_g10.gd")
 const EncounterRegistryScript = preload("res://scripts/encounter_registry_g11.gd")
 const EncounterStateStoreScript = preload("res://scripts/encounter_state_store_g11.gd")
 const QuestProgressStateScript = preload("res://scripts/quest_progress_state_g13.gd")
+const InspectionCatalogScript = preload("res://scripts/inspection_catalog_g13.gd")
+const InspectionMarkerScript = preload("res://scripts/inspection_marker_g13.gd")
 
 @onready var board: Node2D = $GroundAndGrid
 @onready var scenery: Node2D = $Scenery
@@ -31,6 +33,7 @@ const QuestProgressStateScript = preload("res://scripts/quest_progress_state_g13
 var logical_position := Vector2i(1, 1)
 var world_flags: Dictionary = {}
 var _quest_state = QuestProgressStateScript.new()
+var _inspection_catalog = InspectionCatalogScript.new()
 var _quest_event_sequence := 0
 var movement_in_progress := false
 var map_origin := Vector2.ZERO
@@ -58,6 +61,7 @@ var dialogue_text: Label
 var dialogue_advance: Button
 var quest_tracker: Label
 var quest_accept_button: Button
+var inspect_button: Button
 var talk_button: Button
 var _dialogue_lines: PackedStringArray = []
 var _dialogue_index := 0
@@ -70,10 +74,13 @@ var _encounter_state_store = EncounterStateStoreScript.new()
 var selected_encounter_id := ""
 var _selected_encounter_cell := ENCOUNTER_MARKER
 var _encounter_markers := Node2D.new()
+var _inspection_markers := Node2D.new()
 
 func _ready() -> void:
 	_encounter_markers.name = "EncounterMarkers"
 	add_child(_encounter_markers)
+	_inspection_markers.name = "InspectionMarkersG13"
+	add_child(_inspection_markers)
 	confirm_button.pressed.connect(_confirm_pending_move)
 	confirm_button.hide()
 	_build_interaction_ui()
@@ -113,6 +120,20 @@ func _load_map_visuals() -> void:
 	for old_marker: Node in _encounter_markers.get_children():
 		_encounter_markers.remove_child(old_marker)
 		old_marker.queue_free()
+	for old_marker: Node in _inspection_markers.get_children():
+		_inspection_markers.remove_child(old_marker)
+		old_marker.queue_free()
+	for point: Dictionary in _inspection_catalog.points_for_map(map_id):
+		var marker := Node2D.new()
+		marker.name = "Inspect_" + String(point.id)
+		marker.set_script(InspectionMarkerScript)
+		marker.position = Logic.cell_to_screen(Vector2i(int(point.x), int(point.y)), map_origin)
+		marker.z_index = int(point.x) + int(point.y) + 3
+		marker.set_meta("logical_cell", Vector2i(int(point.x), int(point.y)))
+		marker.set_meta("point_id", String(point.id))
+		marker.set_meta("point_data", point)
+		marker.set("inspected", _quest_state.is_point_inspected(String(point.id)))
+		_inspection_markers.add_child(marker)
 	selected_encounter_id = ""
 	var pending_ids: Array[String] = []
 	for encounter: Dictionary in _encounter_registry.encounters_for_map(map_id):
@@ -477,6 +498,9 @@ func _layout_viewport() -> void:
 	for layer: TileMapLayer in _tile_layers():
 		layer.position = map_origin - layer.map_to_local(Vector2i.ZERO) * layer.scale
 	scenery.update_origin(map_origin)
+	for marker: Node2D in _inspection_markers.get_children():
+		var cell: Vector2i = marker.get_meta("logical_cell")
+		marker.position = Logic.cell_to_screen(cell, map_origin)
 	actor.position = Logic.cell_to_screen(logical_position, map_origin)
 	var view := _map_view_data()
 	if not _user_zoomed:
@@ -576,6 +600,13 @@ func _build_interaction_ui() -> void:
 	talk_button.hide()
 	talk_button.pressed.connect(_interact_with_nearest_npc)
 	$HUD.add_child(talk_button)
+	inspect_button = Button.new()
+	inspect_button.name = "InspectPointG13"
+	inspect_button.text = "Investigar"
+	inspect_button.custom_minimum_size = Vector2(0, 52)
+	inspect_button.hide()
+	inspect_button.pressed.connect(_inspect_nearest_point)
+	$HUD.add_child(inspect_button)
 
 	dialogue_panel = PanelContainer.new()
 	dialogue_panel.name = "NpcDialoguePanel"
@@ -656,6 +687,10 @@ func _layout_interaction_ui(size_override: Vector2 = Vector2.ZERO) -> void:
 	else:
 		talk_button.position = Vector2(view_size.x - width - margin, view_size.y - 74.0 * ui_scale)
 		talk_button.size = Vector2(width, 58.0 * ui_scale)
+	if inspect_button != null and inspect_button.visible:
+		inspect_button.position = Vector2(view_size.x - width - margin, view_size.y - 74.0 * ui_scale)
+		inspect_button.size = Vector2(width, 58.0 * ui_scale)
+		inspect_button.add_theme_font_size_override("font_size", int(round(16.0 * ui_scale)))
 	var panel_height := (200.0 if is_portrait else 184.0) * ui_scale
 	var panel_top := view_size.y - panel_height - 12.0 * ui_scale
 	dialogue_panel.position = Vector2(12.0 * ui_scale, panel_top)
@@ -711,13 +746,24 @@ func _refresh_npc_interaction() -> void:
 		if distance < closest_distance:
 			closest = marker
 			closest_distance = distance
-	talk_button.visible = closest != null and closest_distance <= 1 and not _dialogue_is_open()
+	var inspection_marker := _nearest_inspection_marker()
+	var inspection_distance := _inspection_distance(inspection_marker) if inspection_marker != null else 999
+	inspect_button.visible = inspection_marker != null and inspection_distance <= 1 and not _dialogue_is_open()
+	if inspect_button.visible:
+		var point: Dictionary = inspection_marker.get_meta("point_data")
+		var provisional := String(point.get("position_status", "")) == "PROVISIONAL_LOGICAL"
+		inspect_button.text = "Investigar · posição provisória" if provisional else "Investigar"
+		inspect_button.tooltip_text = String(point.get("item_name", point.get("id", "ponto")))
+	talk_button.visible = closest != null and closest_distance <= 1 and not _dialogue_is_open() and not inspect_button.visible
 	if talk_button.visible:
 		talk_button.text = "Conversar com %s" % String(closest.display_name).get_slice(",", 0)
 	_layout_interaction_ui()
 	_refresh_encounter_interaction()
 
 func _interact_with_nearest_npc() -> void:
+	if inspect_button != null and inspect_button.visible:
+		_inspect_nearest_point()
+		return
 	var closest: Node2D
 	var closest_distance := 999
 	for marker in scenery.get_children():
@@ -726,6 +772,47 @@ func _interact_with_nearest_npc() -> void:
 			closest_distance = _npc_distance(marker)
 	if closest != null and closest_distance <= 1:
 		_open_npc_dialogue(String(closest.get_meta("npc_id")))
+
+func _nearest_inspection_marker() -> Node2D:
+	var nearest: Node2D
+	var nearest_distance := 999
+	for marker: Node2D in _inspection_markers.get_children():
+		if bool(marker.get("inspected")):
+			continue
+		var distance := _inspection_distance(marker)
+		marker.set("can_interact", distance <= 1)
+		marker.queue_redraw()
+		if distance < nearest_distance:
+			nearest = marker
+			nearest_distance = distance
+	return nearest
+
+func _inspection_distance(marker: Node2D) -> int:
+	var cell: Vector2i = marker.get_meta("logical_cell")
+	return absi(cell.x - logical_position.x) + absi(cell.y - logical_position.y)
+
+func _inspect_nearest_point() -> void:
+	var marker := _nearest_inspection_marker()
+	if marker == null:
+		return
+	if _inspection_distance(marker) > 1:
+		_last_notice = "Aproxime-se do ponto para investigar."
+		_set_instructions()
+		return
+	var point: Dictionary = marker.get_meta("point_data")
+	var validation := _inspection_catalog.validate({map_id: map_data})
+	if not validation.is_empty():
+		push_error("Inspection point registry is invalid: " + ", ".join(validation))
+		return
+	var result := _quest_state.record_inspection(point)
+	if not result.accepted:
+		return
+	marker.set("inspected", true)
+	marker.queue_redraw()
+	_last_notice = "%s registrado; o item aguarda integração do inventário." % String(point.get("item_name", "Ponto de interesse"))
+	_set_instructions()
+	_refresh_quest_tracker()
+	_refresh_npc_interaction()
 
 func _interact_with_npc(marker: Node2D) -> void:
 	if movement_in_progress or _dialogue_is_open():
@@ -742,10 +829,12 @@ func _open_npc_dialogue(npc_id: String) -> void:
 		push_error("No canonical dialogue defined for NPC: " + npc_id)
 		return
 	_active_npc_id = npc_id
+	var dialogue_state := _quest_state.dialogue_state_for_npc(npc_id)
 	_quest_event_sequence += 1
 	_apply_quest_result(_quest_state.record_npc_talk(npc_id, "talk:%s:%d" % [npc_id, _quest_event_sequence]))
 	_dialogue_lines = PackedStringArray()
-	var greeting := String(definition.get("greeting", ""))
+	var states: Dictionary = definition.get("states", {})
+	var greeting := String(states.get(dialogue_state, definition.get("greeting", "")))
 	for line: String in greeting.split("\n", false):
 		if not line.strip_edges().is_empty():
 			_dialogue_lines.append(line)

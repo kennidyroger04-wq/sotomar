@@ -2,6 +2,7 @@ extends SceneTree
 
 const Logic = preload("res://scripts/iso_board_logic.gd")
 const MapCatalog = preload("res://scripts/map_catalog.gd")
+const NpcDialogueCatalog = preload("res://scripts/npc_dialogue_catalog.gd")
 var failures := 0
 
 func _initialize() -> void:
@@ -59,6 +60,7 @@ func _test_playable_integration() -> void:
 	_check(scene.quest_tracker.visible and scene.quest_tracker.text.contains("A Cerca Quebrada"), "mobile quest tracker displays the canonical current objective")
 	scene._open_npc_dialogue("guarda_mira")
 	_check(scene.quest_accept_button.visible and scene.quest_accept_button.text.contains("A Cerca Quebrada"), "canonical Mira dialogue offers the available main quest")
+	_check(scene.dialogue_text.text == NpcDialogueCatalog.get_npc("guarda_mira").states.available, "quest dialogue uses the canonical available-state copy")
 	scene._accept_quest_from_dialogue()
 	_check(scene._quest_state._states["MAIN_01"]["accepted"], "quest offer requires an explicit accept action")
 	scene._close_dialogue()
