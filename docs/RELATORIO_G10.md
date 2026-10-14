@@ -48,8 +48,8 @@ Data: 2026-10-14. Projeto Godot 4.6.3, branch `main` no checkout de trabalho.
 Todas em `reports/g10/`; executadas por Chromium/WebGL software a 1280×720 (desktop) e viewport 390×844 com touch emulado (mobile):
 
 - `01-character-select-desktop.png`, `02-exploration-map01-desktop.png`, `03-encounter-marker-map02-desktop.png`, `04-combat-enc01-desktop.png`.
-- `05-character-select-mobile.png`, `06-exploration-mobile.png`, `07-mobile-touch-selection.png`, `13-encounter-mobile.png`, `14-combat-mobile.png`.
-- `08-enemy-turn-desktop.png`, `10-combat-move-mode.png`, `11-first-browser-attack.png`, `12-enemy-turn-fortified.png`, `09-victory-return-desktop.png`.
+- `05-character-select-mobile.png`, `06-exploration-mobile.png`, `13-encounter-mobile.png`, `14-combat-mobile.png`.
+- `08-enemy-turn-desktop.png`, `10-combat-move-mode.png`, `11-first-browser-attack.png`, `09-victory-return-desktop.png`.
 
 A captura final do MAP_02 mostra retorno após vitória e encerramento visual do overlay. As capturas verificam enquadramento e legibilidade no browser executado, não aprovam a arte provisória.
 
