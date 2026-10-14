@@ -5,13 +5,13 @@
 - Última missão concluída: G12 — integração do catálogo e layouts MAP_01–MAP_11.
 - Branch de trabalho: `operation/g12-g17`.
 - Base remota conhecida antes desta missão: `4ab3e72868f2962d563cad509aa0276a562b70d6` (G11B).
-- As mudanças G12 estão no working tree e ainda precisam de commit/push.
+- G12 foi commitada e enviada: `834ae3d4f6048ebf7c0a75b99dfa224e26b672b8`. O working tree deve permanecer limpo após este commit de auditoria documental.
 - G11 está protegido pela tag `g11-stable-20261014`; não alterar a branch `main` nem mesclar automaticamente.
 - Skill/ambiente cloud não exigiram credenciais nem configuração adicional.
 
 ## O que foi feito
 
-Ver `docs/RELATORIO_G12.md`. Os principais arquivos alterados incluem o gerador do catálogo, `map_registry.json`, `encounter_registry.json`, controlador da cena principal e testes G08/G12. As fontes canônicas JavaScript não foram modificadas.
+G12: ver `docs/RELATORIO_G12.md`. G13 teve auditoria da fonte, mas sua implementação ainda não começou: ver `docs/RELATORIO_G13_AUDITORIA.md`. Os principais arquivos alterados incluem o gerador do catálogo, `map_registry.json`, `encounter_registry.json`, controlador da cena principal e testes G08/G12. As fontes canônicas JavaScript não foram modificadas.
 
 ## Retomada segura
 
@@ -21,7 +21,7 @@ Ver `docs/RELATORIO_G12.md`. Os principais arquivos alterados incluem o gerador 
 4. Executar `node tools/sync_godot_map_registry.js --check`, `node tools/build_godot_encounter_catalog.js --check`, `node godot/tests/test_maps_g12.js`, `godot --headless --path godot --script res://tests/test_maps_g08.gd` e `godot --headless --path godot --script res://tests/test_maps_g12.gd`.
 5. Configurar `XDG_DATA_HOME=/tmp/sotomar-godot-data`, `XDG_CONFIG_HOME=/tmp/sotomar-godot-config`, `XDG_CACHE_HOME=/tmp/sotomar-godot-cache` e `HOME=/tmp/sotomar-home` para Godot no container.
 6. Completar revisão de diff; criar commit da G12 e fazer push somente para `operation/g12-g17` se a autenticação estiver presente.
-7. Avançar G13: auditar fonte JavaScript de quests/eventos/diálogos e construir testes de paridade antes de alterar gameplay.
+7. Avançar G13: implementar registry de quests derivado da fonte, estado idempotente isolado, conexões de eventos/diálogos e UI mobile; respeitar os bloqueios documentados.
 
 ## Pendências conhecidas
 
