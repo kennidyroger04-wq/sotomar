@@ -8,6 +8,9 @@ const TOUCH_MOUSE_GUARD_MS := 650
 const DOUBLE_TAP_MS := 700
 const START_MAP_ID := "MAP_01"
 const GRASS_VARIANT_SOURCES := [5, 6]
+const ENCOUNTER_MARKER := Vector2i(6, 4)
+const CombatOverlayScript = preload("res://scripts/combat_overlay_g10.gd")
+const EncounterMarkerScript = preload("res://scripts/encounter_marker_g10.gd")
 
 @onready var board: Node2D = $GroundAndGrid
 @onready var scenery: Node2D = $Scenery
@@ -51,11 +54,15 @@ var talk_button: Button
 var _dialogue_lines: PackedStringArray = []
 var _dialogue_index := 0
 var _active_npc_id := ""
+var encounter_button: Button
+var _combat_overlay: CanvasLayer
+var _encounter_resolved := false
 
 func _ready() -> void:
 	confirm_button.pressed.connect(_confirm_pending_move)
 	confirm_button.hide()
 	_build_interaction_ui()
+	_build_encounter_ui()
 	map_data = MapCatalog.get_map(START_MAP_ID)
 	if map_data.is_empty():
 		push_error("Start map MAP_01 is not available in the Godot map registry.")
@@ -86,6 +93,15 @@ func _load_map_visuals() -> void:
 		layer.clear()
 	_configure_tile_layers()
 	scenery.configure(map_origin, map_data)
+	if map_id == "MAP_02" and not _encounter_resolved:
+		var marker := Node2D.new()
+		marker.name = "Encounter_ENC_01"
+		marker.set_script(EncounterMarkerScript)
+		marker.position = Logic.cell_to_screen(ENCOUNTER_MARKER, map_origin)
+		marker.z_index = ENCOUNTER_MARKER.x + ENCOUNTER_MARKER.y + 2
+		marker.set_meta("logical_cell", ENCOUNTER_MARKER)
+		marker.set_meta("encounter_id", "ENC_01")
+		scenery.add_child(marker)
 	board.origin = map_origin
 	board.queue_redraw()
 	_set_instructions()
@@ -139,6 +155,8 @@ func _path_source(cell: Vector2i) -> int:
 	return 2
 
 func _unhandled_input(event: InputEvent) -> void:
+	if _combat_overlay != null:
+		return
 	if _dialogue_is_open():
 		if event is InputEventKey and event.pressed and not event.echo:
 			if event.keycode == KEY_ESCAPE:
@@ -191,6 +209,11 @@ func _handle_mouse_button(event: InputEventMouseButton) -> void:
 		_mark_input_handled()
 		return
 	if event.button_index == MOUSE_BUTTON_LEFT or event.button_index == MOUSE_BUTTON_RIGHT:
+		var encounter_marker := _encounter_at_screen(event.position)
+		if encounter_marker != null:
+			_interact_with_encounter(encounter_marker)
+			_mark_input_handled()
+			return
 		var npc := _npc_at_screen(event.position)
 		if npc != null:
 			_interact_with_npc(npc)
@@ -200,6 +223,10 @@ func _handle_mouse_button(event: InputEventMouseButton) -> void:
 	if not Logic.is_inside(cell, map_columns, map_rows):
 		return
 	if event.button_index == MOUSE_BUTTON_LEFT:
+		if map_id == "MAP_02" and cell == ENCOUNTER_MARKER and not _encounter_resolved:
+			_start_encounter()
+			_mark_input_handled()
+			return
 		_select_cell(cell)
 		_mark_input_handled()
 	elif event.button_index == MOUSE_BUTTON_RIGHT:
@@ -253,12 +280,19 @@ func _handle_screen_drag(event: InputEventScreenDrag) -> void:
 func _handle_touch_tap(screen_position: Vector2) -> void:
 	if _dialogue_is_open():
 		return
+	var encounter_marker := _encounter_at_screen(screen_position)
+	if encounter_marker != null:
+		_interact_with_encounter(encounter_marker)
+		return
 	var npc := _npc_at_screen(screen_position)
 	if npc != null:
 		_interact_with_npc(npc)
 		return
 	var cell := _screen_to_cell(screen_position)
 	if not Logic.is_inside(cell, map_columns, map_rows):
+		return
+	if map_id == "MAP_02" and cell == ENCOUNTER_MARKER and not _encounter_resolved:
+		_start_encounter()
 		return
 	var now := Time.get_ticks_msec()
 	var second_tap := cell == _last_touch_cell and now - _last_tap_msec <= DOUBLE_TAP_MS
@@ -337,6 +371,7 @@ func _walk_route(route: Array[Vector2i]) -> void:
 			return
 	actor.walking = false
 	movement_in_progress = false
+	_refresh_npc_interaction()
 	if _layout_pending:
 		_layout_viewport()
 
@@ -425,6 +460,10 @@ func _layout_viewport() -> void:
 		confirm_button.hide()
 	_clamp_camera()
 	_layout_interaction_ui()
+	if encounter_button != null:
+		encounter_button.position = Vector2(16.0 / screen_scale, view_size.y - 74.0 / screen_scale)
+		encounter_button.size = Vector2(minf(320.0 / screen_scale, view_size.x - 32.0 / screen_scale), 58.0 / screen_scale)
+		encounter_button.add_theme_font_size_override("font_size", int(round(16.0 / screen_scale)))
 
 func _map_view_data() -> Rect2:
 	var left := -(map_rows - 1) * CELL_WIDTH * 0.5 - CELL_WIDTH * 0.5
@@ -524,6 +563,16 @@ func _build_interaction_ui() -> void:
 	$HUD.add_child(dialogue_panel)
 	$HUD.add_child(dialogue_advance)
 
+func _build_encounter_ui() -> void:
+	encounter_button = Button.new()
+	encounter_button.name = "StartEncounterENC01"
+	encounter_button.text = "Investigar Cascudo-de-cal"
+	encounter_button.custom_minimum_size = Vector2(0, 58)
+	encounter_button.add_theme_font_size_override("font_size", 16)
+	encounter_button.hide()
+	encounter_button.pressed.connect(_start_encounter)
+	$HUD.add_child(encounter_button)
+
 func _layout_interaction_ui(size_override: Vector2 = Vector2.ZERO) -> void:
 	if talk_button == null or dialogue_panel == null:
 		return
@@ -537,11 +586,17 @@ func _layout_interaction_ui(size_override: Vector2 = Vector2.ZERO) -> void:
 	var width := maxf(0.0, available_width * 0.5) if confirm_button.visible else minf(240.0 * ui_scale, view_size.x - margin * 2.0)
 	talk_button.add_theme_font_size_override("font_size", int(round(16.0 * ui_scale)))
 	confirm_button.add_theme_font_size_override("font_size", int(round(16.0 * ui_scale)))
-	if confirm_button.visible:
+	if encounter_button != null and encounter_button.visible:
+		encounter_button.position = Vector2(margin, view_size.y - 74.0 * ui_scale)
+		encounter_button.size = Vector2(minf(320.0 * ui_scale, view_size.x - margin * 2.0), 58.0 * ui_scale)
+		encounter_button.add_theme_font_size_override("font_size", int(round(16.0 * ui_scale)))
+	elif confirm_button.visible:
 		confirm_button.position = Vector2(margin, view_size.y - 74.0 * ui_scale)
 		confirm_button.size = Vector2(width, 58.0 * ui_scale)
 		talk_button.position = Vector2(margin + width + gap, view_size.y - 74.0 * ui_scale)
 		talk_button.size = Vector2(width, 58.0 * ui_scale)
+		if width < 200.0 * ui_scale:
+			talk_button.text = "Conversar"
 	else:
 		talk_button.position = Vector2(view_size.x - width - margin, view_size.y - 74.0 * ui_scale)
 		talk_button.size = Vector2(width, 58.0 * ui_scale)
@@ -597,6 +652,7 @@ func _refresh_npc_interaction() -> void:
 	if talk_button.visible:
 		talk_button.text = "Conversar com %s" % String(closest.display_name).get_slice(",", 0)
 	_layout_interaction_ui()
+	_refresh_encounter_interaction()
 
 func _interact_with_nearest_npc() -> void:
 	var closest: Node2D
@@ -661,4 +717,68 @@ func _close_dialogue() -> void:
 	_active_npc_id = ""
 	_dialogue_lines = []
 	_refresh_npc_interaction()
+	_set_instructions()
+
+func _encounter_at_screen(screen_position: Vector2) -> Node2D:
+	if map_id != "MAP_02" or _encounter_resolved:
+		return null
+	var world_position: Vector2 = get_viewport().get_canvas_transform().affine_inverse() * screen_position
+	for marker in scenery.get_children():
+		if marker.has_meta("encounter_id"):
+			var local: Vector2 = marker.to_local(world_position)
+			if local.x >= -48 and local.x <= 48 and local.y >= -68 and local.y <= 12:
+				return marker
+	return null
+
+func _interact_with_encounter(marker: Node2D) -> void:
+	if movement_in_progress:
+		return
+	_start_encounter()
+
+func _refresh_encounter_interaction() -> void:
+	if encounter_button == null or not is_node_ready():
+		return
+	var can_start := map_id == "MAP_02" and not _encounter_resolved and not movement_in_progress and not _dialogue_is_open()
+	encounter_button.visible = can_start
+	if can_start:
+		talk_button.hide()
+	_layout_interaction_ui()
+
+func _start_encounter() -> void:
+	if _combat_overlay != null or map_id != "MAP_02" or _encounter_resolved:
+		return
+	_clear_pending_move()
+	encounter_button.hide()
+	talk_button.hide()
+	instructions.hide()
+	confirm_button.hide()
+	rotation_hint.hide()
+	board.hide()
+	scenery.hide()
+	actor.hide()
+	for layer: TileMapLayer in _tile_layers():
+		layer.hide()
+	_combat_overlay = CanvasLayer.new()
+	_combat_overlay.set_script(CombatOverlayScript)
+	_combat_overlay.combat_finished.connect(_on_combat_finished)
+	add_child(_combat_overlay)
+
+func _on_combat_finished(result: String, _remaining_hp: int) -> void:
+	if result != "VICTORY":
+		return
+	_encounter_resolved = true
+	if _combat_overlay != null:
+		_combat_overlay.queue_free()
+		_combat_overlay = null
+	for layer: TileMapLayer in _tile_layers():
+		layer.show()
+	board.show()
+	scenery.show()
+	actor.show()
+	_load_map_visuals()
+	_layout_viewport()
+	_update_depth()
+	_refresh_npc_interaction()
+	_refresh_encounter_interaction()
+	_last_notice = "ENC_01 vencido. O encontro está resolvido nesta sessão."
 	_set_instructions()

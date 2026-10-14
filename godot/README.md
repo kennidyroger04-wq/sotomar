@@ -10,6 +10,12 @@ Protótipo jogável 2D isométrico em Godot 4.6.3/GDScript. Mantém a grade, reg
 4. Clique numa célula para destacá-la; botão direito para caminhar até ela. As setas ou WASD movem uma célula. Obstáculos aparecem com um X e não podem ser atravessados.
 5. Para a comparação, abra `scenes/character_compare_g06.tscn` e execute a cena atual com **F6**. Setas alternam direção, teclas 1–7 alternam ações e G inspeciona overlays de equipamentos.
 
+### Primeiro combate G10
+
+Na exploração, entre no portal de MAP_01 para MAP_02. Em MAP_02, toque/click em **Investigar Cascudo-de-cal** no rodapé ou toque/click no marcador `ENC_01`. O combate é um tabuleiro isométrico 8×6: use **Mover** e selecione uma célula verde alcançável, **Golpe 4 PA** e o Cascudo adjacente, **Defender 2 PA** para reduzir dano físico, ou **Encerrar turno**. No telefone, os mesmos botões e toques nas células funcionam. Vitória remove o encontro até a sessão de jogo acabar e retoma MAP_02 na posição atual; derrota permite reiniciar o encontro.
+
+O encontro é o `ENC_01` canônico de MAP_02 com uma instância de `CRE_CASCUDO_DE_CAL`. A criatura aparece com um placeholder desenhado por código porque o catálogo não fornece sprite canônico para ela. HP/PA/PM/agilidade são os números provisórios já registrados no runtime JavaScript; não são balanceamento aprovado. As ações usam as regras existentes de `Golpe Pesado` e `Fortificar`. Persistência de combate, recompensas, progressão e outras habilidades permanecem fora desta primeira integração.
+
 ## Verificações e geração de tiles
 
 Na raiz do repositório:
@@ -23,7 +29,9 @@ godot --headless --path godot --script res://tests/test_iso_board.gd
 godot --headless --path godot --quit-after 5
 ```
 
-A suíte de 20 checks cobre projeção, seleção/escalonamento, movimento determinístico, bloqueios, profundidade, integridade e contato geométrico dos tiles, redimensionamento da janela e alinhamento/conteúdo dos `TileMapLayer`. Headless valida carga e lógica, não aprova aparência gráfica.
+A suíte G01 de 21 checks cobre projeção, seleção/escalonamento, movimento determinístico, bloqueios, profundidade, integridade e contato geométrico dos tiles, redimensionamento da janela e alinhamento/conteúdo dos `TileMapLayer`. Headless valida carga e lógica, não aprova aparência gráfica.
+
+O teste G10 é `godot --headless --path godot --script res://tests/test_combat_g10.gd`; execute também `node godot/tests/test_combat_parity_g10.js` para conferir as fixtures compartilhadas com as regras JavaScript originais. A matriz completa dos testes está em [`tests/README.md`](tests/README.md), e o resultado e limites do primeiro combate estão em [`../docs/RELATORIO_G10.md`](../docs/RELATORIO_G10.md).
 
 O pacote G06 tem 112 quadros masculinos em sete folhas 512×640, recursos `SpriteFrames`, equipamento direcional, persistência por ID, seleção inicial e uma cena comparativa. Leia [RELATORIO_G06.md](../docs/RELATORIO_G06.md) e [CATALOGO_ASSETS_G06.md](../docs/CATALOGO_ASSETS_G06.md). Os recursos Wayfarer G03/G05 permanecem nos mesmos caminhos.
 

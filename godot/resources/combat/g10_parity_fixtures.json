@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "source": "js/core/rules.js, js/data/abilities.js, js/systems/combat-effects.js, js/systems/combat-ai.js",
+  "provisional_balance_source": "js/data/fimbria-runtime.js",
+  "encounter_id": "ENC_01",
+  "creature_id": "CRE_CASCUDO_DE_CAL",
+  "creature_runtime": {
+    "hp": 70,
+    "pa": 6,
+    "pm": 3,
+    "agility": 5,
+    "attack_ability": "golpe",
+    "balance_status": "PROVISÓRIO — BALANCEAMENTO FUTURO"
+  },
+  "initiative": {
+    "combatants": [
+      {"id": "player", "side": "player", "agility": 10, "tie_roll": 0.0},
+      {"id": "cascudo", "side": "mob", "agility": 5, "tie_roll": 0.0}
+    ],
+    "order": ["player", "cascudo"]
+  },
+  "movement": {
+    "start": [1, 1],
+    "goal": [3, 1],
+    "blocked": [[2, 1]],
+    "path_length": 4,
+    "pm": 4,
+    "remaining_pm": 0,
+    "neighbor_order": [[1, 0], [-1, 0], [0, 1], [0, -1]]
+  },
+  "damage": {
+    "ability_id": "golpe",
+    "ap_cost": 4,
+    "range": [1, 1],
+    "base_roll": 40,
+    "strength": 10,
+    "crit_roll": 0.99,
+    "noncritical": 44,
+    "critical_roll": 0.0,
+    "critical": 66,
+    "target_hp_before": 70,
+    "target_hp_after": 26
+  },
+  "defense": {
+    "ability_id": "fortificar",
+    "ap_cost": 2,
+    "duration": 2,
+    "physical_resistance": 0.2,
+    "magical_resistance": 0.1,
+    "physical_damage_base": 40,
+    "physical_damage_received": 32
+  },
+  "outcomes": {
+    "defeated_hp": 0,
+    "victory": "UNIT_DIED",
+    "action_rejected_at_hp": 0
+  }
+}
