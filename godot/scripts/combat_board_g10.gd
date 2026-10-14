@@ -8,6 +8,8 @@ var cell_scale := 1.0
 var combat: Dictionary = {}
 var selected_cell := Vector2i(-1, -1)
 var mode := ""
+var targetable_cells: Array[Vector2i] = []
+var affected_cells: Array[Vector2i] = []
 var sprites: Dictionary = {}
 var origin := Vector2.ZERO
 var fx_nodes: Dictionary = {}
@@ -37,16 +39,13 @@ func configure(state: Dictionary, player_frames: SpriteFrames) -> void:
 
 func set_mode(value: String) -> void:
 	mode = value
+	targetable_cells.clear()
+	affected_cells.clear()
 	queue_redraw()
 
 func _process(_delta: float) -> void:
 	if combat.is_empty():
 		return
-	var view := get_viewport_rect().size
-	var new_origin := Vector2(view.x * 0.5, view.y * 0.48)
-	if origin.distance_to(new_origin) > 1.0:
-		origin = new_origin
-		queue_redraw()
 	for unit: Dictionary in combat.units:
 		var id := String(unit.id)
 		var sprite: AnimatedSprite2D = sprites.get(id)
@@ -76,7 +75,15 @@ func _draw() -> void:
 				color = Color("687078")
 			elif mode == "move" and _reachable(cell):
 				color = Color("a9d987")
+			elif targetable_cells.has(cell):
+				color = Color("8abbe3")
+			if affected_cells.has(cell):
+				color = Color("e97768")
 			draw_colored_polygon(points, color)
+			if affected_cells.has(cell):
+				draw_colored_polygon(points, Color(0.92, 0.23, 0.18, 0.24))
+			elif targetable_cells.has(cell):
+				draw_colored_polygon(points, Color(0.25, 0.70, 0.95, 0.18))
 			draw_polyline(PackedVector2Array([points[0], points[1], points[2], points[3], points[0]]), Color("365448"), 1.0, true)
 			if combat.blocked.has(cell):
 				draw_rect(Rect2(center - Vector2(9, 6), Vector2(18, 12)), Color("48505a"))

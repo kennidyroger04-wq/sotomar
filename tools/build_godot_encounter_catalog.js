@@ -30,6 +30,7 @@ for (const source of canonicalRows) {
   const composition = source.composition.map((member, index) => {
     const resolved = runtime.resolveCreature(member.creatureId);
     const template = resolved?.template || null;
+    const creatureProfile = canonical.creatures[resolved?.baseId || member.creatureId] || canonical.creatures[member.creatureId] || {};
     const ability = template?.attackAbility || null;
     return {
       unit_id: `${source.id}_${index + 1}`,
@@ -37,6 +38,7 @@ for (const source of canonicalRows) {
       canonical_base_id: resolved?.baseId || member.creatureId,
       name: template?.name || canonical.creatures[member.creatureId]?.name || member.creatureId,
       exposure: member.exposure,
+      ai_profile: creatureProfile.ai || 'UNSPECIFIED_IN_CANON',
       stats: template ? {
         hp: template.hp, pa: template.pa, pm: template.pm, agility: template.agilidade,
         strength: Number(template.strength || 0), physical_resistance: Number(template.resistances?.PHYSICAL || 0),
@@ -58,7 +60,7 @@ for (const source of canonicalRows) {
     .map(quest => ({ id: quest.id, prerequisites: quest.prerequisites || [], related_objective_ids: quest.objectives.filter(objective =>
       (objective.type === 'ENCOUNTER' && objective.target === source.id) ||
       (objective.type === 'KILL' && source.composition.some(member => member.creatureId === objective.target))).map(objective => objective.id) }));
-  const mechanicallyReady = composition.every(member => member.stats && member.ability?.id === 'golpe' && member.ability.mechanics_status === 'BASIC_EFFECTS_AVAILABLE');
+  const mechanicallyReady = composition.every(member => member.stats && abilities[member.ability?.id]);
   const provisionalRuntimeReady = source.id === 'ENC_01' || source.id === 'ENC_05';
   encounters[source.id] = {
     id: source.id,

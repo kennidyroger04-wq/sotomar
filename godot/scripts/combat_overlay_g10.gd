@@ -6,6 +6,8 @@ signal combat_finished(result: String, remaining_hp: int)
 const Rules = preload("res://scripts/combat_rules_g10.gd")
 const BoardScript = preload("res://scripts/combat_board_g10.gd")
 const RegistryScript = preload("res://scripts/encounter_registry_g11.gd")
+const EffectsScript = preload("res://scripts/combat_effects_g18b.gd")
+const AIScript = preload("res://scripts/combat_ai_g18b.gd")
 
 var combat: Dictionary = {}
 var board: Node2D
@@ -26,6 +28,9 @@ var encounter_definition: Dictionary = {}
 var encounter_state_store: EncounterStateStoreG11
 var active_unit_id := ""
 var result_record: Dictionary = {}
+var effects_engine: CombatEffectsG18B
+var combat_ai: CombatAIG18B
+var preview_target := Vector2i(-1, -1)
 
 func configure(definition: Dictionary, state_store: EncounterStateStoreG11) -> void:
 	encounter_definition = definition.duplicate(true)
@@ -35,6 +40,8 @@ func _ready() -> void:
 	name = "CombatOverlayG10"
 	layer = 20
 	action_rng.seed = 0xF1B12A
+	effects_engine = EffectsScript.new(0xF1B12A)
+	combat_ai = AIScript.new(effects_engine)
 	if encounter_definition.is_empty():
 		var registry := RegistryScript.new()
 		var built: Dictionary = registry.combat_definition("ENC_01")
@@ -60,7 +67,7 @@ func _build_model() -> void:
 	var stats: Dictionary = character.get("stats", {})
 	var player_cell: Vector2i = encounter_definition.get("player_cell", Vector2i(1, 2))
 	var player_hp := int(encounter_definition.get("player_hp", stats.get("health", 100)))
-	var player := {"id": "player", "side": "player", "name": String(character.get("name", "Protagonista")), "x": player_cell.x, "y": player_cell.y, "hp": player_hp, "max_hp": player_hp, "strength": int(stats.get("strength", 0)), "agility": int(stats.get("agility", 0)), "pa": 6, "max_pa": 6, "pm": 4, "max_pm": 4, "physical_resistance": 0.0, "magical_resistance": 0.0, "damage_bonus": 0.0, "attack_ability_id": "golpe", "attack_ap": 4, "attack_damage_min": 35, "attack_damage_max": 45, "attack_range_min": 1, "attack_range_max": 1, "attack_cooldown": 2, "cooldowns": {}, "fortify_turns": 0, "fortify_cooldown": 0}
+	var player := {"id": "player", "side": "player", "name": String(character.get("name", "Protagonista")), "x": player_cell.x, "y": player_cell.y, "hp": player_hp, "max_hp": player_hp, "strength": int(stats.get("strength", stats.get("forca", 0))), "intelligence": int(stats.get("intelligence", stats.get("inteligencia", 0))), "agility": int(stats.get("agility", stats.get("agilidade", 0))), "combat_stats": {"forca": int(stats.get("strength", stats.get("forca", 0))), "inteligencia": int(stats.get("intelligence", stats.get("inteligencia", 0))), "agilidade": int(stats.get("agility", stats.get("agilidade", 0)))}, "pa": 6, "max_pa": 6, "pm": 4, "max_pm": 4, "physical_resistance": 0.0, "magical_resistance": 0.0, "damage_bonus": 0.0, "attack_ability_id": "golpe", "ability_ids": ["golpe", "avanco", "cruz", "lanca", "fortificar"], "attack_ap": 4, "attack_damage_min": 35, "attack_damage_max": 45, "attack_range_min": 1, "attack_range_max": 1, "attack_cooldown": 2, "cooldowns": {}, "effects": [], "fortify_turns": 0, "fortify_cooldown": 0}
 	var units: Array[Dictionary] = [player]
 	for enemy: Dictionary in encounter_definition.get("enemies", []):
 		units.append(enemy.duplicate(true))
@@ -73,7 +80,7 @@ func _build_model() -> void:
 		"map_id": String(encounter_definition.get("map_id", "MAP_02")),
 		"width": int(encounter_definition.get("width", 8)), "height": int(encounter_definition.get("height", 6)),
 		"blocked": encounter_definition.get("blocked", [Vector2i(3, 2), Vector2i(4, 2), Vector2i(4, 4)]).duplicate(),
-		"units": units, "turn_order": order, "turn_index": -1, "round": 0, "phase": "ENEMY",
+		"units": units, "turn_order": order, "turn_index": -1, "round": 0, "phase": "ENEMY", "event_sequence": 0,
 		"result": "", "provisional_stats": true, "composition": encounter_definition.get("composition", []).duplicate(true)
 	}
 	active_unit_id = ""
@@ -108,21 +115,26 @@ func _build_ui() -> void:
 		provisional_balance = provisional_balance or bool(member.get("stats", {}).get("provisional_balance", false))
 	log_label.text = "%s · %s%s" % [String(encounter_definition.get("encounter_id", "ENCONTRO")), " + ".join(encounter_names), " (balanceamento provisório)" if provisional_balance else ""]
 	header_stack.add_child(log_label)
-	var actions := HBoxContainer.new()
+	var actions := HFlowContainer.new()
 	actions.name = "CombatActions"
+	actions.add_theme_constant_override("h_separation", 6)
+	actions.add_theme_constant_override("v_separation", 6)
 	root.add_child(actions)
-	for item in [["move", "Mover"], ["attack", "Golpe 4 PA"], ["fortify", "Defender 2 PA"]]:
+	for item in [["move", "Mover · PM"], ["golpe", "Golpe · 4 PA"], ["avanco", "Avanço · 3 PA"], ["cruz", "Cruz · 4 PA"], ["lanca", "Lança · 3 PA"], ["fortificar", "Fortificar · 2 PA"]]:
 		var button := Button.new()
 		button.name = String(item[0]).capitalize()
 		button.text = String(item[1])
-		button.custom_minimum_size = Vector2(126, 58)
-		button.add_theme_font_size_override("font_size", 16)
+		button.custom_minimum_size = Vector2(96, 52)
+		button.add_theme_font_size_override("font_size", 14)
 		button.pressed.connect(_choose_action.bind(String(item[0])))
 		actions.add_child(button)
 		action_buttons[String(item[0])] = button
+	# Keep these aliases for existing G10 automation and input hooks.
+	action_buttons["attack"] = action_buttons["golpe"]
+	action_buttons["fortify"] = action_buttons["fortificar"]
 	end_button = Button.new()
 	end_button.text = "Encerrar turno"
-	end_button.custom_minimum_size = Vector2(150, 58)
+	end_button.custom_minimum_size = Vector2(110, 52)
 	end_button.add_theme_font_size_override("font_size", 16)
 	end_button.pressed.connect(_end_turn)
 	actions.add_child(end_button)
@@ -149,28 +161,40 @@ func _build_ui() -> void:
 	_layout_ui()
 
 func _layout_ui() -> void:
+	_layout_ui_at(get_viewport().get_visible_rect().size)
+
+func _layout_ui_at(size: Vector2) -> void:
 	var root := get_node_or_null("CombatHUD") as Control
 	if root == null:
 		return
-	var size := get_viewport().get_visible_rect().size
-	var scale := 2.0 if size.x < size.y else clampf(size.x / 960.0, 0.82, 1.35)
-	var board_scale := scale if size.x < size.y else 1.0
-	board.cell_scale = board_scale
+	var scale := clampf(minf(size.x / 390.0, size.y / 390.0), 0.82, 1.1)
 	var header := root.get_node("CombatHeader") as Control
 	header.position = Vector2(12, 12)
-	header.size = Vector2(minf(size.x - 24, 435 * scale), 92 * scale)
-	var actions := root.get_node("CombatActions") as Control
-	var buttons_width := minf(size.x - 20, 560 * scale)
-	actions.position = Vector2((size.x - buttons_width) * 0.5, size.y - 76 * scale)
-	actions.size = Vector2(buttons_width, 62 * scale)
+	header.size = Vector2(minf(size.x - 24, 435 * scale), 104 * scale)
+	var actions := root.get_node("CombatActions") as FlowContainer
+	var buttons_width := minf(size.x - 20, 840.0)
+	var columns := maxi(1, int(floor(buttons_width / 132.0)))
+	var rows := ceili(float(actions.get_child_count()) / float(columns))
+	var button_width := (buttons_width - float(columns - 1) * 6.0) / float(columns)
+	var button_height := 60.0 * scale
 	for child in actions.get_children():
-		child.custom_minimum_size = Vector2(buttons_width / 4.0 - 5, 58 * scale)
-		child.add_theme_font_size_override("font_size", int(15 * scale))
-	status_label.add_theme_font_size_override("font_size", int(19 * scale))
-	log_label.add_theme_font_size_override("font_size", int(14 * scale))
-	action_hint.add_theme_font_size_override("font_size", int(15 * scale))
-	action_hint.position = Vector2(14, size.y - 110 * scale)
-	action_hint.size = Vector2(size.x - 28, 30 * scale)
+		child.custom_minimum_size = Vector2(button_width, button_height)
+		child.add_theme_font_size_override("font_size", int(14 * scale))
+	var actions_height := float(rows) * button_height + float(rows - 1) * 6.0
+	actions.position = Vector2((size.x - buttons_width) * 0.5, size.y - actions_height - 12.0)
+	actions.size = Vector2(buttons_width, actions_height)
+	status_label.add_theme_font_size_override("font_size", int(18 * scale))
+	log_label.add_theme_font_size_override("font_size", int(13 * scale))
+	action_hint.add_theme_font_size_override("font_size", int(13 * scale))
+	action_hint.position = Vector2(14, actions.position.y - 28 * scale)
+	action_hint.size = Vector2(size.x - 28, 26 * scale)
+	var board_extent := Vector2((float(combat.width + combat.height - 2) * 30.0) + 30.0, (float(combat.width + combat.height - 2) * 15.0) + 30.0)
+	var available_height := maxf(120.0, actions.position.y - header.position.y - header.size.y - 20.0)
+	var board_scale := clampf(minf((size.x - 24.0) / board_extent.x, available_height / board_extent.y), 0.58, 1.5)
+	board.cell_scale = board_scale
+	var logical_center := Vector2(float(combat.width - combat.height) * 15.0, float(combat.width + combat.height - 2) * 15.0)
+	var available_center_y := header.position.y + header.size.y + available_height * 0.5
+	board.origin = Vector2(size.x * 0.5, available_center_y) - logical_center * board_scale
 	result_panel.position = (size - Vector2(320, 180)) * 0.5
 	result_panel.size = Vector2(minf(320, size.x - 28), 180)
 	if board != null:
@@ -198,6 +222,19 @@ func _unhandled_input(event: InputEvent) -> void:
 			_try_attack(combat.units[0], target, true)
 		else:
 			log_label.text = "Toque em um inimigo vivo para selecionar o alvo."
+	elif effects_engine.ability_catalog().has(mode):
+		var ability_data := effects_engine.ability(mode)
+		if mode == "cruz" and preview_target != cell:
+			var preview_check := effects_engine.validate(combat, combat.units[0], ability_data, cell)
+			if preview_check.ok:
+				preview_target = cell
+				board.affected_cells = effects_engine.area_cells(String(ability_data.targeting.shape), cell)
+				log_label.text = "Área da Cruz destacada. Toque no centro outra vez para lançar."
+				board.queue_redraw()
+			else:
+				_try_cast(combat.units[0], mode, cell, true)
+		else:
+			_try_cast(combat.units[0], mode, cell, true)
 	board.queue_redraw()
 	_update_ui()
 	get_viewport().set_input_as_handled()
@@ -208,23 +245,85 @@ func _choose_action(action: String) -> void:
 	var player: Dictionary = combat.units[0]
 	if action == "move":
 		mode = "move"
-	elif action == "attack":
-		if int(player.pa) < 4 or int(player.cooldowns.get("golpe", 0)) > 0:
-			log_label.text = "Golpe Pesado requer 4 PA e recarga concluída."
+	else:
+		var ability_id := "golpe" if action == "attack" else "fortificar" if action == "fortify" else action
+		var ability_data := effects_engine.ability(ability_id)
+		if ability_data.is_empty():
+			return
+		var cost := int(ability_data.get("apCost", 0))
+		if int(player.pa) < cost or int(player.cooldowns.get(ability_id, 0)) > 0:
+			log_label.text = "%s requer %d PA e recarga concluída." % [String(ability_data.get("name", ability_id)), cost]
 			_update_ui()
 			return
-		mode = "attack"
-	elif action == "fortify":
-		if not Rules.apply_fortify(player):
-			log_label.text = "Postura Fortificada requer 2 PA e recarga concluída."
-			_update_ui()
+		if String(ability_data.get("targeting", {}).get("targetType", "")) == "SELF":
+			_try_cast(player, ability_id, _cell(player), true)
 			return
-		log_label.text = "Postura Fortificada: resistência física +20% por dois turnos próprios."
-		board.animate_player("defend", current_direction)
-		board.trigger_fx("shield_block", _cell(player))
-		mode = ""
+		mode = ability_id
+		preview_target = Vector2i(-1, -1)
 	board.set_mode(mode)
+	if effects_engine.ability_catalog().has(mode):
+		var active_ability := effects_engine.ability(mode)
+		board.targetable_cells = effects_engine.targetable_cells(combat, player, active_ability)
 	_update_ui()
+
+func _try_cast(actor: Dictionary, ability_id: String, target_cell: Vector2i, player_action: bool) -> Dictionary:
+	var result := effects_engine.cast(combat, String(actor.id), ability_id, target_cell)
+	if not result.get("ok", false):
+		var reason := String(result.get("reason", "ACTION"))
+		var messages := {"PA": "PA insuficiente.", "RANGE": "Alvo fora do alcance.", "LOS": "Linha de visão bloqueada.", "PATH": "O avanço está bloqueado.", "COOLDOWN": "Habilidade em recarga.", "TARGET": "Alvo inválido.", "DEAD": "Combatente derrotado."}
+		log_label.text = String(messages.get(reason, "Ação indisponível."))
+		_update_ui()
+		return result
+	var target_id := String(result.get("target_unit_id", ""))
+	var target := _unit_by_id(target_id) if not target_id.is_empty() else {}
+	var ability_data := effects_engine.ability(ability_id)
+	var damage_type := "MAGICAL"
+	for effect: Dictionary in ability_data.get("effects", []):
+		if String(effect.get("type", "")) == "DAMAGE":
+			damage_type = String(effect.get("damageType", "PHYSICAL"))
+			break
+	if player_action:
+		if ability_id == "fortificar":
+			board.animate_player("defend", current_direction)
+			board.trigger_fx("shield_block", _cell(actor))
+		elif ability_id in ["cruz", "lanca"]:
+			board.animate_player("cast", current_direction)
+			board.trigger_fx("spell_release", _cell(actor))
+		else:
+			if not target.is_empty():
+				current_direction = board.direction_from_step(_cell(target) - _cell(actor))
+			board.animate_player("attack", current_direction)
+			board.trigger_fx("physical_slash", _cell(actor))
+		if ability_id == "avanco":
+			board.animate_player("walk", current_direction)
+	else:
+		if String(actor.get("side", "")) == "mob" and String(target.get("side", "")) == "player":
+			current_direction = board.direction_from_step(_cell(actor) - _cell(target))
+			board.animate_player("death" if int(target.get("hp", 0)) <= 0 else "hurt", current_direction)
+		for event: Dictionary in result.events:
+			if String(event.get("target_id", "")) == "player" and event.type == "DAMAGE_APPLIED":
+				board.trigger_fx("damage_flash", _cell(combat.units[0]))
+	for event: Dictionary in result.events:
+		if String(event.get("type", "")) == "STATUS_APPLIED":
+			var status_target := _unit_by_id(String(event.get("target_id", "")))
+			if not status_target.is_empty():
+				board.trigger_fx("spell_release", _cell(status_target))
+	if ability_id == "cruz":
+		board.affected_cells = effects_engine.area_cells(String(ability_data.targeting.shape), target_cell)
+	else:
+		board.affected_cells.clear()
+	board.targetable_cells.clear()
+	preview_target = Vector2i(-1, -1)
+	log_label.text = "%s usado; custo %d PA." % [String(ability_data.get("name", ability_id)), int(ability_data.get("apCost", 0))]
+	mode = ""
+	board.set_mode(mode)
+	if int(combat.units[0].hp) <= 0:
+		_resolve("DEFEAT")
+	elif Rules.alive_enemies(combat.units).is_empty():
+		_resolve("VICTORY")
+	else:
+		_update_ui()
+	return result
 
 func _try_move(destination: Vector2i) -> void:
 	var player: Dictionary = combat.units[0]
@@ -246,45 +345,12 @@ func _try_move(destination: Vector2i) -> void:
 
 func _try_attack(attacker: Dictionary, target: Dictionary, player_action: bool) -> void:
 	var ability_id := String(attacker.get("attack_ability_id", "golpe"))
-	var cd: int = int(attacker.cooldowns.get(ability_id, 0))
-	var ap_cost := int(attacker.get("attack_ap", 4))
-	if cd > 0 or int(attacker.pa) < ap_cost:
-		log_label.text = "Ação indisponível: confira PA e recarga."
-		return
-	var result := Rules.attack(
-		attacker, target,
-		int(attacker.get("attack_damage_min", 35)), int(attacker.get("attack_damage_max", 45)),
-		action_rng.randf(), action_rng.randf(),
-		int(attacker.get("attack_range_min", 1)), int(attacker.get("attack_range_max", 1)), ap_cost
-	)
-	if not result.ok:
-		log_label.text = "Alvo fora do alcance desta habilidade." if result.reason == "RANGE" else "PA insuficiente."
-		return
-	attacker.cooldowns[ability_id] = int(attacker.get("attack_cooldown", 2))
-	log_label.text = "%s causa %d de dano%s." % [String(attacker.get("name", "Você" if player_action else "Inimigo")), int(result.amount), " crítico" if result.critical else ""]
-	if player_action:
-		current_direction = board.direction_from_step(_cell(target) - _cell(attacker))
-		board.animate_player("attack", current_direction)
-		board.trigger_fx("physical_slash", _cell(attacker))
-		board.trigger_fx("impact", _cell(target))
-	else:
-		current_direction = board.direction_from_step(_cell(attacker) - _cell(target))
-		if String(target.side) == "player":
-			board.animate_player("death" if int(target.hp) <= 0 else "hurt", current_direction)
-		board.trigger_fx("defeat_marker" if int(target.hp) <= 0 else "damage_flash", _cell(target))
-	mode = ""
-	board.set_mode(mode)
-	if int(combat.units[0].hp) <= 0:
-		_resolve("DEFEAT")
-		return
-	if Rules.alive_enemies(combat.units).is_empty():
-		_resolve("VICTORY")
-		return
-	_update_ui()
+	_try_cast(attacker, ability_id, _cell(target), player_action)
 
 func _end_turn() -> void:
 	if finished or String(combat.phase) != "PLAYER":
 		return
+	effects_engine.end_turn(combat, active_unit_id)
 	mode = ""
 	_advance_turn()
 	_run_enemy_queue()
@@ -296,6 +362,7 @@ func _run_enemy_queue() -> void:
 		_enemy_turn()
 		if finished:
 			return
+		effects_engine.end_turn(combat, active_unit_id)
 		_advance_turn()
 		visited += 1
 	board.animate_player("idle", current_direction)
@@ -309,35 +376,39 @@ func _enemy_turn() -> void:
 	var foe := _unit_by_id(active_unit_id)
 	if foe.is_empty() or int(foe.get("hp", 0)) <= 0:
 		return
-	var player: Dictionary = combat.units[0]
-	var min_range := int(foe.get("attack_range_min", 1))
-	var max_range := int(foe.get("attack_range_max", 1))
-	var distance := Rules.manhattan(_cell(foe), _cell(player))
-	if distance < min_range or distance > max_range:
-		var blocked: Array[Vector2i] = []
-		for blocked_cell: Vector2i in combat.blocked:
-			blocked.append(blocked_cell)
-		blocked.append_array(Rules.occupied_cells(combat.units, String(foe.id)))
-		var best_path: Array[Vector2i] = []
-		var best_goal := Vector2i(-1, -1)
-		for y in combat.height:
-			for x in combat.width:
-				var candidate := Vector2i(x, y)
-				var candidate_distance := Rules.manhattan(candidate, _cell(player))
-				if candidate == _cell(foe) or blocked.has(candidate) or candidate_distance < min_range or candidate_distance > max_range:
-					continue
-				var route := Rules.path(_cell(foe), candidate, blocked, combat.width, combat.height)
-				if not route.is_empty() and route.size() <= int(foe.pm) and (best_goal.x < 0 or route.size() < best_path.size() or (route.size() == best_path.size() and (candidate.y < best_goal.y or (candidate.y == best_goal.y and candidate.x < best_goal.x)))):
-					best_path.assign(route)
-					best_goal = candidate
-		if best_goal.x >= 0:
-			foe.x = best_goal.x
-			foe.y = best_goal.y
-			foe.pm -= best_path.size()
+	var ability_ids: Array[String] = []
+	for ability_id: Variant in foe.get("ability_ids", [foe.get("attack_ability_id", "golpe")]):
+		ability_ids.append(String(ability_id))
+	var plan := combat_ai.choose_ability(combat, foe, ability_ids)
+	if not plan.get("ok", false):
+		log_label.text = "%s não encontrou ação válida (%s)." % [String(foe.get("name", foe.id)), String(plan.get("reason", "NO_PATH"))]
+		return
+	var route: Array = plan.get("path", [])
+	if not route.is_empty():
+		var old_cell := _cell(foe)
+		var destination: Vector2i = route.back()
+		foe.x = destination.x
+		foe.y = destination.y
+		foe.pm = int(foe.pm) - route.size()
+		current_direction = board.direction_from_step(destination - old_cell)
+		board.animate_player("walk", current_direction)
+	var ability_id := String(plan.ability.get("id", ""))
+	var target_cell: Vector2i = plan.target
+	var result := effects_engine.cast(combat, String(foe.id), ability_id, target_cell)
+	if result.get("ok", false):
+		log_label.text = "%s usa %s." % [String(foe.get("name", foe.id)), String(plan.ability.get("name", ability_id))]
+		if ability_id == "fortificar":
+			board.trigger_fx("shield_block", _cell(foe))
 		else:
-			log_label.text = "%s não alcança uma posição de ataque." % foe.get("name", foe.id)
-	if Rules.manhattan(_cell(foe), _cell(player)) >= min_range and Rules.manhattan(_cell(foe), _cell(player)) <= max_range:
-		_try_attack(foe, player, false)
+			board.trigger_fx("impact" if String(plan.ability.get("targeting", {}).get("shape", "")) == "SINGLE" else "spell_release", target_cell)
+		for event: Dictionary in result.events:
+			if String(event.get("target_id", "")) == "player" and String(event.get("type", "")) == "DAMAGE_APPLIED":
+				board.animate_player("death" if int(combat.units[0].hp) <= 0 else "hurt", current_direction)
+				board.trigger_fx("defeat_marker" if int(combat.units[0].hp) <= 0 else "damage_flash", _cell(combat.units[0]))
+		if int(combat.units[0].hp) <= 0:
+			_resolve("DEFEAT")
+		elif Rules.alive_enemies(combat.units).is_empty():
+			_resolve("VICTORY")
 
 func _advance_turn() -> void:
 	if combat.turn_order.is_empty():
@@ -350,18 +421,12 @@ func _advance_turn() -> void:
 	if unit.is_empty():
 		return
 	combat.phase = "PLAYER" if String(unit.side) == "player" else "ENEMY"
-	unit.pa = 6
-	unit.pm = int(unit.get("max_pm", 4))
-	for key in unit.cooldowns.keys():
-		unit.cooldowns[key] = maxi(0, int(unit.cooldowns[key]) - 1)
-		if int(unit.cooldowns[key]) == 0:
-			unit.cooldowns.erase(key)
-	if int(unit.fortify_turns) > 0:
-		unit.fortify_turns = int(unit.fortify_turns) - 1
-		if int(unit.fortify_turns) == 0:
-			unit.physical_resistance = 0.0
-	if int(unit.fortify_cooldown) > 0:
-		unit.fortify_cooldown = int(unit.fortify_cooldown) - 1
+	var turn_result := effects_engine.start_turn(combat, active_unit_id)
+	if not turn_result.get("ok", false):
+		if String(unit.side) == "player":
+			_resolve("DEFEAT")
+		elif Rules.alive_enemies(combat.units).is_empty():
+			_resolve("VICTORY")
 
 func _unit_by_id(unit_id: String) -> Dictionary:
 	for unit: Dictionary in combat.get("units", []):
@@ -425,16 +490,44 @@ func _update_ui() -> void:
 	var enemy_status: Array[String] = []
 	for foe: Dictionary in combat.units:
 		if String(foe.get("side", "")) == "mob":
-			enemy_status.append("%s %d/%d" % [foe.get("name", foe.get("canonical_id", "Inimigo")), foe.hp, foe.max_hp])
-	status_label.text = "%s · rodada %d · ativo: %s\nVida %d/%d · %d PA · %d PM\n%s" % [turn_text, int(combat.round), active.get("name", "—"), int(player.hp), int(player.max_hp), int(player.pa), int(player.pm), "  |  ".join(enemy_status)]
-	action_hint.text = "Toque numa célula verde para mover." if mode == "move" else "Toque em qualquer inimigo vivo para atacar." if mode == "attack" else "%s · toque/click para selecionar células." % combat.encounter_id
+			var effects_text := _effect_summary(foe)
+			enemy_status.append("%s %d/%d%s" % [foe.get("name", foe.get("canonical_id", "Inimigo")), foe.hp, foe.max_hp, " · " + effects_text if not effects_text.is_empty() else ""])
+	var player_effects := _effect_summary(player)
+	status_label.text = "%s · rodada %d · ativo: %s\nVida %d/%d · %d PA · %d PM%s\n%s" % [turn_text, int(combat.round), active.get("name", "—"), int(player.hp), int(player.max_hp), int(player.pa), int(player.pm), " · Efeitos: " + player_effects if not player_effects.is_empty() else "", "  |  ".join(enemy_status)]
+	if mode == "move":
+		action_hint.text = "Toque numa célula verde alcançável; mover custa PM conforme a distância."
+	elif mode == "attack":
+		action_hint.text = "Toque em um inimigo vivo para usar Golpe Pesado · 4 PA."
+	elif effects_engine.ability_catalog().has(mode):
+		var active_ability := effects_engine.ability(mode)
+		var range_data: Dictionary = active_ability.get("range", {})
+		action_hint.text = "%s · %d PA · alcance %d–%d%s" % [String(active_ability.get("name", mode)), int(active_ability.get("apCost", 0)), int(range_data.get("min", 0)), int(range_data.get("max", 0)), " · área vermelha; toque no centro duas vezes" if mode == "cruz" else ""]
+	else:
+		action_hint.text = "%s · toque/click numa habilidade para ver alvos, custos e alcance." % combat.encounter_id
 	var player_turn := String(combat.phase) == "PLAYER" and not finished
-	for button in action_buttons.values():
-		button.disabled = not player_turn
+	for action_id: String in ["move", "golpe", "avanco", "cruz", "lanca", "fortificar"]:
+		var button: Button = action_buttons[action_id]
+		var ability_data := effects_engine.ability(action_id) if action_id != "move" else {}
+		var disabled := not player_turn
+		if action_id == "move":
+			disabled = disabled or int(player.pm) <= 0
+		else:
+			var cost := int(ability_data.get("apCost", 0))
+			disabled = disabled or int(player.pa) < cost or int(player.cooldowns.get(action_id, 0)) > 0
+			if String(ability_data.get("targeting", {}).get("targetType", "")) != "SELF":
+				disabled = disabled or Rules.alive_enemies(combat.units).is_empty()
+		button.disabled = disabled
+		if action_id != "move":
+			var cooldown := int(player.cooldowns.get(action_id, 0))
+			button.text = "%s · CD %d" % [String(ability_data.get("name", action_id)), cooldown] if cooldown > 0 else "%s · %d PA" % [String(ability_data.get("name", action_id)), int(ability_data.get("apCost", 0))]
 	end_button.disabled = not player_turn
-	action_buttons["attack"].disabled = not player_turn or int(player.pa) < 4 or int(player.cooldowns.get("golpe", 0)) > 0 or Rules.alive_enemies(combat.units).is_empty()
-	action_buttons["fortify"].disabled = not player_turn or int(player.pa) < 2 or int(player.fortify_cooldown) > 0
 	board.queue_redraw()
+
+func _effect_summary(unit: Dictionary) -> String:
+	var labels: Array[String] = []
+	for effect: Dictionary in unit.get("effects", []):
+		labels.append("%s (%d)" % [String(effect.get("status_id", effect.get("id", "estado"))), int(effect.get("duration", 0))])
+	return ", ".join(labels)
 
 func _cell(unit: Dictionary) -> Vector2i:
 	return Vector2i(int(unit.x), int(unit.y))

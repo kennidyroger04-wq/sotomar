@@ -185,6 +185,7 @@
           "canonical_base_id": "CRE_CASCUDO_DE_CAL",
           "name": "Cascudo-de-cal",
           "exposure": "NORMAL",
+          "ai_profile": "melee",
           "stats": {
             "hp": 70,
             "pa": 6,
@@ -249,6 +250,7 @@
           "canonical_base_id": "CRE_CASCUDO_DE_CAL",
           "name": "Cascudo-de-cal",
           "exposure": "NORMAL",
+          "ai_profile": "melee",
           "stats": {
             "hp": 70,
             "pa": 6,
@@ -280,6 +282,7 @@
           "canonical_base_id": "CRE_CASCUDO_DE_CAL",
           "name": "Cascudo-de-cal",
           "exposure": "NORMAL",
+          "ai_profile": "melee",
           "stats": {
             "hp": 70,
             "pa": 6,
@@ -347,6 +350,7 @@
           "canonical_base_id": "CRE_PAPA_MEL",
           "name": "Papa-mel",
           "exposure": "NORMAL",
+          "ai_profile": "melee",
           "stats": {
             "hp": 60,
             "pa": 6,
@@ -378,6 +382,7 @@
           "canonical_base_id": "CRE_CASCUDO_DE_CAL",
           "name": "Cascudo-de-cal",
           "exposure": "NORMAL",
+          "ai_profile": "melee",
           "stats": {
             "hp": 70,
             "pa": 6,
@@ -442,6 +447,7 @@
           "canonical_base_id": "CRE_PAPA_MEL",
           "name": "Papa-mel",
           "exposure": "ORVALHADO",
+          "ai_profile": "melee",
           "stats": {
             "hp": 60,
             "pa": 6,
@@ -495,6 +501,7 @@
           "canonical_base_id": "CRE_TOPETAO",
           "name": "Topetão",
           "exposure": "NORMAL",
+          "ai_profile": "melee",
           "stats": {
             "hp": 90,
             "pa": 6,
@@ -548,8 +555,7 @@
       "canonical_status": "data_only",
       "godot_status": "PENDING",
       "pending_reasons": [
-        "CANONICAL_TRIGGER_OR_UNIQUE_PLACEMENT_UNSPECIFIED",
-        "CREATURE_ABILITY_MECHANICS_NOT_FULLY_IMPLEMENTED"
+        "CANONICAL_TRIGGER_OR_UNIQUE_PLACEMENT_UNSPECIFIED"
       ],
       "activation_condition": "UNSPECIFIED_IN_CANON",
       "repetition_policy": "UNSPECIFIED_IN_CANON",
@@ -562,6 +568,7 @@
           "canonical_base_id": "CRE_TOPETAO",
           "name": "Topetão",
           "exposure": "NORMAL",
+          "ai_profile": "melee",
           "stats": {
             "hp": 90,
             "pa": 6,
@@ -593,6 +600,7 @@
           "canonical_base_id": "CRE_FIANDEIRA",
           "name": "Fiandeira",
           "exposure": "NORMAL",
+          "ai_profile": "ranged_control",
           "stats": {
             "hp": 65,
             "pa": 6,
@@ -645,9 +653,7 @@
       "map_id": "MAP_05",
       "canonical_status": "data_only",
       "godot_status": "PENDING",
-      "pending_reasons": [
-        "CREATURE_ABILITY_MECHANICS_NOT_FULLY_IMPLEMENTED"
-      ],
+      "pending_reasons": [],
       "activation_condition": "UNSPECIFIED_IN_CANON",
       "repetition_policy": "UNSPECIFIED_IN_CANON",
       "runtime_policy": "NO_WORLD_TRIGGER",
@@ -664,6 +670,7 @@
           "canonical_base_id": "CRE_FIANDEIRA",
           "name": "Fiandeira",
           "exposure": "NORMAL",
+          "ai_profile": "ranged_control",
           "stats": {
             "hp": 65,
             "pa": 6,
@@ -695,6 +702,7 @@
           "canonical_base_id": "CRE_FIANDEIRA",
           "name": "Fiandeira",
           "exposure": "MAREJADO",
+          "ai_profile": "ranged_control",
           "stats": {
             "hp": 65,
             "pa": 6,
@@ -731,9 +739,7 @@
       "map_id": "MAP_06",
       "canonical_status": "data_only",
       "godot_status": "PENDING",
-      "pending_reasons": [
-        "CREATURE_ABILITY_MECHANICS_NOT_FULLY_IMPLEMENTED"
-      ],
+      "pending_reasons": [],
       "activation_condition": "UNSPECIFIED_IN_CANON",
       "repetition_policy": "UNSPECIFIED_IN_CANON",
       "runtime_policy": "NO_WORLD_TRIGGER",
@@ -750,6 +756,7 @@
           "canonical_base_id": "CRE_SAPO_DE_POCA",
           "name": "Sapo-de-poça",
           "exposure": "MAREJADO",
+          "ai_profile": "control",
           "stats": {
             "hp": 75,
             "pa": 6,
@@ -781,6 +788,7 @@
           "canonical_base_id": "CRE_SAPO_DE_POCA",
           "name": "Sapo-de-poça",
           "exposure": "MAREJADO",
+          "ai_profile": "control",
           "stats": {
             "hp": 75,
             "pa": 6,
@@ -812,6 +820,7 @@
           "canonical_base_id": "CRE_FIANDEIRA",
           "name": "Fiandeira",
           "exposure": "MAREJADO",
+          "ai_profile": "ranged_control",
           "stats": {
             "hp": 65,
             "pa": 6,
@@ -848,9 +857,7 @@
       "map_id": "MAP_07",
       "canonical_status": "data_only",
       "godot_status": "PENDING",
-      "pending_reasons": [
-        "CREATURE_ABILITY_MECHANICS_NOT_FULLY_IMPLEMENTED"
-      ],
+      "pending_reasons": [],
       "activation_condition": "UNSPECIFIED_IN_CANON",
       "repetition_policy": "UNSPECIFIED_IN_CANON",
       "runtime_policy": "NO_WORLD_TRIGGER",
@@ -867,6 +874,7 @@
           "canonical_base_id": "CRE_LERDO_DE_MUSGO",
           "name": "Lerdo-de-musgo",
           "exposure": "MAREJADO",
+          "ai_profile": "support",
           "stats": {
             "hp": 100,
             "pa": 6,
@@ -895,6 +903,7 @@
           "canonical_base_id": "CRE_FAREJADOR_DE_BREJO",
           "name": "Farejador-de-brejo",
           "exposure": "MAREJADO",
+          "ai_profile": "pack",
           "stats": {
             "hp": 72,
             "pa": 6,
@@ -926,6 +935,7 @@
           "canonical_base_id": "CRE_FAREJADOR_DE_BREJO",
           "name": "Farejador-de-brejo",
           "exposure": "MAREJADO",
+          "ai_profile": "pack",
           "stats": {
             "hp": 72,
             "pa": 6,
@@ -962,9 +972,7 @@
       "map_id": "MAP_08",
       "canonical_status": "data_only",
       "godot_status": "PENDING",
-      "pending_reasons": [
-        "CREATURE_ABILITY_MECHANICS_NOT_FULLY_IMPLEMENTED"
-      ],
+      "pending_reasons": [],
       "activation_condition": "UNSPECIFIED_IN_CANON",
       "repetition_policy": "UNSPECIFIED_IN_CANON",
       "runtime_policy": "NO_WORLD_TRIGGER",
@@ -981,6 +989,7 @@
           "canonical_base_id": "CRE_LERDO_DE_MUSGO",
           "name": "Lerdo-de-musgo",
           "exposure": "ENCHARCADO",
+          "ai_profile": "support",
           "stats": {
             "hp": 100,
             "pa": 6,
@@ -1009,6 +1018,7 @@
           "canonical_base_id": "CRE_FAREJADOR_DE_BREJO",
           "name": "Farejador-de-brejo",
           "exposure": "MAREJADO",
+          "ai_profile": "pack",
           "stats": {
             "hp": 72,
             "pa": 6,
@@ -1062,6 +1072,7 @@
           "canonical_base_id": "CRE_FAREJADOR_DE_BREJO",
           "name": "Farejador-de-brejo",
           "exposure": "MAREJADO",
+          "ai_profile": "pack",
           "stats": {
             "hp": 72,
             "pa": 6,
@@ -1093,6 +1104,7 @@
           "canonical_base_id": "CRE_FAREJADOR_DE_BREJO",
           "name": "Farejador-de-brejo",
           "exposure": "MAREJADO",
+          "ai_profile": "pack",
           "stats": {
             "hp": 72,
             "pa": 6,
@@ -1124,6 +1136,7 @@
           "canonical_base_id": "CRE_TOPETAO",
           "name": "Topetão",
           "exposure": "MAREJADO",
+          "ai_profile": "melee",
           "stats": {
             "hp": 90,
             "pa": 6,
@@ -1160,9 +1173,7 @@
       "map_id": "MAP_10",
       "canonical_status": "data_only",
       "godot_status": "PENDING",
-      "pending_reasons": [
-        "CREATURE_ABILITY_MECHANICS_NOT_FULLY_IMPLEMENTED"
-      ],
+      "pending_reasons": [],
       "activation_condition": "UNSPECIFIED_IN_CANON",
       "repetition_policy": "UNSPECIFIED_IN_CANON",
       "runtime_policy": "NO_WORLD_TRIGGER",
@@ -1179,6 +1190,7 @@
           "canonical_base_id": "CRE_CASCUDO_DE_CAL",
           "name": "Cascudo-de-cal",
           "exposure": "ENCHARCADO",
+          "ai_profile": "melee",
           "stats": {
             "hp": 70,
             "pa": 6,
@@ -1210,6 +1222,7 @@
           "canonical_base_id": "CRE_SAPO_DE_POCA",
           "name": "Sapo-de-poça",
           "exposure": "MAREJADO",
+          "ai_profile": "control",
           "stats": {
             "hp": 75,
             "pa": 6,
@@ -1241,6 +1254,7 @@
           "canonical_base_id": "CRE_FIANDEIRA",
           "name": "Fiandeira",
           "exposure": "ENCHARCADO",
+          "ai_profile": "ranged_control",
           "stats": {
             "hp": 65,
             "pa": 6,

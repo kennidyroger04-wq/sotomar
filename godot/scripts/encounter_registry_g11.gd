@@ -3,6 +3,7 @@ class_name EncounterRegistryG11
 ## Godot adapter for the canonical encounter registry generated from JavaScript.
 
 const REGISTRY_PATH := "res://resources/combat/encounter_registry.json"
+const EffectsScript = preload("res://scripts/combat_effects_g18b.gd")
 const BOARD_WIDTH := 8
 const BOARD_HEIGHT := 6
 const DEFAULT_PLAYER_CELL := Vector2i(1, 2)
@@ -56,12 +57,19 @@ func combat_definition(encounter_id: String, enemy_cells: Array[Vector2i] = [], 
 		occupied.append(cell)
 		chosen_cells.append(cell)
 	var enemies: Array[Dictionary] = []
+	var effects_engine := EffectsScript.new()
 	for index in composition.size():
 		var member: Dictionary = composition[index]
 		var stats: Dictionary = member.get("stats", {})
-		var ability: Dictionary = member.get("ability", {})
-		if stats.is_empty() or String(ability.get("id", "")) != "golpe" or String(ability.get("mechanics_status", "")) != "BASIC_EFFECTS_AVAILABLE":
+		var profile_ability: Dictionary = member.get("ability", {})
+		var ability_id := String(profile_ability.get("id", ""))
+		var ability: Dictionary = effects_engine.ability(ability_id)
+		if stats.is_empty() or ability.is_empty():
 			return {"ok": false, "reason": "UNSUPPORTED_CREATURE_MECHANICS", "creature_id": member.get("creature_id", "")}
+		var effects: Array = ability.get("effects", [])
+		var damage_range: Variant = effects[0].get("amount", [35, 45]) if not effects.is_empty() else [35, 45]
+		var damage_min := int(damage_range[0]) if damage_range is Array else int(damage_range)
+		var damage_max := int(damage_range[1]) if damage_range is Array and damage_range.size() > 1 else damage_min
 		var cell := chosen_cells[index]
 		enemies.append({
 			"id": String(member.unit_id), "side": "mob", "canonical_id": String(member.creature_id),
@@ -70,16 +78,18 @@ func combat_definition(encounter_id: String, enemy_cells: Array[Vector2i] = [], 
 			"pm": int(stats.pm), "max_pm": int(stats.pm), "strength": int(stats.strength),
 			"agility": int(stats.agility), "physical_resistance": float(stats.physical_resistance),
 			"magical_resistance": float(stats.magical_resistance), "damage_bonus": 0.0,
-			"attack_ability_id": "golpe", "attack_ap": int(ability.ap_cost),
-			"attack_damage_min": int(ability.damage[0]), "attack_damage_max": int(ability.damage[1]),
-			"attack_range_min": int(ability.range_min), "attack_range_max": int(ability.range_max),
+			"attack_ability_id": ability_id, "ability_ids": [ability_id], "ai_profile": String(member.get("ai_profile", "canonical_ability")),
+			"attack_ap": int(ability.get("apCost", 0)),
+			"attack_damage_min": damage_min, "attack_damage_max": damage_max,
+			"attack_range_min": int(ability.get("range", {}).get("min", 0)), "attack_range_max": int(ability.get("range", {}).get("max", 0)),
+			"attack_cooldown": int(ability.get("cooldown", 0)), "combat_stats": {"forca": int(stats.strength), "agilidade": int(stats.agility)},
 			"cooldowns": {}, "fortify_turns": 0, "fortify_cooldown": 0,
 			"provisional_balance": stats.provisional_balance == true
 		})
 	return {
 		"ok": true, "encounter_id": encounter_id, "map_id": String(entry.map_id),
 		"canonical_status": String(entry.canonical_status), "godot_status": String(entry.godot_status),
-		"runtime_policy": String(entry.runtime_policy), "composition": composition.duplicate(true),
+		"runtime_policy": String(entry.runtime_policy), "technical_ready": true, "composition": composition.duplicate(true),
 		"enemies": enemies, "width": BOARD_WIDTH, "height": BOARD_HEIGHT,
 		"blocked": [Vector2i(3, 2), Vector2i(4, 2), Vector2i(4, 4)],
 		"player_cell": player_cell, "encounter_rewards": entry.get("encounter_rewards", []).duplicate(true),
