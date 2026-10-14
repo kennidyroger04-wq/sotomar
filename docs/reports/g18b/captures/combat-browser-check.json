@@ -1,0 +1,10 @@
+{
+  "url": "http://127.0.0.1:8991/index.html",
+  "state": {
+    "canvas": true,
+    "title": "Sotomar - F\u00edmbria (prot\u00f3tipo 2D)"
+  },
+  "errors": [],
+  "combat_flow": "ENC_05 in MAP_04 launched from exploration. Chromium touch at 390x844 moved the player two cells, cast Arremesso de Lan\u00e7a twice, showed POISON and a tick, then the enemy used Golpe Pesado. The player defeated the enemy with Golpe and returned to MAP_04 exploration. See mobile-g18b-lanca-target-result.png, mobile-g18b-enemy-turn.png and mobile-g18b-after-golpe.png.",
+  "resolution_capture": "mobile-g18b-after-golpe.png"
+}

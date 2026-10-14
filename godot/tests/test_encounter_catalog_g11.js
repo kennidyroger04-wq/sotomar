@@ -24,6 +24,8 @@ for (const source of Object.values(canonical.encounters)) {
     assert.equal(actual.stats.hp, creature.hp, `${source.id} unit ${index + 1} HP`);
     assert.equal(actual.stats.agility, creature.agilidade, `${source.id} unit ${index + 1} initiative stat`);
     assert.equal(actual.ability.id, creature.attackAbility.id, `${source.id} unit ${index + 1} ability`);
+    const profile = canonical.creatures[actual.canonical_base_id];
+    assert.equal(actual.ai_profile, profile.ai, `${source.id} unit ${index + 1} canonical AI profile`);
   }
   assert.equal(generated.activation_condition, 'UNSPECIFIED_IN_CANON', `${source.id} activation gap recorded`);
   assert.equal(generated.repetition_policy, 'UNSPECIFIED_IN_CANON', `${source.id} repeat gap recorded`);

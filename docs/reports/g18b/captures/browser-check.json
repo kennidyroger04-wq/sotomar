@@ -1,0 +1,29 @@
+{
+  "url": "http://127.0.0.1:8991/index.html",
+  "results": [
+    {
+      "viewport": "390x844",
+      "canvasCount": 1,
+      "errors": [],
+      "gameplay_capture": true
+    },
+    {
+      "viewport": "844x390",
+      "canvasCount": 1,
+      "errors": [],
+      "gameplay_capture": true
+    },
+    {
+      "viewport": "360x800",
+      "canvasCount": 1,
+      "errors": [],
+      "gameplay_capture": true
+    },
+    {
+      "viewport": "1280x720",
+      "canvasCount": 1,
+      "errors": [],
+      "gameplay_capture": true
+    }
+  ]
+}
