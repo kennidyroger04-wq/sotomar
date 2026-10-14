@@ -2,35 +2,32 @@
 
 ## Checkpoint recuperável
 
-- Última etapa fechada: G17 save versionado ligado ao ciclo da exploração; G15 permanece parcial por mecânicas/IA ainda sem paridade e G16 não pode ser concluída sem definições canônicas de boss/final.
-- Branch de trabalho: `operation/g12-g17`.
-- Checkpoints desta continuação: G13 `4df28dc3d669a66c5918de027c742f361d9b5348`; G14 `624817100e5694020c61af08194f082b9426cf32`; G15 `e8771bde028f4f06fc2cceac6aaccdca315845cf`; G16 `ac7cdd4c3086d0f4619a071eab858b3e350eda04`; G17 `979a3e4d4b521addd18e8a574636308f750abf70`. Todos foram enviados a `origin/operation/g12-g17`.
-- G12: `834ae3d4f6048ebf7c0a75b99dfa224e26b672b8`; G13–G17 estão descritas nos relatórios de cada missão.
-- G11 está protegido pela tag `g11-stable-20261014`; não alterar a branch `main` nem mesclar automaticamente.
-- Skill/ambiente cloud não exigiram credenciais nem configuração adicional.
+- Última missão: G18A consolidou a interface mobile, ações de inventário/equipamento, cura de Nilo e fluxo Web de backup; G15 permanece parcial e G16 depende de definições canônicas para confronto/encerramento.
+- Branch atual: `operation/g18a`, baseada na branch preservada `operation/g12-g17`.
+- Base verificada: `90190d1a62698928df19cdecdba3442e6d33d93e`, igual a `origin/operation/g12-g17` após fetch.
+- Checkpoint pré-G18A: branch local `checkpoint/g18a-start` e tag `checkpoint-g18a-start-20261014`.
+- Checkpoints G13–G17: G13 `4df28dc3d669a66c5918de027c742f361d9b5348`; G14 `624817100e5694020c61af08194f082b9426cf32`; G15 `e8771bde028f4f06fc2cceac6aaccdca315845cf`; G16 `ac7cdd4c3086d0f4619a071eab858b3e350eda04`; G17 `979a3e4d4b521addd18e8a574636308f750abf70`.
+- G11 permanece protegida pela tag `g11-stable-20261014`; não alterar `main` nem mesclar automaticamente.
 
-## O que foi feito
+## Trabalho anterior
 
-G12: ver `docs/RELATORIO_G12.md`. Para G13–G17, consultar `docs/RELATORIO_G13.md`, `docs/RELATORIO_G14.md`, `docs/RELATORIO_G15.md`, `docs/RELATORIO_G16.md` e `docs/RELATORIO_G17.md`. A captura técnica de Web mobile pós-reload está em `docs/reports/g17/web_mobile_after_reload.png`. As fontes JavaScript canônicas não foram modificadas.
+G12–G17: ver os respectivos relatórios. G18A e capturas: `docs/RELATORIO_G18A.md` e `docs/reports/g18a/`. O projeto Web foi exportado localmente e testado com Chromium. Fontes JS canônicas permanecem inalteradas.
 
 ## Retomada segura
 
-1. `cd /workspace/sotomar`
-2. `git status --short --branch` e revisar todos os diffs.
-3. Executar `git diff --check`.
-4. Executar `node tools/sync_godot_map_registry.js --check`, `node tools/build_godot_encounter_catalog.js --check`, `node tools/build_godot_quest_registry.js --check`, testes G12/G13 e as regressões enumeradas em `godot/tests/README.md`.
-5. Configurar `XDG_DATA_HOME=/tmp/sotomar-godot-data`, `XDG_CONFIG_HOME=/tmp/sotomar-godot-config`, `XDG_CACHE_HOME=/tmp/sotomar-godot-cache` e `HOME=/tmp/sotomar-home` para Godot no container.
-6. Executar os comandos G01–G17 listados em `godot/tests/README.md`; a regressão completa mais recente teve 302 verificações PASS. Rebuild Web e Chromium foram aprovados tecnicamente.
-7. Criar controles visuais de export/import de save, preservando o API JSON e testando seleção de arquivos em browser/mobile.
-8. Retomar G15 com port das habilidades/efeitos e IA em paridade JavaScript; só ativar habilidades após fixtures; decidir boss final somente com fonte canônica.
+1. `cd /workspace/sotomar` e conferir `git status --short --branch`/`git diff` na branch `operation/g18a`.
+2. Manter `operation/g12-g17` e `g11-stable-20261014` intactas; não mesclar na `main` automaticamente.
+3. Para Godot no container, definir `XDG_DATA_HOME=/tmp/sotomar-godot-data`, `XDG_CONFIG_HOME=/tmp/sotomar-godot-config`, `XDG_CACHE_HOME=/tmp/sotomar-godot-cache` e `HOME=/tmp/sotomar-home`.
+4. Regressões centrais G18A: `godot --headless --path godot --script res://tests/test_mobile_layout_g18a.gd`, `godot --headless --path godot --script res://tests/test_saves_g17.gd`, `godot --headless --path godot --script res://tests/test_inventory_g14.gd` e `godot --headless --path godot --script res://tests/test_combat_g10.gd`.
+5. Servir `/workspace/build/web` por HTTP local e rodar `NODE_PATH=/opt/codex/runtimes/codex-primary-runtime/dependencies/node/node_modules node godot/tools/capture_web_g18a.js http://127.0.0.1:PORT/index.html docs/reports/g18a`.
+6. Fluxo automatizado de arquivo: `NODE_PATH=/opt/codex/runtimes/codex-primary-runtime/dependencies/node/node_modules node godot/tests/test_web_save_flow_g18a.js http://127.0.0.1:PORT/index.html`.
+7. Próxima etapa segura: provar equivalência de Avanço/Cruz/Lança e efeitos temporários com fixtures JavaScript/Godot antes de ativá-los ou ampliar a IA. Separadamente, solicitar decisão narrativa sobre acessos TBD, Sineira e encerramento; não inferir conteúdo.
 
 ## Pendências conhecidas
 
-- MAP_03 e MAP_09 não possuem saída no runtime; requerem informação canônica antes de se tornarem alcançáveis.
-- MAIN_02, MAIN_03, MAIN_07 e algumas missões secundárias têm objetivos, entregas ou resoluções TBD; não inventar lore, item ou conclusão.
-- MAP_05↔MAP_07 requer `FLAG_ESCADA_MARCO_PRUMO_UNLOCKED`; a progressão MAIN_04 concede a flag pelo objetivo/entrega canônicos.
-- A suíte JavaScript histórica tem 11 assets Kenney ausentes, conforme o histórico da operação; não ignorar essas falhas.
-- G15 permanece parcial: três habilidades e efeitos de estado/IA ainda sem integração Godot em paridade.
-- G16 permanece parcial: Sineira é boss canônico da MAP_11, mas não há confirmação de que seja o boss final nem regras suficientes para lutar/encerrar o Arco 1.
-- G14 não tem interface visual completa para equipar/comprar/vender; os preços são provisórios. G17 persiste em IndexedDB, mas ainda não oferece seletor/baixador de arquivo.
-- Revisão visual humana, aparelho físico e hospedagem HTTPS continuam pendentes. A tela mobile mostrou escala compacta e sobreposição do HUD; a captura não representa aprovação visual.
+- MAP_03 e MAP_09 continuam sem acesso canônico. MAIN_02/03 e MAIN_07/08, secundárias, Coruja-muda e Sineira mantêm os TBD documentados em G12–G16.
+- G14: interface de mochila/equipamento/consumível e cura de Nilo implementadas; visual do equipamento no avatar pendente. Bram não oferece comércio pela fala canônica e preços continuam provisórios.
+- G15 parcial: Golpe/Fortificar parciais; Avanço/Cruz/Lança, efeitos temporários e IA sem paridade completa.
+- G16/Arco 1 parcial: a fonte não confirma Sineira como boss final nem define confronto/epílogo.
+- `node js/tests/run-tests.js` em G18A emitiu 362 aprovações antes de falhar em `js/tests/run-tests.js:501` pela ausência de asset. A auditoria atual lista 20 PNGs e 4 licenças Kenney em `docs/ASSETS_AUSENTES.md`.
+- Chromium mobile emulado passou; aparelho físico, revisão artística humana e publicação HTTPS não foram feitos.

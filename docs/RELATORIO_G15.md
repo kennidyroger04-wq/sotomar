@@ -18,3 +18,15 @@
 **PENDENTE:** completar efeitos e IA contra fixtures JavaScript antes de integrar as ações ao overlay; dar suporte às criaturas/encontros adicionais apenas quando regras, posições e gatilhos forem válidos. Valores do runtime identificados como provisórios seguem assim. Nenhuma vantagem artificial foi adicionada.
 
 G15 está PARCIAL; a fonte JavaScript e o motor existente não foram alterados nesta auditoria.
+
+## Atualização G18A — matriz de equivalência
+
+| Habilidade | Definição sincronizada | Efeito Godot em combate | IA | Estado G18A |
+|---|---:|---:|---:|---|
+| Golpe Pesado | Sim | Parcial, dano físico single-target | Melee básico | TESTADO em G10; equivalência de todos os efeitos ainda não demonstrada |
+| Avanço Impactante | Sim | Não | Não | PENDENTE: dash linear com bloqueios, custo e dano |
+| Explosão em Cruz | Sim | Não | Não | PENDENTE: área, dano mágico e Vulnerável temporário |
+| Arremesso de Lança | Sim | Não | Não | PENDENTE: alcance, veneno e ticks/expiração |
+| Postura Fortificada | Sim | Parcial, resistência física | Não | TESTADO em G10; bônus mágico e expiração ainda não equivalentes |
+
+G18A executou novamente os fixtures JS de G10 (22 assertions) e o combate Godot (22 verificações). Não ativou novas habilidades nem mudou a IA, porque esses resultados não cobrem efeitos/estados cruzados suficientes para declarar paridade. A IA atual continua determinística e focada em aproximação/melee; seleção de habilidade por papel, LoS e reações especiais continuam PENDENTES.
