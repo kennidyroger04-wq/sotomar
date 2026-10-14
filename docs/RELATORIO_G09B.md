@@ -8,6 +8,8 @@
 
 Antes da consolidação, `main` estava em `1c48d2d00f23fa6985f59cc9bf30ec248a580cc2`, igual ao único head retornado por `git ls-remote --heads origin`. `git fetch origin --prune` terminou sem avançar nem remover uma branch. As alterações locais G01–G09 consistiam em código original modificado, workflow/configuração nova, projeto Godot, testes, scripts, documentação e evidências visuais. Foram preservadas para commit.
 
+**Estado final do envio:** os commits `b626dfb` (projeto G01–G09) e `a393f86` (relatório G09B e procedimento) foram enviados com sucesso a `origin/main`. Em seguida, `48d8a64` adicionou evidências visuais novas de persistência; seu push falhou porque o Git não obteve autenticação HTTPS (`could not read Username`). `gh auth status` confirmou que o `GH_TOKEN` presente nesta sessão é inválido; seu valor não foi lido nem registrado. O ref local de acompanhamento `origin/main` continua em `a393f86`, portanto o head local está adiante e as duas capturas recém-geradas ainda não estão no GitHub. Após restabelecer autenticação GitHub, conclua com `git push origin main`; não use force push. O comando remoto falhou também ao consultar `ls-remote`, então o hash remoto foi confirmado pela última vez no push bem-sucedido para `a393f86`.
+
 O inventário pré-commit encontrou **487 arquivos de projeto**, excluindo `.git`, `build/web/` e `godot/.godot/`. Inclui código, 140 PNGs, 16 áudios OGG, fontes/recursos Godot, 11 GIFs de revisão, capturas, relatórios, testes e ferramentas. `build/web/` (build gerada) e `godot/.godot/` (cache/importação) estão no `.gitignore` e foram excluídos do escopo. A varredura de nomes e padrões de chave não encontrou credenciais; os nomes dos bindings Firebase aparecem apenas no workflow e na documentação.
 
 ## Pipeline Web
@@ -16,7 +18,7 @@ O inventário pré-commit encontrou **487 arquivos de projeto**, excluindo `.git
 
 **IMPLEMENTADO:** eventos `push` em `main` e `pull_request` só constroem e armazenam o artefato. O passo Firebase exige simultaneamente `workflow_dispatch`, `publish=true` e `refs/heads/main`. A configuração Firebase serve somente `build/web/`; o conteúdo-fonte e os assets de autoria permanecem fora do pacote publicado. Não foi iniciado deploy.
 
-**TESTADO localmente:** o workflow e os bindings são verificados por `godot/tests/test_publish_g09.py`; a exportação real passa por `tools/validate_g09_web_export.py`. O workflow hospedado no GitHub ainda não executou, portanto o artefato de Actions está **PENDENTE** até o push e conclusão do job remoto.
+**TESTADO localmente:** o workflow e os bindings são verificados por `godot/tests/test_publish_g09.py`; a exportação real passa por `tools/validate_g09_web_export.py`. O push que publicou `a393f86` deve iniciar o job `Godot Web build`, mas o status do Actions não pôde ser consultado (API respondeu HTTP 403); a geração/transferência do artefato no GitHub está **PENDENTE de confirmação**. A build local está validada.
 
 **PENDENTE:** a API GitHub GraphQL respondeu HTTP 403 nesta sessão. Não foi possível confirmar via API a visibilidade atual do repositório nem consultar status de Actions. A fonte não foi tornada pública ou alterada. Confirme **Settings → General → Danger Zone → Private** antes de distribuir. O site Web é público quando publicado, embora o repositório possa continuar privado.
 
