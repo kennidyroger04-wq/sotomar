@@ -1,0 +1,76 @@
+name: Godot Web build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: Publish the build to the configured Firebase Hosting site
+        type: boolean
+        required: true
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Cache Godot 4.6.3 and Web templates
+        id: godot-cache
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: |
+            ~/.local/bin/godot
+            ~/.local/share/godot/export_templates/4.6.3.stable
+          key: godot-web-4.6.3-${{ runner.os }}-v1
+      - name: Install pinned Godot 4.6.3 and export templates
+        if: steps.godot-cache.outputs.cache-hit != 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          version='4.6.3'
+          base="https://github.com/godotengine/godot/releases/download/${version}-stable"
+          work="${RUNNER_TEMP}/godot-${version}"
+          mkdir -p "$work" "$HOME/.local/bin" "$HOME/.local/share/godot/export_templates/${version}.stable"
+          curl --fail --location --retry 3 "$base/Godot_v${version}-stable_linux.x86_64.zip" -o "$work/godot.zip"
+          curl --fail --location --retry 3 "$base/Godot_v${version}-stable_export_templates.tpz" -o "$work/templates.tpz"
+          curl --fail --location --retry 3 "$base/SHA512-SUMS.txt" -o "$work/SHA512-SUMS.txt"
+          (cd "$work" && grep -F 'Godot_v4.6.3-stable_linux.x86_64.zip' SHA512-SUMS.txt | sha512sum --check -)
+          (cd "$work" && grep -F 'Godot_v4.6.3-stable_export_templates.tpz' SHA512-SUMS.txt | sha512sum --check -)
+          unzip -q "$work/godot.zip" -d "$work/bin"
+          install "$work/bin/Godot_v${version}-stable_linux.x86_64" "$HOME/.local/bin/godot"
+          chmod +x "$HOME/.local/bin/godot"
+          unzip -q "$work/templates.tpz" -d "$work/templates"
+          cp -a "$work/templates/templates/." "$HOME/.local/share/godot/export_templates/${version}.stable/"
+          "$HOME/.local/bin/godot" --version
+      - name: Add cached Godot binary to PATH
+        run: echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      - name: Import project and export Web build
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p build/web
+          godot --headless --editor --path godot --import --quit
+          godot --headless --path godot --export-release Web "$GITHUB_WORKSPACE/build/web/index.html"
+      - name: Validate and report Web export
+        run: python3 tools/validate_g09_web_export.py build/web
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: sotomar-fimbria-web
+          path: build/web/
+          if-no-files-found: error
+          retention-days: 7
+      - name: Publish to Firebase Hosting
+        if: github.event_name == 'workflow_dispatch' && inputs.publish == true && github.ref == 'refs/heads/main'
+        uses: FirebaseExtended/action-hosting-deploy@500ac625ca2dd40cbd15f7659af953801858032a # v0.11.0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          projectId: ${{ vars.FIREBASE_PROJECT_ID }}
+          channelId: live
+          entryPoint: .

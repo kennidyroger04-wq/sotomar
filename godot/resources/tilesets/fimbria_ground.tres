@@ -1,0 +1,192 @@
+[gd_resource type="TileSet" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/tiles/terrain/g03/grass_meadow.png" id="1_hsd0s"]
+[ext_resource type="Texture2D" path="res://assets/tiles/terrain/g03/dirt_ochre.png" id="2_a6qsx"]
+[ext_resource type="Texture2D" path="res://assets/tiles/terrain/g03/water_lily.png" id="3_srkj2"]
+[ext_resource type="Texture2D" path="res://assets/tiles/terrain/g03/path_straight_ne_sw.png" id="4_mevsv"]
+[ext_resource type="Texture2D" path="res://assets/tiles/terrain/g03/path_straight_nw_se.png" id="5_fofri"]
+[ext_resource type="Texture2D" path="res://assets/tiles/terrain/g03/path_bend.png" id="6_i73v3"]
+[ext_resource type="Texture2D" path="res://assets/tiles/terrain/g03/path_cross.png" id="7_ycc1l"]
+[ext_resource type="Texture2D" path="res://assets/tiles/terrain/g03/transition_grass_earth_edge_north.png" id="8_s56ww"]
+[ext_resource type="Texture2D" path="res://assets/tiles/terrain/g03/transition_grass_earth_edge_east.png" id="9_qa5mk"]
+[ext_resource type="Texture2D" path="res://assets/tiles/terrain/g03/transition_grass_earth_edge_south.png" id="10_qc0ja"]
+[ext_resource type="Texture2D" path="res://assets/tiles/terrain/g03/transition_grass_earth_edge_west.png" id="11_0u65u"]
+[ext_resource type="Texture2D" path="res://assets/tiles/terrain/g03/transition_grass_earth_diagonal.png" id="12_s1tkx"]
+[ext_resource type="Texture2D" path="res://assets/tiles/terrain/g03/path_center.png" id="13_p08b7"]
+[ext_resource type="Texture2D" path="res://assets/tiles/terrain/g03/transition_grass_water_stones_a.png" id="14_vx1d3"]
+[ext_resource type="Texture2D" path="res://assets/tiles/terrain/g03/transition_grass_water_stones_b.png" id="15_2cnaj"]
+[ext_resource type="Texture2D" path="res://assets/tiles/terrain/g03/transition_earth_cliff_edge.png" id="16_c7io0"]
+[ext_resource type="Texture2D" path="res://assets/tiles/terrain/g03/stone_moss.png" id="17_6nyi1"]
+[ext_resource type="Texture2D" path="res://assets/tiles/terrain/g03/water_clear.png" id="18_doa01"]
+[ext_resource type="Texture2D" path="res://assets/tiles/terrain/g03/grass_clover.png" id="19_ajidl"]
+[ext_resource type="Texture2D" path="res://assets/tiles/terrain/g03/grass_fern.png" id="20_wo1pf"]
+[ext_resource type="Texture2D" path="res://assets/tiles/terrain/g03/dirt_dappled.png" id="21_6v4l4"]
+[ext_resource type="Texture2D" path="res://assets/tiles/terrain/g03/stone_lichen.png" id="22_43qp2"]
+[ext_resource type="Texture2D" path="res://assets/tiles/terrain/g03/water_ripple.png" id="23_ek2ud"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iln63"]
+texture = ExtResource("1_hsd0s")
+texture_region_size = Vector2i(128, 80)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gmhvo"]
+texture = ExtResource("2_a6qsx")
+texture_region_size = Vector2i(128, 80)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1q0s8"]
+texture = ExtResource("3_srkj2")
+texture_region_size = Vector2i(128, 80)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2fr2k"]
+texture = ExtResource("4_mevsv")
+texture_region_size = Vector2i(128, 80)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7xrag"]
+texture = ExtResource("5_fofri")
+texture_region_size = Vector2i(128, 80)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gx72h"]
+texture = ExtResource("6_i73v3")
+texture_region_size = Vector2i(128, 80)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rfhef"]
+texture = ExtResource("7_ycc1l")
+texture_region_size = Vector2i(128, 80)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7ldjl"]
+texture = ExtResource("8_s56ww")
+texture_region_size = Vector2i(128, 80)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mxa3b"]
+texture = ExtResource("9_qa5mk")
+texture_region_size = Vector2i(128, 80)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7w6im"]
+texture = ExtResource("10_qc0ja")
+texture_region_size = Vector2i(128, 80)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6u1an"]
+texture = ExtResource("11_0u65u")
+texture_region_size = Vector2i(128, 80)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_61fss"]
+texture = ExtResource("12_s1tkx")
+texture_region_size = Vector2i(128, 80)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fonxt"]
+texture = ExtResource("13_p08b7")
+texture_region_size = Vector2i(128, 80)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5upaa"]
+texture = ExtResource("14_vx1d3")
+texture_region_size = Vector2i(128, 80)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1plxq"]
+texture = ExtResource("15_2cnaj")
+texture_region_size = Vector2i(128, 80)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_blara"]
+texture = ExtResource("16_c7io0")
+texture_region_size = Vector2i(128, 80)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ev744"]
+texture = ExtResource("17_6nyi1")
+texture_region_size = Vector2i(128, 80)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3n6wf"]
+texture = ExtResource("18_doa01")
+texture_region_size = Vector2i(128, 80)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_17hvp"]
+texture = ExtResource("19_ajidl")
+texture_region_size = Vector2i(128, 80)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_65sia"]
+texture = ExtResource("20_wo1pf")
+texture_region_size = Vector2i(128, 80)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2mw0q"]
+texture = ExtResource("21_6v4l4")
+texture_region_size = Vector2i(128, 80)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_soxb2"]
+texture = ExtResource("22_43qp2")
+texture_region_size = Vector2i(128, 80)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dpid8"]
+texture = ExtResource("23_ek2ud")
+texture_region_size = Vector2i(128, 80)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
+
+[resource]
+tile_shape = 1
+tile_layout = 5
+tile_offset_axis = 1
+tile_size = Vector2i(128, 64)
+sources/0 = SubResource("TileSetAtlasSource_iln63")
+sources/1 = SubResource("TileSetAtlasSource_gmhvo")
+sources/2 = SubResource("TileSetAtlasSource_fonxt")
+sources/3 = SubResource("TileSetAtlasSource_ev744")
+sources/4 = SubResource("TileSetAtlasSource_3n6wf")
+sources/5 = SubResource("TileSetAtlasSource_17hvp")
+sources/6 = SubResource("TileSetAtlasSource_65sia")
+sources/7 = SubResource("TileSetAtlasSource_2mw0q")
+sources/8 = SubResource("TileSetAtlasSource_soxb2")
+sources/9 = SubResource("TileSetAtlasSource_dpid8")
+sources/10 = SubResource("TileSetAtlasSource_1q0s8")
+sources/11 = SubResource("TileSetAtlasSource_2fr2k")
+sources/12 = SubResource("TileSetAtlasSource_7xrag")
+sources/13 = SubResource("TileSetAtlasSource_gx72h")
+sources/14 = SubResource("TileSetAtlasSource_rfhef")
+sources/15 = SubResource("TileSetAtlasSource_7ldjl")
+sources/16 = SubResource("TileSetAtlasSource_mxa3b")
+sources/17 = SubResource("TileSetAtlasSource_7w6im")
+sources/18 = SubResource("TileSetAtlasSource_6u1an")
+sources/19 = SubResource("TileSetAtlasSource_61fss")
+sources/20 = SubResource("TileSetAtlasSource_5upaa")
+sources/21 = SubResource("TileSetAtlasSource_1plxq")
+sources/22 = SubResource("TileSetAtlasSource_blara")

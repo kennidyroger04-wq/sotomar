@@ -1,0 +1,23 @@
+{
+  "audited_visual_assets": 62,
+  "facts": [
+    "character frames: 32 non-empty; alpha baseline spread 0px",
+    "tiles: 23 listed",
+    "props: 2",
+    "raster masters: 5"
+  ],
+  "objective_issues": [],
+  "review_boards": [
+    "reviews/g04/01_tiles_catalog.png",
+    "reviews/g04/02_path_connections.png",
+    "reviews/g04/03_transitions.png",
+    "reviews/g04/04_props_on_terrain.png",
+    "reviews/g04/05_character_directions.png",
+    "reviews/g04/06_idle_walk.png",
+    "reviews/g04/07_demo_map_static.png"
+  ],
+  "limitations": [
+    "Static Pillow boards are review aids; they do not reproduce Godot texture filtering, TileMapLayer drawing or animation timing.",
+    "Seam quality, path semantic compatibility and artistic direction require visual judgment."
+  ]
+}

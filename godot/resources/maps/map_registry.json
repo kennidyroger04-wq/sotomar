@@ -1,0 +1,1524 @@
+{
+  "schema_version": 1,
+  "maps": {
+    "MAP_01": {
+      "id": "MAP_01",
+      "name": "Caieira",
+      "width": 12,
+      "height": 10,
+      "base_floor_asset_id": "VIS_GRASS_BASE",
+      "floor_overrides": [
+        {
+          "x": 5,
+          "y": 4,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 6,
+          "y": 4,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 5,
+          "y": 5,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 6,
+          "y": 5,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 7,
+          "y": 5,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 6,
+          "y": 6,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 5,
+          "y": 1,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 6,
+          "y": 1,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 7,
+          "y": 1,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 1,
+          "y": 5,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 1,
+          "y": 6,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 2,
+          "y": 6,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 1,
+          "y": 7,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 8,
+          "y": 5,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 9,
+          "y": 5,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 10,
+          "y": 5,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 11,
+          "y": 5,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 6,
+          "y": 7,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 6,
+          "y": 8,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 6,
+          "y": 9,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 6,
+          "y": 3,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 6,
+          "y": 2,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 4,
+          "y": 5,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 3,
+          "y": 5,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 2,
+          "y": 5,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 2,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 2,
+          "y": 3,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 2,
+          "y": 2,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 1,
+          "y": 2,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 10,
+          "y": 0,
+          "assetId": "VIS_WATER"
+        },
+        {
+          "x": 11,
+          "y": 0,
+          "assetId": "VIS_WATER"
+        },
+        {
+          "x": 11,
+          "y": 1,
+          "assetId": "VIS_WATER"
+        },
+        {
+          "x": 9,
+          "y": 0,
+          "assetId": "VIS_WATER_EDGE"
+        },
+        {
+          "x": 10,
+          "y": 1,
+          "assetId": "VIS_WATER_EDGE"
+        },
+        {
+          "x": 11,
+          "y": 2,
+          "assetId": "VIS_WATER_EDGE"
+        }
+      ],
+      "props": [
+        {
+          "id": "map01-house-01",
+          "assetId": "VIS_HOUSE_SMALL",
+          "x": 4,
+          "y": 2,
+          "blocking": true,
+          "label": "house-north"
+        },
+        {
+          "id": "map01-house-02",
+          "assetId": "VIS_HOUSE_SMALL",
+          "x": 10,
+          "y": 3,
+          "blocking": true,
+          "label": "house-east"
+        },
+        {
+          "id": "map01-house-03",
+          "assetId": "VIS_HOUSE_SMALL",
+          "x": 2,
+          "y": 9,
+          "blocking": true,
+          "label": "house-southwest"
+        },
+        {
+          "id": "map01-masonry-01",
+          "assetId": "VIS_MASONRY_STRUCTURE",
+          "x": 5,
+          "y": 9,
+          "blocking": true,
+          "label": "masonry-south"
+        },
+        {
+          "id": "map01-wall-01",
+          "assetId": "VIS_LOW_WALL",
+          "x": 7,
+          "y": 9,
+          "blocking": true,
+          "label": "wall-south"
+        },
+        {
+          "id": "map01-wall-02",
+          "assetId": "VIS_LOW_WALL",
+          "x": 0,
+          "y": 5,
+          "blocking": true,
+          "label": "wall-west"
+        },
+        {
+          "id": "map01-wall-03",
+          "assetId": "VIS_LOW_WALL",
+          "x": 0,
+          "y": 6,
+          "blocking": true,
+          "label": "wall-west"
+        },
+        {
+          "id": "map01-wall-04",
+          "assetId": "VIS_LOW_WALL",
+          "x": 0,
+          "y": 7,
+          "blocking": true,
+          "label": "wall-west"
+        },
+        {
+          "id": "map01-tree-01",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 0,
+          "y": 0,
+          "blocking": true
+        },
+        {
+          "id": "map01-tree-02",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 0,
+          "y": 1,
+          "blocking": true
+        },
+        {
+          "id": "map01-tree-03",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 0,
+          "y": 3,
+          "blocking": true
+        },
+        {
+          "id": "map01-tree-04",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 8,
+          "y": 0,
+          "blocking": true
+        },
+        {
+          "id": "map01-tree-05",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 11,
+          "y": 3,
+          "blocking": true
+        },
+        {
+          "id": "map01-tree-06",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 11,
+          "y": 7,
+          "blocking": true
+        },
+        {
+          "id": "map01-tree-07",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 10,
+          "y": 8,
+          "blocking": true
+        },
+        {
+          "id": "map01-tree-08",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 4,
+          "y": 9,
+          "blocking": true
+        },
+        {
+          "id": "map01-tree-09",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 8,
+          "y": 9,
+          "blocking": true
+        },
+        {
+          "id": "map01-rocks-01",
+          "assetId": "VIS_ROCKS_GRASS",
+          "x": 7,
+          "y": 0,
+          "blocking": false
+        },
+        {
+          "id": "map01-rocks-02",
+          "assetId": "VIS_ROCKS_GRASS",
+          "x": 3,
+          "y": 7,
+          "blocking": false
+        },
+        {
+          "id": "map01-rocks-03",
+          "assetId": "VIS_ROCKS_GRASS",
+          "x": 9,
+          "y": 6,
+          "blocking": false
+        },
+        {
+          "id": "map01-rocks-04",
+          "assetId": "VIS_ROCKS_GRASS",
+          "x": 5,
+          "y": 7,
+          "blocking": false
+        }
+      ],
+      "blocked_cells": [
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 10,
+          "y": 3
+        },
+        {
+          "x": 9,
+          "y": 3
+        },
+        {
+          "x": 2,
+          "y": 9
+        },
+        {
+          "x": 1,
+          "y": 9
+        },
+        {
+          "x": 5,
+          "y": 9
+        },
+        {
+          "x": 7,
+          "y": 9
+        },
+        {
+          "x": 0,
+          "y": 5
+        },
+        {
+          "x": 0,
+          "y": 6
+        },
+        {
+          "x": 0,
+          "y": 7
+        },
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 0
+        },
+        {
+          "x": 11,
+          "y": 3
+        },
+        {
+          "x": 11,
+          "y": 7
+        },
+        {
+          "x": 10,
+          "y": 8
+        },
+        {
+          "x": 4,
+          "y": 9
+        },
+        {
+          "x": 8,
+          "y": 9
+        },
+        {
+          "x": 10,
+          "y": 0
+        },
+        {
+          "x": 11,
+          "y": 0
+        },
+        {
+          "x": 11,
+          "y": 1
+        }
+      ],
+      "reserved_cells": [
+        {
+          "id": "SPAWN_DEFAULT",
+          "x": 6,
+          "y": 5
+        },
+        {
+          "id": "EXIT_MAP_02",
+          "x": 11,
+          "y": 5
+        },
+        {
+          "id": "EXIT_CARROCAL",
+          "x": 6,
+          "y": 9
+        }
+      ],
+      "spawns": {
+        "SPAWN_DEFAULT": {
+          "x": 6,
+          "y": 5
+        },
+        "SPAWN_FROM_MAP_02": {
+          "x": 10,
+          "y": 5
+        },
+        "SPAWN_FROM_MAP_04": {
+          "x": 6,
+          "y": 8
+        }
+      },
+      "npcs": [
+        {
+          "id": "guarda_mira",
+          "name": "Mira, Guarda da Estrada",
+          "role": "QUEST",
+          "x": 1,
+          "y": 1
+        },
+        {
+          "id": "exploradora_lia",
+          "name": "Lia, Exploradora",
+          "role": "GENERIC",
+          "x": 6,
+          "y": 1
+        },
+        {
+          "id": "curandeiro_nilo",
+          "name": "Nilo, Curandeiro",
+          "role": "HEALER",
+          "x": 6,
+          "y": 4
+        },
+        {
+          "id": "mercador_bram",
+          "name": "Bram, Comerciante",
+          "role": "MERCHANT",
+          "x": 1,
+          "y": 6
+        }
+      ],
+      "exits": [
+        {
+          "id": "EXIT_MAP01_MAP02",
+          "to": "MAP_02",
+          "x": 11,
+          "y": 5,
+          "target_spawn_id": "SPAWN_FROM_MAP_01",
+          "target_position": {
+            "x": 1,
+            "y": 4
+          },
+          "status": "PROVISIONAL_RUNTIME"
+        },
+        {
+          "id": "EXIT_CARROCAL",
+          "to": "MAP_04",
+          "x": 6,
+          "y": 9,
+          "target_spawn_id": "SPAWN_FROM_MAP_01",
+          "target_position": {
+            "x": 6,
+            "y": 1
+          },
+          "status": "CANONICAL_OPEN_SANDBOX"
+        }
+      ]
+    },
+    "MAP_02": {
+      "id": "MAP_02",
+      "name": "Terraços das Roças",
+      "width": 12,
+      "height": 9,
+      "base_floor_asset_id": "VIS_GRASS_BASE",
+      "floor_overrides": [
+        {
+          "x": 2,
+          "y": 1,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 3,
+          "y": 1,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 4,
+          "y": 1,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 5,
+          "y": 1,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 2,
+          "y": 2,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 3,
+          "y": 2,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 4,
+          "y": 2,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 5,
+          "y": 2,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 8,
+          "y": 2,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 9,
+          "y": 2,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 10,
+          "y": 2,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 9,
+          "y": 3,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 0,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 1,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 2,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 3,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 4,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 5,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 6,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 7,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 8,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 9,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 10,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 6,
+          "y": 6,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 7,
+          "y": 6,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 8,
+          "y": 6,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 9,
+          "y": 6,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 6,
+          "y": 7,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 7,
+          "y": 7,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 8,
+          "y": 7,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 9,
+          "y": 7,
+          "assetId": "VIS_DIRT_BASE"
+        }
+      ],
+      "props": [
+        {
+          "id": "map02-house-01",
+          "assetId": "VIS_HOUSE_SMALL",
+          "x": 9,
+          "y": 1,
+          "blocking": true,
+          "label": "house-northeast"
+        },
+        {
+          "id": "map02-masonry-01",
+          "assetId": "VIS_MASONRY_STRUCTURE",
+          "x": 3,
+          "y": 7,
+          "blocking": true,
+          "label": "masonry-southwest"
+        },
+        {
+          "id": "map02-wall-01",
+          "assetId": "VIS_LOW_WALL",
+          "x": 2,
+          "y": 3,
+          "blocking": true
+        },
+        {
+          "id": "map02-wall-02",
+          "assetId": "VIS_LOW_WALL",
+          "x": 3,
+          "y": 3,
+          "blocking": true
+        },
+        {
+          "id": "map02-wall-03",
+          "assetId": "VIS_LOW_WALL",
+          "x": 5,
+          "y": 3,
+          "blocking": true
+        },
+        {
+          "id": "map02-wall-04",
+          "assetId": "VIS_LOW_WALL",
+          "x": 7,
+          "y": 5,
+          "blocking": true
+        },
+        {
+          "id": "map02-wall-05",
+          "assetId": "VIS_LOW_WALL",
+          "x": 8,
+          "y": 5,
+          "blocking": true
+        },
+        {
+          "id": "map02-tree-01",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 0,
+          "y": 0,
+          "blocking": true
+        },
+        {
+          "id": "map02-tree-02",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 1,
+          "y": 0,
+          "blocking": true
+        },
+        {
+          "id": "map02-tree-03",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 11,
+          "y": 0,
+          "blocking": true
+        },
+        {
+          "id": "map02-tree-04",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 11,
+          "y": 1,
+          "blocking": true
+        },
+        {
+          "id": "map02-tree-05",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 0,
+          "y": 2,
+          "blocking": true
+        },
+        {
+          "id": "map02-tree-06",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 0,
+          "y": 6,
+          "blocking": true
+        },
+        {
+          "id": "map02-tree-07",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 11,
+          "y": 7,
+          "blocking": true
+        },
+        {
+          "id": "map02-tree-08",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 0,
+          "y": 8,
+          "blocking": true
+        },
+        {
+          "id": "map02-tree-09",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 1,
+          "y": 8,
+          "blocking": true
+        },
+        {
+          "id": "map02-tree-10",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 5,
+          "y": 8,
+          "blocking": true
+        },
+        {
+          "id": "map02-tree-11",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 10,
+          "y": 8,
+          "blocking": true
+        },
+        {
+          "id": "map02-tree-12",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 11,
+          "y": 8,
+          "blocking": true
+        },
+        {
+          "id": "map02-rocks-01",
+          "assetId": "VIS_ROCKS_GRASS",
+          "x": 10,
+          "y": 3,
+          "blocking": false
+        },
+        {
+          "id": "map02-rocks-02",
+          "assetId": "VIS_ROCKS_GRASS",
+          "x": 5,
+          "y": 5,
+          "blocking": false
+        },
+        {
+          "id": "map02-rocks-03",
+          "assetId": "VIS_ROCKS_GRASS",
+          "x": 2,
+          "y": 6,
+          "blocking": false
+        }
+      ],
+      "blocked_cells": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 11,
+          "y": 0
+        },
+        {
+          "x": 8,
+          "y": 1
+        },
+        {
+          "x": 9,
+          "y": 1
+        },
+        {
+          "x": 11,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 3,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 7,
+          "y": 5
+        },
+        {
+          "x": 8,
+          "y": 5
+        },
+        {
+          "x": 0,
+          "y": 6
+        },
+        {
+          "x": 3,
+          "y": 7
+        },
+        {
+          "x": 11,
+          "y": 7
+        },
+        {
+          "x": 0,
+          "y": 8
+        },
+        {
+          "x": 1,
+          "y": 8
+        },
+        {
+          "x": 5,
+          "y": 8
+        },
+        {
+          "x": 10,
+          "y": 8
+        },
+        {
+          "x": 11,
+          "y": 8
+        }
+      ],
+      "reserved_cells": [
+        {
+          "id": "SPAWN_DEFAULT",
+          "x": 6,
+          "y": 4
+        },
+        {
+          "id": "EXIT_MAP_01",
+          "x": 0,
+          "y": 4
+        },
+        {
+          "id": "ENCOUNTER_PLACEMENT_01",
+          "x": 6,
+          "y": 4
+        }
+      ],
+      "spawns": {
+        "SPAWN_DEFAULT": {
+          "x": 6,
+          "y": 4
+        },
+        "SPAWN_FROM_MAP_01": {
+          "x": 1,
+          "y": 4
+        }
+      },
+      "npcs": [],
+      "exits": [
+        {
+          "id": "EXIT_MAP02_MAP01",
+          "to": "MAP_01",
+          "x": 0,
+          "y": 4,
+          "target_spawn_id": "SPAWN_FROM_MAP_02",
+          "target_position": {
+            "x": 10,
+            "y": 5
+          },
+          "status": "PROVISIONAL_RUNTIME"
+        }
+      ]
+    },
+    "MAP_04": {
+      "id": "MAP_04",
+      "name": "Trilha do Lenhador",
+      "width": 12,
+      "height": 9,
+      "base_floor_asset_id": "VIS_GRASS_BASE",
+      "floor_overrides": [
+        {
+          "x": 6,
+          "y": 0,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 6,
+          "y": 1,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 6,
+          "y": 2,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 3,
+          "y": 3,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 6,
+          "y": 3,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 3,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 4,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 5,
+          "y": 4,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 6,
+          "y": 4,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 7,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 8,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 9,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 10,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 11,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 6,
+          "y": 5,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 6,
+          "y": 6,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 6,
+          "y": 7,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 6,
+          "y": 8,
+          "assetId": "VIS_DIRT_PATH"
+        }
+      ],
+      "props": [
+        {
+          "id": "map04-house-01",
+          "assetId": "VIS_HOUSE_SMALL",
+          "x": 2,
+          "y": 2,
+          "blocking": true,
+          "label": "house-northwest"
+        },
+        {
+          "id": "map04-wall-01",
+          "assetId": "VIS_LOW_WALL",
+          "x": 8,
+          "y": 2,
+          "blocking": true
+        },
+        {
+          "id": "map04-wall-02",
+          "assetId": "VIS_LOW_WALL",
+          "x": 9,
+          "y": 2,
+          "blocking": true
+        },
+        {
+          "id": "map04-tree-01",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 0,
+          "y": 0,
+          "blocking": true
+        },
+        {
+          "id": "map04-tree-02",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 1,
+          "y": 0,
+          "blocking": true
+        },
+        {
+          "id": "map04-tree-03",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 10,
+          "y": 0,
+          "blocking": true
+        },
+        {
+          "id": "map04-tree-04",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 11,
+          "y": 0,
+          "blocking": true
+        },
+        {
+          "id": "map04-tree-05",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 0,
+          "y": 1,
+          "blocking": true
+        },
+        {
+          "id": "map04-tree-06",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 11,
+          "y": 1,
+          "blocking": true
+        },
+        {
+          "id": "map04-tree-07",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 0,
+          "y": 5,
+          "blocking": true
+        },
+        {
+          "id": "map04-tree-08",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 3,
+          "y": 5,
+          "blocking": true
+        },
+        {
+          "id": "map04-tree-09",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 11,
+          "y": 5,
+          "blocking": true
+        },
+        {
+          "id": "map04-tree-10",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 0,
+          "y": 6,
+          "blocking": true
+        },
+        {
+          "id": "map04-tree-11",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 1,
+          "y": 6,
+          "blocking": true
+        },
+        {
+          "id": "map04-tree-12",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 9,
+          "y": 6,
+          "blocking": true
+        },
+        {
+          "id": "map04-tree-13",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 11,
+          "y": 6,
+          "blocking": true
+        },
+        {
+          "id": "map04-tree-14",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 0,
+          "y": 7,
+          "blocking": true
+        },
+        {
+          "id": "map04-tree-15",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 1,
+          "y": 7,
+          "blocking": true
+        },
+        {
+          "id": "map04-tree-16",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 2,
+          "y": 7,
+          "blocking": true
+        },
+        {
+          "id": "map04-tree-17",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 4,
+          "y": 7,
+          "blocking": true
+        },
+        {
+          "id": "map04-tree-18",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 9,
+          "y": 7,
+          "blocking": true
+        },
+        {
+          "id": "map04-tree-19",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 10,
+          "y": 7,
+          "blocking": true
+        },
+        {
+          "id": "map04-tree-20",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 11,
+          "y": 7,
+          "blocking": true
+        },
+        {
+          "id": "map04-tree-21",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 0,
+          "y": 8,
+          "blocking": true
+        },
+        {
+          "id": "map04-tree-22",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 1,
+          "y": 8,
+          "blocking": true
+        },
+        {
+          "id": "map04-tree-23",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 2,
+          "y": 8,
+          "blocking": true
+        },
+        {
+          "id": "map04-tree-24",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 3,
+          "y": 8,
+          "blocking": true
+        },
+        {
+          "id": "map04-tree-25",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 4,
+          "y": 8,
+          "blocking": true
+        },
+        {
+          "id": "map04-tree-26",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 8,
+          "y": 8,
+          "blocking": true
+        },
+        {
+          "id": "map04-tree-27",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 9,
+          "y": 8,
+          "blocking": true
+        },
+        {
+          "id": "map04-tree-28",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 10,
+          "y": 8,
+          "blocking": true
+        },
+        {
+          "id": "map04-tree-29",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 11,
+          "y": 8,
+          "blocking": true
+        },
+        {
+          "id": "map04-rocks-01",
+          "assetId": "VIS_ROCKS_GRASS",
+          "x": 7,
+          "y": 6,
+          "blocking": false
+        }
+      ],
+      "blocked_cells": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 10,
+          "y": 0
+        },
+        {
+          "x": 11,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 11,
+          "y": 1
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 8,
+          "y": 2
+        },
+        {
+          "x": 9,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 5
+        },
+        {
+          "x": 3,
+          "y": 5
+        },
+        {
+          "x": 11,
+          "y": 5
+        },
+        {
+          "x": 0,
+          "y": 6
+        },
+        {
+          "x": 1,
+          "y": 6
+        },
+        {
+          "x": 9,
+          "y": 6
+        },
+        {
+          "x": 11,
+          "y": 6
+        },
+        {
+          "x": 0,
+          "y": 7
+        },
+        {
+          "x": 1,
+          "y": 7
+        },
+        {
+          "x": 2,
+          "y": 7
+        },
+        {
+          "x": 4,
+          "y": 7
+        },
+        {
+          "x": 9,
+          "y": 7
+        },
+        {
+          "x": 10,
+          "y": 7
+        },
+        {
+          "x": 11,
+          "y": 7
+        },
+        {
+          "x": 0,
+          "y": 8
+        },
+        {
+          "x": 1,
+          "y": 8
+        },
+        {
+          "x": 2,
+          "y": 8
+        },
+        {
+          "x": 3,
+          "y": 8
+        },
+        {
+          "x": 4,
+          "y": 8
+        },
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 9,
+          "y": 8
+        },
+        {
+          "x": 10,
+          "y": 8
+        },
+        {
+          "x": 11,
+          "y": 8
+        }
+      ],
+      "reserved_cells": [
+        {
+          "id": "SPAWN_DEFAULT",
+          "x": 6,
+          "y": 4
+        },
+        {
+          "id": "EXIT_MAP_01",
+          "x": 6,
+          "y": 0
+        },
+        {
+          "id": "EXIT_MAP_05",
+          "x": 11,
+          "y": 4
+        },
+        {
+          "id": "EXIT_MAP_06",
+          "x": 6,
+          "y": 8
+        },
+        {
+          "id": "ENCOUNTER_PLACEMENT_01",
+          "x": 6,
+          "y": 4
+        }
+      ],
+      "spawns": {
+        "SPAWN_DEFAULT": {
+          "x": 6,
+          "y": 4
+        },
+        "SPAWN_FROM_MAP_01": {
+          "x": 6,
+          "y": 1
+        },
+        "SPAWN_FROM_MAP_05": {
+          "x": 10,
+          "y": 4
+        },
+        "SPAWN_FROM_MAP_06": {
+          "x": 6,
+          "y": 7
+        }
+      },
+      "npcs": [],
+      "exits": [
+        {
+          "id": "EXIT_MAP04_MAP01",
+          "to": "MAP_01",
+          "x": 6,
+          "y": 0,
+          "target_spawn_id": "SPAWN_FROM_MAP_04",
+          "target_position": {
+            "x": 6,
+            "y": 8
+          },
+          "status": "CANONICAL_OPEN_SANDBOX"
+        },
+        {
+          "id": "EXIT_MAP04_MAP05",
+          "to": "MAP_05",
+          "x": 11,
+          "y": 4,
+          "target_spawn_id": "SPAWN_FROM_MAP_04",
+          "target_position": {
+            "x": 1,
+            "y": 4
+          },
+          "status": "PROVISIONAL_RUNTIME"
+        },
+        {
+          "id": "EXIT_MAP04_MAP06",
+          "to": "MAP_06",
+          "x": 6,
+          "y": 8,
+          "target_spawn_id": "SPAWN_FROM_MAP_04",
+          "target_position": {
+            "x": 5,
+            "y": 1
+          },
+          "status": "PROVISIONAL_RUNTIME"
+        }
+      ]
+    }
+  }
+}

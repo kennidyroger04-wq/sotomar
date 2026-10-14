@@ -1,0 +1,1088 @@
+{
+  "package": "Sotomar/Fímbria G03 original art prototype",
+  "source_art": "Raster masters in res://art/source/generated_g03/",
+  "editable_raster_masters": [
+    {
+      "path": "res://art/source/generated_g03/terrain_materials_master.png",
+      "size": [
+        1619,
+        971
+      ]
+    },
+    {
+      "path": "res://art/source/generated_g03/paths_master.png",
+      "size": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "res://art/source/generated_g03/transitions_master.png",
+      "size": [
+        1774,
+        887
+      ]
+    },
+    {
+      "path": "res://art/source/generated_g03/props_master.png",
+      "size": [
+        1774,
+        887
+      ]
+    },
+    {
+      "path": "res://art/source/generated_g03/wayfarer_character_master.png",
+      "size": [
+        1774,
+        887
+      ]
+    }
+  ],
+  "art_status": "PROTOTYPE_REQUIRES_VISUAL_REVIEW",
+  "tiles": [
+    {
+      "name": "grass_meadow",
+      "group": "terrain",
+      "path": "res://assets/tiles/terrain/g03/grass_meadow.png",
+      "size": [
+        128,
+        80
+      ],
+      "tile_pitch": [
+        128,
+        64
+      ],
+      "texture_origin": [
+        0,
+        -8
+      ],
+      "display_scale": 0.5,
+      "pivot": [
+        64,
+        32
+      ],
+      "editable_source": "res://art/source/generated_g03/terrain_materials_master.png"
+    },
+    {
+      "name": "grass_clover",
+      "group": "terrain",
+      "path": "res://assets/tiles/terrain/g03/grass_clover.png",
+      "size": [
+        128,
+        80
+      ],
+      "tile_pitch": [
+        128,
+        64
+      ],
+      "texture_origin": [
+        0,
+        -8
+      ],
+      "display_scale": 0.5,
+      "pivot": [
+        64,
+        32
+      ],
+      "editable_source": "res://art/source/generated_g03/terrain_materials_master.png"
+    },
+    {
+      "name": "grass_fern",
+      "group": "terrain",
+      "path": "res://assets/tiles/terrain/g03/grass_fern.png",
+      "size": [
+        128,
+        80
+      ],
+      "tile_pitch": [
+        128,
+        64
+      ],
+      "texture_origin": [
+        0,
+        -8
+      ],
+      "display_scale": 0.5,
+      "pivot": [
+        64,
+        32
+      ],
+      "editable_source": "res://art/source/generated_g03/terrain_materials_master.png"
+    },
+    {
+      "name": "dirt_ochre",
+      "group": "terrain",
+      "path": "res://assets/tiles/terrain/g03/dirt_ochre.png",
+      "size": [
+        128,
+        80
+      ],
+      "tile_pitch": [
+        128,
+        64
+      ],
+      "texture_origin": [
+        0,
+        -8
+      ],
+      "display_scale": 0.5,
+      "pivot": [
+        64,
+        32
+      ],
+      "editable_source": "res://art/source/generated_g03/terrain_materials_master.png"
+    },
+    {
+      "name": "dirt_dappled",
+      "group": "terrain",
+      "path": "res://assets/tiles/terrain/g03/dirt_dappled.png",
+      "size": [
+        128,
+        80
+      ],
+      "tile_pitch": [
+        128,
+        64
+      ],
+      "texture_origin": [
+        0,
+        -8
+      ],
+      "display_scale": 0.5,
+      "pivot": [
+        64,
+        32
+      ],
+      "editable_source": "res://art/source/generated_g03/terrain_materials_master.png"
+    },
+    {
+      "name": "stone_moss",
+      "group": "terrain",
+      "path": "res://assets/tiles/terrain/g03/stone_moss.png",
+      "size": [
+        128,
+        80
+      ],
+      "tile_pitch": [
+        128,
+        64
+      ],
+      "texture_origin": [
+        0,
+        -8
+      ],
+      "display_scale": 0.5,
+      "pivot": [
+        64,
+        32
+      ],
+      "editable_source": "res://art/source/generated_g03/terrain_materials_master.png"
+    },
+    {
+      "name": "stone_lichen",
+      "group": "terrain",
+      "path": "res://assets/tiles/terrain/g03/stone_lichen.png",
+      "size": [
+        128,
+        80
+      ],
+      "tile_pitch": [
+        128,
+        64
+      ],
+      "texture_origin": [
+        0,
+        -8
+      ],
+      "display_scale": 0.5,
+      "pivot": [
+        64,
+        32
+      ],
+      "editable_source": "res://art/source/generated_g03/terrain_materials_master.png"
+    },
+    {
+      "name": "water_clear",
+      "group": "terrain",
+      "path": "res://assets/tiles/terrain/g03/water_clear.png",
+      "size": [
+        128,
+        80
+      ],
+      "tile_pitch": [
+        128,
+        64
+      ],
+      "texture_origin": [
+        0,
+        -8
+      ],
+      "display_scale": 0.5,
+      "pivot": [
+        64,
+        32
+      ],
+      "editable_source": "res://art/source/generated_g03/terrain_materials_master.png"
+    },
+    {
+      "name": "water_ripple",
+      "group": "terrain",
+      "path": "res://assets/tiles/terrain/g03/water_ripple.png",
+      "size": [
+        128,
+        80
+      ],
+      "tile_pitch": [
+        128,
+        64
+      ],
+      "texture_origin": [
+        0,
+        -8
+      ],
+      "display_scale": 0.5,
+      "pivot": [
+        64,
+        32
+      ],
+      "editable_source": "res://art/source/generated_g03/terrain_materials_master.png"
+    },
+    {
+      "name": "water_lily",
+      "group": "terrain",
+      "path": "res://assets/tiles/terrain/g03/water_lily.png",
+      "size": [
+        128,
+        80
+      ],
+      "tile_pitch": [
+        128,
+        64
+      ],
+      "texture_origin": [
+        0,
+        -8
+      ],
+      "display_scale": 0.5,
+      "pivot": [
+        64,
+        32
+      ],
+      "editable_source": "res://art/source/generated_g03/terrain_materials_master.png"
+    },
+    {
+      "name": "path_center",
+      "group": "path",
+      "path": "res://assets/tiles/terrain/g03/path_center.png",
+      "size": [
+        128,
+        80
+      ],
+      "tile_pitch": [
+        128,
+        64
+      ],
+      "texture_origin": [
+        0,
+        -8
+      ],
+      "display_scale": 0.5,
+      "pivot": [
+        64,
+        32
+      ],
+      "editable_source": "res://art/source/generated_g03/paths_master.png"
+    },
+    {
+      "name": "path_straight_ne_sw",
+      "group": "path",
+      "path": "res://assets/tiles/terrain/g03/path_straight_ne_sw.png",
+      "size": [
+        128,
+        80
+      ],
+      "tile_pitch": [
+        128,
+        64
+      ],
+      "texture_origin": [
+        0,
+        -8
+      ],
+      "display_scale": 0.5,
+      "pivot": [
+        64,
+        32
+      ],
+      "editable_source": "res://art/source/generated_g03/paths_master.png"
+    },
+    {
+      "name": "path_straight_nw_se",
+      "group": "path",
+      "path": "res://assets/tiles/terrain/g03/path_straight_nw_se.png",
+      "size": [
+        128,
+        80
+      ],
+      "tile_pitch": [
+        128,
+        64
+      ],
+      "texture_origin": [
+        0,
+        -8
+      ],
+      "display_scale": 0.5,
+      "pivot": [
+        64,
+        32
+      ],
+      "editable_source": "res://art/source/generated_g03/paths_master.png"
+    },
+    {
+      "name": "path_bend",
+      "group": "path",
+      "path": "res://assets/tiles/terrain/g03/path_bend.png",
+      "size": [
+        128,
+        80
+      ],
+      "tile_pitch": [
+        128,
+        64
+      ],
+      "texture_origin": [
+        0,
+        -8
+      ],
+      "display_scale": 0.5,
+      "pivot": [
+        64,
+        32
+      ],
+      "editable_source": "res://art/source/generated_g03/paths_master.png"
+    },
+    {
+      "name": "path_cross",
+      "group": "path",
+      "path": "res://assets/tiles/terrain/g03/path_cross.png",
+      "size": [
+        128,
+        80
+      ],
+      "tile_pitch": [
+        128,
+        64
+      ],
+      "texture_origin": [
+        0,
+        -8
+      ],
+      "display_scale": 0.5,
+      "pivot": [
+        64,
+        32
+      ],
+      "editable_source": "res://art/source/generated_g03/paths_master.png"
+    },
+    {
+      "name": "transition_grass_earth_edge_north",
+      "group": "transition",
+      "path": "res://assets/tiles/terrain/g03/transition_grass_earth_edge_north.png",
+      "size": [
+        128,
+        80
+      ],
+      "tile_pitch": [
+        128,
+        64
+      ],
+      "texture_origin": [
+        0,
+        -8
+      ],
+      "display_scale": 0.5,
+      "pivot": [
+        64,
+        32
+      ],
+      "editable_source": "res://art/source/generated_g03/transitions_master.png"
+    },
+    {
+      "name": "transition_grass_earth_edge_east",
+      "group": "transition",
+      "path": "res://assets/tiles/terrain/g03/transition_grass_earth_edge_east.png",
+      "size": [
+        128,
+        80
+      ],
+      "tile_pitch": [
+        128,
+        64
+      ],
+      "texture_origin": [
+        0,
+        -8
+      ],
+      "display_scale": 0.5,
+      "pivot": [
+        64,
+        32
+      ],
+      "editable_source": "res://art/source/generated_g03/transitions_master.png"
+    },
+    {
+      "name": "transition_grass_earth_edge_south",
+      "group": "transition",
+      "path": "res://assets/tiles/terrain/g03/transition_grass_earth_edge_south.png",
+      "size": [
+        128,
+        80
+      ],
+      "tile_pitch": [
+        128,
+        64
+      ],
+      "texture_origin": [
+        0,
+        -8
+      ],
+      "display_scale": 0.5,
+      "pivot": [
+        64,
+        32
+      ],
+      "editable_source": "res://art/source/generated_g03/transitions_master.png"
+    },
+    {
+      "name": "transition_grass_earth_edge_west",
+      "group": "transition",
+      "path": "res://assets/tiles/terrain/g03/transition_grass_earth_edge_west.png",
+      "size": [
+        128,
+        80
+      ],
+      "tile_pitch": [
+        128,
+        64
+      ],
+      "texture_origin": [
+        0,
+        -8
+      ],
+      "display_scale": 0.5,
+      "pivot": [
+        64,
+        32
+      ],
+      "editable_source": "res://art/source/generated_g03/transitions_master.png"
+    },
+    {
+      "name": "transition_grass_earth_diagonal",
+      "group": "transition",
+      "path": "res://assets/tiles/terrain/g03/transition_grass_earth_diagonal.png",
+      "size": [
+        128,
+        80
+      ],
+      "tile_pitch": [
+        128,
+        64
+      ],
+      "texture_origin": [
+        0,
+        -8
+      ],
+      "display_scale": 0.5,
+      "pivot": [
+        64,
+        32
+      ],
+      "editable_source": "res://art/source/generated_g03/transitions_master.png"
+    },
+    {
+      "name": "transition_grass_water_stones_a",
+      "group": "transition",
+      "path": "res://assets/tiles/terrain/g03/transition_grass_water_stones_a.png",
+      "size": [
+        128,
+        80
+      ],
+      "tile_pitch": [
+        128,
+        64
+      ],
+      "texture_origin": [
+        0,
+        -8
+      ],
+      "display_scale": 0.5,
+      "pivot": [
+        64,
+        32
+      ],
+      "editable_source": "res://art/source/generated_g03/transitions_master.png"
+    },
+    {
+      "name": "transition_grass_water_stones_b",
+      "group": "transition",
+      "path": "res://assets/tiles/terrain/g03/transition_grass_water_stones_b.png",
+      "size": [
+        128,
+        80
+      ],
+      "tile_pitch": [
+        128,
+        64
+      ],
+      "texture_origin": [
+        0,
+        -8
+      ],
+      "display_scale": 0.5,
+      "pivot": [
+        64,
+        32
+      ],
+      "editable_source": "res://art/source/generated_g03/transitions_master.png"
+    },
+    {
+      "name": "transition_earth_cliff_edge",
+      "group": "transition",
+      "path": "res://assets/tiles/terrain/g03/transition_earth_cliff_edge.png",
+      "size": [
+        128,
+        80
+      ],
+      "tile_pitch": [
+        128,
+        64
+      ],
+      "texture_origin": [
+        0,
+        -8
+      ],
+      "display_scale": 0.5,
+      "pivot": [
+        64,
+        32
+      ],
+      "editable_source": "res://art/source/generated_g03/transitions_master.png"
+    }
+  ],
+  "props": {
+    "tree_mosswood": {
+      "path": "res://assets/props/g03/tree_mosswood.png",
+      "size": [
+        256,
+        288
+      ],
+      "pivot": [
+        128,
+        280
+      ],
+      "display_scale": 0.5,
+      "origin": "asset base/feet; shadows included in original illustration"
+    },
+    "rock_moss_stone": {
+      "path": "res://assets/props/g03/rock_moss_stone.png",
+      "size": [
+        256,
+        288
+      ],
+      "pivot": [
+        128,
+        280
+      ],
+      "display_scale": 0.5,
+      "origin": "asset base/feet; shadows included in original illustration"
+    }
+  },
+  "character": {
+    "path": "res://assets/characters/wayfarer_v1/wayfarer_v1.png",
+    "frame_size": [
+      128,
+      160
+    ],
+    "columns": 8,
+    "rows": 4,
+    "directions": [
+      "se",
+      "sw",
+      "nw",
+      "ne"
+    ],
+    "frame_pivot": [
+      64,
+      152
+    ],
+    "animation_groups": {
+      "idle": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "walk": [
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    "idle_fps": 4,
+    "walk_fps": 8,
+    "frame_count": 32,
+    "frames": [
+      {
+        "row": 0,
+        "column": 0,
+        "rect": [
+          0,
+          0,
+          128,
+          160
+        ],
+        "pivot": [
+          64,
+          152
+        ]
+      },
+      {
+        "row": 0,
+        "column": 1,
+        "rect": [
+          128,
+          0,
+          128,
+          160
+        ],
+        "pivot": [
+          64,
+          152
+        ]
+      },
+      {
+        "row": 0,
+        "column": 2,
+        "rect": [
+          256,
+          0,
+          128,
+          160
+        ],
+        "pivot": [
+          64,
+          152
+        ]
+      },
+      {
+        "row": 0,
+        "column": 3,
+        "rect": [
+          384,
+          0,
+          128,
+          160
+        ],
+        "pivot": [
+          64,
+          152
+        ]
+      },
+      {
+        "row": 0,
+        "column": 4,
+        "rect": [
+          512,
+          0,
+          128,
+          160
+        ],
+        "pivot": [
+          64,
+          152
+        ]
+      },
+      {
+        "row": 0,
+        "column": 5,
+        "rect": [
+          640,
+          0,
+          128,
+          160
+        ],
+        "pivot": [
+          64,
+          152
+        ]
+      },
+      {
+        "row": 0,
+        "column": 6,
+        "rect": [
+          768,
+          0,
+          128,
+          160
+        ],
+        "pivot": [
+          64,
+          152
+        ]
+      },
+      {
+        "row": 0,
+        "column": 7,
+        "rect": [
+          896,
+          0,
+          128,
+          160
+        ],
+        "pivot": [
+          64,
+          152
+        ]
+      },
+      {
+        "row": 1,
+        "column": 0,
+        "rect": [
+          0,
+          160,
+          128,
+          160
+        ],
+        "pivot": [
+          64,
+          152
+        ]
+      },
+      {
+        "row": 1,
+        "column": 1,
+        "rect": [
+          128,
+          160,
+          128,
+          160
+        ],
+        "pivot": [
+          64,
+          152
+        ]
+      },
+      {
+        "row": 1,
+        "column": 2,
+        "rect": [
+          256,
+          160,
+          128,
+          160
+        ],
+        "pivot": [
+          64,
+          152
+        ]
+      },
+      {
+        "row": 1,
+        "column": 3,
+        "rect": [
+          384,
+          160,
+          128,
+          160
+        ],
+        "pivot": [
+          64,
+          152
+        ]
+      },
+      {
+        "row": 1,
+        "column": 4,
+        "rect": [
+          512,
+          160,
+          128,
+          160
+        ],
+        "pivot": [
+          64,
+          152
+        ]
+      },
+      {
+        "row": 1,
+        "column": 5,
+        "rect": [
+          640,
+          160,
+          128,
+          160
+        ],
+        "pivot": [
+          64,
+          152
+        ]
+      },
+      {
+        "row": 1,
+        "column": 6,
+        "rect": [
+          768,
+          160,
+          128,
+          160
+        ],
+        "pivot": [
+          64,
+          152
+        ]
+      },
+      {
+        "row": 1,
+        "column": 7,
+        "rect": [
+          896,
+          160,
+          128,
+          160
+        ],
+        "pivot": [
+          64,
+          152
+        ]
+      },
+      {
+        "row": 2,
+        "column": 0,
+        "rect": [
+          0,
+          320,
+          128,
+          160
+        ],
+        "pivot": [
+          64,
+          152
+        ]
+      },
+      {
+        "row": 2,
+        "column": 1,
+        "rect": [
+          128,
+          320,
+          128,
+          160
+        ],
+        "pivot": [
+          64,
+          152
+        ]
+      },
+      {
+        "row": 2,
+        "column": 2,
+        "rect": [
+          256,
+          320,
+          128,
+          160
+        ],
+        "pivot": [
+          64,
+          152
+        ]
+      },
+      {
+        "row": 2,
+        "column": 3,
+        "rect": [
+          384,
+          320,
+          128,
+          160
+        ],
+        "pivot": [
+          64,
+          152
+        ]
+      },
+      {
+        "row": 2,
+        "column": 4,
+        "rect": [
+          512,
+          320,
+          128,
+          160
+        ],
+        "pivot": [
+          64,
+          152
+        ]
+      },
+      {
+        "row": 2,
+        "column": 5,
+        "rect": [
+          640,
+          320,
+          128,
+          160
+        ],
+        "pivot": [
+          64,
+          152
+        ]
+      },
+      {
+        "row": 2,
+        "column": 6,
+        "rect": [
+          768,
+          320,
+          128,
+          160
+        ],
+        "pivot": [
+          64,
+          152
+        ]
+      },
+      {
+        "row": 2,
+        "column": 7,
+        "rect": [
+          896,
+          320,
+          128,
+          160
+        ],
+        "pivot": [
+          64,
+          152
+        ]
+      },
+      {
+        "row": 3,
+        "column": 0,
+        "rect": [
+          0,
+          480,
+          128,
+          160
+        ],
+        "pivot": [
+          64,
+          152
+        ]
+      },
+      {
+        "row": 3,
+        "column": 1,
+        "rect": [
+          128,
+          480,
+          128,
+          160
+        ],
+        "pivot": [
+          64,
+          152
+        ]
+      },
+      {
+        "row": 3,
+        "column": 2,
+        "rect": [
+          256,
+          480,
+          128,
+          160
+        ],
+        "pivot": [
+          64,
+          152
+        ]
+      },
+      {
+        "row": 3,
+        "column": 3,
+        "rect": [
+          384,
+          480,
+          128,
+          160
+        ],
+        "pivot": [
+          64,
+          152
+        ]
+      },
+      {
+        "row": 3,
+        "column": 4,
+        "rect": [
+          512,
+          480,
+          128,
+          160
+        ],
+        "pivot": [
+          64,
+          152
+        ]
+      },
+      {
+        "row": 3,
+        "column": 5,
+        "rect": [
+          640,
+          480,
+          128,
+          160
+        ],
+        "pivot": [
+          64,
+          152
+        ]
+      },
+      {
+        "row": 3,
+        "column": 6,
+        "rect": [
+          768,
+          480,
+          128,
+          160
+        ],
+        "pivot": [
+          64,
+          152
+        ]
+      },
+      {
+        "row": 3,
+        "column": 7,
+        "rect": [
+          896,
+          480,
+          128,
+          160
+        ],
+        "pivot": [
+          64,
+          152
+        ]
+      }
+    ],
+    "source_art": "art/source/generated_g03/wayfarer_character_master.png"
+  }
+}

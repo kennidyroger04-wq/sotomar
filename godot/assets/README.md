@@ -1,0 +1,11 @@
+# Arte do protótipo
+
+Este protótipo desenha gramado, caminho, árvore, rochas e personagem via GDScript. Ainda não contém imagens importadas. O layout preparado organiza PNGs e spritesheets por função:
+
+- `tiles/terrain/` e `tiles/edges/` — chão e transições isométricas modulares.
+- `props/` — árvores, rochas, construções e demais elementos de cenário.
+- `characters/` — personagens, criaturas, direções e animações.
+- `effects/`, `ui/` e `spritesheets/` — efeitos, interface e folhas de sprites reutilizáveis.
+- `art/source/` na raiz do projeto Godot — fontes editáveis; `art/exports/` — exportações aprovadas.
+
+Registre IDs estáveis, pivôs, tamanho lógico, metadados e licenças. O runtime deve referenciar IDs/recursos, não acoplar as regras a nomes de arquivos exportados.

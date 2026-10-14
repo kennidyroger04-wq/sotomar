@@ -33,7 +33,7 @@
 
 #mainMenuScreen .sotomar-menu__background {
   z-index:-2;
-  background:var(--sotomar-deep-blue) url("../assets/menu/sotomar-fimbria-menu.png") 72% 50% / cover no-repeat;
+  background:var(--sotomar-deep-blue) url("../menu/sotomar-fimbria-menu.png") 72% 50% / cover no-repeat;
   transform-origin:70% 50%;
   animation:sotomar-bg-settle 2.6s cubic-bezier(.2,.7,.2,1) both;
 }

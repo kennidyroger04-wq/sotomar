@@ -1,0 +1,17 @@
+{
+  "boards": [
+    "reviews/g05/wayfarer_animations.png",
+    "reviews/g05/moss_raider_animations.png",
+    "reviews/g05/equipment_layers.png",
+    "reviews/g05/character_proportions.png",
+    "reviews/g05/combat_sequences.png",
+    "reviews/g05/combat_demo_static.png"
+  ],
+  "gifs": [
+    "reviews/g05/wayfarer_attack.gif",
+    "reviews/g05/wayfarer_cast.gif",
+    "reviews/g05/moss_raider_walk.gif",
+    "reviews/g05/moss_raider_attack.gif"
+  ],
+  "note": "Static contact sheets and short GIFs aid review but do not replace Godot playback inspection."
+}

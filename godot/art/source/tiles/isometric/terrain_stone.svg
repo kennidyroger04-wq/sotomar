@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="80" viewBox="0 0 128 80">
+  <defs>
+    <linearGradient id="top" x1="0" y1="0" x2="0.8" y2="1"><stop stop-color="#9fa6a0"/><stop offset="1" stop-color="#69736f"/></linearGradient>
+    <clipPath id="top-diamond"><polygon points="64,0 128,32 64,64 0,32"/></clipPath>
+  </defs>
+  <g stroke="#384c3c" stroke-width="2.2" stroke-linejoin="round">
+    <path d="M0 32 64 64 128 32 128 46 64 78 0 46Z" fill="#69736f"/>
+    <path d="M0 32 64 64 64 78 0 46Z" fill="#69736f" opacity="0.72"/>
+    <polygon points="64,0 128,32 64,64 0,32" fill="url(#top)"/>
+    <g clip-path="url(#top-diamond)" stroke="none"><path d="M31 26l1.6 -4.0l3.2 -1.6l3.2 2.8l-1.6 4.0l-3.6 0Z" fill="#737e78" stroke="#46574f" stroke-width="1"/><path d="M33.8 23.0l2.0 -0.8" stroke="#d1d4c8" stroke-width="1"/><path d="M77 18l1.2 -3.0l2.4 -1.2l2.4 2.1l-1.2 3.0l-2.7 0Z" fill="#737e78" stroke="#46574f" stroke-width="1"/><path d="M79.1 15.5l1.5 -0.6" stroke="#d1d4c8" stroke-width="1"/><path d="M87 38l2.0 -5.0l4.0 -2.0l4.0 3.5l-2.0 5.0l-4.5 0Z" fill="#737e78" stroke="#46574f" stroke-width="1"/><path d="M90.5 34.5l2.5 -1.0" stroke="#d1d4c8" stroke-width="1"/><path d="M49.5 49l1.4 -3.5l2.8 -1.4l2.8 2.4l-1.4 3.5l-3.1 0Z" fill="#737e78" stroke="#46574f" stroke-width="1"/><path d="M52.0 46.2l1.8 -0.7" stroke="#d1d4c8" stroke-width="1"/><path d="M72.5 41l1.0 -2.5l2.0 -1.0l2.0 1.8l-1.0 2.5l-2.2 0Z" fill="#737e78" stroke="#46574f" stroke-width="1"/><path d="M74.2 38.8l1.2 -0.5" stroke="#d1d4c8" stroke-width="1"/><path d="M27.5 44l1.0 -2.5l2.0 -1.0l2.0 1.8l-1.0 2.5l-2.2 0Z" fill="#737e78" stroke="#46574f" stroke-width="1"/><path d="M29.2 41.8l1.2 -0.5" stroke="#d1d4c8" stroke-width="1"/><path d="M61 31l1.2 -3.0l2.4 -1.2l2.4 2.1l-1.2 3.0l-2.7 0Z" fill="#737e78" stroke="#46574f" stroke-width="1"/><path d="M63.1 28.5l1.5 -0.6" stroke="#d1d4c8" stroke-width="1"/></g>
+    <polygon points="64,0 128,32 64,64 0,32" fill="none" stroke="#384c3c" stroke-width="2.2"/>
+    <path d="M8 33 64 61 119 33" fill="none" stroke="#ffffff" stroke-opacity="0.17" stroke-width="1.2"/>
+  </g>
+</svg>

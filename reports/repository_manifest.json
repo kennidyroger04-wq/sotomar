@@ -1,0 +1,898 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-10-14T03:04:13.875250+00:00",
+  "root": "/workspace/sotomar",
+  "summary": {
+    "file_count": 87,
+    "directory_count": 14,
+    "total_size_bytes": 3628744,
+    "asset_file_count": 19,
+    "empty_file_count": 0,
+    "unreadable_file_count": 0
+  },
+  "directories": [
+    "audio",
+    "audio/kenney",
+    "audio/kenney/rpg",
+    "audio/kenney/ui",
+    "css",
+    "docs",
+    "js",
+    "js/core",
+    "js/data",
+    "js/systems",
+    "js/tests",
+    "menu",
+    "reports",
+    "tools"
+  ],
+  "files": [
+    {
+      "path": "audio/kenney/rpg/bookClose.ogg",
+      "type": "file",
+      "size_bytes": 9292,
+      "sha256": "81e976532565f4372abd14e83d2684195fa548d0a28d345de221e56052454f32"
+    },
+    {
+      "path": "audio/kenney/rpg/bookOpen.ogg",
+      "type": "file",
+      "size_bytes": 8273,
+      "sha256": "953390534377222bee89ac8cd9e60a58fdc037c71a4d7c18c43cd647c7f34ba8"
+    },
+    {
+      "path": "audio/kenney/rpg/drawKnife1.ogg",
+      "type": "file",
+      "size_bytes": 11134,
+      "sha256": "276403e72c3b71c47bc24db3083970c23f8e5551ffa78f436f83483c56f3f0bb"
+    },
+    {
+      "path": "audio/kenney/rpg/footstep00.ogg",
+      "type": "file",
+      "size_bytes": 9475,
+      "sha256": "6fe61ef1fc3bcf0e253bf2eb64759db6cb69e2fe452f4d88cc597ecf78a3d601"
+    },
+    {
+      "path": "audio/kenney/rpg/footstep01.ogg",
+      "type": "file",
+      "size_bytes": 9900,
+      "sha256": "313472dba31fd0c855376069fa368bb5a198c27251cc8398ef464578b7047a4c"
+    },
+    {
+      "path": "audio/kenney/rpg/footstep02.ogg",
+      "type": "file",
+      "size_bytes": 9528,
+      "sha256": "2d9575b7dead6e1217ca113991fc5229e9b6d998ea0726ebbb277e7398ab888f"
+    },
+    {
+      "path": "audio/kenney/rpg/footstep03.ogg",
+      "type": "file",
+      "size_bytes": 10559,
+      "sha256": "a86756b9af9f370455ab47844239bb07fd1bee7a113068c91f0fcd9b72703fae"
+    },
+    {
+      "path": "audio/kenney/rpg/handleCoins.ogg",
+      "type": "file",
+      "size_bytes": 25394,
+      "sha256": "8a91f969e932df709df80ee124d86a51389eed9b67f22e5e716bc2bbf60d8dab"
+    },
+    {
+      "path": "audio/kenney/rpg/handleSmallLeather.ogg",
+      "type": "file",
+      "size_bytes": 10492,
+      "sha256": "ae3cbf695aa0a8b98b5a80a835be5a3ccbd5446a24db2235cd4c3cd6fc92ed96"
+    },
+    {
+      "path": "audio/kenney/rpg/knifeSlice.ogg",
+      "type": "file",
+      "size_bytes": 15532,
+      "sha256": "4cd96dc630bed9840c15f1dd2306da2cc56a4da26a5d3f1a03c5a7265ac5e54f"
+    },
+    {
+      "path": "audio/kenney/rpg/knifeSlice2.ogg",
+      "type": "file",
+      "size_bytes": 15099,
+      "sha256": "6c2064d0ef988d1ec3d56868e823ea8823a5cac00f2742560052633529407def"
+    },
+    {
+      "path": "audio/kenney/rpg/License.txt",
+      "type": "file",
+      "size_bytes": 478,
+      "sha256": "5735dfd72cb64cbbceda4ebc00c380c41ca680edb82ff153aa7c9ab97614c539"
+    },
+    {
+      "path": "audio/kenney/rpg/metalClick.ogg",
+      "type": "file",
+      "size_bytes": 13615,
+      "sha256": "9851a69d0c613e13bceef08060ecc4148f098ef487927cbebe270d642398a3b3"
+    },
+    {
+      "path": "audio/kenney/ui/click1.ogg",
+      "type": "file",
+      "size_bytes": 4983,
+      "sha256": "59175ac17cd49a68dd736285738441287636112a84a6f7ce0d89921bda5a5360"
+    },
+    {
+      "path": "audio/kenney/ui/License.txt",
+      "type": "file",
+      "size_bytes": 479,
+      "sha256": "4f88ab3c885c87874834441a0d009cea8942f57461d7b870be65cf4e31362073"
+    },
+    {
+      "path": "audio/kenney/ui/rollover1.ogg",
+      "type": "file",
+      "size_bytes": 5932,
+      "sha256": "4eb47e2e1540c44847b47a89825e21335c820a4e54cacf8c4c1eb5100e36af42"
+    },
+    {
+      "path": "audio/kenney/ui/switch1.ogg",
+      "type": "file",
+      "size_bytes": 6104,
+      "sha256": "efdd1d1e2904fb2d81259cd96bb80101caceae94be02baa4b5310714a6708b19"
+    },
+    {
+      "path": "audio/kenney/ui/switch2.ogg",
+      "type": "file",
+      "size_bytes": 6042,
+      "sha256": "aa8ad6e4745e87c84c24a0335e0e0f8629ccbbc474ccfd544fe07d7f3a1b2280"
+    },
+    {
+      "path": "css/game.css",
+      "type": "file",
+      "size_bytes": 28562,
+      "sha256": "449ab02ff04a35efd4d1eb3327de8e2611ebd96b6b4c5b9242df1cbcfef139ed"
+    },
+    {
+      "path": "css/menu-sotomar.css",
+      "type": "file",
+      "size_bytes": 11158,
+      "sha256": "81819a37a1b98da56be836268b2efc116fe66fe0523948c544e79a6444639218"
+    },
+    {
+      "path": "docs/ASSETS_AUSENTES.md",
+      "type": "file",
+      "size_bytes": 3876,
+      "sha256": "c6865fd6b85e32be50e4bb89c68df0b463758ebbbead578b338ab52df4941c50"
+    },
+    {
+      "path": "docs/AUDITORIA_REPOSITORIO.md",
+      "type": "file",
+      "size_bytes": 5202,
+      "sha256": "cbd27b1c76496739826dda8c14e0b6cf9c662f9309d98315facd2e272d081027"
+    },
+    {
+      "path": "docs/PIPELINE_ASSETS_2D.md",
+      "type": "file",
+      "size_bytes": 3104,
+      "sha256": "617ffcf71d350dfd52bc3563a33d879d98a25abd23c0136bf633251504f8983b"
+    },
+    {
+      "path": "docs/PLANO_GODOT_4.md",
+      "type": "file",
+      "size_bytes": 2872,
+      "sha256": "14c003bad26a45fddbd22bfa572787e12fec2c1ed9a6fa39ab03da0b743313e9"
+    },
+    {
+      "path": "docs/PLANO_SINCRONIZACAO.md",
+      "type": "file",
+      "size_bytes": 2528,
+      "sha256": "f84dbc1d4f301d83aaae2188b587a8b0c4d74a22b0cd35e9588c05cebdb20c73"
+    },
+    {
+      "path": "index.html",
+      "type": "file",
+      "size_bytes": 14624,
+      "sha256": "4074b21775fe0cc073b304be21d71deca9d59456dce77a6d5d55a5fa879abe86"
+    },
+    {
+      "path": "js/core/asset-loader.js",
+      "type": "file",
+      "size_bytes": 2379,
+      "sha256": "79d27f399fd87790f16bf364300126242e02d88af33de7843c4aa84de2b4961a"
+    },
+    {
+      "path": "js/core/canvas-resolution.js",
+      "type": "file",
+      "size_bytes": 1572,
+      "sha256": "888c1d2f3e8af29df60f7680336b122d301700fabc0b36e667bb19966e3d5f70"
+    },
+    {
+      "path": "js/core/clock.js",
+      "type": "file",
+      "size_bytes": 292,
+      "sha256": "a96144079cd1d67d8295e5205af68dd135cafb5cfd0ffbfa5735cf1eb36ef248"
+    },
+    {
+      "path": "js/core/commands.js",
+      "type": "file",
+      "size_bytes": 2845,
+      "sha256": "a77c23c64261e5647c32085c5eb0958d380f75926680a961a9a1c72275a1b795"
+    },
+    {
+      "path": "js/core/constants.js",
+      "type": "file",
+      "size_bytes": 486,
+      "sha256": "ac5f7d1aef0ae1505fa3fa3143a66e991bfb47f78c4269cb8e319428ffe88ae6"
+    },
+    {
+      "path": "js/core/geometry.js",
+      "type": "file",
+      "size_bytes": 2346,
+      "sha256": "d595675f49d735c2d191b68ddad3ac41b9f225956a6519e78787cb58d19781d0"
+    },
+    {
+      "path": "js/core/isometric.js",
+      "type": "file",
+      "size_bytes": 4837,
+      "sha256": "2eb23071c8e30d0841b5ad5f8d8efbe067bbc9ed7c3e68e50bf02b8b3639b406"
+    },
+    {
+      "path": "js/core/persistence.js",
+      "type": "file",
+      "size_bytes": 8098,
+      "sha256": "080e34fd2e12fc964157dd20b2b1c7ea8aabe7bb00ac30a19bc5c9155b44d382"
+    },
+    {
+      "path": "js/core/rng.js",
+      "type": "file",
+      "size_bytes": 361,
+      "sha256": "acf0735a419df07cea49cd378a5c5c3df3d9bab7aab9756937125b15d6543150"
+    },
+    {
+      "path": "js/core/rules.js",
+      "type": "file",
+      "size_bytes": 4510,
+      "sha256": "78616d19a26ead065f56954755146b5e3cf7e18af5d45be7120386b43c0c6f3c"
+    },
+    {
+      "path": "js/core/state.js",
+      "type": "file",
+      "size_bytes": 293,
+      "sha256": "f249c0b2b6aa687ff0a39d8b33aa7676d14a14dd7d0c353d8a5f160571a494ac"
+    },
+    {
+      "path": "js/core/viewport.js",
+      "type": "file",
+      "size_bytes": 1693,
+      "sha256": "ed938e5e083004e279e289087878db27c50509a2c6c243b1ce2699a9686566c3"
+    },
+    {
+      "path": "js/data/abilities.js",
+      "type": "file",
+      "size_bytes": 1961,
+      "sha256": "3bcf67ac69f4e32dfc5e0ae949d029ab8a8f35302f9d804362d95206501115db"
+    },
+    {
+      "path": "js/data/audio-assets.js",
+      "type": "file",
+      "size_bytes": 1770,
+      "sha256": "72556179c86bea207a7c5389a87a119e4434d471ae93936fa4d1e343597e11a9"
+    },
+    {
+      "path": "js/data/character-assets.js",
+      "type": "file",
+      "size_bytes": 3036,
+      "sha256": "41a054ea6c6877de6b1458a450697a21f44ab21a450e180c25693a683ec35c53"
+    },
+    {
+      "path": "js/data/economy.js",
+      "type": "file",
+      "size_bytes": 5709,
+      "sha256": "2d2736d718ba15eeecabab528acf42f45e5f3a9644a2af291199b5405d0a377a"
+    },
+    {
+      "path": "js/data/fimbria-canonical.js",
+      "type": "file",
+      "size_bytes": 17020,
+      "sha256": "acb8aa1cff778090b61d5bcbc744f4b5e4210fce4a0e110c2012aaecfa063da9"
+    },
+    {
+      "path": "js/data/fimbria-runtime.js",
+      "type": "file",
+      "size_bytes": 12099,
+      "sha256": "1160054aca350bb8346ff50c9e68211cd22b24b6ea69de9c1b197f9eddd4c719"
+    },
+    {
+      "path": "js/data/items.js",
+      "type": "file",
+      "size_bytes": 4765,
+      "sha256": "272b74d936ce88be7d703f8e0e1c756dc981f673c7d1288dd4d5802c4bb470a2"
+    },
+    {
+      "path": "js/data/map01-visual.js",
+      "type": "file",
+      "size_bytes": 3851,
+      "sha256": "0e0d5b62710a5935e1776f399beb2ef4e66dd295063755df78efb0518ccff041"
+    },
+    {
+      "path": "js/data/map02-visual.js",
+      "type": "file",
+      "size_bytes": 5190,
+      "sha256": "d49e44e7f95d69f2afc9d0fbbcb14baa8b1c2e048cbe344928270d4ea0997013"
+    },
+    {
+      "path": "js/data/map03-visual.js",
+      "type": "file",
+      "size_bytes": 4080,
+      "sha256": "c39315a335854679f0c6f28e807bdc2961b88bd5b848d3a2b9a43fba1720d8ab"
+    },
+    {
+      "path": "js/data/map04-visual.js",
+      "type": "file",
+      "size_bytes": 5750,
+      "sha256": "8f9c51fd435062e3548b6471ae3fbd631514636a63bda57395c37e95a6c36d3f"
+    },
+    {
+      "path": "js/data/map05-visual.js",
+      "type": "file",
+      "size_bytes": 4698,
+      "sha256": "f79d6ac149ef60085713203ad103226be3fb9d7b402e929932fe53be48ad3564"
+    },
+    {
+      "path": "js/data/map06-visual.js",
+      "type": "file",
+      "size_bytes": 6403,
+      "sha256": "49dce60233ea71dd8e3004033c377b2e251fdd9bbf9db50a2fd1db138ddccbc9"
+    },
+    {
+      "path": "js/data/map07-visual.js",
+      "type": "file",
+      "size_bytes": 6872,
+      "sha256": "d3c8f6c9694800864305d52c48cdfa7df565bf288013e237ca231b38f242e480"
+    },
+    {
+      "path": "js/data/map08-visual.js",
+      "type": "file",
+      "size_bytes": 4426,
+      "sha256": "607a48056624682d1b2b1958e3c2367a839f9c1d6328efbcdf6baea585974cfa"
+    },
+    {
+      "path": "js/data/map09-visual.js",
+      "type": "file",
+      "size_bytes": 4197,
+      "sha256": "b2be70f3a6dce5b943114ee0c816a2310e614ced311cfabc95fe0bdfad925487"
+    },
+    {
+      "path": "js/data/map10-visual.js",
+      "type": "file",
+      "size_bytes": 5740,
+      "sha256": "43e38ec6ed8ed501274dc8d9ba7e60cb7086f6271917daaea8fdb1de0b2773db"
+    },
+    {
+      "path": "js/data/map11-visual.js",
+      "type": "file",
+      "size_bytes": 5899,
+      "sha256": "eeafac3d6808345d14372e42d7c2faad7eae58dd47b677d0a1eba32eba320058"
+    },
+    {
+      "path": "js/data/maps.js",
+      "type": "file",
+      "size_bytes": 781,
+      "sha256": "52931008c6d9036fa72635122810b117067459c74f08b46ddd359f937a85255a"
+    },
+    {
+      "path": "js/data/mobs.js",
+      "type": "file",
+      "size_bytes": 1243,
+      "sha256": "dd1d44216edf6359a8d900bbd2dc9352b89ae4c9b89d77d80f4c5a0cfdfbfe82"
+    },
+    {
+      "path": "js/data/npcs.js",
+      "type": "file",
+      "size_bytes": 1765,
+      "sha256": "363dfc8972e412cdb3f92b105417323577376724af0004356bc6e91148627029"
+    },
+    {
+      "path": "js/data/quests.js",
+      "type": "file",
+      "size_bytes": 1480,
+      "sha256": "fcf889a09d75ff319ffb706b08f32a84b689b23c52e98f4c008d8281d8bc6171"
+    },
+    {
+      "path": "js/data/visual-assets.js",
+      "type": "file",
+      "size_bytes": 5877,
+      "sha256": "2ccf4687b3fc8cb1bfc860005f02b6bf7a43c0277c1fff40078b30a63065f652"
+    },
+    {
+      "path": "js/main.js",
+      "type": "file",
+      "size_bytes": 101292,
+      "sha256": "f8892d6b8e1fd4fe6ee2a669e87b37a9e314effb83b358182c1642b68e0cc981"
+    },
+    {
+      "path": "js/systems/ability-preview.js",
+      "type": "file",
+      "size_bytes": 2076,
+      "sha256": "8fbe9d4fe940c9414505c14151c2130b9913da2a95adb7d7d8f2bbe8b63a3e9e"
+    },
+    {
+      "path": "js/systems/audio-manager.js",
+      "type": "file",
+      "size_bytes": 3331,
+      "sha256": "6282f53376c0dff381c58ee64b798794cdd96274c5aeda9279ab8eff6d46ff02"
+    },
+    {
+      "path": "js/systems/boss.js",
+      "type": "file",
+      "size_bytes": 5060,
+      "sha256": "c5f67d7ff3de3be4a5b245540d9acc688ae4784cab34f292b396bb60a7333d24"
+    },
+    {
+      "path": "js/systems/combat-ai.js",
+      "type": "file",
+      "size_bytes": 7478,
+      "sha256": "641664f1edeb928ca4d0dc5b8642a1d75854a204993f7c04a62426d6ee386eae"
+    },
+    {
+      "path": "js/systems/combat-effects.js",
+      "type": "file",
+      "size_bytes": 12303,
+      "sha256": "f9d69a0fabf3b17a4b0b20e52d4573f397447794454611099ccf86bc9cfe5750"
+    },
+    {
+      "path": "js/systems/consumables.js",
+      "type": "file",
+      "size_bytes": 2676,
+      "sha256": "ead5176bc65e75d4313e711bbfc9c73ac9bec5d5b994e37315496dbb85960d64"
+    },
+    {
+      "path": "js/systems/economy.js",
+      "type": "file",
+      "size_bytes": 3240,
+      "sha256": "7328c507ae318cf15b5549ca2887fe1e936c7463eec30ba69e0260f82e0a7b17"
+    },
+    {
+      "path": "js/systems/entity-animation.js",
+      "type": "file",
+      "size_bytes": 7926,
+      "sha256": "0edc6126cdf9f701f2bc06b25f08f0a76721c23e2547c009d881e3e0972d4e54"
+    },
+    {
+      "path": "js/systems/fimbria-inspections.js",
+      "type": "file",
+      "size_bytes": 3028,
+      "sha256": "fb8e5ada37fa1f94380edca0618322df95515555ba663c7cbe45eabcf1336083"
+    },
+    {
+      "path": "js/systems/fimbria-narrative.js",
+      "type": "file",
+      "size_bytes": 3501,
+      "sha256": "139503748522ba630d2c64b9221aa881c300eccc962d8b87f54601f3e811d38c"
+    },
+    {
+      "path": "js/systems/fimbria-quest-adapter.js",
+      "type": "file",
+      "size_bytes": 1462,
+      "sha256": "853817b17b8fba21278c8f3663cc4a8a46016e952e66d453fc40736e128ba3bd"
+    },
+    {
+      "path": "js/systems/local-authority.js",
+      "type": "file",
+      "size_bytes": 3020,
+      "sha256": "03771dd5f8e127615951018b59995ac3a576c47780148445b8bd77563ed6a2bf"
+    },
+    {
+      "path": "js/systems/map-gates.js",
+      "type": "file",
+      "size_bytes": 876,
+      "sha256": "4b83d70cee6796a212983492df263abd3b44ea384bb2927a321027f7ba0804ed"
+    },
+    {
+      "path": "js/systems/npcs.js",
+      "type": "file",
+      "size_bytes": 5321,
+      "sha256": "fcde786e305fd52426be6e3f3a5e9e0d1d7c4089d92db4ce49a952a5109fdd3f"
+    },
+    {
+      "path": "js/systems/quests.js",
+      "type": "file",
+      "size_bytes": 7749,
+      "sha256": "3a095b7d93c87daf231463e5bca3d01475a2d0202af2ee4bdfb027c3f9fb0204"
+    },
+    {
+      "path": "js/systems/sineira-strategy.js",
+      "type": "file",
+      "size_bytes": 8375,
+      "sha256": "9e28ef6128683bbf7e953b57d7e60ee3307c6a46f47947c6b53b2473525254cb"
+    },
+    {
+      "path": "js/systems/world.js",
+      "type": "file",
+      "size_bytes": 1658,
+      "sha256": "326488d0f148f31418d044e9e22d0c55c76265793c597eaea37d79db8015e978"
+    },
+    {
+      "path": "js/tests/run-tests.js",
+      "type": "file",
+      "size_bytes": 190890,
+      "sha256": "eb087335dd674794ca6f5441c3f9859e524b8b5bf34bfe0996c79ac606a01db3"
+    },
+    {
+      "path": "js/ui-feedback.js",
+      "type": "file",
+      "size_bytes": 2772,
+      "sha256": "ce3dc7a559914a8c865fe32410b71f41fd34bd46ab835ae96ad1bd87d79fb6e7"
+    },
+    {
+      "path": "js/ui-hud.js",
+      "type": "file",
+      "size_bytes": 1193,
+      "sha256": "0d4fb840276f2e6ca5a9723ba1fda53069ef5c617d6f7147bc629d6812e15839"
+    },
+    {
+      "path": "menu/sotomar-fimbria-menu.png",
+      "type": "file",
+      "size_bytes": 2761887,
+      "sha256": "964c3fe5759526e3c4e20de7367f4a0057b66f3b284f798efc22969e9784dbc1"
+    },
+    {
+      "path": "tatico-dofus-like-v11-original.html",
+      "type": "file",
+      "size_bytes": 90594,
+      "sha256": "6bfb9e227ca7526aabbb37c7d51d196bd7018052250c66db8f3f2b0f5247f6e6"
+    },
+    {
+      "path": "tools/compare_inventory.py",
+      "type": "file",
+      "size_bytes": 2441,
+      "sha256": "dc6ee3546a4517595e5099feb73442666af4e975d285889c8704dc26e77bc0fc"
+    },
+    {
+      "path": "tools/inventory.py",
+      "type": "file",
+      "size_bytes": 5646,
+      "sha256": "7eedfc192b8fea1452b2f9098add01c48bfb800479dfcc4d30ea7be7cb750ea3"
+    },
+    {
+      "path": "tools/restore_assets.py",
+      "type": "file",
+      "size_bytes": 4388,
+      "sha256": "4208c35c1a80e1451d8d2128787e8b18e4190bfc5cf8f800e546041a568cea81"
+    }
+  ],
+  "extensions": {
+    ".css": 2,
+    ".html": 2,
+    ".js": 56,
+    ".md": 5,
+    ".ogg": 16,
+    ".png": 1,
+    ".py": 3,
+    ".txt": 2
+  },
+  "size_bytes_by_directory": {
+    ".": 105218,
+    "audio/kenney/rpg": 148771,
+    "audio/kenney/ui": 23540,
+    "css": 39720,
+    "docs": 17582,
+    "js": 105257,
+    "js/core": 29712,
+    "js/data": 114612,
+    "js/systems": 79080,
+    "js/tests": 190890,
+    "menu": 2761887,
+    "tools": 12475
+  },
+  "largest_files": [
+    {
+      "path": "menu/sotomar-fimbria-menu.png",
+      "size_bytes": 2761887
+    },
+    {
+      "path": "js/tests/run-tests.js",
+      "size_bytes": 190890
+    },
+    {
+      "path": "js/main.js",
+      "size_bytes": 101292
+    },
+    {
+      "path": "tatico-dofus-like-v11-original.html",
+      "size_bytes": 90594
+    },
+    {
+      "path": "css/game.css",
+      "size_bytes": 28562
+    },
+    {
+      "path": "audio/kenney/rpg/handleCoins.ogg",
+      "size_bytes": 25394
+    },
+    {
+      "path": "js/data/fimbria-canonical.js",
+      "size_bytes": 17020
+    },
+    {
+      "path": "audio/kenney/rpg/knifeSlice.ogg",
+      "size_bytes": 15532
+    },
+    {
+      "path": "audio/kenney/rpg/knifeSlice2.ogg",
+      "size_bytes": 15099
+    },
+    {
+      "path": "index.html",
+      "size_bytes": 14624
+    },
+    {
+      "path": "audio/kenney/rpg/metalClick.ogg",
+      "size_bytes": 13615
+    },
+    {
+      "path": "js/systems/combat-effects.js",
+      "size_bytes": 12303
+    },
+    {
+      "path": "js/data/fimbria-runtime.js",
+      "size_bytes": 12099
+    },
+    {
+      "path": "css/menu-sotomar.css",
+      "size_bytes": 11158
+    },
+    {
+      "path": "audio/kenney/rpg/drawKnife1.ogg",
+      "size_bytes": 11134
+    },
+    {
+      "path": "audio/kenney/rpg/footstep03.ogg",
+      "size_bytes": 10559
+    },
+    {
+      "path": "audio/kenney/rpg/handleSmallLeather.ogg",
+      "size_bytes": 10492
+    },
+    {
+      "path": "audio/kenney/rpg/footstep01.ogg",
+      "size_bytes": 9900
+    },
+    {
+      "path": "audio/kenney/rpg/footstep02.ogg",
+      "size_bytes": 9528
+    },
+    {
+      "path": "audio/kenney/rpg/footstep00.ogg",
+      "size_bytes": 9475
+    },
+    {
+      "path": "audio/kenney/rpg/bookClose.ogg",
+      "size_bytes": 9292
+    },
+    {
+      "path": "js/systems/sineira-strategy.js",
+      "size_bytes": 8375
+    },
+    {
+      "path": "audio/kenney/rpg/bookOpen.ogg",
+      "size_bytes": 8273
+    },
+    {
+      "path": "js/core/persistence.js",
+      "size_bytes": 8098
+    },
+    {
+      "path": "js/systems/entity-animation.js",
+      "size_bytes": 7926
+    },
+    {
+      "path": "js/systems/quests.js",
+      "size_bytes": 7749
+    },
+    {
+      "path": "js/systems/combat-ai.js",
+      "size_bytes": 7478
+    },
+    {
+      "path": "js/data/map07-visual.js",
+      "size_bytes": 6872
+    },
+    {
+      "path": "js/data/map06-visual.js",
+      "size_bytes": 6403
+    },
+    {
+      "path": "audio/kenney/ui/switch1.ogg",
+      "size_bytes": 6104
+    },
+    {
+      "path": "audio/kenney/ui/switch2.ogg",
+      "size_bytes": 6042
+    },
+    {
+      "path": "audio/kenney/ui/rollover1.ogg",
+      "size_bytes": 5932
+    },
+    {
+      "path": "js/data/map11-visual.js",
+      "size_bytes": 5899
+    },
+    {
+      "path": "js/data/visual-assets.js",
+      "size_bytes": 5877
+    },
+    {
+      "path": "js/data/map04-visual.js",
+      "size_bytes": 5750
+    },
+    {
+      "path": "js/data/map10-visual.js",
+      "size_bytes": 5740
+    },
+    {
+      "path": "js/data/economy.js",
+      "size_bytes": 5709
+    },
+    {
+      "path": "tools/inventory.py",
+      "size_bytes": 5646
+    },
+    {
+      "path": "js/systems/npcs.js",
+      "size_bytes": 5321
+    },
+    {
+      "path": "docs/AUDITORIA_REPOSITORIO.md",
+      "size_bytes": 5202
+    },
+    {
+      "path": "js/data/map02-visual.js",
+      "size_bytes": 5190
+    },
+    {
+      "path": "js/systems/boss.js",
+      "size_bytes": 5060
+    },
+    {
+      "path": "audio/kenney/ui/click1.ogg",
+      "size_bytes": 4983
+    },
+    {
+      "path": "js/core/isometric.js",
+      "size_bytes": 4837
+    },
+    {
+      "path": "js/data/items.js",
+      "size_bytes": 4765
+    },
+    {
+      "path": "js/data/map05-visual.js",
+      "size_bytes": 4698
+    },
+    {
+      "path": "js/core/rules.js",
+      "size_bytes": 4510
+    },
+    {
+      "path": "js/data/map08-visual.js",
+      "size_bytes": 4426
+    },
+    {
+      "path": "tools/restore_assets.py",
+      "size_bytes": 4388
+    },
+    {
+      "path": "js/data/map09-visual.js",
+      "size_bytes": 4197
+    }
+  ],
+  "duplicate_sha256_groups": [],
+  "asset_files": [
+    "audio/kenney/rpg/License.txt",
+    "audio/kenney/rpg/bookClose.ogg",
+    "audio/kenney/rpg/bookOpen.ogg",
+    "audio/kenney/rpg/drawKnife1.ogg",
+    "audio/kenney/rpg/footstep00.ogg",
+    "audio/kenney/rpg/footstep01.ogg",
+    "audio/kenney/rpg/footstep02.ogg",
+    "audio/kenney/rpg/footstep03.ogg",
+    "audio/kenney/rpg/handleCoins.ogg",
+    "audio/kenney/rpg/handleSmallLeather.ogg",
+    "audio/kenney/rpg/knifeSlice.ogg",
+    "audio/kenney/rpg/knifeSlice2.ogg",
+    "audio/kenney/rpg/metalClick.ogg",
+    "audio/kenney/ui/License.txt",
+    "audio/kenney/ui/click1.ogg",
+    "audio/kenney/ui/rollover1.ogg",
+    "audio/kenney/ui/switch1.ogg",
+    "audio/kenney/ui/switch2.ogg",
+    "menu/sotomar-fimbria-menu.png"
+  ],
+  "empty_files": [],
+  "git": {
+    "tracked_paths": [
+      "audio/kenney/rpg/License.txt",
+      "audio/kenney/rpg/bookClose.ogg",
+      "audio/kenney/rpg/bookOpen.ogg",
+      "audio/kenney/rpg/drawKnife1.ogg",
+      "audio/kenney/rpg/footstep00.ogg",
+      "audio/kenney/rpg/footstep01.ogg",
+      "audio/kenney/rpg/footstep02.ogg",
+      "audio/kenney/rpg/footstep03.ogg",
+      "audio/kenney/rpg/handleCoins.ogg",
+      "audio/kenney/rpg/handleSmallLeather.ogg",
+      "audio/kenney/rpg/knifeSlice.ogg",
+      "audio/kenney/rpg/knifeSlice2.ogg",
+      "audio/kenney/rpg/metalClick.ogg",
+      "audio/kenney/ui/License.txt",
+      "audio/kenney/ui/click1.ogg",
+      "audio/kenney/ui/rollover1.ogg",
+      "audio/kenney/ui/switch1.ogg",
+      "audio/kenney/ui/switch2.ogg",
+      "css/game.css",
+      "css/menu-sotomar.css",
+      "index.html",
+      "js/core/asset-loader.js",
+      "js/core/canvas-resolution.js",
+      "js/core/clock.js",
+      "js/core/commands.js",
+      "js/core/constants.js",
+      "js/core/geometry.js",
+      "js/core/isometric.js",
+      "js/core/persistence.js",
+      "js/core/rng.js",
+      "js/core/rules.js",
+      "js/core/state.js",
+      "js/core/viewport.js",
+      "js/data/abilities.js",
+      "js/data/audio-assets.js",
+      "js/data/character-assets.js",
+      "js/data/economy.js",
+      "js/data/fimbria-canonical.js",
+      "js/data/fimbria-runtime.js",
+      "js/data/items.js",
+      "js/data/map01-visual.js",
+      "js/data/map02-visual.js",
+      "js/data/map03-visual.js",
+      "js/data/map04-visual.js",
+      "js/data/map05-visual.js",
+      "js/data/map06-visual.js",
+      "js/data/map07-visual.js",
+      "js/data/map08-visual.js",
+      "js/data/map09-visual.js",
+      "js/data/map10-visual.js",
+      "js/data/map11-visual.js",
+      "js/data/maps.js",
+      "js/data/mobs.js",
+      "js/data/npcs.js",
+      "js/data/quests.js",
+      "js/data/visual-assets.js",
+      "js/main.js",
+      "js/systems/ability-preview.js",
+      "js/systems/audio-manager.js",
+      "js/systems/boss.js",
+      "js/systems/combat-ai.js",
+      "js/systems/combat-effects.js",
+      "js/systems/consumables.js",
+      "js/systems/economy.js",
+      "js/systems/entity-animation.js",
+      "js/systems/fimbria-inspections.js",
+      "js/systems/fimbria-narrative.js",
+      "js/systems/fimbria-quest-adapter.js",
+      "js/systems/local-authority.js",
+      "js/systems/map-gates.js",
+      "js/systems/npcs.js",
+      "js/systems/quests.js",
+      "js/systems/sineira-strategy.js",
+      "js/systems/world.js",
+      "js/tests/run-tests.js",
+      "js/ui-feedback.js",
+      "js/ui-hud.js",
+      "menu/sotomar-fimbria-menu.png",
+      "tatico-dofus-like-v11-original.html"
+    ],
+    "untracked_paths": [
+      "docs/ASSETS_AUSENTES.md",
+      "docs/AUDITORIA_REPOSITORIO.md",
+      "docs/PIPELINE_ASSETS_2D.md",
+      "docs/PLANO_GODOT_4.md",
+      "docs/PLANO_SINCRONIZACAO.md",
+      "reports/repository_manifest.json",
+      "tools/compare_inventory.py",
+      "tools/inventory.py",
+      "tools/restore_assets.py"
+    ],
+    "ignored_paths": [],
+    "note": "Git path lists are empty when this directory is not a readable Git worktree."
+  }
+}

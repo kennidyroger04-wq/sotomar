@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "source": "js/data/npcs.js",
+  "interaction_distance": 1,
+  "npcs": {
+    "guarda_mira": {
+      "name": "Mira, Guarda da Estrada",
+      "role": "QUEST",
+      "greeting": "A estrada precisa de olhos atentos. Posso confiar uma tarefa a você?",
+      "states": {
+        "available": "Há trabalho para quem quer ajudar a vila.",
+        "active": "Continue avançando; ainda há trabalho pela estrada.",
+        "ready": "Você voltou com tudo o que era necessário. Vamos registrar seu feito.",
+        "completed": "A vila agradece sua ajuda. Fique atento a novos chamados."
+      }
+    },
+    "exploradora_lia": {
+      "name": "Lia, Exploradora",
+      "role": "GENERIC",
+      "greeting": "As trilhas mudam depois da ponte. Posso compartilhar o que aprendi.",
+      "states": {
+        "active": "Você encontrou o caminho. Conte-me o que viu por lá.",
+        "completed": "Seu relato já foi anotado. Boa caminhada."
+      }
+    },
+    "curandeiro_nilo": {
+      "name": "Nilo, Curandeiro",
+      "role": "HEALER",
+      "greeting": "Minhas ervas estão prontas. Deseja recuperar suas forças?",
+      "states": {
+        "healed": "Pronto. Respire fundo e siga com cuidado.",
+        "full": "Você já está em boas condições."
+      }
+    },
+    "mercador_bram": {
+      "name": "Bram, Comerciante",
+      "role": "MERCHANT",
+      "greeting": "Estou organizando minhas mercadorias. Volte em breve; ainda não negocio por aqui.",
+      "states": {}
+    }
+  }
+}

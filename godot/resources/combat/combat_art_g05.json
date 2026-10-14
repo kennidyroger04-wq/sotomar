@@ -1,0 +1,3716 @@
+{
+  "package": "Sotomar/Fímbria original combat art G05",
+  "status": "prototype_requires_visual_review",
+  "directions": [
+    "se",
+    "sw",
+    "nw",
+    "ne"
+  ],
+  "frame_size": [
+    128,
+    160
+  ],
+  "pivot": [
+    64,
+    152
+  ],
+  "characters": {
+    "wayfarer": {
+      "base_sheet": "res://assets/characters/wayfarer_v1/wayfarer_v1.png",
+      "existing_actions": {
+        "idle": {
+          "fps": 4,
+          "loop": true,
+          "path": "res://assets/characters/wayfarer_v1/wayfarer_v1.png"
+        },
+        "walk": {
+          "fps": 8,
+          "loop": true,
+          "path": "res://assets/characters/wayfarer_v1/wayfarer_v1.png"
+        }
+      },
+      "actions": {
+        "attack": {
+          "path": "res://assets/characters/wayfarer_g05/wayfarer_attack.png",
+          "frame_size": [
+            128,
+            160
+          ],
+          "rows": 4,
+          "columns": 4,
+          "directions": [
+            "se",
+            "sw",
+            "nw",
+            "ne"
+          ],
+          "fps": 6,
+          "loop": false,
+          "pivot": [
+            64,
+            152
+          ],
+          "frames": [
+            {
+              "direction": "se",
+              "frame": 0,
+              "source_cell": [
+                0,
+                0,
+                315,
+                312
+              ],
+              "source_alpha_bounds": [
+                53,
+                43,
+                282,
+                301
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "se",
+              "frame": 1,
+              "source_cell": [
+                315,
+                0,
+                630,
+                312
+              ],
+              "source_alpha_bounds": [
+                39,
+                3,
+                258,
+                312
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "se",
+              "frame": 2,
+              "source_cell": [
+                630,
+                0,
+                946,
+                312
+              ],
+              "source_alpha_bounds": [
+                41,
+                49,
+                316,
+                303
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "se",
+              "frame": 3,
+              "source_cell": [
+                946,
+                0,
+                1261,
+                312
+              ],
+              "source_alpha_bounds": [
+                0,
+                42,
+                273,
+                302
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "sw",
+              "frame": 0,
+              "source_cell": [
+                0,
+                312,
+                315,
+                624
+              ],
+              "source_alpha_bounds": [
+                16,
+                40,
+                285,
+                298
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "sw",
+              "frame": 1,
+              "source_cell": [
+                315,
+                312,
+                630,
+                624
+              ],
+              "source_alpha_bounds": [
+                52,
+                0,
+                315,
+                312
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "sw",
+              "frame": 2,
+              "source_cell": [
+                630,
+                312,
+                946,
+                624
+              ],
+              "source_alpha_bounds": [
+                0,
+                40,
+                316,
+                300
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "sw",
+              "frame": 3,
+              "source_cell": [
+                946,
+                312,
+                1261,
+                624
+              ],
+              "source_alpha_bounds": [
+                0,
+                40,
+                285,
+                298
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "nw",
+              "frame": 0,
+              "source_cell": [
+                23,
+                624,
+                292,
+                935
+              ],
+              "source_alpha_bounds": [
+                0,
+                34,
+                269,
+                285
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "nw",
+              "frame": 1,
+              "source_cell": [
+                372,
+                624,
+                614,
+                935
+              ],
+              "source_alpha_bounds": [
+                0,
+                0,
+                242,
+                311
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "nw",
+              "frame": 2,
+              "source_cell": [
+                671,
+                624,
+                969,
+                935
+              ],
+              "source_alpha_bounds": [
+                0,
+                33,
+                298,
+                286
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "nw",
+              "frame": 3,
+              "source_cell": [
+                986,
+                624,
+                1229,
+                935
+              ],
+              "source_alpha_bounds": [
+                0,
+                34,
+                243,
+                283
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "ne",
+              "frame": 0,
+              "source_cell": [
+                0,
+                935,
+                315,
+                1247
+              ],
+              "source_alpha_bounds": [
+                40,
+                17,
+                315,
+                279
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "ne",
+              "frame": 1,
+              "source_cell": [
+                315,
+                935,
+                630,
+                1247
+              ],
+              "source_alpha_bounds": [
+                26,
+                0,
+                255,
+                277
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "ne",
+              "frame": 2,
+              "source_cell": [
+                630,
+                935,
+                946,
+                1247
+              ],
+              "source_alpha_bounds": [
+                11,
+                16,
+                316,
+                278
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "ne",
+              "frame": 3,
+              "source_cell": [
+                946,
+                935,
+                1261,
+                1247
+              ],
+              "source_alpha_bounds": [
+                0,
+                16,
+                287,
+                279
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            }
+          ],
+          "source": "res://art/source/generated_g05/wayfarer_attack_master.png"
+        },
+        "hurt": {
+          "path": "res://assets/characters/wayfarer_g05/wayfarer_hurt.png",
+          "frame_size": [
+            128,
+            160
+          ],
+          "rows": 4,
+          "columns": 4,
+          "directions": [
+            "se",
+            "sw",
+            "nw",
+            "ne"
+          ],
+          "fps": 6,
+          "loop": false,
+          "pivot": [
+            64,
+            152
+          ],
+          "frames": [
+            {
+              "direction": "se",
+              "frame": 0,
+              "source_cell": [
+                30,
+                0,
+                249,
+                308
+              ],
+              "source_alpha_bounds": [
+                0,
+                18,
+                219,
+                308
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "se",
+              "frame": 1,
+              "source_cell": [
+                358,
+                0,
+                608,
+                308
+              ],
+              "source_alpha_bounds": [
+                0,
+                26,
+                250,
+                308
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "se",
+              "frame": 2,
+              "source_cell": [
+                664,
+                0,
+                913,
+                308
+              ],
+              "source_alpha_bounds": [
+                0,
+                22,
+                249,
+                308
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "se",
+              "frame": 3,
+              "source_cell": [
+                999,
+                0,
+                1210,
+                308
+              ],
+              "source_alpha_bounds": [
+                0,
+                18,
+                211,
+                308
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "sw",
+              "frame": 0,
+              "source_cell": [
+                59,
+                308,
+                282,
+                615
+              ],
+              "source_alpha_bounds": [
+                0,
+                15,
+                223,
+                304
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "sw",
+              "frame": 1,
+              "source_cell": [
+                368,
+                308,
+                619,
+                615
+              ],
+              "source_alpha_bounds": [
+                0,
+                0,
+                251,
+                303
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "sw",
+              "frame": 2,
+              "source_cell": [
+                684,
+                308,
+                941,
+                615
+              ],
+              "source_alpha_bounds": [
+                0,
+                21,
+                257,
+                303
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "sw",
+              "frame": 3,
+              "source_cell": [
+                1018,
+                308,
+                1241,
+                615
+              ],
+              "source_alpha_bounds": [
+                0,
+                14,
+                223,
+                304
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "nw",
+              "frame": 0,
+              "source_cell": [
+                59,
+                615,
+                280,
+                922
+              ],
+              "source_alpha_bounds": [
+                0,
+                12,
+                221,
+                297
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "nw",
+              "frame": 1,
+              "source_cell": [
+                365,
+                615,
+                621,
+                922
+              ],
+              "source_alpha_bounds": [
+                0,
+                24,
+                256,
+                297
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "nw",
+              "frame": 2,
+              "source_cell": [
+                695,
+                615,
+                947,
+                922
+              ],
+              "source_alpha_bounds": [
+                0,
+                19,
+                252,
+                297
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "nw",
+              "frame": 3,
+              "source_cell": [
+                1018,
+                615,
+                1239,
+                922
+              ],
+              "source_alpha_bounds": [
+                0,
+                12,
+                221,
+                297
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "ne",
+              "frame": 0,
+              "source_cell": [
+                32,
+                922,
+                256,
+                1230
+              ],
+              "source_alpha_bounds": [
+                0,
+                1,
+                224,
+                291
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "ne",
+              "frame": 1,
+              "source_cell": [
+                353,
+                922,
+                587,
+                1230
+              ],
+              "source_alpha_bounds": [
+                0,
+                5,
+                234,
+                291
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "ne",
+              "frame": 2,
+              "source_cell": [
+                657,
+                922,
+                905,
+                1230
+              ],
+              "source_alpha_bounds": [
+                0,
+                5,
+                248,
+                291
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "ne",
+              "frame": 3,
+              "source_cell": [
+                990,
+                922,
+                1215,
+                1230
+              ],
+              "source_alpha_bounds": [
+                0,
+                1,
+                225,
+                291
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            }
+          ],
+          "source": "res://art/source/generated_g05/wayfarer_hurt_master.png"
+        },
+        "defend": {
+          "path": "res://assets/characters/wayfarer_g05/wayfarer_defend.png",
+          "frame_size": [
+            128,
+            160
+          ],
+          "rows": 4,
+          "columns": 4,
+          "directions": [
+            "se",
+            "sw",
+            "nw",
+            "ne"
+          ],
+          "fps": 5,
+          "loop": false,
+          "pivot": [
+            64,
+            152
+          ],
+          "frames": [
+            {
+              "direction": "se",
+              "frame": 0,
+              "source_cell": [
+                304,
+                0,
+                500,
+                248
+              ],
+              "source_alpha_bounds": [
+                0,
+                6,
+                196,
+                246
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "se",
+              "frame": 1,
+              "source_cell": [
+                558,
+                0,
+                754,
+                248
+              ],
+              "source_alpha_bounds": [
+                0,
+                6,
+                196,
+                244
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "se",
+              "frame": 2,
+              "source_cell": [
+                809,
+                0,
+                1010,
+                248
+              ],
+              "source_alpha_bounds": [
+                0,
+                6,
+                201,
+                245
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "se",
+              "frame": 3,
+              "source_cell": [
+                1069,
+                0,
+                1264,
+                248
+              ],
+              "source_alpha_bounds": [
+                0,
+                6,
+                195,
+                246
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "sw",
+              "frame": 0,
+              "source_cell": [
+                325,
+                248,
+                517,
+                496
+              ],
+              "source_alpha_bounds": [
+                0,
+                2,
+                192,
+                245
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "sw",
+              "frame": 1,
+              "source_cell": [
+                574,
+                248,
+                768,
+                496
+              ],
+              "source_alpha_bounds": [
+                0,
+                2,
+                194,
+                245
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "sw",
+              "frame": 2,
+              "source_cell": [
+                817,
+                248,
+                1024,
+                496
+              ],
+              "source_alpha_bounds": [
+                0,
+                4,
+                207,
+                244
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "sw",
+              "frame": 3,
+              "source_cell": [
+                1088,
+                248,
+                1278,
+                496
+              ],
+              "source_alpha_bounds": [
+                0,
+                2,
+                190,
+                245
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "nw",
+              "frame": 0,
+              "source_cell": [
+                309,
+                496,
+                522,
+                744
+              ],
+              "source_alpha_bounds": [
+                0,
+                4,
+                213,
+                248
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "nw",
+              "frame": 1,
+              "source_cell": [
+                561,
+                496,
+                774,
+                744
+              ],
+              "source_alpha_bounds": [
+                0,
+                4,
+                213,
+                248
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "nw",
+              "frame": 2,
+              "source_cell": [
+                817,
+                496,
+                1028,
+                744
+              ],
+              "source_alpha_bounds": [
+                0,
+                5,
+                211,
+                248
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "nw",
+              "frame": 3,
+              "source_cell": [
+                1073,
+                496,
+                1280,
+                744
+              ],
+              "source_alpha_bounds": [
+                0,
+                4,
+                207,
+                248
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "ne",
+              "frame": 0,
+              "source_cell": [
+                301,
+                744,
+                509,
+                992
+              ],
+              "source_alpha_bounds": [
+                0,
+                0,
+                208,
+                234
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "ne",
+              "frame": 1,
+              "source_cell": [
+                553,
+                744,
+                763,
+                992
+              ],
+              "source_alpha_bounds": [
+                0,
+                0,
+                210,
+                234
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "ne",
+              "frame": 2,
+              "source_cell": [
+                810,
+                744,
+                1020,
+                992
+              ],
+              "source_alpha_bounds": [
+                0,
+                0,
+                210,
+                235
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "ne",
+              "frame": 3,
+              "source_cell": [
+                1064,
+                744,
+                1260,
+                992
+              ],
+              "source_alpha_bounds": [
+                0,
+                0,
+                196,
+                234
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            }
+          ],
+          "source": "res://art/source/generated_g05/wayfarer_defend_master.png"
+        },
+        "cast": {
+          "path": "res://assets/characters/wayfarer_g05/wayfarer_cast.png",
+          "frame_size": [
+            128,
+            160
+          ],
+          "rows": 4,
+          "columns": 4,
+          "directions": [
+            "se",
+            "sw",
+            "nw",
+            "ne"
+          ],
+          "fps": 6,
+          "loop": false,
+          "pivot": [
+            64,
+            152
+          ],
+          "frames": [
+            {
+              "direction": "se",
+              "frame": 0,
+              "source_cell": [
+                45,
+                0,
+                255,
+                312
+              ],
+              "source_alpha_bounds": [
+                0,
+                13,
+                210,
+                301
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "se",
+              "frame": 1,
+              "source_cell": [
+                351,
+                0,
+                577,
+                312
+              ],
+              "source_alpha_bounds": [
+                0,
+                15,
+                226,
+                301
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "se",
+              "frame": 2,
+              "source_cell": [
+                642,
+                0,
+                968,
+                312
+              ],
+              "source_alpha_bounds": [
+                0,
+                21,
+                326,
+                301
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "se",
+              "frame": 3,
+              "source_cell": [
+                991,
+                0,
+                1187,
+                312
+              ],
+              "source_alpha_bounds": [
+                0,
+                14,
+                196,
+                301
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "sw",
+              "frame": 0,
+              "source_cell": [
+                68,
+                312,
+                276,
+                623
+              ],
+              "source_alpha_bounds": [
+                0,
+                11,
+                208,
+                302
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "sw",
+              "frame": 1,
+              "source_cell": [
+                356,
+                312,
+                580,
+                623
+              ],
+              "source_alpha_bounds": [
+                0,
+                11,
+                224,
+                301
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "sw",
+              "frame": 2,
+              "source_cell": [
+                599,
+                312,
+                962,
+                623
+              ],
+              "source_alpha_bounds": [
+                0,
+                16,
+                363,
+                300
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "sw",
+              "frame": 3,
+              "source_cell": [
+                1019,
+                312,
+                1231,
+                623
+              ],
+              "source_alpha_bounds": [
+                0,
+                9,
+                212,
+                302
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "nw",
+              "frame": 0,
+              "source_cell": [
+                73,
+                623,
+                282,
+                934
+              ],
+              "source_alpha_bounds": [
+                0,
+                8,
+                209,
+                311
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "nw",
+              "frame": 1,
+              "source_cell": [
+                330,
+                623,
+                582,
+                934
+              ],
+              "source_alpha_bounds": [
+                0,
+                15,
+                252,
+                311
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "nw",
+              "frame": 2,
+              "source_cell": [
+                640,
+                623,
+                992,
+                934
+              ],
+              "source_alpha_bounds": [
+                0,
+                15,
+                352,
+                311
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "nw",
+              "frame": 3,
+              "source_cell": [
+                1019,
+                623,
+                1230,
+                934
+              ],
+              "source_alpha_bounds": [
+                0,
+                10,
+                211,
+                311
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "ne",
+              "frame": 0,
+              "source_cell": [
+                51,
+                934,
+                248,
+                1246
+              ],
+              "source_alpha_bounds": [
+                0,
+                0,
+                197,
+                283
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "ne",
+              "frame": 1,
+              "source_cell": [
+                347,
+                934,
+                579,
+                1246
+              ],
+              "source_alpha_bounds": [
+                0,
+                0,
+                232,
+                283
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "ne",
+              "frame": 2,
+              "source_cell": [
+                637,
+                934,
+                978,
+                1246
+              ],
+              "source_alpha_bounds": [
+                0,
+                0,
+                341,
+                283
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "ne",
+              "frame": 3,
+              "source_cell": [
+                991,
+                934,
+                1193,
+                1246
+              ],
+              "source_alpha_bounds": [
+                0,
+                0,
+                202,
+                283
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            }
+          ],
+          "source": "res://art/source/generated_g05/wayfarer_cast_master.png"
+        },
+        "death": {
+          "path": "res://assets/characters/wayfarer_g05/wayfarer_death.png",
+          "frame_size": [
+            128,
+            160
+          ],
+          "rows": 4,
+          "columns": 4,
+          "directions": [
+            "se",
+            "sw",
+            "nw",
+            "ne"
+          ],
+          "fps": 4,
+          "loop": false,
+          "pivot": [
+            64,
+            152
+          ],
+          "frames": [
+            {
+              "direction": "se",
+              "frame": 0,
+              "source_cell": [
+                54,
+                0,
+                291,
+                312
+              ],
+              "source_alpha_bounds": [
+                0,
+                35,
+                237,
+                312
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "se",
+              "frame": 1,
+              "source_cell": [
+                371,
+                0,
+                616,
+                312
+              ],
+              "source_alpha_bounds": [
+                0,
+                80,
+                245,
+                312
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "se",
+              "frame": 2,
+              "source_cell": [
+                668,
+                0,
+                911,
+                312
+              ],
+              "source_alpha_bounds": [
+                0,
+                115,
+                243,
+                312
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "se",
+              "frame": 3,
+              "source_cell": [
+                991,
+                0,
+                1208,
+                312
+              ],
+              "source_alpha_bounds": [
+                0,
+                141,
+                217,
+                312
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "sw",
+              "frame": 0,
+              "source_cell": [
+                59,
+                312,
+                309,
+                623
+              ],
+              "source_alpha_bounds": [
+                0,
+                0,
+                250,
+                311
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "sw",
+              "frame": 1,
+              "source_cell": [
+                378,
+                312,
+                625,
+                623
+              ],
+              "source_alpha_bounds": [
+                0,
+                0,
+                247,
+                308
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "sw",
+              "frame": 2,
+              "source_cell": [
+                700,
+                312,
+                935,
+                623
+              ],
+              "source_alpha_bounds": [
+                0,
+                0,
+                235,
+                311
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "sw",
+              "frame": 3,
+              "source_cell": [
+                1019,
+                312,
+                1231,
+                623
+              ],
+              "source_alpha_bounds": [
+                0,
+                0,
+                212,
+                308
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "nw",
+              "frame": 0,
+              "source_cell": [
+                60,
+                623,
+                309,
+                934
+              ],
+              "source_alpha_bounds": [
+                0,
+                0,
+                249,
+                311
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "nw",
+              "frame": 1,
+              "source_cell": [
+                374,
+                623,
+                620,
+                934
+              ],
+              "source_alpha_bounds": [
+                0,
+                39,
+                246,
+                287
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "nw",
+              "frame": 2,
+              "source_cell": [
+                677,
+                623,
+                916,
+                934
+              ],
+              "source_alpha_bounds": [
+                0,
+                0,
+                239,
+                284
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "nw",
+              "frame": 3,
+              "source_cell": [
+                998,
+                623,
+                1204,
+                934
+              ],
+              "source_alpha_bounds": [
+                0,
+                121,
+                206,
+                284
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "ne",
+              "frame": 0,
+              "source_cell": [
+                55,
+                934,
+                304,
+                1246
+              ],
+              "source_alpha_bounds": [
+                0,
+                0,
+                249,
+                270
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "ne",
+              "frame": 1,
+              "source_cell": [
+                359,
+                934,
+                613,
+                1246
+              ],
+              "source_alpha_bounds": [
+                0,
+                21,
+                254,
+                268
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "ne",
+              "frame": 2,
+              "source_cell": [
+                669,
+                934,
+                911,
+                1246
+              ],
+              "source_alpha_bounds": [
+                0,
+                55,
+                242,
+                268
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "ne",
+              "frame": 3,
+              "source_cell": [
+                994,
+                934,
+                1214,
+                1246
+              ],
+              "source_alpha_bounds": [
+                0,
+                80,
+                220,
+                265
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            }
+          ],
+          "source": "res://art/source/generated_g05/wayfarer_death_master_v2.png"
+        }
+      }
+    },
+    "moss_raider": {
+      "description": "Original moss goblin raider, shorter and stockier than the Wayfarer.",
+      "scale": 0.82,
+      "actions": {
+        "idle": {
+          "path": "res://assets/characters/moss_raider_g05/moss_raider_idle.png",
+          "frame_size": [
+            128,
+            160
+          ],
+          "rows": 4,
+          "columns": 4,
+          "directions": [
+            "se",
+            "sw",
+            "nw",
+            "ne"
+          ],
+          "fps": 4,
+          "loop": true,
+          "pivot": [
+            64,
+            152
+          ],
+          "frames": [
+            {
+              "direction": "se",
+              "frame": 0,
+              "source_cell": [
+                48,
+                0,
+                312,
+                274
+              ],
+              "source_alpha_bounds": [
+                0,
+                18,
+                264,
+                257
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "se",
+              "frame": 1,
+              "source_cell": [
+                412,
+                0,
+                674,
+                274
+              ],
+              "source_alpha_bounds": [
+                0,
+                18,
+                262,
+                255
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "se",
+              "frame": 2,
+              "source_cell": [
+                772,
+                0,
+                1036,
+                274
+              ],
+              "source_alpha_bounds": [
+                0,
+                22,
+                264,
+                258
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "se",
+              "frame": 3,
+              "source_cell": [
+                1129,
+                0,
+                1388,
+                274
+              ],
+              "source_alpha_bounds": [
+                0,
+                17,
+                259,
+                256
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "sw",
+              "frame": 0,
+              "source_cell": [
+                39,
+                274,
+                297,
+                548
+              ],
+              "source_alpha_bounds": [
+                0,
+                5,
+                258,
+                245
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "sw",
+              "frame": 1,
+              "source_cell": [
+                404,
+                274,
+                663,
+                548
+              ],
+              "source_alpha_bounds": [
+                0,
+                7,
+                259,
+                246
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "sw",
+              "frame": 2,
+              "source_cell": [
+                762,
+                274,
+                1024,
+                548
+              ],
+              "source_alpha_bounds": [
+                0,
+                12,
+                262,
+                246
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "sw",
+              "frame": 3,
+              "source_cell": [
+                1117,
+                274,
+                1376,
+                548
+              ],
+              "source_alpha_bounds": [
+                0,
+                5,
+                259,
+                245
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "nw",
+              "frame": 0,
+              "source_cell": [
+                53,
+                548,
+                322,
+                822
+              ],
+              "source_alpha_bounds": [
+                0,
+                3,
+                269,
+                274
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "nw",
+              "frame": 1,
+              "source_cell": [
+                407,
+                548,
+                683,
+                822
+              ],
+              "source_alpha_bounds": [
+                0,
+                3,
+                276,
+                274
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "nw",
+              "frame": 2,
+              "source_cell": [
+                769,
+                548,
+                1044,
+                822
+              ],
+              "source_alpha_bounds": [
+                0,
+                5,
+                275,
+                274
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "nw",
+              "frame": 3,
+              "source_cell": [
+                1127,
+                548,
+                1401,
+                822
+              ],
+              "source_alpha_bounds": [
+                0,
+                3,
+                274,
+                274
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "ne",
+              "frame": 0,
+              "source_cell": [
+                59,
+                822,
+                320,
+                1096
+              ],
+              "source_alpha_bounds": [
+                0,
+                0,
+                261,
+                232
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "ne",
+              "frame": 1,
+              "source_cell": [
+                413,
+                822,
+                678,
+                1096
+              ],
+              "source_alpha_bounds": [
+                0,
+                0,
+                265,
+                232
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "ne",
+              "frame": 2,
+              "source_cell": [
+                771,
+                822,
+                1035,
+                1096
+              ],
+              "source_alpha_bounds": [
+                0,
+                0,
+                264,
+                233
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "ne",
+              "frame": 3,
+              "source_cell": [
+                1131,
+                822,
+                1397,
+                1096
+              ],
+              "source_alpha_bounds": [
+                0,
+                0,
+                266,
+                232
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            }
+          ],
+          "source": "res://art/source/generated_g05/moss_raider_idle_master.png"
+        },
+        "walk": {
+          "path": "res://assets/characters/moss_raider_g05/moss_raider_walk.png",
+          "frame_size": [
+            128,
+            160
+          ],
+          "rows": 4,
+          "columns": 4,
+          "directions": [
+            "se",
+            "sw",
+            "nw",
+            "ne"
+          ],
+          "fps": 8,
+          "loop": true,
+          "pivot": [
+            64,
+            152
+          ],
+          "frames": [
+            {
+              "direction": "se",
+              "frame": 0,
+              "source_cell": [
+                56,
+                0,
+                351,
+                274
+              ],
+              "source_alpha_bounds": [
+                0,
+                13,
+                295,
+                267
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "se",
+              "frame": 1,
+              "source_cell": [
+                413,
+                0,
+                697,
+                274
+              ],
+              "source_alpha_bounds": [
+                0,
+                13,
+                284,
+                268
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "se",
+              "frame": 2,
+              "source_cell": [
+                765,
+                0,
+                1049,
+                274
+              ],
+              "source_alpha_bounds": [
+                0,
+                13,
+                284,
+                267
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "se",
+              "frame": 3,
+              "source_cell": [
+                1123,
+                0,
+                1397,
+                274
+              ],
+              "source_alpha_bounds": [
+                0,
+                13,
+                274,
+                267
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "sw",
+              "frame": 0,
+              "source_cell": [
+                31,
+                274,
+                324,
+                548
+              ],
+              "source_alpha_bounds": [
+                0,
+                3,
+                293,
+                274
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "sw",
+              "frame": 1,
+              "source_cell": [
+                389,
+                274,
+                686,
+                548
+              ],
+              "source_alpha_bounds": [
+                0,
+                2,
+                297,
+                274
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "sw",
+              "frame": 2,
+              "source_cell": [
+                748,
+                274,
+                1046,
+                548
+              ],
+              "source_alpha_bounds": [
+                0,
+                2,
+                298,
+                274
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "sw",
+              "frame": 3,
+              "source_cell": [
+                1111,
+                274,
+                1395,
+                548
+              ],
+              "source_alpha_bounds": [
+                0,
+                2,
+                284,
+                274
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "nw",
+              "frame": 0,
+              "source_cell": [
+                41,
+                548,
+                342,
+                822
+              ],
+              "source_alpha_bounds": [
+                0,
+                0,
+                301,
+                274
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "nw",
+              "frame": 1,
+              "source_cell": [
+                409,
+                548,
+                700,
+                822
+              ],
+              "source_alpha_bounds": [
+                0,
+                0,
+                291,
+                274
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "nw",
+              "frame": 2,
+              "source_cell": [
+                764,
+                548,
+                1063,
+                822
+              ],
+              "source_alpha_bounds": [
+                0,
+                0,
+                299,
+                274
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "nw",
+              "frame": 3,
+              "source_cell": [
+                1121,
+                548,
+                1414,
+                822
+              ],
+              "source_alpha_bounds": [
+                0,
+                0,
+                293,
+                274
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "ne",
+              "frame": 0,
+              "source_cell": [
+                46,
+                822,
+                330,
+                1096
+              ],
+              "source_alpha_bounds": [
+                0,
+                0,
+                284,
+                235
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "ne",
+              "frame": 1,
+              "source_cell": [
+                411,
+                822,
+                703,
+                1096
+              ],
+              "source_alpha_bounds": [
+                0,
+                0,
+                292,
+                235
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "ne",
+              "frame": 2,
+              "source_cell": [
+                764,
+                822,
+                1055,
+                1096
+              ],
+              "source_alpha_bounds": [
+                0,
+                0,
+                291,
+                234
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "ne",
+              "frame": 3,
+              "source_cell": [
+                1127,
+                822,
+                1403,
+                1096
+              ],
+              "source_alpha_bounds": [
+                0,
+                0,
+                276,
+                234
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            }
+          ],
+          "source": "res://art/source/generated_g05/moss_raider_walk_master.png"
+        },
+        "attack": {
+          "path": "res://assets/characters/moss_raider_g05/moss_raider_attack.png",
+          "frame_size": [
+            128,
+            160
+          ],
+          "rows": 4,
+          "columns": 4,
+          "directions": [
+            "se",
+            "sw",
+            "nw",
+            "ne"
+          ],
+          "fps": 6,
+          "loop": false,
+          "pivot": [
+            64,
+            152
+          ],
+          "frames": [
+            {
+              "direction": "se",
+              "frame": 0,
+              "source_cell": [
+                47,
+                0,
+                315,
+                274
+              ],
+              "source_alpha_bounds": [
+                0,
+                30,
+                268,
+                261
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "se",
+              "frame": 1,
+              "source_cell": [
+                362,
+                0,
+                635,
+                274
+              ],
+              "source_alpha_bounds": [
+                0,
+                12,
+                273,
+                274
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "se",
+              "frame": 2,
+              "source_cell": [
+                743,
+                0,
+                1085,
+                274
+              ],
+              "source_alpha_bounds": [
+                0,
+                50,
+                342,
+                262
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "se",
+              "frame": 3,
+              "source_cell": [
+                1111,
+                0,
+                1417,
+                274
+              ],
+              "source_alpha_bounds": [
+                0,
+                50,
+                306,
+                263
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "sw",
+              "frame": 0,
+              "source_cell": [
+                48,
+                274,
+                309,
+                548
+              ],
+              "source_alpha_bounds": [
+                0,
+                23,
+                261,
+                251
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "sw",
+              "frame": 1,
+              "source_cell": [
+                413,
+                274,
+                656,
+                548
+              ],
+              "source_alpha_bounds": [
+                0,
+                0,
+                243,
+                274
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "sw",
+              "frame": 2,
+              "source_cell": [
+                733,
+                274,
+                1073,
+                548
+              ],
+              "source_alpha_bounds": [
+                0,
+                48,
+                340,
+                251
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "sw",
+              "frame": 3,
+              "source_cell": [
+                1106,
+                274,
+                1401,
+                548
+              ],
+              "source_alpha_bounds": [
+                0,
+                47,
+                295,
+                253
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "nw",
+              "frame": 0,
+              "source_cell": [
+                53,
+                548,
+                296,
+                822
+              ],
+              "source_alpha_bounds": [
+                0,
+                11,
+                243,
+                243
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "nw",
+              "frame": 1,
+              "source_cell": [
+                418,
+                548,
+                663,
+                822
+              ],
+              "source_alpha_bounds": [
+                0,
+                0,
+                245,
+                274
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "nw",
+              "frame": 2,
+              "source_cell": [
+                763,
+                548,
+                1064,
+                822
+              ],
+              "source_alpha_bounds": [
+                0,
+                35,
+                301,
+                248
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "nw",
+              "frame": 3,
+              "source_cell": [
+                1124,
+                548,
+                1408,
+                822
+              ],
+              "source_alpha_bounds": [
+                0,
+                25,
+                284,
+                245
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "ne",
+              "frame": 0,
+              "source_cell": [
+                51,
+                822,
+                326,
+                1096
+              ],
+              "source_alpha_bounds": [
+                0,
+                5,
+                275,
+                234
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "ne",
+              "frame": 1,
+              "source_cell": [
+                412,
+                822,
+                644,
+                1096
+              ],
+              "source_alpha_bounds": [
+                0,
+                0,
+                232,
+                233
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "ne",
+              "frame": 2,
+              "source_cell": [
+                750,
+                822,
+                1099,
+                1096
+              ],
+              "source_alpha_bounds": [
+                0,
+                24,
+                349,
+                237
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "ne",
+              "frame": 3,
+              "source_cell": [
+                1132,
+                822,
+                1404,
+                1096
+              ],
+              "source_alpha_bounds": [
+                0,
+                4,
+                272,
+                234
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            }
+          ],
+          "source": "res://art/source/generated_g05/moss_raider_attack_master.png"
+        },
+        "hurt": {
+          "path": "res://assets/characters/moss_raider_g05/moss_raider_hurt.png",
+          "frame_size": [
+            128,
+            160
+          ],
+          "rows": 4,
+          "columns": 4,
+          "directions": [
+            "se",
+            "sw",
+            "nw",
+            "ne"
+          ],
+          "fps": 6,
+          "loop": false,
+          "pivot": [
+            64,
+            152
+          ],
+          "frames": [
+            {
+              "direction": "se",
+              "frame": 0,
+              "source_cell": [
+                44,
+                0,
+                314,
+                274
+              ],
+              "source_alpha_bounds": [
+                0,
+                16,
+                270,
+                258
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "se",
+              "frame": 1,
+              "source_cell": [
+                417,
+                0,
+                677,
+                274
+              ],
+              "source_alpha_bounds": [
+                0,
+                22,
+                260,
+                258
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "se",
+              "frame": 2,
+              "source_cell": [
+                793,
+                0,
+                1063,
+                274
+              ],
+              "source_alpha_bounds": [
+                0,
+                18,
+                270,
+                257
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "se",
+              "frame": 3,
+              "source_cell": [
+                1135,
+                0,
+                1400,
+                274
+              ],
+              "source_alpha_bounds": [
+                0,
+                16,
+                265,
+                258
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "sw",
+              "frame": 0,
+              "source_cell": [
+                40,
+                274,
+                306,
+                548
+              ],
+              "source_alpha_bounds": [
+                0,
+                10,
+                266,
+                274
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "sw",
+              "frame": 1,
+              "source_cell": [
+                416,
+                274,
+                680,
+                548
+              ],
+              "source_alpha_bounds": [
+                0,
+                15,
+                264,
+                250
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "sw",
+              "frame": 2,
+              "source_cell": [
+                800,
+                274,
+                1071,
+                548
+              ],
+              "source_alpha_bounds": [
+                0,
+                18,
+                271,
+                256
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "sw",
+              "frame": 3,
+              "source_cell": [
+                1126,
+                274,
+                1394,
+                548
+              ],
+              "source_alpha_bounds": [
+                0,
+                10,
+                268,
+                274
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "nw",
+              "frame": 0,
+              "source_cell": [
+                45,
+                548,
+                320,
+                822
+              ],
+              "source_alpha_bounds": [
+                0,
+                0,
+                275,
+                274
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "nw",
+              "frame": 1,
+              "source_cell": [
+                416,
+                548,
+                693,
+                822
+              ],
+              "source_alpha_bounds": [
+                0,
+                2,
+                277,
+                274
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "nw",
+              "frame": 2,
+              "source_cell": [
+                790,
+                548,
+                1055,
+                822
+              ],
+              "source_alpha_bounds": [
+                0,
+                2,
+                265,
+                274
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "nw",
+              "frame": 3,
+              "source_cell": [
+                1130,
+                548,
+                1400,
+                822
+              ],
+              "source_alpha_bounds": [
+                0,
+                0,
+                270,
+                274
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "ne",
+              "frame": 0,
+              "source_cell": [
+                45,
+                822,
+                321,
+                1096
+              ],
+              "source_alpha_bounds": [
+                0,
+                0,
+                276,
+                230
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "ne",
+              "frame": 1,
+              "source_cell": [
+                409,
+                822,
+                680,
+                1096
+              ],
+              "source_alpha_bounds": [
+                0,
+                0,
+                271,
+                230
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "ne",
+              "frame": 2,
+              "source_cell": [
+                774,
+                822,
+                1070,
+                1096
+              ],
+              "source_alpha_bounds": [
+                0,
+                0,
+                296,
+                230
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "ne",
+              "frame": 3,
+              "source_cell": [
+                1134,
+                822,
+                1407,
+                1096
+              ],
+              "source_alpha_bounds": [
+                0,
+                0,
+                273,
+                230
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            }
+          ],
+          "source": "res://art/source/generated_g05/moss_raider_hurt_master.png"
+        },
+        "death": {
+          "path": "res://assets/characters/moss_raider_g05/moss_raider_death.png",
+          "frame_size": [
+            128,
+            160
+          ],
+          "rows": 4,
+          "columns": 4,
+          "directions": [
+            "se",
+            "sw",
+            "nw",
+            "ne"
+          ],
+          "fps": 4,
+          "loop": false,
+          "pivot": [
+            64,
+            152
+          ],
+          "frames": [
+            {
+              "direction": "se",
+              "frame": 0,
+              "source_cell": [
+                55,
+                0,
+                350,
+                274
+              ],
+              "source_alpha_bounds": [
+                0,
+                24,
+                295,
+                274
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "se",
+              "frame": 1,
+              "source_cell": [
+                435,
+                0,
+                712,
+                274
+              ],
+              "source_alpha_bounds": [
+                0,
+                80,
+                277,
+                274
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "se",
+              "frame": 2,
+              "source_cell": [
+                745,
+                0,
+                1025,
+                274
+              ],
+              "source_alpha_bounds": [
+                0,
+                89,
+                280,
+                274
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "se",
+              "frame": 3,
+              "source_cell": [
+                1080,
+                0,
+                1418,
+                274
+              ],
+              "source_alpha_bounds": [
+                0,
+                138,
+                338,
+                274
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "sw",
+              "frame": 0,
+              "source_cell": [
+                32,
+                274,
+                315,
+                548
+              ],
+              "source_alpha_bounds": [
+                0,
+                0,
+                283,
+                266
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "sw",
+              "frame": 1,
+              "source_cell": [
+                398,
+                274,
+                705,
+                548
+              ],
+              "source_alpha_bounds": [
+                0,
+                0,
+                307,
+                264
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "sw",
+              "frame": 2,
+              "source_cell": [
+                745,
+                274,
+                1055,
+                548
+              ],
+              "source_alpha_bounds": [
+                0,
+                0,
+                310,
+                274
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "sw",
+              "frame": 3,
+              "source_cell": [
+                1089,
+                274,
+                1416,
+                548
+              ],
+              "source_alpha_bounds": [
+                0,
+                0,
+                327,
+                269
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "nw",
+              "frame": 0,
+              "source_cell": [
+                62,
+                548,
+                342,
+                822
+              ],
+              "source_alpha_bounds": [
+                0,
+                9,
+                280,
+                274
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "nw",
+              "frame": 1,
+              "source_cell": [
+                410,
+                548,
+                704,
+                822
+              ],
+              "source_alpha_bounds": [
+                0,
+                28,
+                294,
+                235
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "nw",
+              "frame": 2,
+              "source_cell": [
+                750,
+                548,
+                1034,
+                822
+              ],
+              "source_alpha_bounds": [
+                0,
+                0,
+                284,
+                244
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "nw",
+              "frame": 3,
+              "source_cell": [
+                1090,
+                548,
+                1413,
+                822
+              ],
+              "source_alpha_bounds": [
+                0,
+                111,
+                323,
+                244
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "ne",
+              "frame": 0,
+              "source_cell": [
+                58,
+                822,
+                354,
+                1096
+              ],
+              "source_alpha_bounds": [
+                0,
+                0,
+                296,
+                225
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "ne",
+              "frame": 1,
+              "source_cell": [
+                426,
+                822,
+                713,
+                1096
+              ],
+              "source_alpha_bounds": [
+                0,
+                1,
+                287,
+                221
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "ne",
+              "frame": 2,
+              "source_cell": [
+                748,
+                822,
+                1029,
+                1096
+              ],
+              "source_alpha_bounds": [
+                0,
+                19,
+                281,
+                231
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            },
+            {
+              "direction": "ne",
+              "frame": 3,
+              "source_cell": [
+                1100,
+                822,
+                1421,
+                1096
+              ],
+              "source_alpha_bounds": [
+                0,
+                69,
+                321,
+                225
+              ],
+              "pivot": [
+                64,
+                152
+              ]
+            }
+          ],
+          "source": "res://art/source/generated_g05/moss_raider_death_master.png"
+        }
+      }
+    }
+  },
+  "equipment": {
+    "sword": {
+      "path": "res://assets/equipment/g05/wayfarer_sword_idle.png",
+      "frame_size": [
+        128,
+        160
+      ],
+      "directions": [
+        "se",
+        "sw",
+        "nw",
+        "ne"
+      ],
+      "poses": [
+        {
+          "direction": "se",
+          "rect": [
+            0,
+            0,
+            128,
+            160
+          ],
+          "item_pivot": [
+            92,
+            94
+          ],
+          "source_bounds": [
+            90,
+            155,
+            406,
+            434
+          ]
+        },
+        {
+          "direction": "sw",
+          "rect": [
+            128,
+            0,
+            128,
+            160
+          ],
+          "item_pivot": [
+            36,
+            94
+          ],
+          "source_bounds": [
+            52,
+            154,
+            363,
+            435
+          ]
+        },
+        {
+          "direction": "nw",
+          "rect": [
+            256,
+            0,
+            128,
+            160
+          ],
+          "item_pivot": [
+            36,
+            94
+          ],
+          "source_bounds": [
+            78,
+            134,
+            372,
+            440
+          ]
+        },
+        {
+          "direction": "ne",
+          "rect": [
+            384,
+            0,
+            128,
+            160
+          ],
+          "item_pivot": [
+            92,
+            94
+          ],
+          "source_bounds": [
+            80,
+            131,
+            366,
+            442
+          ]
+        }
+      ],
+      "source": "res://art/source/generated_g05/equipment_master.png"
+    },
+    "shield": {
+      "path": "res://assets/equipment/g05/wayfarer_shield_idle.png",
+      "frame_size": [
+        128,
+        160
+      ],
+      "directions": [
+        "se",
+        "sw",
+        "nw",
+        "ne"
+      ],
+      "poses": [
+        {
+          "direction": "se",
+          "rect": [
+            0,
+            0,
+            128,
+            160
+          ],
+          "item_pivot": [
+            92,
+            94
+          ],
+          "source_bounds": [
+            108,
+            57,
+            333,
+            344
+          ]
+        },
+        {
+          "direction": "sw",
+          "rect": [
+            128,
+            0,
+            128,
+            160
+          ],
+          "item_pivot": [
+            36,
+            94
+          ],
+          "source_bounds": [
+            120,
+            59,
+            323,
+            345
+          ]
+        },
+        {
+          "direction": "nw",
+          "rect": [
+            256,
+            0,
+            128,
+            160
+          ],
+          "item_pivot": [
+            36,
+            94
+          ],
+          "source_bounds": [
+            119,
+            64,
+            348,
+            345
+          ]
+        },
+        {
+          "direction": "ne",
+          "rect": [
+            384,
+            0,
+            128,
+            160
+          ],
+          "item_pivot": [
+            92,
+            94
+          ],
+          "source_bounds": [
+            114,
+            62,
+            337,
+            347
+          ]
+        }
+      ],
+      "source": "res://art/source/generated_g05/equipment_master.png"
+    }
+  },
+  "impact_events": {
+    "wayfarer_attack": {
+      "frame": 2,
+      "event": "impact"
+    },
+    "moss_raider_attack": {
+      "frame": 2,
+      "event": "impact"
+    },
+    "wayfarer_cast": {
+      "frame": 2,
+      "event": "release"
+    },
+    "wayfarer_defend": {
+      "frame": 2,
+      "event": "block"
+    },
+    "wayfarer_hurt": {
+      "frame": 1,
+      "event": "damage_received"
+    },
+    "wayfarer_death": {
+      "frame": 3,
+      "event": "defeated"
+    },
+    "moss_raider_hurt": {
+      "frame": 1,
+      "event": "damage_received"
+    },
+    "moss_raider_death": {
+      "frame": 3,
+      "event": "defeated"
+    }
+  },
+  "effect_ids": [
+    "physical_slash",
+    "impact",
+    "shield_block",
+    "damage_flash",
+    "defeat_marker",
+    "spell_release"
+  ],
+  "layering": {
+    "neutral": "Separate sword/shield overlay sheets attach to a CharacterRig and share its transform.",
+    "combat": "The action atlases are co-rendered with their held weapon for pose continuity. Hide static overlays during attack/defend actions to prevent doubled equipment.",
+    "logical_position": "Equipment is visual-only and inherits the rig position; it never edits the logical grid cell."
+  }
+}

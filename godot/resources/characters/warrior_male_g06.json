@@ -1,0 +1,964 @@
+{
+  "id": "character.warrior_male.g06",
+  "display_name": "Guerreiro",
+  "frame_size": [
+    128,
+    160
+  ],
+  "pivot_feet": [
+    64,
+    152
+  ],
+  "directions_in_source": [
+    "ne",
+    "se",
+    "sw",
+    "nw"
+  ],
+  "actions": {
+    "idle": {
+      "path": "res://assets/characters/warrior_male_g06/warrior_male_idle.png",
+      "fps": 4,
+      "loop": true,
+      "frame_count": 16,
+      "directions": {
+        "ne": {
+          "frames": 4,
+          "rects": [
+            [
+              0,
+              0,
+              128,
+              160
+            ],
+            [
+              0,
+              160,
+              128,
+              160
+            ],
+            [
+              0,
+              320,
+              128,
+              160
+            ],
+            [
+              0,
+              480,
+              128,
+              160
+            ]
+          ]
+        },
+        "se": {
+          "frames": 4,
+          "rects": [
+            [
+              128,
+              0,
+              128,
+              160
+            ],
+            [
+              128,
+              160,
+              128,
+              160
+            ],
+            [
+              128,
+              320,
+              128,
+              160
+            ],
+            [
+              128,
+              480,
+              128,
+              160
+            ]
+          ]
+        },
+        "sw": {
+          "frames": 4,
+          "rects": [
+            [
+              256,
+              0,
+              128,
+              160
+            ],
+            [
+              256,
+              160,
+              128,
+              160
+            ],
+            [
+              256,
+              320,
+              128,
+              160
+            ],
+            [
+              256,
+              480,
+              128,
+              160
+            ]
+          ]
+        },
+        "nw": {
+          "frames": 4,
+          "rects": [
+            [
+              384,
+              0,
+              128,
+              160
+            ],
+            [
+              384,
+              160,
+              128,
+              160
+            ],
+            [
+              384,
+              320,
+              128,
+              160
+            ],
+            [
+              384,
+              480,
+              128,
+              160
+            ]
+          ]
+        }
+      },
+      "impact_event": null
+    },
+    "walk": {
+      "path": "res://assets/characters/warrior_male_g06/warrior_male_walk.png",
+      "fps": 8,
+      "loop": true,
+      "frame_count": 16,
+      "directions": {
+        "ne": {
+          "frames": 4,
+          "rects": [
+            [
+              0,
+              0,
+              128,
+              160
+            ],
+            [
+              0,
+              160,
+              128,
+              160
+            ],
+            [
+              0,
+              320,
+              128,
+              160
+            ],
+            [
+              0,
+              480,
+              128,
+              160
+            ]
+          ]
+        },
+        "se": {
+          "frames": 4,
+          "rects": [
+            [
+              128,
+              0,
+              128,
+              160
+            ],
+            [
+              128,
+              160,
+              128,
+              160
+            ],
+            [
+              128,
+              320,
+              128,
+              160
+            ],
+            [
+              128,
+              480,
+              128,
+              160
+            ]
+          ]
+        },
+        "sw": {
+          "frames": 4,
+          "rects": [
+            [
+              256,
+              0,
+              128,
+              160
+            ],
+            [
+              256,
+              160,
+              128,
+              160
+            ],
+            [
+              256,
+              320,
+              128,
+              160
+            ],
+            [
+              256,
+              480,
+              128,
+              160
+            ]
+          ]
+        },
+        "nw": {
+          "frames": 4,
+          "rects": [
+            [
+              384,
+              0,
+              128,
+              160
+            ],
+            [
+              384,
+              160,
+              128,
+              160
+            ],
+            [
+              384,
+              320,
+              128,
+              160
+            ],
+            [
+              384,
+              480,
+              128,
+              160
+            ]
+          ]
+        }
+      },
+      "impact_event": null
+    },
+    "attack": {
+      "path": "res://assets/characters/warrior_male_g06/warrior_male_attack.png",
+      "fps": 6,
+      "loop": false,
+      "frame_count": 16,
+      "directions": {
+        "ne": {
+          "frames": 4,
+          "rects": [
+            [
+              0,
+              0,
+              128,
+              160
+            ],
+            [
+              0,
+              160,
+              128,
+              160
+            ],
+            [
+              0,
+              320,
+              128,
+              160
+            ],
+            [
+              0,
+              480,
+              128,
+              160
+            ]
+          ]
+        },
+        "se": {
+          "frames": 4,
+          "rects": [
+            [
+              128,
+              0,
+              128,
+              160
+            ],
+            [
+              128,
+              160,
+              128,
+              160
+            ],
+            [
+              128,
+              320,
+              128,
+              160
+            ],
+            [
+              128,
+              480,
+              128,
+              160
+            ]
+          ]
+        },
+        "sw": {
+          "frames": 4,
+          "rects": [
+            [
+              256,
+              0,
+              128,
+              160
+            ],
+            [
+              256,
+              160,
+              128,
+              160
+            ],
+            [
+              256,
+              320,
+              128,
+              160
+            ],
+            [
+              256,
+              480,
+              128,
+              160
+            ]
+          ]
+        },
+        "nw": {
+          "frames": 4,
+          "rects": [
+            [
+              384,
+              0,
+              128,
+              160
+            ],
+            [
+              384,
+              160,
+              128,
+              160
+            ],
+            [
+              384,
+              320,
+              128,
+              160
+            ],
+            [
+              384,
+              480,
+              128,
+              160
+            ]
+          ]
+        }
+      },
+      "impact_event": 2
+    },
+    "hurt": {
+      "path": "res://assets/characters/warrior_male_g06/warrior_male_hurt.png",
+      "fps": 6,
+      "loop": false,
+      "frame_count": 16,
+      "directions": {
+        "ne": {
+          "frames": 4,
+          "rects": [
+            [
+              0,
+              0,
+              128,
+              160
+            ],
+            [
+              0,
+              160,
+              128,
+              160
+            ],
+            [
+              0,
+              320,
+              128,
+              160
+            ],
+            [
+              0,
+              480,
+              128,
+              160
+            ]
+          ]
+        },
+        "se": {
+          "frames": 4,
+          "rects": [
+            [
+              128,
+              0,
+              128,
+              160
+            ],
+            [
+              128,
+              160,
+              128,
+              160
+            ],
+            [
+              128,
+              320,
+              128,
+              160
+            ],
+            [
+              128,
+              480,
+              128,
+              160
+            ]
+          ]
+        },
+        "sw": {
+          "frames": 4,
+          "rects": [
+            [
+              256,
+              0,
+              128,
+              160
+            ],
+            [
+              256,
+              160,
+              128,
+              160
+            ],
+            [
+              256,
+              320,
+              128,
+              160
+            ],
+            [
+              256,
+              480,
+              128,
+              160
+            ]
+          ]
+        },
+        "nw": {
+          "frames": 4,
+          "rects": [
+            [
+              384,
+              0,
+              128,
+              160
+            ],
+            [
+              384,
+              160,
+              128,
+              160
+            ],
+            [
+              384,
+              320,
+              128,
+              160
+            ],
+            [
+              384,
+              480,
+              128,
+              160
+            ]
+          ]
+        }
+      },
+      "impact_event": 1
+    },
+    "defend": {
+      "path": "res://assets/characters/warrior_male_g06/warrior_male_defend.png",
+      "fps": 5,
+      "loop": false,
+      "frame_count": 16,
+      "directions": {
+        "ne": {
+          "frames": 4,
+          "rects": [
+            [
+              0,
+              0,
+              128,
+              160
+            ],
+            [
+              0,
+              160,
+              128,
+              160
+            ],
+            [
+              0,
+              320,
+              128,
+              160
+            ],
+            [
+              0,
+              480,
+              128,
+              160
+            ]
+          ]
+        },
+        "se": {
+          "frames": 4,
+          "rects": [
+            [
+              128,
+              0,
+              128,
+              160
+            ],
+            [
+              128,
+              160,
+              128,
+              160
+            ],
+            [
+              128,
+              320,
+              128,
+              160
+            ],
+            [
+              128,
+              480,
+              128,
+              160
+            ]
+          ]
+        },
+        "sw": {
+          "frames": 4,
+          "rects": [
+            [
+              256,
+              0,
+              128,
+              160
+            ],
+            [
+              256,
+              160,
+              128,
+              160
+            ],
+            [
+              256,
+              320,
+              128,
+              160
+            ],
+            [
+              256,
+              480,
+              128,
+              160
+            ]
+          ]
+        },
+        "nw": {
+          "frames": 4,
+          "rects": [
+            [
+              384,
+              0,
+              128,
+              160
+            ],
+            [
+              384,
+              160,
+              128,
+              160
+            ],
+            [
+              384,
+              320,
+              128,
+              160
+            ],
+            [
+              384,
+              480,
+              128,
+              160
+            ]
+          ]
+        }
+      },
+      "impact_event": 2
+    },
+    "cast": {
+      "path": "res://assets/characters/warrior_male_g06/warrior_male_cast.png",
+      "fps": 6,
+      "loop": false,
+      "frame_count": 16,
+      "directions": {
+        "ne": {
+          "frames": 4,
+          "rects": [
+            [
+              0,
+              0,
+              128,
+              160
+            ],
+            [
+              0,
+              160,
+              128,
+              160
+            ],
+            [
+              0,
+              320,
+              128,
+              160
+            ],
+            [
+              0,
+              480,
+              128,
+              160
+            ]
+          ]
+        },
+        "se": {
+          "frames": 4,
+          "rects": [
+            [
+              128,
+              0,
+              128,
+              160
+            ],
+            [
+              128,
+              160,
+              128,
+              160
+            ],
+            [
+              128,
+              320,
+              128,
+              160
+            ],
+            [
+              128,
+              480,
+              128,
+              160
+            ]
+          ]
+        },
+        "sw": {
+          "frames": 4,
+          "rects": [
+            [
+              256,
+              0,
+              128,
+              160
+            ],
+            [
+              256,
+              160,
+              128,
+              160
+            ],
+            [
+              256,
+              320,
+              128,
+              160
+            ],
+            [
+              256,
+              480,
+              128,
+              160
+            ]
+          ]
+        },
+        "nw": {
+          "frames": 4,
+          "rects": [
+            [
+              384,
+              0,
+              128,
+              160
+            ],
+            [
+              384,
+              160,
+              128,
+              160
+            ],
+            [
+              384,
+              320,
+              128,
+              160
+            ],
+            [
+              384,
+              480,
+              128,
+              160
+            ]
+          ]
+        }
+      },
+      "impact_event": 2
+    },
+    "death": {
+      "path": "res://assets/characters/warrior_male_g06/warrior_male_death.png",
+      "fps": 4,
+      "loop": false,
+      "frame_count": 16,
+      "directions": {
+        "ne": {
+          "frames": 4,
+          "rects": [
+            [
+              0,
+              0,
+              128,
+              160
+            ],
+            [
+              0,
+              160,
+              128,
+              160
+            ],
+            [
+              0,
+              320,
+              128,
+              160
+            ],
+            [
+              0,
+              480,
+              128,
+              160
+            ]
+          ]
+        },
+        "se": {
+          "frames": 4,
+          "rects": [
+            [
+              128,
+              0,
+              128,
+              160
+            ],
+            [
+              128,
+              160,
+              128,
+              160
+            ],
+            [
+              128,
+              320,
+              128,
+              160
+            ],
+            [
+              128,
+              480,
+              128,
+              160
+            ]
+          ]
+        },
+        "sw": {
+          "frames": 4,
+          "rects": [
+            [
+              256,
+              0,
+              128,
+              160
+            ],
+            [
+              256,
+              160,
+              128,
+              160
+            ],
+            [
+              256,
+              320,
+              128,
+              160
+            ],
+            [
+              256,
+              480,
+              128,
+              160
+            ]
+          ]
+        },
+        "nw": {
+          "frames": 4,
+          "rects": [
+            [
+              384,
+              0,
+              128,
+              160
+            ],
+            [
+              384,
+              160,
+              128,
+              160
+            ],
+            [
+              384,
+              320,
+              128,
+              160
+            ],
+            [
+              384,
+              480,
+              128,
+              160
+            ]
+          ]
+        }
+      },
+      "impact_event": 3
+    }
+  },
+  "equipment": {
+    "sword": {
+      "path": "res://assets/equipment/g06/warrior_male_sword.png",
+      "directions": [
+        "ne",
+        "se",
+        "sw",
+        "nw"
+      ],
+      "frame_size": [
+        128,
+        160
+      ],
+      "slot": "weapon"
+    },
+    "shield": {
+      "path": "res://assets/equipment/g06/warrior_male_shield.png",
+      "directions": [
+        "ne",
+        "se",
+        "sw",
+        "nw"
+      ],
+      "frame_size": [
+        128,
+        160
+      ],
+      "slot": "shield"
+    }
+  },
+  "planned_slots": [
+    "weapon",
+    "shield",
+    "helmet",
+    "armor"
+  ],
+  "events": {
+    "attack": {
+      "frame": 2,
+      "event": "impact"
+    },
+    "defend": {
+      "frame": 2,
+      "event": "block"
+    },
+    "cast": {
+      "frame": 2,
+      "event": "release"
+    },
+    "hurt": {
+      "frame": 1,
+      "event": "damage_received"
+    },
+    "death": {
+      "frame": 3,
+      "event": "defeated"
+    }
+  },
+  "sources": [
+    "res://art/source/generated_g06/male_warrior_idle_master.png",
+    "res://art/source/generated_g06/male_warrior_walk_master.png",
+    "res://art/source/generated_g06/male_warrior_attack_master.png",
+    "res://art/source/generated_g06/male_warrior_hurt_master.png",
+    "res://art/source/generated_g06/male_warrior_defend_master.png",
+    "res://art/source/generated_g06/male_warrior_cast_master.png",
+    "res://art/source/generated_g06/male_warrior_death_master.png",
+    "res://art/source/generated_g06/male_equipment_master.png"
+  ],
+  "rendering_note": "Generated illustrated master sheets normalized to a common frame canvas; GDScript/SpriteFrames share the G05 feet transform."
+}

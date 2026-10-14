@@ -1,8 +1,8 @@
 /* V7C selected, local Kenney sound effects. No archive or preview dependency. */
 (function(root){
   const PACKAGES=Object.freeze({
-    UI:Object.freeze({id:'kenney_ui-audio',directory:'assets/audio/kenney/ui',license:'assets/audio/kenney/ui/License.txt'}),
-    RPG:Object.freeze({id:'kenney_rpg-audio',directory:'assets/audio/kenney/rpg',license:'assets/audio/kenney/rpg/License.txt'})
+    UI:Object.freeze({id:'kenney_ui-audio',directory:'audio/kenney/ui',license:'audio/kenney/ui/License.txt'}),
+    RPG:Object.freeze({id:'kenney_rpg-audio',directory:'audio/kenney/rpg',license:'audio/kenney/rpg/License.txt'})
   });
   const definitions={
     SFX_UI_CLICK:['UI','click1.ogg'],SFX_UI_HOVER:['UI','rollover1.ogg'],SFX_UI_CONFIRM:['UI','switch1.ogg'],SFX_UI_CANCEL:['UI','switch2.ogg'],

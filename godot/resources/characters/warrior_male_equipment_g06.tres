@@ -1,0 +1,103 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/equipment/g06/warrior_male_shield.png" id="1_gr34g"]
+[ext_resource type="Texture2D" path="res://assets/equipment/g06/warrior_male_sword.png" id="2_ucgdr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aykrq"]
+atlas = ExtResource("1_gr34g")
+region = Rect2(0, 0, 128, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_40n1w"]
+atlas = ExtResource("1_gr34g")
+region = Rect2(384, 0, 128, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a3wyt"]
+atlas = ExtResource("1_gr34g")
+region = Rect2(128, 0, 128, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_25ab1"]
+atlas = ExtResource("1_gr34g")
+region = Rect2(256, 0, 128, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_02swx"]
+atlas = ExtResource("2_ucgdr")
+region = Rect2(0, 0, 128, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3vdip"]
+atlas = ExtResource("2_ucgdr")
+region = Rect2(384, 0, 128, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a87lf"]
+atlas = ExtResource("2_ucgdr")
+region = Rect2(128, 0, 128, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_85dun"]
+atlas = ExtResource("2_ucgdr")
+region = Rect2(256, 0, 128, 160)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aykrq")
+}],
+"loop": true,
+"name": &"shield_ne",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_40n1w")
+}],
+"loop": true,
+"name": &"shield_nw",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a3wyt")
+}],
+"loop": true,
+"name": &"shield_se",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_25ab1")
+}],
+"loop": true,
+"name": &"shield_sw",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_02swx")
+}],
+"loop": true,
+"name": &"sword_ne",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3vdip")
+}],
+"loop": true,
+"name": &"sword_nw",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a87lf")
+}],
+"loop": true,
+"name": &"sword_se",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_85dun")
+}],
+"loop": true,
+"name": &"sword_sw",
+"speed": 5.0
+}]

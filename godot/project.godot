@@ -1,0 +1,27 @@
+; Sotomar/Fímbria - protótipo isométrico 2D Godot 4
+config_version=5
+
+[application]
+config/name="Sotomar - Fímbria (protótipo 2D)"
+run/main_scene="res://scenes/character_select.tscn"
+
+[autoload]
+CharacterRoster="*res://scripts/characters/character_roster.gd"
+
+[display]
+window/size/viewport_width=960
+window/size/viewport_height=640
+window/size/window_width_override=960
+window/size/window_height_override=640
+window/stretch/mode="canvas_items"
+window/stretch/aspect.web="expand"
+
+[input_devices]
+pointing/emulate_mouse_from_touch=true
+
+[rendering]
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/default_filters/use_nearest_mipmap_filter=false
+textures/canvas_textures/default_texture_filter=0
+environment/defaults/default_clear_color=Color(0.075, 0.095, 0.12, 1)

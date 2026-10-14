@@ -1,0 +1,22 @@
+{
+  "static_review_aids_only": true,
+  "godot_desktop_capture": false,
+  "images": [
+    "male_all_animations.png",
+    "hero_comparison.png",
+    "selection_preview.png",
+    "male_equipment_catalog.png",
+    "characters_on_map.png"
+  ],
+  "gifs": [
+    "warrior_idle.gif",
+    "warrior_walk.gif",
+    "warrior_attack.gif",
+    "warrior_hurt.gif",
+    "warrior_defend.gif",
+    "warrior_cast.gif",
+    "warrior_death.gif"
+  ],
+  "source_frames": 112,
+  "art_approval": "pending in-engine visual inspection"
+}
