@@ -7,12 +7,12 @@
 | G03/G04 — arte 2D | IMPLEMENTADO, TESTADO | Terreno modular, props e personagens; inspeção artística final depende do proprietário. |
 | G05/G06 — personagens e seleção | IMPLEMENTADO, TESTADO | Dois protagonistas, equipamento e animações; sem validação física mobile. |
 | G07 — Web/touch | VALIDADO | Export Web, viewport mobile emulado, toque e zoom. |
-| G08 — mapas variáveis | IMPLEMENTADO PARCIAL | MAP_01, MAP_02, MAP_04 jogáveis; MAP_03 e MAP_05–11 pendentes de integração. |
+| G08/G12 — mapas do Arco 1 | IMPLEMENTADO, TESTADO | Catálogo e renderização dos onze mapas; portais/spawns validados por BFS; MAP_03/MAP_09 seguem sem acesso pois faltam saídas canônicas. Ver `RELATORIO_G12.md`. |
 | G09/G09B — NPC/Web | IMPLEMENTADO, TESTADO | NPCs e diálogos; Hosting HTTPS não publicado. |
 | G10 — combate | IMPLEMENTADO, VALIDADO | ENC_01; testes de turnos e paridade JavaScript. |
 | G11 — encontros | IMPLEMENTADO, VALIDADO | ENC_01/MAP_02, ENC_05/MAP_04; dez encontros pendentes. |
 | G11B — checkpoint | IMPLEMENTADO, TESTADO | Tag `g11-stable-20261014`, branch `operation/g12-g17`, build Web local. |
-| G12 — mapas restantes | EM ANDAMENTO | Próxima etapa: auditoria de fonte/topologia e adapter dos mapas originais. |
+| G12 — mapas restantes | IMPLEMENTADO, TESTADO | Relatório `RELATORIO_G12.md`; importação, cena compartilhada, navegação existente, gate e export Web passaram. Inspeção visual humana pendente. |
 | G13 — missões/progressão | PENDENTE | A migrar após mapa/eventos G12. |
 | G14 — inventário/serviços | PENDENTE | Depende de G13 e contrato de rewards idempotente. |
 | G15 — habilidades/criaturas/IA | PENDENTE | Requer auditoria dos efeitos JavaScript e integração incremental. |

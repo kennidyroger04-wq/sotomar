@@ -7,22 +7,28 @@ const fs = require('node:fs');
 const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 
-global.MAP_01_VISUAL = require(path.join(root, 'js/data/map01-visual.js'));
-global.MAP_02_VISUAL = require(path.join(root, 'js/data/map02-visual.js'));
-global.MAP_04_VISUAL = require(path.join(root, 'js/data/map04-visual.js'));
 global.FIMBRIA_CANONICAL = require(path.join(root, 'js/data/fimbria-canonical.js'));
+for (const id of Object.keys(global.FIMBRIA_CANONICAL.maps)) {
+  const suffix = id.slice(-2);
+  global[`${id}_VISUAL`] = require(path.join(root, `js/data/map${suffix}-visual.js`));
+}
 const runtime = require(path.join(root, 'js/data/fimbria-runtime.js'));
 const npcDb = require(path.join(root, 'js/data/npcs.js'));
-const names = new Map(Object.values(global.FIMBRIA_CANONICAL.maps).map(entry => [entry.id, entry.name]));
 const maps = {};
-for (const id of ['MAP_01', 'MAP_02', 'MAP_04']) {
-  const visual = id === 'MAP_01' ? global.MAP_01_VISUAL : id === 'MAP_02' ? global.MAP_02_VISUAL : global.MAP_04_VISUAL;
+for (const [id, canonical] of Object.entries(global.FIMBRIA_CANONICAL.maps)) {
+  const visual = global[`${id}_VISUAL`];
   const source = runtime.mapDatabase[id];
+  if (!visual || !source) throw new Error(`${id}: canonical runtime or visual layout missing`);
+  if (visual.mapId !== id || visual.dimensions.width !== source.width || visual.dimensions.height !== source.height) {
+    throw new Error(`${id}: visual dimensions/identity do not match canonical runtime`);
+  }
   maps[id] = {
     id,
-    name: names.get(id),
-    width: visual.dimensions.width,
-    height: visual.dimensions.height,
+    name: canonical.name,
+    width: source.width,
+    height: source.height,
+    geometry_status: source.geometryStatus,
+    canonical_connections: canonical.connections || [],
     base_floor_asset_id: visual.baseFloorAssetId,
     floor_overrides: visual.floorOverrides,
     props: visual.props,
@@ -39,6 +45,7 @@ for (const id of ['MAP_01', 'MAP_02', 'MAP_04']) {
       y: exit.y,
       target_spawn_id: exit.targetSpawnId,
       target_position: runtime.resolveSpawn(exit.to, exit.targetSpawnId),
+      requires_flag: exit.requiresFlag || "",
       status: exit.status,
     })),
   };

@@ -28,6 +28,7 @@ const EncounterStateStoreScript = preload("res://scripts/encounter_state_store_g
 @onready var obstacle_tiles: TileMapLayer = $ObstacleTiles
 
 var logical_position := Vector2i(1, 1)
+var world_flags: Dictionary = {}
 var movement_in_progress := false
 var map_origin := Vector2.ZERO
 var map_id := ""
@@ -406,11 +407,21 @@ func _exit_at(cell: Vector2i) -> Dictionary:
 			return exit
 	return {}
 
+func set_world_flag(flag_id: String, enabled := true) -> void:
+	if flag_id.is_empty():
+		return
+	world_flags[flag_id] = enabled
+
 func _enter_exit(exit_data: Dictionary) -> void:
+	var required_flag := String(exit_data.get("requires_flag", ""))
+	if not required_flag.is_empty() and not bool(world_flags.get(required_flag, false)):
+		_last_notice = "A passagem exige: %s." % required_flag
+		_set_instructions()
+		return
 	var target_id := String(exit_data.to)
 	var target_data := MapCatalog.get_map(target_id)
 	if target_data.is_empty():
-		_last_notice = "%s → %s será integrado em uma etapa posterior." % [String(exit_data.id), target_id]
+		_last_notice = "%s → %s não está disponível no catálogo." % [String(exit_data.id), target_id]
 		_set_instructions()
 		return
 	var target_position: Dictionary = exit_data.target_position

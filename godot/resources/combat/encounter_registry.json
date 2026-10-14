@@ -10,7 +10,15 @@
   "available_godot_maps": [
     "MAP_01",
     "MAP_02",
-    "MAP_04"
+    "MAP_03",
+    "MAP_04",
+    "MAP_05",
+    "MAP_06",
+    "MAP_07",
+    "MAP_08",
+    "MAP_09",
+    "MAP_10",
+    "MAP_11"
   ],
   "reserved_placement_candidates": {
     "MAP_01": [],
@@ -22,6 +30,20 @@
         "sourceStatus": "PROVISIONAL_RESERVED_CELL"
       }
     ],
+    "MAP_03": [
+      {
+        "id": "ENCOUNTER_PLACEMENT_01",
+        "x": 4,
+        "y": 4,
+        "sourceStatus": "PROVISIONAL_RESERVED_CELL"
+      },
+      {
+        "id": "ENCOUNTER_PLACEMENT_02",
+        "x": 5,
+        "y": 4,
+        "sourceStatus": "PROVISIONAL_RESERVED_CELL"
+      }
+    ],
     "MAP_04": [
       {
         "id": "ENCOUNTER_PLACEMENT_01",
@@ -29,7 +51,116 @@
         "y": 4,
         "sourceStatus": "PROVISIONAL_RESERVED_CELL"
       }
-    ]
+    ],
+    "MAP_05": [
+      {
+        "id": "ENCOUNTER_PLACEMENT_01",
+        "x": 5,
+        "y": 4,
+        "sourceStatus": "PROVISIONAL_RESERVED_CELL"
+      },
+      {
+        "id": "ENCOUNTER_PLACEMENT_02",
+        "x": 6,
+        "y": 4,
+        "sourceStatus": "PROVISIONAL_RESERVED_CELL"
+      }
+    ],
+    "MAP_06": [
+      {
+        "id": "ENCOUNTER_PLACEMENT_01",
+        "x": 5,
+        "y": 4,
+        "sourceStatus": "PROVISIONAL_RESERVED_CELL"
+      },
+      {
+        "id": "ENCOUNTER_PLACEMENT_02",
+        "x": 6,
+        "y": 4,
+        "sourceStatus": "PROVISIONAL_RESERVED_CELL"
+      },
+      {
+        "id": "ENCOUNTER_PLACEMENT_03",
+        "x": 7,
+        "y": 4,
+        "sourceStatus": "PROVISIONAL_RESERVED_CELL"
+      }
+    ],
+    "MAP_07": [
+      {
+        "id": "ENCOUNTER_PLACEMENT_01",
+        "x": 6,
+        "y": 5,
+        "sourceStatus": "PROVISIONAL_RESERVED_CELL"
+      },
+      {
+        "id": "ENCOUNTER_PLACEMENT_02",
+        "x": 7,
+        "y": 5,
+        "sourceStatus": "PROVISIONAL_RESERVED_CELL"
+      },
+      {
+        "id": "ENCOUNTER_PLACEMENT_03",
+        "x": 8,
+        "y": 5,
+        "sourceStatus": "PROVISIONAL_RESERVED_CELL"
+      }
+    ],
+    "MAP_08": [
+      {
+        "id": "ENCOUNTER_PLACEMENT_01",
+        "x": 5,
+        "y": 4,
+        "sourceStatus": "PROVISIONAL_RESERVED_CELL"
+      },
+      {
+        "id": "ENCOUNTER_PLACEMENT_02",
+        "x": 6,
+        "y": 4,
+        "sourceStatus": "PROVISIONAL_RESERVED_CELL"
+      }
+    ],
+    "MAP_09": [
+      {
+        "id": "ENCOUNTER_PLACEMENT_01",
+        "x": 4,
+        "y": 4,
+        "sourceStatus": "PROVISIONAL_RESERVED_CELL"
+      },
+      {
+        "id": "ENCOUNTER_PLACEMENT_02",
+        "x": 5,
+        "y": 4,
+        "sourceStatus": "PROVISIONAL_RESERVED_CELL"
+      },
+      {
+        "id": "ENCOUNTER_PLACEMENT_03",
+        "x": 6,
+        "y": 4,
+        "sourceStatus": "PROVISIONAL_RESERVED_CELL"
+      }
+    ],
+    "MAP_10": [
+      {
+        "id": "ENCOUNTER_PLACEMENT_01",
+        "x": 5,
+        "y": 4,
+        "sourceStatus": "PROVISIONAL_RESERVED_CELL"
+      },
+      {
+        "id": "ENCOUNTER_PLACEMENT_02",
+        "x": 6,
+        "y": 4,
+        "sourceStatus": "PROVISIONAL_RESERVED_CELL"
+      },
+      {
+        "id": "ENCOUNTER_PLACEMENT_03",
+        "x": 7,
+        "y": 4,
+        "sourceStatus": "PROVISIONAL_RESERVED_CELL"
+      }
+    ],
+    "MAP_11": []
   },
   "encounters": {
     "ENC_01": {
@@ -199,14 +330,16 @@
       "map_id": "MAP_03",
       "canonical_status": "data_only",
       "godot_status": "PENDING",
-      "pending_reasons": [
-        "MAP_NOT_IN_GODOT_RUNTIME",
-        "CANONICAL_TRIGGER_OR_UNIQUE_PLACEMENT_UNSPECIFIED"
-      ],
+      "pending_reasons": [],
       "activation_condition": "UNSPECIFIED_IN_CANON",
       "repetition_policy": "UNSPECIFIED_IN_CANON",
       "runtime_policy": "NO_WORLD_TRIGGER",
-      "spawn_placement": null,
+      "spawn_placement": {
+        "id": "ENCOUNTER_PLACEMENT_01",
+        "x": 4,
+        "y": 4,
+        "sourceStatus": "PROVISIONAL_RESERVED_CELL"
+      },
       "composition": [
         {
           "unit_id": "ENC_03_1",
@@ -296,7 +429,6 @@
       "canonical_status": "data_only",
       "godot_status": "PENDING",
       "pending_reasons": [
-        "MAP_NOT_IN_GODOT_RUNTIME",
         "CANONICAL_TRIGGER_OR_UNIQUE_PLACEMENT_UNSPECIFIED"
       ],
       "activation_condition": "UNSPECIFIED_IN_CANON",
@@ -514,14 +646,17 @@
       "canonical_status": "data_only",
       "godot_status": "PENDING",
       "pending_reasons": [
-        "MAP_NOT_IN_GODOT_RUNTIME",
-        "CANONICAL_TRIGGER_OR_UNIQUE_PLACEMENT_UNSPECIFIED",
         "CREATURE_ABILITY_MECHANICS_NOT_FULLY_IMPLEMENTED"
       ],
       "activation_condition": "UNSPECIFIED_IN_CANON",
       "repetition_policy": "UNSPECIFIED_IN_CANON",
       "runtime_policy": "NO_WORLD_TRIGGER",
-      "spawn_placement": null,
+      "spawn_placement": {
+        "id": "ENCOUNTER_PLACEMENT_01",
+        "x": 5,
+        "y": 4,
+        "sourceStatus": "PROVISIONAL_RESERVED_CELL"
+      },
       "composition": [
         {
           "unit_id": "ENC_07_1",
@@ -597,14 +732,17 @@
       "canonical_status": "data_only",
       "godot_status": "PENDING",
       "pending_reasons": [
-        "MAP_NOT_IN_GODOT_RUNTIME",
-        "CANONICAL_TRIGGER_OR_UNIQUE_PLACEMENT_UNSPECIFIED",
         "CREATURE_ABILITY_MECHANICS_NOT_FULLY_IMPLEMENTED"
       ],
       "activation_condition": "UNSPECIFIED_IN_CANON",
       "repetition_policy": "UNSPECIFIED_IN_CANON",
       "runtime_policy": "NO_WORLD_TRIGGER",
-      "spawn_placement": null,
+      "spawn_placement": {
+        "id": "ENCOUNTER_PLACEMENT_01",
+        "x": 5,
+        "y": 4,
+        "sourceStatus": "PROVISIONAL_RESERVED_CELL"
+      },
       "composition": [
         {
           "unit_id": "ENC_08_1",
@@ -711,14 +849,17 @@
       "canonical_status": "data_only",
       "godot_status": "PENDING",
       "pending_reasons": [
-        "MAP_NOT_IN_GODOT_RUNTIME",
-        "CANONICAL_TRIGGER_OR_UNIQUE_PLACEMENT_UNSPECIFIED",
         "CREATURE_ABILITY_MECHANICS_NOT_FULLY_IMPLEMENTED"
       ],
       "activation_condition": "UNSPECIFIED_IN_CANON",
       "repetition_policy": "UNSPECIFIED_IN_CANON",
       "runtime_policy": "NO_WORLD_TRIGGER",
-      "spawn_placement": null,
+      "spawn_placement": {
+        "id": "ENCOUNTER_PLACEMENT_01",
+        "x": 6,
+        "y": 5,
+        "sourceStatus": "PROVISIONAL_RESERVED_CELL"
+      },
       "composition": [
         {
           "unit_id": "ENC_09_1",
@@ -822,14 +963,17 @@
       "canonical_status": "data_only",
       "godot_status": "PENDING",
       "pending_reasons": [
-        "MAP_NOT_IN_GODOT_RUNTIME",
-        "CANONICAL_TRIGGER_OR_UNIQUE_PLACEMENT_UNSPECIFIED",
         "CREATURE_ABILITY_MECHANICS_NOT_FULLY_IMPLEMENTED"
       ],
       "activation_condition": "UNSPECIFIED_IN_CANON",
       "repetition_policy": "UNSPECIFIED_IN_CANON",
       "runtime_policy": "NO_WORLD_TRIGGER",
-      "spawn_placement": null,
+      "spawn_placement": {
+        "id": "ENCOUNTER_PLACEMENT_01",
+        "x": 5,
+        "y": 4,
+        "sourceStatus": "PROVISIONAL_RESERVED_CELL"
+      },
       "composition": [
         {
           "unit_id": "ENC_10_1",
@@ -901,14 +1045,16 @@
       "map_id": "MAP_09",
       "canonical_status": "data_only",
       "godot_status": "PENDING",
-      "pending_reasons": [
-        "MAP_NOT_IN_GODOT_RUNTIME",
-        "CANONICAL_TRIGGER_OR_UNIQUE_PLACEMENT_UNSPECIFIED"
-      ],
+      "pending_reasons": [],
       "activation_condition": "UNSPECIFIED_IN_CANON",
       "repetition_policy": "UNSPECIFIED_IN_CANON",
       "runtime_policy": "NO_WORLD_TRIGGER",
-      "spawn_placement": null,
+      "spawn_placement": {
+        "id": "ENCOUNTER_PLACEMENT_01",
+        "x": 4,
+        "y": 4,
+        "sourceStatus": "PROVISIONAL_RESERVED_CELL"
+      },
       "composition": [
         {
           "unit_id": "ENC_11_1",
@@ -1015,14 +1161,17 @@
       "canonical_status": "data_only",
       "godot_status": "PENDING",
       "pending_reasons": [
-        "MAP_NOT_IN_GODOT_RUNTIME",
-        "CANONICAL_TRIGGER_OR_UNIQUE_PLACEMENT_UNSPECIFIED",
         "CREATURE_ABILITY_MECHANICS_NOT_FULLY_IMPLEMENTED"
       ],
       "activation_condition": "UNSPECIFIED_IN_CANON",
       "repetition_policy": "UNSPECIFIED_IN_CANON",
       "runtime_policy": "NO_WORLD_TRIGGER",
-      "spawn_placement": null,
+      "spawn_placement": {
+        "id": "ENCOUNTER_PLACEMENT_01",
+        "x": 5,
+        "y": 4,
+        "sourceStatus": "PROVISIONAL_RESERVED_CELL"
+      },
       "composition": [
         {
           "unit_id": "ENC_12_1",
@@ -1140,7 +1289,7 @@
   ],
   "audit": {
     "canonical_encounter_count": 12,
-    "godot_available_map_count": 3,
+    "godot_available_map_count": 11,
     "provisional_playable_encounters": [
       "ENC_01",
       "ENC_05"

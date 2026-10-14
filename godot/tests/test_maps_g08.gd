@@ -89,9 +89,38 @@ func _test_playable_integration() -> void:
 	_check(scene.map_id == "MAP_01" and scene.logical_position == Vector2i(6, 8), "MAP_04 return portal restores its canonical MAP_01 entry cell")
 	scene.map_id = "MAP_04"
 	scene.map_data = MapCatalog.get_map("MAP_04")
-	var future_exit: Dictionary = _find_exit(scene.map_data, "EXIT_MAP04_MAP05")
-	scene._enter_exit(future_exit)
-	_check(scene.map_id == "MAP_04" and scene._last_notice.contains("MAP_05"), "MAP_05 exit keeps its stable ID and reports its not-yet-integrated destination")
+	var map05_exit: Dictionary = _find_exit(scene.map_data, "EXIT_MAP04_MAP05")
+	scene._enter_exit(map05_exit)
+	await process_frame
+	_check(scene.map_id == "MAP_05" and scene.logical_position == Vector2i(1, 4) and scene.terrain_tiles.get_used_cells().size() == 90, "MAP_04 portal loads the original MAP_05 layout")
+	var gated_exit: Dictionary = _find_exit(scene.map_data, "EXIT_ESCADA_MARCO_PRUMO")
+	scene._enter_exit(gated_exit)
+	_check(scene.map_id == "MAP_05" and scene._last_notice.contains("FLAG_ESCADA_MARCO_PRUMO_UNLOCKED"), "MAP_05 to MAP_07 gate remains closed without its canonical flag")
+	scene.set_world_flag("FLAG_ESCADA_MARCO_PRUMO_UNLOCKED")
+	scene._enter_exit(gated_exit)
+	await process_frame
+	_check(scene.map_id == "MAP_07" and scene.logical_position == Vector2i(1, 5) and scene.terrain_tiles.get_used_cells().size() == 120, "canonical flag opens the MAP_07 passage")
+	var map08_exit: Dictionary = _find_exit(scene.map_data, "EXIT_MAP07_MAP08")
+	scene._enter_exit(map08_exit)
+	await process_frame
+	_check(scene.map_id == "MAP_08" and scene.terrain_tiles.get_used_cells().size() == 80, "MAP_07 portal loads variable-sized MAP_08")
+	var return_map07: Dictionary = _find_exit(scene.map_data, "EXIT_MAP08_MAP07")
+	scene._enter_exit(return_map07)
+	await process_frame
+	var onward_exit: Dictionary = _find_exit(scene.map_data, "EXIT_MAP07_MAP08")
+	var map08_data: Dictionary = MapCatalog.get_map("MAP_08")
+	scene.map_id = "MAP_08"
+	scene.map_data = map08_data
+	scene._enter_exit(_find_exit(map08_data, "EXIT_MAP08_MAP10"))
+	await process_frame
+	_check(scene.map_id == "MAP_10" and scene.terrain_tiles.get_used_cells().size() == 90, "MAP_08 portal loads MAP_10 through the authored route")
+	scene._enter_exit(_find_exit(scene.map_data, "EXIT_MAP10_MAP11"))
+	await process_frame
+	_check(scene.map_id == "MAP_11" and scene.terrain_tiles.get_used_cells().size() == 120, "MAP_10 portal loads MAP_11")
+	var return_map10: Dictionary = _find_exit(scene.map_data, "EXIT_MAP11_MAP10")
+	scene._enter_exit(return_map10)
+	await process_frame
+	_check(scene.map_id == "MAP_10" and scene.logical_position == Vector2i(8, 4), "MAP_11 return portal restores its authored MAP_10 spawn")
 	roster.set_selected(original_character, false)
 	scene.queue_free()
 	await process_frame

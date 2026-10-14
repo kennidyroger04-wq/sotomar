@@ -6,6 +6,11 @@
       "name": "Caieira",
       "width": 12,
       "height": 10,
+      "geometry_status": "PROVISIONAL_RUNTIME",
+      "canonical_connections": [
+        "MAP_02",
+        "MAP_04"
+      ],
       "base_floor_asset_id": "VIS_GRASS_BASE",
       "floor_overrides": [
         {
@@ -507,6 +512,7 @@
             "x": 1,
             "y": 4
           },
+          "requires_flag": "",
           "status": "PROVISIONAL_RUNTIME"
         },
         {
@@ -519,6 +525,7 @@
             "x": 6,
             "y": 1
           },
+          "requires_flag": "",
           "status": "CANONICAL_OPEN_SANDBOX"
         }
       ]
@@ -528,6 +535,10 @@
       "name": "Terraços das Roças",
       "width": 12,
       "height": 9,
+      "geometry_status": "PROVISIONAL_RUNTIME",
+      "canonical_connections": [
+        "MAP_01"
+      ],
       "base_floor_asset_id": "VIS_GRASS_BASE",
       "floor_overrides": [
         {
@@ -965,15 +976,324 @@
             "x": 10,
             "y": 5
           },
+          "requires_flag": "",
           "status": "PROVISIONAL_RUNTIME"
         }
       ]
+    },
+    "MAP_03": {
+      "id": "MAP_03",
+      "name": "Colmeal Velho",
+      "width": 9,
+      "height": 8,
+      "geometry_status": "PROVISIONAL_RUNTIME",
+      "canonical_connections": [],
+      "base_floor_asset_id": "VIS_GRASS_BASE",
+      "floor_overrides": [
+        {
+          "x": 6,
+          "y": 2,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 5,
+          "y": 3,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 6,
+          "y": 3,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 1,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 3,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 4,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 5,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 6,
+          "y": 4,
+          "assetId": "VIS_DIRT_BASE"
+        }
+      ],
+      "props": [
+        {
+          "id": "map03-house-01",
+          "assetId": "VIS_HOUSE_SMALL",
+          "x": 6,
+          "y": 1,
+          "blocking": true,
+          "label": "house-northeast"
+        },
+        {
+          "id": "map03-masonry-01",
+          "assetId": "VIS_MASONRY_STRUCTURE",
+          "x": 7,
+          "y": 5,
+          "blocking": true,
+          "label": "masonry-southeast"
+        },
+        {
+          "id": "map03-wall-01",
+          "assetId": "VIS_LOW_WALL",
+          "x": 1,
+          "y": 2,
+          "blocking": true
+        },
+        {
+          "id": "map03-wall-02",
+          "assetId": "VIS_LOW_WALL",
+          "x": 2,
+          "y": 2,
+          "blocking": true
+        },
+        {
+          "id": "map03-wall-03",
+          "assetId": "VIS_LOW_WALL",
+          "x": 7,
+          "y": 2,
+          "blocking": true
+        },
+        {
+          "id": "map03-wall-04",
+          "assetId": "VIS_LOW_WALL",
+          "x": 1,
+          "y": 5,
+          "blocking": true
+        },
+        {
+          "id": "map03-tree-01",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 0,
+          "y": 0,
+          "blocking": true
+        },
+        {
+          "id": "map03-tree-02",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 1,
+          "y": 0,
+          "blocking": true
+        },
+        {
+          "id": "map03-tree-03",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 7,
+          "y": 0,
+          "blocking": true
+        },
+        {
+          "id": "map03-tree-04",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 8,
+          "y": 0,
+          "blocking": true
+        },
+        {
+          "id": "map03-tree-05",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 0,
+          "y": 1,
+          "blocking": true
+        },
+        {
+          "id": "map03-tree-06",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 3,
+          "y": 3,
+          "blocking": true
+        },
+        {
+          "id": "map03-tree-07",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 0,
+          "y": 6,
+          "blocking": true
+        },
+        {
+          "id": "map03-tree-08",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 8,
+          "y": 6,
+          "blocking": true
+        },
+        {
+          "id": "map03-tree-09",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 0,
+          "y": 7,
+          "blocking": true
+        },
+        {
+          "id": "map03-tree-10",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 1,
+          "y": 7,
+          "blocking": true
+        },
+        {
+          "id": "map03-tree-11",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 2,
+          "y": 7,
+          "blocking": true
+        },
+        {
+          "id": "map03-tree-12",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 7,
+          "y": 7,
+          "blocking": true
+        },
+        {
+          "id": "map03-tree-13",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 8,
+          "y": 7,
+          "blocking": true
+        },
+        {
+          "id": "map03-rocks-01",
+          "assetId": "VIS_ROCKS_GRASS",
+          "x": 4,
+          "y": 6,
+          "blocking": false
+        }
+      ],
+      "blocked_cells": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 7,
+          "y": 0
+        },
+        {
+          "x": 8,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 6,
+          "y": 1
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 7,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 3
+        },
+        {
+          "x": 1,
+          "y": 5
+        },
+        {
+          "x": 7,
+          "y": 5
+        },
+        {
+          "x": 0,
+          "y": 6
+        },
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 0,
+          "y": 7
+        },
+        {
+          "x": 1,
+          "y": 7
+        },
+        {
+          "x": 2,
+          "y": 7
+        },
+        {
+          "x": 7,
+          "y": 7
+        },
+        {
+          "x": 8,
+          "y": 7
+        }
+      ],
+      "reserved_cells": [
+        {
+          "id": "SPAWN_DEFAULT",
+          "x": 4,
+          "y": 4
+        },
+        {
+          "id": "ENCOUNTER_PLACEMENT_01",
+          "x": 4,
+          "y": 4
+        },
+        {
+          "id": "ENCOUNTER_PLACEMENT_02",
+          "x": 5,
+          "y": 4
+        }
+      ],
+      "spawns": {
+        "SPAWN_DEFAULT": {
+          "x": 4,
+          "y": 4
+        }
+      },
+      "npcs": [],
+      "exits": []
     },
     "MAP_04": {
       "id": "MAP_04",
       "name": "Trilha do Lenhador",
       "width": 12,
       "height": 9,
+      "geometry_status": "PROVISIONAL_RUNTIME",
+      "canonical_connections": [
+        "MAP_01",
+        "MAP_05",
+        "MAP_06"
+      ],
       "base_floor_asset_id": "VIS_GRASS_BASE",
       "floor_overrides": [
         {
@@ -1492,6 +1812,7 @@
             "x": 6,
             "y": 8
           },
+          "requires_flag": "",
           "status": "CANONICAL_OPEN_SANDBOX"
         },
         {
@@ -1504,6 +1825,7 @@
             "x": 1,
             "y": 4
           },
+          "requires_flag": "",
           "status": "PROVISIONAL_RUNTIME"
         },
         {
@@ -1516,6 +1838,3480 @@
             "x": 5,
             "y": 1
           },
+          "requires_flag": "",
+          "status": "PROVISIONAL_RUNTIME"
+        }
+      ]
+    },
+    "MAP_05": {
+      "id": "MAP_05",
+      "name": "Marco-Prumo",
+      "width": 10,
+      "height": 9,
+      "geometry_status": "PROVISIONAL_RUNTIME",
+      "canonical_connections": [
+        "MAP_04",
+        "MAP_07"
+      ],
+      "base_floor_asset_id": "VIS_GRASS_BASE",
+      "floor_overrides": [
+        {
+          "x": 5,
+          "y": 2,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 4,
+          "y": 3,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 5,
+          "y": 3,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 6,
+          "y": 3,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 0,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 1,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 2,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 3,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 4,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 5,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 6,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 7,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 8,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 9,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        }
+      ],
+      "props": [
+        {
+          "id": "map05-masonry-01",
+          "assetId": "VIS_MASONRY_STRUCTURE",
+          "x": 5,
+          "y": 2,
+          "blocking": true,
+          "label": "masonry-north"
+        },
+        {
+          "id": "map05-masonry-02",
+          "assetId": "VIS_MASONRY_STRUCTURE",
+          "x": 9,
+          "y": 2,
+          "blocking": true,
+          "label": "masonry-northeast"
+        },
+        {
+          "id": "map05-masonry-03",
+          "assetId": "VIS_MASONRY_STRUCTURE",
+          "x": 9,
+          "y": 6,
+          "blocking": true,
+          "label": "masonry-southeast"
+        },
+        {
+          "id": "map05-wall-01",
+          "assetId": "VIS_LOW_WALL",
+          "x": 2,
+          "y": 2,
+          "blocking": true
+        },
+        {
+          "id": "map05-wall-02",
+          "assetId": "VIS_LOW_WALL",
+          "x": 4,
+          "y": 2,
+          "blocking": true
+        },
+        {
+          "id": "map05-wall-03",
+          "assetId": "VIS_LOW_WALL",
+          "x": 6,
+          "y": 2,
+          "blocking": true
+        },
+        {
+          "id": "map05-wall-04",
+          "assetId": "VIS_LOW_WALL",
+          "x": 2,
+          "y": 6,
+          "blocking": true
+        },
+        {
+          "id": "map05-tree-01",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 0,
+          "y": 0,
+          "blocking": true
+        },
+        {
+          "id": "map05-tree-02",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 1,
+          "y": 0,
+          "blocking": true
+        },
+        {
+          "id": "map05-tree-03",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 8,
+          "y": 0,
+          "blocking": true
+        },
+        {
+          "id": "map05-tree-04",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 9,
+          "y": 0,
+          "blocking": true
+        },
+        {
+          "id": "map05-tree-05",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 0,
+          "y": 1,
+          "blocking": true
+        },
+        {
+          "id": "map05-tree-06",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 9,
+          "y": 1,
+          "blocking": true
+        },
+        {
+          "id": "map05-tree-07",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 0,
+          "y": 7,
+          "blocking": true
+        },
+        {
+          "id": "map05-tree-08",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 9,
+          "y": 7,
+          "blocking": true
+        },
+        {
+          "id": "map05-tree-09",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 0,
+          "y": 8,
+          "blocking": true
+        },
+        {
+          "id": "map05-tree-10",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 1,
+          "y": 8,
+          "blocking": true
+        },
+        {
+          "id": "map05-tree-11",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 8,
+          "y": 8,
+          "blocking": true
+        },
+        {
+          "id": "map05-tree-12",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 9,
+          "y": 8,
+          "blocking": true
+        },
+        {
+          "id": "map05-rocks-01",
+          "assetId": "VIS_ROCKS_GRASS",
+          "x": 6,
+          "y": 1,
+          "blocking": false
+        },
+        {
+          "id": "map05-rocks-02",
+          "assetId": "VIS_ROCKS_GRASS",
+          "x": 3,
+          "y": 5,
+          "blocking": false
+        },
+        {
+          "id": "map05-rocks-03",
+          "assetId": "VIS_ROCKS_GRASS",
+          "x": 1,
+          "y": 7,
+          "blocking": false
+        },
+        {
+          "id": "map05-rocks-04",
+          "assetId": "VIS_ROCKS_GRASS",
+          "x": 6,
+          "y": 7,
+          "blocking": false
+        }
+      ],
+      "blocked_cells": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 8,
+          "y": 0
+        },
+        {
+          "x": 9,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 9,
+          "y": 1
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 2
+        },
+        {
+          "x": 6,
+          "y": 2
+        },
+        {
+          "x": 9,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 6
+        },
+        {
+          "x": 9,
+          "y": 6
+        },
+        {
+          "x": 0,
+          "y": 7
+        },
+        {
+          "x": 9,
+          "y": 7
+        },
+        {
+          "x": 0,
+          "y": 8
+        },
+        {
+          "x": 1,
+          "y": 8
+        },
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 9,
+          "y": 8
+        }
+      ],
+      "reserved_cells": [
+        {
+          "id": "SPAWN_DEFAULT",
+          "x": 5,
+          "y": 4
+        },
+        {
+          "id": "EXIT_MAP_04",
+          "x": 0,
+          "y": 4
+        },
+        {
+          "id": "EXIT_MAP_07",
+          "x": 9,
+          "y": 4
+        },
+        {
+          "id": "ENCOUNTER_PLACEMENT_01",
+          "x": 5,
+          "y": 4
+        },
+        {
+          "id": "ENCOUNTER_PLACEMENT_02",
+          "x": 6,
+          "y": 4
+        }
+      ],
+      "spawns": {
+        "SPAWN_DEFAULT": {
+          "x": 5,
+          "y": 4
+        },
+        "SPAWN_FROM_MAP_04": {
+          "x": 1,
+          "y": 4
+        },
+        "SPAWN_FROM_MAP_07": {
+          "x": 8,
+          "y": 4
+        }
+      },
+      "npcs": [],
+      "exits": [
+        {
+          "id": "EXIT_MAP05_MAP04",
+          "to": "MAP_04",
+          "x": 0,
+          "y": 4,
+          "target_spawn_id": "SPAWN_FROM_MAP_05",
+          "target_position": {
+            "x": 10,
+            "y": 4
+          },
+          "requires_flag": "",
+          "status": "PROVISIONAL_RUNTIME"
+        },
+        {
+          "id": "EXIT_ESCADA_MARCO_PRUMO",
+          "to": "MAP_07",
+          "x": 9,
+          "y": 4,
+          "target_spawn_id": "SPAWN_FROM_MAP_05",
+          "target_position": {
+            "x": 1,
+            "y": 5
+          },
+          "requires_flag": "FLAG_ESCADA_MARCO_PRUMO_UNLOCKED",
+          "status": "CANONICAL_TBD_GATE"
+        }
+      ]
+    },
+    "MAP_06": {
+      "id": "MAP_06",
+      "name": "Ponte Quebrada",
+      "width": 11,
+      "height": 9,
+      "geometry_status": "PROVISIONAL_RUNTIME",
+      "canonical_connections": [
+        "MAP_04",
+        "MAP_07"
+      ],
+      "base_floor_asset_id": "VIS_GRASS_BASE",
+      "floor_overrides": [
+        {
+          "x": 5,
+          "y": 0,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 5,
+          "y": 1,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 5,
+          "y": 2,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 5,
+          "y": 3,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 4,
+          "y": 4,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 5,
+          "y": 4,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 6,
+          "y": 4,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 7,
+          "y": 4,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 0,
+          "y": 5,
+          "assetId": "VIS_WATER_EDGE"
+        },
+        {
+          "x": 1,
+          "y": 5,
+          "assetId": "VIS_WATER_EDGE"
+        },
+        {
+          "x": 2,
+          "y": 5,
+          "assetId": "VIS_WATER_EDGE"
+        },
+        {
+          "x": 3,
+          "y": 5,
+          "assetId": "VIS_WATER_EDGE"
+        },
+        {
+          "x": 4,
+          "y": 5,
+          "assetId": "VIS_WATER_EDGE"
+        },
+        {
+          "x": 5,
+          "y": 5,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 6,
+          "y": 5,
+          "assetId": "VIS_WATER_EDGE"
+        },
+        {
+          "x": 7,
+          "y": 5,
+          "assetId": "VIS_WATER_EDGE"
+        },
+        {
+          "x": 8,
+          "y": 5,
+          "assetId": "VIS_WATER_EDGE"
+        },
+        {
+          "x": 9,
+          "y": 5,
+          "assetId": "VIS_WATER_EDGE"
+        },
+        {
+          "x": 10,
+          "y": 5,
+          "assetId": "VIS_WATER_EDGE"
+        },
+        {
+          "x": 0,
+          "y": 6,
+          "assetId": "VIS_WATER"
+        },
+        {
+          "x": 1,
+          "y": 6,
+          "assetId": "VIS_WATER"
+        },
+        {
+          "x": 2,
+          "y": 6,
+          "assetId": "VIS_WATER"
+        },
+        {
+          "x": 3,
+          "y": 6,
+          "assetId": "VIS_WATER"
+        },
+        {
+          "x": 4,
+          "y": 6,
+          "assetId": "VIS_WATER"
+        },
+        {
+          "x": 5,
+          "y": 6,
+          "assetId": "VIS_WATER"
+        },
+        {
+          "x": 6,
+          "y": 6,
+          "assetId": "VIS_WATER"
+        },
+        {
+          "x": 7,
+          "y": 6,
+          "assetId": "VIS_WATER"
+        },
+        {
+          "x": 8,
+          "y": 6,
+          "assetId": "VIS_WATER"
+        },
+        {
+          "x": 9,
+          "y": 6,
+          "assetId": "VIS_WATER"
+        },
+        {
+          "x": 10,
+          "y": 6,
+          "assetId": "VIS_WATER"
+        },
+        {
+          "x": 0,
+          "y": 7,
+          "assetId": "VIS_WATER"
+        },
+        {
+          "x": 1,
+          "y": 7,
+          "assetId": "VIS_WATER"
+        },
+        {
+          "x": 2,
+          "y": 7,
+          "assetId": "VIS_WATER"
+        },
+        {
+          "x": 3,
+          "y": 7,
+          "assetId": "VIS_WATER"
+        },
+        {
+          "x": 4,
+          "y": 7,
+          "assetId": "VIS_WATER"
+        },
+        {
+          "x": 5,
+          "y": 7,
+          "assetId": "VIS_WATER"
+        },
+        {
+          "x": 6,
+          "y": 7,
+          "assetId": "VIS_WATER"
+        },
+        {
+          "x": 7,
+          "y": 7,
+          "assetId": "VIS_WATER"
+        },
+        {
+          "x": 8,
+          "y": 7,
+          "assetId": "VIS_WATER"
+        },
+        {
+          "x": 9,
+          "y": 7,
+          "assetId": "VIS_WATER"
+        },
+        {
+          "x": 10,
+          "y": 7,
+          "assetId": "VIS_WATER"
+        },
+        {
+          "x": 0,
+          "y": 8,
+          "assetId": "VIS_WATER_EDGE"
+        },
+        {
+          "x": 1,
+          "y": 8,
+          "assetId": "VIS_WATER_EDGE"
+        },
+        {
+          "x": 2,
+          "y": 8,
+          "assetId": "VIS_WATER_EDGE"
+        },
+        {
+          "x": 3,
+          "y": 8,
+          "assetId": "VIS_WATER_EDGE"
+        },
+        {
+          "x": 4,
+          "y": 8,
+          "assetId": "VIS_WATER_EDGE"
+        },
+        {
+          "x": 5,
+          "y": 8,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 6,
+          "y": 8,
+          "assetId": "VIS_WATER_EDGE"
+        },
+        {
+          "x": 7,
+          "y": 8,
+          "assetId": "VIS_WATER_EDGE"
+        },
+        {
+          "x": 8,
+          "y": 8,
+          "assetId": "VIS_WATER_EDGE"
+        },
+        {
+          "x": 9,
+          "y": 8,
+          "assetId": "VIS_WATER_EDGE"
+        },
+        {
+          "x": 10,
+          "y": 8,
+          "assetId": "VIS_WATER_EDGE"
+        }
+      ],
+      "props": [
+        {
+          "id": "map06-masonry-01",
+          "assetId": "VIS_MASONRY_STRUCTURE",
+          "x": 4,
+          "y": 7,
+          "blocking": true,
+          "label": "masonry-south"
+        },
+        {
+          "id": "map06-masonry-02",
+          "assetId": "VIS_MASONRY_STRUCTURE",
+          "x": 6,
+          "y": 7,
+          "blocking": true,
+          "label": "masonry-south"
+        },
+        {
+          "id": "map06-wall-01",
+          "assetId": "VIS_LOW_WALL",
+          "x": 4,
+          "y": 5,
+          "blocking": true
+        },
+        {
+          "id": "map06-wall-02",
+          "assetId": "VIS_LOW_WALL",
+          "x": 6,
+          "y": 5,
+          "blocking": true
+        },
+        {
+          "id": "map06-bridge-01",
+          "assetId": "VIS_BRIDGE",
+          "x": 5,
+          "y": 6,
+          "blocking": false,
+          "label": "bridge-stub"
+        },
+        {
+          "id": "map06-tree-01",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 0,
+          "y": 0,
+          "blocking": true
+        },
+        {
+          "id": "map06-tree-02",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 1,
+          "y": 0,
+          "blocking": true
+        },
+        {
+          "id": "map06-tree-03",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 9,
+          "y": 0,
+          "blocking": true
+        },
+        {
+          "id": "map06-tree-04",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 10,
+          "y": 0,
+          "blocking": true
+        },
+        {
+          "id": "map06-tree-05",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 0,
+          "y": 1,
+          "blocking": true
+        },
+        {
+          "id": "map06-tree-06",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 10,
+          "y": 1,
+          "blocking": true
+        },
+        {
+          "id": "map06-tree-07",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 2,
+          "y": 2,
+          "blocking": true
+        },
+        {
+          "id": "map06-tree-08",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 8,
+          "y": 2,
+          "blocking": true
+        },
+        {
+          "id": "map06-tree-09",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 0,
+          "y": 3,
+          "blocking": true
+        },
+        {
+          "id": "map06-tree-10",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 10,
+          "y": 3,
+          "blocking": true
+        },
+        {
+          "id": "map06-tree-11",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 0,
+          "y": 8,
+          "blocking": true
+        },
+        {
+          "id": "map06-tree-12",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 1,
+          "y": 8,
+          "blocking": true
+        },
+        {
+          "id": "map06-tree-13",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 2,
+          "y": 8,
+          "blocking": true
+        },
+        {
+          "id": "map06-tree-14",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 8,
+          "y": 8,
+          "blocking": true
+        },
+        {
+          "id": "map06-tree-15",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 9,
+          "y": 8,
+          "blocking": true
+        },
+        {
+          "id": "map06-tree-16",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 10,
+          "y": 8,
+          "blocking": true
+        },
+        {
+          "id": "map06-rocks-01",
+          "assetId": "VIS_ROCKS_GRASS",
+          "x": 2,
+          "y": 4,
+          "blocking": false
+        },
+        {
+          "id": "map06-rocks-02",
+          "assetId": "VIS_ROCKS_GRASS",
+          "x": 8,
+          "y": 4,
+          "blocking": false
+        }
+      ],
+      "blocked_cells": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 9,
+          "y": 0
+        },
+        {
+          "x": 10,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 10,
+          "y": 1
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 8,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 10,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 5
+        },
+        {
+          "x": 6,
+          "y": 5
+        },
+        {
+          "x": 0,
+          "y": 6
+        },
+        {
+          "x": 1,
+          "y": 6
+        },
+        {
+          "x": 2,
+          "y": 6
+        },
+        {
+          "x": 3,
+          "y": 6
+        },
+        {
+          "x": 4,
+          "y": 6
+        },
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 7,
+          "y": 6
+        },
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 9,
+          "y": 6
+        },
+        {
+          "x": 10,
+          "y": 6
+        },
+        {
+          "x": 0,
+          "y": 7
+        },
+        {
+          "x": 1,
+          "y": 7
+        },
+        {
+          "x": 2,
+          "y": 7
+        },
+        {
+          "x": 3,
+          "y": 7
+        },
+        {
+          "x": 4,
+          "y": 7
+        },
+        {
+          "x": 5,
+          "y": 7
+        },
+        {
+          "x": 6,
+          "y": 7
+        },
+        {
+          "x": 7,
+          "y": 7
+        },
+        {
+          "x": 8,
+          "y": 7
+        },
+        {
+          "x": 9,
+          "y": 7
+        },
+        {
+          "x": 10,
+          "y": 7
+        },
+        {
+          "x": 0,
+          "y": 8
+        },
+        {
+          "x": 1,
+          "y": 8
+        },
+        {
+          "x": 2,
+          "y": 8
+        },
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 9,
+          "y": 8
+        },
+        {
+          "x": 10,
+          "y": 8
+        }
+      ],
+      "reserved_cells": [
+        {
+          "id": "SPAWN_DEFAULT",
+          "x": 5,
+          "y": 4
+        },
+        {
+          "id": "EXIT_MAP_04",
+          "x": 5,
+          "y": 0
+        },
+        {
+          "id": "ENCOUNTER_PLACEMENT_01",
+          "x": 5,
+          "y": 4
+        },
+        {
+          "id": "ENCOUNTER_PLACEMENT_02",
+          "x": 6,
+          "y": 4
+        },
+        {
+          "id": "ENCOUNTER_PLACEMENT_03",
+          "x": 7,
+          "y": 4
+        }
+      ],
+      "spawns": {
+        "SPAWN_DEFAULT": {
+          "x": 5,
+          "y": 4
+        },
+        "SPAWN_FROM_MAP_04": {
+          "x": 5,
+          "y": 1
+        }
+      },
+      "npcs": [],
+      "exits": [
+        {
+          "id": "EXIT_MAP06_MAP04",
+          "to": "MAP_04",
+          "x": 5,
+          "y": 0,
+          "target_spawn_id": "SPAWN_FROM_MAP_06",
+          "target_position": {
+            "x": 6,
+            "y": 7
+          },
+          "requires_flag": "",
+          "status": "PROVISIONAL_RUNTIME"
+        }
+      ]
+    },
+    "MAP_07": {
+      "id": "MAP_07",
+      "name": "Descida das Raízes",
+      "width": 12,
+      "height": 10,
+      "geometry_status": "PROVISIONAL_RUNTIME",
+      "canonical_connections": [
+        "MAP_05",
+        "MAP_06",
+        "MAP_08",
+        "MAP_09"
+      ],
+      "base_floor_asset_id": "VIS_GRASS_BASE",
+      "floor_overrides": [
+        {
+          "x": 2,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 3,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 4,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 5,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 6,
+          "y": 4,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 7,
+          "y": 4,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 0,
+          "y": 5,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 1,
+          "y": 5,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 2,
+          "y": 5,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 5,
+          "y": 5,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 6,
+          "y": 5,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 7,
+          "y": 5,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 8,
+          "y": 5,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 9,
+          "y": 5,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 10,
+          "y": 5,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 11,
+          "y": 5,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 7,
+          "y": 6,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 8,
+          "y": 6,
+          "assetId": "VIS_DIRT_BASE"
+        }
+      ],
+      "props": [
+        {
+          "id": "map07-tree-01",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 0,
+          "y": 0,
+          "blocking": true
+        },
+        {
+          "id": "map07-tree-02",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 1,
+          "y": 0,
+          "blocking": true
+        },
+        {
+          "id": "map07-tree-03",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 3,
+          "y": 0,
+          "blocking": true
+        },
+        {
+          "id": "map07-tree-04",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 4,
+          "y": 0,
+          "blocking": true
+        },
+        {
+          "id": "map07-tree-05",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 7,
+          "y": 0,
+          "blocking": true
+        },
+        {
+          "id": "map07-tree-06",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 8,
+          "y": 0,
+          "blocking": true
+        },
+        {
+          "id": "map07-tree-07",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 9,
+          "y": 0,
+          "blocking": true
+        },
+        {
+          "id": "map07-tree-08",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 10,
+          "y": 0,
+          "blocking": true
+        },
+        {
+          "id": "map07-tree-09",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 11,
+          "y": 0,
+          "blocking": true
+        },
+        {
+          "id": "map07-tree-10",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 0,
+          "y": 1,
+          "blocking": true
+        },
+        {
+          "id": "map07-tree-11",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 4,
+          "y": 1,
+          "blocking": true
+        },
+        {
+          "id": "map07-tree-12",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 7,
+          "y": 1,
+          "blocking": true
+        },
+        {
+          "id": "map07-tree-13",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 10,
+          "y": 1,
+          "blocking": true
+        },
+        {
+          "id": "map07-tree-14",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 11,
+          "y": 1,
+          "blocking": true
+        },
+        {
+          "id": "map07-tree-15",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 0,
+          "y": 2,
+          "blocking": true
+        },
+        {
+          "id": "map07-tree-16",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 3,
+          "y": 2,
+          "blocking": true
+        },
+        {
+          "id": "map07-tree-17",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 7,
+          "y": 2,
+          "blocking": true
+        },
+        {
+          "id": "map07-tree-18",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 2,
+          "y": 3,
+          "blocking": true
+        },
+        {
+          "id": "map07-tree-19",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 7,
+          "y": 3,
+          "blocking": true
+        },
+        {
+          "id": "map07-tree-20",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 10,
+          "y": 3,
+          "blocking": true
+        },
+        {
+          "id": "map07-tree-21",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 1,
+          "y": 4,
+          "blocking": true
+        },
+        {
+          "id": "map07-tree-22",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 10,
+          "y": 4,
+          "blocking": true
+        },
+        {
+          "id": "map07-tree-23",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 11,
+          "y": 4,
+          "blocking": true
+        },
+        {
+          "id": "map07-tree-24",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 2,
+          "y": 6,
+          "blocking": true
+        },
+        {
+          "id": "map07-tree-25",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 10,
+          "y": 6,
+          "blocking": true
+        },
+        {
+          "id": "map07-tree-26",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 11,
+          "y": 6,
+          "blocking": true
+        },
+        {
+          "id": "map07-tree-27",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 1,
+          "y": 7,
+          "blocking": true
+        },
+        {
+          "id": "map07-tree-28",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 4,
+          "y": 7,
+          "blocking": true
+        },
+        {
+          "id": "map07-tree-29",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 11,
+          "y": 7,
+          "blocking": true
+        },
+        {
+          "id": "map07-tree-30",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 0,
+          "y": 8,
+          "blocking": true
+        },
+        {
+          "id": "map07-tree-31",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 4,
+          "y": 8,
+          "blocking": true
+        },
+        {
+          "id": "map07-tree-32",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 7,
+          "y": 8,
+          "blocking": true
+        },
+        {
+          "id": "map07-tree-33",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 10,
+          "y": 8,
+          "blocking": true
+        },
+        {
+          "id": "map07-tree-34",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 11,
+          "y": 8,
+          "blocking": true
+        },
+        {
+          "id": "map07-tree-35",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 0,
+          "y": 9,
+          "blocking": true
+        },
+        {
+          "id": "map07-tree-36",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 1,
+          "y": 9,
+          "blocking": true
+        },
+        {
+          "id": "map07-tree-37",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 3,
+          "y": 9,
+          "blocking": true
+        },
+        {
+          "id": "map07-tree-38",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 4,
+          "y": 9,
+          "blocking": true
+        },
+        {
+          "id": "map07-tree-39",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 7,
+          "y": 9,
+          "blocking": true
+        },
+        {
+          "id": "map07-tree-40",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 9,
+          "y": 9,
+          "blocking": true
+        },
+        {
+          "id": "map07-tree-41",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 10,
+          "y": 9,
+          "blocking": true
+        },
+        {
+          "id": "map07-tree-42",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 11,
+          "y": 9,
+          "blocking": true
+        },
+        {
+          "id": "map07-rocks-01",
+          "assetId": "VIS_ROCKS_GRASS",
+          "x": 6,
+          "y": 3,
+          "blocking": false
+        },
+        {
+          "id": "map07-rocks-02",
+          "assetId": "VIS_ROCKS_GRASS",
+          "x": 9,
+          "y": 4,
+          "blocking": false
+        },
+        {
+          "id": "map07-rocks-03",
+          "assetId": "VIS_ROCKS_GRASS",
+          "x": 5,
+          "y": 6,
+          "blocking": false
+        }
+      ],
+      "blocked_cells": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 7,
+          "y": 0
+        },
+        {
+          "x": 8,
+          "y": 0
+        },
+        {
+          "x": 9,
+          "y": 0
+        },
+        {
+          "x": 10,
+          "y": 0
+        },
+        {
+          "x": 11,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 4,
+          "y": 1
+        },
+        {
+          "x": 7,
+          "y": 1
+        },
+        {
+          "x": 10,
+          "y": 1
+        },
+        {
+          "x": 11,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 7,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 7,
+          "y": 3
+        },
+        {
+          "x": 10,
+          "y": 3
+        },
+        {
+          "x": 1,
+          "y": 4
+        },
+        {
+          "x": 10,
+          "y": 4
+        },
+        {
+          "x": 11,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 6
+        },
+        {
+          "x": 10,
+          "y": 6
+        },
+        {
+          "x": 11,
+          "y": 6
+        },
+        {
+          "x": 1,
+          "y": 7
+        },
+        {
+          "x": 4,
+          "y": 7
+        },
+        {
+          "x": 11,
+          "y": 7
+        },
+        {
+          "x": 0,
+          "y": 8
+        },
+        {
+          "x": 4,
+          "y": 8
+        },
+        {
+          "x": 7,
+          "y": 8
+        },
+        {
+          "x": 10,
+          "y": 8
+        },
+        {
+          "x": 11,
+          "y": 8
+        },
+        {
+          "x": 0,
+          "y": 9
+        },
+        {
+          "x": 1,
+          "y": 9
+        },
+        {
+          "x": 3,
+          "y": 9
+        },
+        {
+          "x": 4,
+          "y": 9
+        },
+        {
+          "x": 7,
+          "y": 9
+        },
+        {
+          "x": 9,
+          "y": 9
+        },
+        {
+          "x": 10,
+          "y": 9
+        },
+        {
+          "x": 11,
+          "y": 9
+        }
+      ],
+      "reserved_cells": [
+        {
+          "id": "SPAWN_DEFAULT",
+          "x": 6,
+          "y": 5
+        },
+        {
+          "id": "EXIT_MAP_05",
+          "x": 0,
+          "y": 5
+        },
+        {
+          "id": "EXIT_MAP_08",
+          "x": 11,
+          "y": 5
+        },
+        {
+          "id": "ENCOUNTER_PLACEMENT_01",
+          "x": 6,
+          "y": 5
+        },
+        {
+          "id": "ENCOUNTER_PLACEMENT_02",
+          "x": 7,
+          "y": 5
+        },
+        {
+          "id": "ENCOUNTER_PLACEMENT_03",
+          "x": 8,
+          "y": 5
+        }
+      ],
+      "spawns": {
+        "SPAWN_DEFAULT": {
+          "x": 6,
+          "y": 5
+        },
+        "SPAWN_FROM_MAP_05": {
+          "x": 1,
+          "y": 5
+        },
+        "SPAWN_FROM_MAP_08": {
+          "x": 10,
+          "y": 5
+        }
+      },
+      "npcs": [],
+      "exits": [
+        {
+          "id": "EXIT_MAP07_MAP05",
+          "to": "MAP_05",
+          "x": 0,
+          "y": 5,
+          "target_spawn_id": "SPAWN_FROM_MAP_07",
+          "target_position": {
+            "x": 8,
+            "y": 4
+          },
+          "requires_flag": "FLAG_ESCADA_MARCO_PRUMO_UNLOCKED",
+          "status": "CANONICAL_TBD_GATE"
+        },
+        {
+          "id": "EXIT_MAP07_MAP08",
+          "to": "MAP_08",
+          "x": 11,
+          "y": 5,
+          "target_spawn_id": "SPAWN_FROM_MAP_07",
+          "target_position": {
+            "x": 1,
+            "y": 4
+          },
+          "requires_flag": "",
+          "status": "PROVISIONAL_RUNTIME"
+        }
+      ]
+    },
+    "MAP_08": {
+      "id": "MAP_08",
+      "name": "Acampamento de Aurelo",
+      "width": 10,
+      "height": 8,
+      "geometry_status": "PROVISIONAL_RUNTIME",
+      "canonical_connections": [
+        "MAP_07",
+        "MAP_10"
+      ],
+      "base_floor_asset_id": "VIS_GRASS_BASE",
+      "floor_overrides": [
+        {
+          "x": 4,
+          "y": 3,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 5,
+          "y": 3,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 6,
+          "y": 3,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 0,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 1,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 2,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 3,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 4,
+          "y": 4,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 5,
+          "y": 4,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 6,
+          "y": 4,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 7,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 8,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 9,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 4,
+          "y": 5,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 5,
+          "y": 5,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 6,
+          "y": 5,
+          "assetId": "VIS_DIRT_BASE"
+        }
+      ],
+      "props": [
+        {
+          "id": "map08-masonry-01",
+          "assetId": "VIS_MASONRY_STRUCTURE",
+          "x": 5,
+          "y": 2,
+          "blocking": true,
+          "label": "masonry-north"
+        },
+        {
+          "id": "map08-wall-01",
+          "assetId": "VIS_LOW_WALL",
+          "x": 3,
+          "y": 6,
+          "blocking": true
+        },
+        {
+          "id": "map08-wall-02",
+          "assetId": "VIS_LOW_WALL",
+          "x": 4,
+          "y": 6,
+          "blocking": true
+        },
+        {
+          "id": "map08-wall-03",
+          "assetId": "VIS_LOW_WALL",
+          "x": 6,
+          "y": 6,
+          "blocking": true
+        },
+        {
+          "id": "map08-wall-04",
+          "assetId": "VIS_LOW_WALL",
+          "x": 7,
+          "y": 6,
+          "blocking": true
+        },
+        {
+          "id": "map08-tree-01",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 0,
+          "y": 0,
+          "blocking": true
+        },
+        {
+          "id": "map08-tree-02",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 1,
+          "y": 0,
+          "blocking": true
+        },
+        {
+          "id": "map08-tree-03",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 8,
+          "y": 0,
+          "blocking": true
+        },
+        {
+          "id": "map08-tree-04",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 9,
+          "y": 0,
+          "blocking": true
+        },
+        {
+          "id": "map08-tree-05",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 0,
+          "y": 1,
+          "blocking": true
+        },
+        {
+          "id": "map08-tree-06",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 9,
+          "y": 1,
+          "blocking": true
+        },
+        {
+          "id": "map08-tree-07",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 0,
+          "y": 6,
+          "blocking": true
+        },
+        {
+          "id": "map08-tree-08",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 9,
+          "y": 6,
+          "blocking": true
+        },
+        {
+          "id": "map08-tree-09",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 0,
+          "y": 7,
+          "blocking": true
+        },
+        {
+          "id": "map08-tree-10",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 1,
+          "y": 7,
+          "blocking": true
+        },
+        {
+          "id": "map08-tree-11",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 8,
+          "y": 7,
+          "blocking": true
+        },
+        {
+          "id": "map08-tree-12",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 9,
+          "y": 7,
+          "blocking": true
+        },
+        {
+          "id": "map08-rocks-01",
+          "assetId": "VIS_ROCKS_GRASS",
+          "x": 4,
+          "y": 2,
+          "blocking": false
+        },
+        {
+          "id": "map08-rocks-02",
+          "assetId": "VIS_ROCKS_GRASS",
+          "x": 6,
+          "y": 2,
+          "blocking": false
+        },
+        {
+          "id": "map08-rocks-03",
+          "assetId": "VIS_ROCKS_GRASS",
+          "x": 2,
+          "y": 5,
+          "blocking": false
+        }
+      ],
+      "blocked_cells": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 8,
+          "y": 0
+        },
+        {
+          "x": 9,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 9,
+          "y": 1
+        },
+        {
+          "x": 5,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 6
+        },
+        {
+          "x": 3,
+          "y": 6
+        },
+        {
+          "x": 4,
+          "y": 6
+        },
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 7,
+          "y": 6
+        },
+        {
+          "x": 9,
+          "y": 6
+        },
+        {
+          "x": 0,
+          "y": 7
+        },
+        {
+          "x": 1,
+          "y": 7
+        },
+        {
+          "x": 8,
+          "y": 7
+        },
+        {
+          "x": 9,
+          "y": 7
+        }
+      ],
+      "reserved_cells": [
+        {
+          "id": "SPAWN_DEFAULT",
+          "x": 5,
+          "y": 4
+        },
+        {
+          "id": "EXIT_MAP_07",
+          "x": 0,
+          "y": 4
+        },
+        {
+          "id": "EXIT_MAP_10",
+          "x": 9,
+          "y": 4
+        },
+        {
+          "id": "ENCOUNTER_PLACEMENT_01",
+          "x": 5,
+          "y": 4
+        },
+        {
+          "id": "ENCOUNTER_PLACEMENT_02",
+          "x": 6,
+          "y": 4
+        }
+      ],
+      "spawns": {
+        "SPAWN_DEFAULT": {
+          "x": 5,
+          "y": 4
+        },
+        "SPAWN_FROM_MAP_07": {
+          "x": 1,
+          "y": 4
+        },
+        "SPAWN_FROM_MAP_10": {
+          "x": 8,
+          "y": 4
+        }
+      },
+      "npcs": [],
+      "exits": [
+        {
+          "id": "EXIT_MAP08_MAP07",
+          "to": "MAP_07",
+          "x": 0,
+          "y": 4,
+          "target_spawn_id": "SPAWN_FROM_MAP_08",
+          "target_position": {
+            "x": 10,
+            "y": 5
+          },
+          "requires_flag": "",
+          "status": "PROVISIONAL_RUNTIME"
+        },
+        {
+          "id": "EXIT_MAP08_MAP10",
+          "to": "MAP_10",
+          "x": 9,
+          "y": 4,
+          "target_spawn_id": "SPAWN_FROM_MAP_08",
+          "target_position": {
+            "x": 1,
+            "y": 4
+          },
+          "requires_flag": "",
+          "status": "PROVISIONAL_RUNTIME"
+        }
+      ]
+    },
+    "MAP_09": {
+      "id": "MAP_09",
+      "name": "Pedras Brancas",
+      "width": 9,
+      "height": 8,
+      "geometry_status": "PROVISIONAL_RUNTIME",
+      "canonical_connections": [
+        "MAP_07"
+      ],
+      "base_floor_asset_id": "VIS_GRASS_BASE",
+      "floor_overrides": [
+        {
+          "x": 4,
+          "y": 1,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 2,
+          "y": 2,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 3,
+          "y": 2,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 4,
+          "y": 2,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 5,
+          "y": 2,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 6,
+          "y": 2,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 1,
+          "y": 3,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 2,
+          "y": 3,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 3,
+          "y": 3,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 4,
+          "y": 3,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 5,
+          "y": 3,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 6,
+          "y": 3,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 7,
+          "y": 3,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 1,
+          "y": 4,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 2,
+          "y": 4,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 3,
+          "y": 4,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 4,
+          "y": 4,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 5,
+          "y": 4,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 6,
+          "y": 4,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 7,
+          "y": 4,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 2,
+          "y": 5,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 3,
+          "y": 5,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 4,
+          "y": 5,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 5,
+          "y": 5,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 6,
+          "y": 5,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 4,
+          "y": 6,
+          "assetId": "VIS_DIRT_BASE"
+        }
+      ],
+      "props": [
+        {
+          "id": "map09-masonry-01",
+          "assetId": "VIS_MASONRY_STRUCTURE",
+          "x": 2,
+          "y": 2,
+          "blocking": true,
+          "label": "masonry-northwest"
+        },
+        {
+          "id": "map09-masonry-02",
+          "assetId": "VIS_MASONRY_STRUCTURE",
+          "x": 6,
+          "y": 2,
+          "blocking": true,
+          "label": "masonry-northeast"
+        },
+        {
+          "id": "map09-masonry-03",
+          "assetId": "VIS_MASONRY_STRUCTURE",
+          "x": 4,
+          "y": 6,
+          "blocking": true,
+          "label": "masonry-south"
+        },
+        {
+          "id": "map09-tree-01",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 0,
+          "y": 0,
+          "blocking": true
+        },
+        {
+          "id": "map09-tree-02",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 8,
+          "y": 0,
+          "blocking": true
+        },
+        {
+          "id": "map09-tree-03",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 0,
+          "y": 7,
+          "blocking": true
+        },
+        {
+          "id": "map09-tree-04",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 8,
+          "y": 7,
+          "blocking": true
+        },
+        {
+          "id": "map09-rocks-01",
+          "assetId": "VIS_ROCKS_GRASS",
+          "x": 1,
+          "y": 1,
+          "blocking": false
+        },
+        {
+          "id": "map09-rocks-02",
+          "assetId": "VIS_ROCKS_GRASS",
+          "x": 7,
+          "y": 1,
+          "blocking": false
+        },
+        {
+          "id": "map09-rocks-03",
+          "assetId": "VIS_ROCKS_GRASS",
+          "x": 7,
+          "y": 3,
+          "blocking": false
+        },
+        {
+          "id": "map09-rocks-04",
+          "assetId": "VIS_ROCKS_GRASS",
+          "x": 1,
+          "y": 4,
+          "blocking": false
+        },
+        {
+          "id": "map09-rocks-05",
+          "assetId": "VIS_ROCKS_GRASS",
+          "x": 2,
+          "y": 6,
+          "blocking": false
+        },
+        {
+          "id": "map09-rocks-06",
+          "assetId": "VIS_ROCKS_GRASS",
+          "x": 6,
+          "y": 6,
+          "blocking": false
+        }
+      ],
+      "blocked_cells": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 8,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 6,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 6
+        },
+        {
+          "x": 0,
+          "y": 7
+        },
+        {
+          "x": 8,
+          "y": 7
+        }
+      ],
+      "reserved_cells": [
+        {
+          "id": "SPAWN_DEFAULT",
+          "x": 4,
+          "y": 4
+        },
+        {
+          "id": "ENCOUNTER_PLACEMENT_01",
+          "x": 4,
+          "y": 4
+        },
+        {
+          "id": "ENCOUNTER_PLACEMENT_02",
+          "x": 5,
+          "y": 4
+        },
+        {
+          "id": "ENCOUNTER_PLACEMENT_03",
+          "x": 6,
+          "y": 4
+        }
+      ],
+      "spawns": {
+        "SPAWN_DEFAULT": {
+          "x": 4,
+          "y": 4
+        }
+      },
+      "npcs": [],
+      "exits": []
+    },
+    "MAP_10": {
+      "id": "MAP_10",
+      "name": "Boca do Grotão",
+      "width": 10,
+      "height": 9,
+      "geometry_status": "PROVISIONAL_RUNTIME",
+      "canonical_connections": [
+        "MAP_08",
+        "MAP_11"
+      ],
+      "base_floor_asset_id": "VIS_GRASS_BASE",
+      "floor_overrides": [
+        {
+          "x": 5,
+          "y": 0,
+          "assetId": "VIS_WATER"
+        },
+        {
+          "x": 6,
+          "y": 0,
+          "assetId": "VIS_WATER"
+        },
+        {
+          "x": 5,
+          "y": 1,
+          "assetId": "VIS_WATER_EDGE"
+        },
+        {
+          "x": 6,
+          "y": 1,
+          "assetId": "VIS_WATER_EDGE"
+        },
+        {
+          "x": 4,
+          "y": 3,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 5,
+          "y": 3,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 6,
+          "y": 3,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 7,
+          "y": 3,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 0,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 1,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 2,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 3,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 4,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 5,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 6,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 7,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 8,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 9,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 4,
+          "y": 5,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 5,
+          "y": 5,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 6,
+          "y": 5,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 7,
+          "y": 5,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 5,
+          "y": 7,
+          "assetId": "VIS_WATER_EDGE"
+        },
+        {
+          "x": 6,
+          "y": 7,
+          "assetId": "VIS_WATER_EDGE"
+        },
+        {
+          "x": 5,
+          "y": 8,
+          "assetId": "VIS_WATER"
+        },
+        {
+          "x": 6,
+          "y": 8,
+          "assetId": "VIS_WATER"
+        }
+      ],
+      "props": [
+        {
+          "id": "map10-masonry-01",
+          "assetId": "VIS_MASONRY_STRUCTURE",
+          "x": 3,
+          "y": 2,
+          "blocking": true,
+          "label": "masonry-northwest"
+        },
+        {
+          "id": "map10-masonry-02",
+          "assetId": "VIS_MASONRY_STRUCTURE",
+          "x": 3,
+          "y": 6,
+          "blocking": true,
+          "label": "masonry-southwest"
+        },
+        {
+          "id": "map10-wall-01",
+          "assetId": "VIS_LOW_WALL",
+          "x": 4,
+          "y": 2,
+          "blocking": true
+        },
+        {
+          "id": "map10-wall-02",
+          "assetId": "VIS_LOW_WALL",
+          "x": 5,
+          "y": 2,
+          "blocking": true
+        },
+        {
+          "id": "map10-wall-03",
+          "assetId": "VIS_LOW_WALL",
+          "x": 6,
+          "y": 2,
+          "blocking": true
+        },
+        {
+          "id": "map10-wall-04",
+          "assetId": "VIS_LOW_WALL",
+          "x": 7,
+          "y": 2,
+          "blocking": true
+        },
+        {
+          "id": "map10-wall-05",
+          "assetId": "VIS_LOW_WALL",
+          "x": 8,
+          "y": 2,
+          "blocking": true
+        },
+        {
+          "id": "map10-wall-06",
+          "assetId": "VIS_LOW_WALL",
+          "x": 4,
+          "y": 6,
+          "blocking": true
+        },
+        {
+          "id": "map10-wall-07",
+          "assetId": "VIS_LOW_WALL",
+          "x": 5,
+          "y": 6,
+          "blocking": true
+        },
+        {
+          "id": "map10-wall-08",
+          "assetId": "VIS_LOW_WALL",
+          "x": 6,
+          "y": 6,
+          "blocking": true
+        },
+        {
+          "id": "map10-wall-09",
+          "assetId": "VIS_LOW_WALL",
+          "x": 7,
+          "y": 6,
+          "blocking": true
+        },
+        {
+          "id": "map10-wall-10",
+          "assetId": "VIS_LOW_WALL",
+          "x": 8,
+          "y": 6,
+          "blocking": true
+        },
+        {
+          "id": "map10-tree-01",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 0,
+          "y": 0,
+          "blocking": true
+        },
+        {
+          "id": "map10-tree-02",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 1,
+          "y": 0,
+          "blocking": true
+        },
+        {
+          "id": "map10-tree-03",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 9,
+          "y": 0,
+          "blocking": true
+        },
+        {
+          "id": "map10-tree-04",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 0,
+          "y": 1,
+          "blocking": true
+        },
+        {
+          "id": "map10-tree-05",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 0,
+          "y": 3,
+          "blocking": true
+        },
+        {
+          "id": "map10-tree-06",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 9,
+          "y": 3,
+          "blocking": true
+        },
+        {
+          "id": "map10-tree-07",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 0,
+          "y": 5,
+          "blocking": true
+        },
+        {
+          "id": "map10-tree-08",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 9,
+          "y": 5,
+          "blocking": true
+        },
+        {
+          "id": "map10-tree-09",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 0,
+          "y": 7,
+          "blocking": true
+        },
+        {
+          "id": "map10-tree-10",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 0,
+          "y": 8,
+          "blocking": true
+        },
+        {
+          "id": "map10-tree-11",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 1,
+          "y": 8,
+          "blocking": true
+        },
+        {
+          "id": "map10-tree-12",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 8,
+          "y": 8,
+          "blocking": true
+        },
+        {
+          "id": "map10-tree-13",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 9,
+          "y": 8,
+          "blocking": true
+        },
+        {
+          "id": "map10-rocks-01",
+          "assetId": "VIS_ROCKS_GRASS",
+          "x": 2,
+          "y": 3,
+          "blocking": false
+        },
+        {
+          "id": "map10-rocks-02",
+          "assetId": "VIS_ROCKS_GRASS",
+          "x": 8,
+          "y": 3,
+          "blocking": false
+        },
+        {
+          "id": "map10-rocks-03",
+          "assetId": "VIS_ROCKS_GRASS",
+          "x": 2,
+          "y": 5,
+          "blocking": false
+        },
+        {
+          "id": "map10-rocks-04",
+          "assetId": "VIS_ROCKS_GRASS",
+          "x": 8,
+          "y": 5,
+          "blocking": false
+        }
+      ],
+      "blocked_cells": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 6,
+          "y": 0
+        },
+        {
+          "x": 9,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 2
+        },
+        {
+          "x": 6,
+          "y": 2
+        },
+        {
+          "x": 7,
+          "y": 2
+        },
+        {
+          "x": 8,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 9,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 5
+        },
+        {
+          "x": 9,
+          "y": 5
+        },
+        {
+          "x": 3,
+          "y": 6
+        },
+        {
+          "x": 4,
+          "y": 6
+        },
+        {
+          "x": 5,
+          "y": 6
+        },
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 7,
+          "y": 6
+        },
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 0,
+          "y": 7
+        },
+        {
+          "x": 0,
+          "y": 8
+        },
+        {
+          "x": 1,
+          "y": 8
+        },
+        {
+          "x": 5,
+          "y": 8
+        },
+        {
+          "x": 6,
+          "y": 8
+        },
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 9,
+          "y": 8
+        }
+      ],
+      "reserved_cells": [
+        {
+          "id": "SPAWN_DEFAULT",
+          "x": 5,
+          "y": 4
+        },
+        {
+          "id": "EXIT_MAP_08",
+          "x": 0,
+          "y": 4
+        },
+        {
+          "id": "EXIT_MAP_11",
+          "x": 9,
+          "y": 4
+        },
+        {
+          "id": "ENCOUNTER_PLACEMENT_01",
+          "x": 5,
+          "y": 4
+        },
+        {
+          "id": "ENCOUNTER_PLACEMENT_02",
+          "x": 6,
+          "y": 4
+        },
+        {
+          "id": "ENCOUNTER_PLACEMENT_03",
+          "x": 7,
+          "y": 4
+        }
+      ],
+      "spawns": {
+        "SPAWN_DEFAULT": {
+          "x": 5,
+          "y": 4
+        },
+        "SPAWN_FROM_MAP_08": {
+          "x": 1,
+          "y": 4
+        },
+        "SPAWN_FROM_MAP_11": {
+          "x": 8,
+          "y": 4
+        }
+      },
+      "npcs": [],
+      "exits": [
+        {
+          "id": "EXIT_MAP10_MAP08",
+          "to": "MAP_08",
+          "x": 0,
+          "y": 4,
+          "target_spawn_id": "SPAWN_FROM_MAP_10",
+          "target_position": {
+            "x": 8,
+            "y": 4
+          },
+          "requires_flag": "",
+          "status": "PROVISIONAL_RUNTIME"
+        },
+        {
+          "id": "EXIT_MAP10_MAP11",
+          "to": "MAP_11",
+          "x": 9,
+          "y": 4,
+          "target_spawn_id": "SPAWN_FROM_MAP_10",
+          "target_position": {
+            "x": 1,
+            "y": 5
+          },
+          "requires_flag": "",
+          "status": "PROVISIONAL_RUNTIME"
+        }
+      ]
+    },
+    "MAP_11": {
+      "id": "MAP_11",
+      "name": "Arena da Sineira",
+      "width": 12,
+      "height": 10,
+      "geometry_status": "PROVISIONAL_RUNTIME",
+      "canonical_connections": [
+        "MAP_10"
+      ],
+      "base_floor_asset_id": "VIS_GRASS_BASE",
+      "floor_overrides": [
+        {
+          "x": 4,
+          "y": 1,
+          "assetId": "VIS_WATER_EDGE"
+        },
+        {
+          "x": 5,
+          "y": 1,
+          "assetId": "VIS_WATER"
+        },
+        {
+          "x": 6,
+          "y": 1,
+          "assetId": "VIS_WATER"
+        },
+        {
+          "x": 7,
+          "y": 1,
+          "assetId": "VIS_WATER"
+        },
+        {
+          "x": 8,
+          "y": 1,
+          "assetId": "VIS_WATER_EDGE"
+        },
+        {
+          "x": 3,
+          "y": 2,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 4,
+          "y": 2,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 5,
+          "y": 2,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 6,
+          "y": 2,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 7,
+          "y": 2,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 8,
+          "y": 2,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 9,
+          "y": 2,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 3,
+          "y": 3,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 9,
+          "y": 3,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 3,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 5,
+          "y": 4,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 6,
+          "y": 4,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 7,
+          "y": 4,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 9,
+          "y": 4,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 0,
+          "y": 5,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 1,
+          "y": 5,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 2,
+          "y": 5,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 3,
+          "y": 5,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 5,
+          "y": 5,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 6,
+          "y": 5,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 7,
+          "y": 5,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 9,
+          "y": 5,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 3,
+          "y": 6,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 5,
+          "y": 6,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 6,
+          "y": 6,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 7,
+          "y": 6,
+          "assetId": "VIS_DIRT_BASE"
+        },
+        {
+          "x": 9,
+          "y": 6,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 3,
+          "y": 7,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 9,
+          "y": 7,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 3,
+          "y": 8,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 4,
+          "y": 8,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 5,
+          "y": 8,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 6,
+          "y": 8,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 7,
+          "y": 8,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 8,
+          "y": 8,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 9,
+          "y": 8,
+          "assetId": "VIS_DIRT_PATH"
+        },
+        {
+          "x": 4,
+          "y": 9,
+          "assetId": "VIS_WATER_EDGE"
+        },
+        {
+          "x": 5,
+          "y": 9,
+          "assetId": "VIS_WATER"
+        },
+        {
+          "x": 6,
+          "y": 9,
+          "assetId": "VIS_WATER"
+        },
+        {
+          "x": 7,
+          "y": 9,
+          "assetId": "VIS_WATER"
+        },
+        {
+          "x": 8,
+          "y": 9,
+          "assetId": "VIS_WATER_EDGE"
+        }
+      ],
+      "props": [
+        {
+          "id": "map11-masonry-01",
+          "assetId": "VIS_MASONRY_STRUCTURE",
+          "x": 3,
+          "y": 2,
+          "blocking": true,
+          "label": "masonry-northwest"
+        },
+        {
+          "id": "map11-masonry-02",
+          "assetId": "VIS_MASONRY_STRUCTURE",
+          "x": 9,
+          "y": 2,
+          "blocking": true,
+          "label": "masonry-northeast"
+        },
+        {
+          "id": "map11-masonry-03",
+          "assetId": "VIS_MASONRY_STRUCTURE",
+          "x": 9,
+          "y": 5,
+          "blocking": true,
+          "label": "masonry-east"
+        },
+        {
+          "id": "map11-masonry-04",
+          "assetId": "VIS_MASONRY_STRUCTURE",
+          "x": 3,
+          "y": 8,
+          "blocking": true,
+          "label": "masonry-southwest"
+        },
+        {
+          "id": "map11-masonry-05",
+          "assetId": "VIS_MASONRY_STRUCTURE",
+          "x": 9,
+          "y": 8,
+          "blocking": true,
+          "label": "masonry-southeast"
+        },
+        {
+          "id": "map11-wall-01",
+          "assetId": "VIS_LOW_WALL",
+          "x": 6,
+          "y": 2,
+          "blocking": true
+        },
+        {
+          "id": "map11-wall-02",
+          "assetId": "VIS_LOW_WALL",
+          "x": 2,
+          "y": 4,
+          "blocking": true
+        },
+        {
+          "id": "map11-wall-03",
+          "assetId": "VIS_LOW_WALL",
+          "x": 2,
+          "y": 6,
+          "blocking": true
+        },
+        {
+          "id": "map11-wall-04",
+          "assetId": "VIS_LOW_WALL",
+          "x": 6,
+          "y": 8,
+          "blocking": true
+        },
+        {
+          "id": "map11-tree-01",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 0,
+          "y": 0,
+          "blocking": true
+        },
+        {
+          "id": "map11-tree-02",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 1,
+          "y": 0,
+          "blocking": true
+        },
+        {
+          "id": "map11-tree-03",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 10,
+          "y": 0,
+          "blocking": true
+        },
+        {
+          "id": "map11-tree-04",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 11,
+          "y": 0,
+          "blocking": true
+        },
+        {
+          "id": "map11-tree-05",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 0,
+          "y": 9,
+          "blocking": true
+        },
+        {
+          "id": "map11-tree-06",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 1,
+          "y": 9,
+          "blocking": true
+        },
+        {
+          "id": "map11-tree-07",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 10,
+          "y": 9,
+          "blocking": true
+        },
+        {
+          "id": "map11-tree-08",
+          "assetId": "VIS_TREE_SMALL",
+          "x": 11,
+          "y": 9,
+          "blocking": true
+        },
+        {
+          "id": "map11-rocks-01",
+          "assetId": "VIS_ROCKS_GRASS",
+          "x": 1,
+          "y": 1,
+          "blocking": false
+        },
+        {
+          "id": "map11-rocks-02",
+          "assetId": "VIS_ROCKS_GRASS",
+          "x": 1,
+          "y": 3,
+          "blocking": false
+        },
+        {
+          "id": "map11-rocks-03",
+          "assetId": "VIS_ROCKS_GRASS",
+          "x": 10,
+          "y": 4,
+          "blocking": false
+        },
+        {
+          "id": "map11-rocks-04",
+          "assetId": "VIS_ROCKS_GRASS",
+          "x": 10,
+          "y": 6,
+          "blocking": false
+        },
+        {
+          "id": "map11-rocks-05",
+          "assetId": "VIS_ROCKS_GRASS",
+          "x": 1,
+          "y": 7,
+          "blocking": false
+        }
+      ],
+      "blocked_cells": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 10,
+          "y": 0
+        },
+        {
+          "x": 11,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 6,
+          "y": 1
+        },
+        {
+          "x": 7,
+          "y": 1
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 6,
+          "y": 2
+        },
+        {
+          "x": 9,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 9,
+          "y": 5
+        },
+        {
+          "x": 2,
+          "y": 6
+        },
+        {
+          "x": 3,
+          "y": 8
+        },
+        {
+          "x": 6,
+          "y": 8
+        },
+        {
+          "x": 9,
+          "y": 8
+        },
+        {
+          "x": 0,
+          "y": 9
+        },
+        {
+          "x": 1,
+          "y": 9
+        },
+        {
+          "x": 5,
+          "y": 9
+        },
+        {
+          "x": 6,
+          "y": 9
+        },
+        {
+          "x": 7,
+          "y": 9
+        },
+        {
+          "x": 10,
+          "y": 9
+        },
+        {
+          "x": 11,
+          "y": 9
+        }
+      ],
+      "reserved_cells": [
+        {
+          "id": "SPAWN_DEFAULT",
+          "x": 6,
+          "y": 5
+        },
+        {
+          "id": "EXIT_MAP_10",
+          "x": 0,
+          "y": 5
+        }
+      ],
+      "spawns": {
+        "SPAWN_DEFAULT": {
+          "x": 6,
+          "y": 5
+        },
+        "SPAWN_FROM_MAP_10": {
+          "x": 1,
+          "y": 5
+        }
+      },
+      "npcs": [],
+      "exits": [
+        {
+          "id": "EXIT_MAP11_MAP10",
+          "to": "MAP_10",
+          "x": 0,
+          "y": 5,
+          "target_spawn_id": "SPAWN_FROM_MAP_11",
+          "target_position": {
+            "x": 8,
+            "y": 4
+          },
+          "requires_flag": "",
           "status": "PROVISIONAL_RUNTIME"
         }
       ]
