@@ -1,0 +1,16 @@
+/* DOM-free atomic currency, buy and sell transactions. */
+(function(root){
+  const int=(v,d=0)=>Number.isFinite(Number(v))?Math.trunc(Number(v)):d;
+  class EconomyEngine{
+    constructor({playerProvider,progressionProvider,itemDb,catalog,currencyId='base',onChanged}={}){this.playerProvider=playerProvider||(()=>({inventory:{}}));this.progressionProvider=progressionProvider||(()=>({}));this.itemDb=itemDb||{};this.catalog=catalog||{};this.currencyId=currencyId;this.onChanged=onChanged||(()=>{});}
+    player(){const p=this.playerProvider()||{};if(!p.inventory)p.inventory={};return p;}
+    progression(){const p=this.progressionProvider()||{};if(!p.currency)p.currency={};return p;}
+    getBalance(){return Math.max(0,int(this.progression().currency[this.currencyId],0));}
+    addCurrency(amount){const n=int(amount,0);if(n<0)return {ok:false,reason:'INVALID_AMOUNT',balance:this.getBalance()};const balance=this.getBalance()+n;this.progression().currency[this.currencyId]=balance;if(n)this.onChanged({type:'CURRENCY_ADDED',amount:n,balance});return {ok:true,amount:n,balance};}
+    removeCurrency(amount){const n=int(amount,0),balance=this.getBalance();if(n<0)return {ok:false,reason:'INVALID_AMOUNT',balance};if(n>balance)return {ok:false,reason:'INSUFFICIENT_FUNDS',balance};this.progression().currency[this.currencyId]=balance-n;if(n)this.onChanged({type:'CURRENCY_REMOVED',amount:n,balance:balance-n});return {ok:true,amount:n,balance:balance-n};}
+    qty(value){const n=int(value,0);return n>0?n:0;}
+    buy(itemId,quantity=1){const qty=this.qty(quantity),entry=this.catalog[itemId],item=this.itemDb[itemId];if(!entry||!item)return {ok:false,reason:'UNKNOWN_ITEM'};if(!qty)return {ok:false,reason:'INVALID_QUANTITY'};const total=entry.buyPrice*qty,balance=this.getBalance();if(!Number.isFinite(total)||total<0)return {ok:false,reason:'INVALID_PRICE'};if(balance<total)return {ok:false,reason:'INSUFFICIENT_FUNDS',balance};this.progression().currency[this.currencyId]=balance-total;const player=this.player();player.inventory[itemId]=(player.inventory[itemId]||0)+qty;const result={ok:true,itemId,quantity:qty,total,balance:balance-total};this.onChanged({type:'PURCHASED',...result});return result;}
+    sell(itemId,quantity=1){const qty=this.qty(quantity),entry=this.catalog[itemId],item=this.itemDb[itemId],player=this.player();if(!entry||!item)return {ok:false,reason:'UNKNOWN_ITEM'};if(!qty)return {ok:false,reason:'INVALID_QUANTITY'};if(entry.sellable===false||item.questItem)return {ok:false,reason:'UNSELLABLE_ITEM'};if((player.inventory[itemId]||0)<qty)return {ok:false,reason:'INSUFFICIENT_QUANTITY'};const total=entry.sellPrice*qty;if(!Number.isFinite(total)||total<0)return {ok:false,reason:'INVALID_PRICE'};const remaining=player.inventory[itemId]-qty;if(remaining)player.inventory[itemId]=remaining;else delete player.inventory[itemId];const balance=this.getBalance()+total;this.progression().currency[this.currencyId]=balance;const result={ok:true,itemId,quantity:qty,total,balance};this.onChanged({type:'SOLD',...result});return result;}
+  }
+  root.EconomySystem={EconomyEngine,createEconomySystem:options=>new EconomyEngine(options)};if(typeof module!=='undefined')module.exports=root.EconomySystem;
+})(globalThis);

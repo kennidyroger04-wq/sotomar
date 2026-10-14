@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sotomar — Fímbria</title>
+<link rel="stylesheet" href="css/game.css">
+<link rel="stylesheet" href="css/menu-sotomar.css">
+</head>
+<body>
+
+<!-- =========================================================================================
+     TELA 1: MENU PRINCIPAL (GAME_STATES.MENU)
+     ========================================================================================= -->
+<main id="mainMenuScreen" class="sotomar-menu" aria-label="Menu principal de Sotomar">
+  <div class="sotomar-menu__background" aria-hidden="true"></div>
+  <div class="sotomar-menu__shade" aria-hidden="true"></div>
+  <section class="sotomar-menu__content">
+    <header class="sotomar-menu__logo">
+      <h1 class="sotomar-menu__title">SOTOMAR</h1>
+      <p class="sotomar-menu__subtitle"><span>FÍMBRIA</span></p>
+    </header>
+    <p class="sotomar-menu__tagline">Explore Fímbria. Cada caminho guarda uma história.</p>
+    <nav class="sotomar-menu__actions" aria-label="Menu principal">
+      <button id="startExploreBtn" class="sotomar-button sotomar-button--primary" type="button" aria-describedby="menuStartDescription">
+        <span>CONTINUAR AVENTURA</span>
+      </button>
+      <span id="menuStartDescription" class="sotomar-menu__sr-only">Abre o mundo salvo na posição atual.</span>
+      <div class="sotomar-menu__secondary">
+        <button id="charBtnMenu" class="sotomar-button sotomar-button--secondary" type="button">PERSONAGEM</button>
+        <button id="invBtnMenu" class="sotomar-button sotomar-button--secondary" type="button">INVENTÁRIO</button>
+      </div>
+    </nav>
+    <dl id="menuProgressInfo" class="sotomar-menu__summary" aria-label="Resumo do progresso">
+      <div class="sotomar-menu__stat"><dt>Nv.</dt><dd data-stat="level">1</dd></div>
+      <div class="sotomar-menu__stat sotomar-menu__stat--xp">
+        <dt>XP</dt><dd><span data-stat="xp">0</span>/<span data-stat="xp-max">100</span></dd>
+        <span class="sotomar-menu__xp-track" aria-hidden="true"><i data-stat="xp-bar"></i></span>
+      </div>
+      <div class="sotomar-menu__stat"><dt>Itens</dt><dd data-stat="items">0</dd></div>
+      <div class="sotomar-menu__stat"><dt>Pontos</dt><dd data-stat="points">0</dd></div>
+    </dl>
+    <p class="sotomar-menu__footer">Seu progresso fica salvo entre sessões.</p>
+  </section>
+</main>
+
+<!-- =========================================================================================
+     TELA 2: OVERWORLD / EXPLORAÇÃO (GAME_STATES.OVERWORLD)
+     ========================================================================================= -->
+<div id="overworldScreen">
+  <h1>🗺️ <span id="mapNameLabel">Vila de Entrada</span></h1>
+  <div class="app game-layout">
+    <main class="game-stage" aria-label="Área de exploração">
+      <div class="board-wrap"><canvas id="overworldCanvas" width="480" height="480"></canvas></div>
+    </main>
+    <aside class="panel side-panel panel-overworld">
+      <section class="hud-summary" aria-label="Estado do jogador">
+        <div class="hud-identity">🧙 <span>Jogador <small>Nv. <span id="owHudLevel">1</span></small></span></div>
+        <div class="hud-resource hud-hp"><span>HP</span><b id="owHudHp">100/100</b></div>
+        <div class="hud-resource"><span>PA</span><b id="owHudPa">—</b></div>
+        <div class="hud-resource"><span>PM</span><b id="owHudPm">—</b></div>
+      </section>
+      <div id="owHint" class="hint">Toque em uma célula para andar. Toque em um mob para lutar!</div>
+      <div id="owHpStatus" class="ow-hp-status sr-only">HP 100 / 100</div>
+
+      <div class="controls shortcut-bar" aria-label="Atalhos">
+        <button id="charBtnOverworld" title="Personagem [C]"><i class="shortcut-icon" aria-hidden="true">👤</i><span>Personagem</span></button>
+        <button id="invBtnOverworld" title="Inventário [I]"><i class="shortcut-icon" aria-hidden="true">🎒</i><span>Inventário</span></button>
+        <button id="questBtnOverworld" title="Missões"><i class="shortcut-icon" aria-hidden="true">📜</i><span>Missões</span></button>
+        <button id="menuBtnOverworld" title="Menu principal"><i class="shortcut-icon" aria-hidden="true">🏠</i><span>Menu</span></button>
+      </div>
+
+      <section id="questTracker" class="quest-tracker" aria-live="polite" aria-label="Quest acompanhada">
+        <div class="quest-tracker-empty">Nenhuma quest ativa.</div>
+      </section>
+
+      <div id="log" class="compact-log"><div class="sys">Bem-vindo à Vila de Entrada! Cuidado: há mobs por perto.</div></div>
+    </aside>
+  </div>
+</div>
+
+<!-- =========================================================================================
+     TELA 3: COMBATE (GAME_STATES.COMBAT) — arena 12x12, fila de iniciativa, relógio de turno
+     ========================================================================================= -->
+<div id="gameScreen">
+  <h1>⚔ COMBATE — Arena 12x12 ⚔</h1>
+  <div class="app game-layout">
+    <main class="game-stage" aria-label="Área de combate">
+      <div class="board-wrap">
+        <canvas id="boardCanvas" width="480" height="480"></canvas>
+      </div>
+    </main>
+
+    <aside class="panel side-panel panel-combat">
+      <section class="hud-summary" aria-label="Estado do jogador em combate">
+        <div class="hud-identity">🧙 <span>Jogador <small>Nv. <span id="combatHudLevel">1</span></small></span></div>
+        <div class="hud-resource hud-hp"><span>HP</span><b id="combatHudHp">100/100</b></div>
+        <div class="hud-resource"><span>PA</span><b id="combatHudPa">6/6</b></div>
+        <div class="hud-resource"><span>PM</span><b id="combatHudPm">4/4</b></div>
+      </section>
+      <!-- Relógio de turno: 30s regressivos, força "Passar Turno" ao zerar -->
+      <div class="turn-timer-row">
+        <div class="turn-timer-track"><div id="turnTimerBar" class="turn-timer-fill" style="width:100%"></div></div>
+        <span id="turnTimerVal" class="turn-timer-val">30s</span>
+      </div>
+      <div id="turnBanner" class="turn-banner turn-player" aria-live="polite">Turno: Jogador</div>
+
+      <!-- Cartões de combatentes: gerados dinamicamente (suporta N unidades) -->
+      <div class="unit-row" id="combatantsRow"></div>
+
+      <div class="abilities ability-hotbar" id="abilityHotbar" aria-label="Habilidades de combate"></div>
+      <div class="hint" id="hint" aria-live="polite">Movimento livre: clique numa célula verde. 1-5 habilidades, C ficha, I mochila, ESC cancela.</div>
+      <div class="selection-status" id="selectionStatus" aria-live="polite">Nenhuma habilidade selecionada.</div>
+
+      <div class="controls">
+        <div class="row turn-actions"><button id="endTurnBtn">Passar Turno</button></div>
+        <div class="shortcut-bar secondary-actions" aria-label="Atalhos">
+          <button id="charBtn" title="Personagem [C]"><i class="shortcut-icon" aria-hidden="true">👤</i><span>Personagem</span></button>
+          <button id="invBtn" title="Inventário [I]"><i class="shortcut-icon" aria-hidden="true">🎒</i><span>Inventário</span></button>
+          <button id="questBtn" title="Missões"><i class="shortcut-icon" aria-hidden="true">📜</i><span>Missões</span></button>
+          <button id="menuBtn" title="Menu principal"><i class="shortcut-icon" aria-hidden="true">🏠</i><span>Menu</span></button>
+        </div>
+        <details class="dev-tools">
+          <summary>Desenvolvimento</summary>
+          <button id="resetBtn">Reiniciar Tudo (zera progresso)</button>
+        </details>
+      </div>
+
+      <div id="combatLog" class="compact-log" aria-live="polite" aria-label="Registro de combate"><div class="sys">Bem-vindo! Calculando iniciativa...</div></div>
+    </aside>
+  </div>
+</div>
+
+<!-- MODAL DE FIM DE BATALHA (Vitória/Derrota) -->
+<div id="overlay" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="overlayTitle">
+  <div class="modal-box">
+    <h2 id="overlayTitle">Fim de Jogo</h2>
+    <p id="overlayText"></p>
+    <div id="rewardBox" style="display:none;">
+      <div id="levelUpBanner" class="level-up-banner" style="display:none;">🎉 LEVEL UP! 🎉</div>
+      <div>XP Ganho: <b id="xpGained" style="color:var(--xp);"></b></div>
+      <div>Itens obtidos: <b id="lootList" style="color:var(--accent2);"></b></div>
+    </div>
+    <button class="primary" id="continueExploringBtn">🗺️ Voltar ao Mapa</button>
+    <button class="secondary" id="backToMenuBtn">🏠 Voltar ao Menu Principal</button>
+  </div>
+</div>
+
+<!-- MODAL DE FICHA DO PERSONAGEM -->
+<div id="characterModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="characterModalTitle">
+  <div class="modal-box char-box">
+    <button class="close-x" data-close="char" aria-label="Fechar ficha do personagem">✕</button>
+    <h2 id="characterModalTitle">👤 Ficha do Personagem</h2>
+    <div class="char-level">Nível <span id="charLevel">1</span></div>
+    <div class="xp-bar-bg"><div id="xpBarFill" class="xp-bar-fill" style="width:0%"></div></div>
+    <div id="xpText" class="xp-text">0/100 XP</div>
+    <div id="pointsAvailable" class="points-available"></div>
+    <div class="equip-section" id="equipSection"></div>
+    <hr class="section-divider">
+    <div class="stats-list" id="statsList"></div>
+  </div>
+</div>
+
+<!-- MODAL DE INVENTÁRIO -->
+<div id="inventoryModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="inventoryModalTitle">
+  <div class="modal-box inv-box">
+    <button class="close-x" data-close="inventory" aria-label="Fechar inventário">✕</button>
+    <h2 id="inventoryModalTitle">🎒 Inventário <span id="inventoryCurrency" class="currency-label"></span></h2>
+    <div class="inv-grid" id="inventoryGrid"></div>
+    <div id="invActionPanel" class="inv-action-panel" style="display:none;"></div>
+    <div id="invEmptyMsg" class="inv-empty-msg" style="display:none;">Sua mochila está vazia. Derrote inimigos para conseguir itens!</div>
+  </div>
+</div>
+
+<div id="questModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="questModalTitle">
+  <div class="modal-box quest-modal-box">
+    <button class="close-x" data-close="quests" aria-label="Fechar missões">✕</button>
+    <h2 id="questModalTitle">📜 Missões</h2>
+    <section class="quest-panel" aria-label="Lista completa de quests">
+      <div class="quest-section-title">Disponíveis</div>
+      <div id="questAvailableList"></div>
+      <div class="quest-section-title">Ativas</div>
+      <div id="questActiveList"></div>
+      <div class="quest-section-title">Concluídas</div>
+      <div id="questCompletedList"></div>
+    </section>
+  </div>
+</div>
+
+<div id="merchantModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="merchantModalTitle">
+  <div class="modal-box inv-box merchant-box">
+    <button class="close-x" id="merchantClose" aria-label="Fechar comércio">✕</button>
+    <h2 id="merchantModalTitle">🧺 Comércio de Bram <span id="merchantCurrency" class="currency-label"></span></h2>
+    <p id="merchantFeedback" class="npc-dialog-text">Valores provisórios de balanceamento.</p>
+    <div id="merchantList" class="merchant-list"></div>
+  </div>
+</div>
+
+<div id="itemTooltip">
+  <div class="tt-name" id="ttName"></div>
+  <div class="tt-rarity" id="ttRarity"></div>
+  <div class="tt-desc" id="ttDesc"></div>
+</div>
+
+<div id="npcDialogModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="npcDialogName" aria-describedby="npcDialogText">
+  <div class="modal-box npc-dialog-box">
+    <button class="close-x" id="npcDialogClose" aria-label="Fechar diálogo">✕</button>
+    <h2 id="npcDialogName">NPC</h2>
+    <p id="npcDialogText" class="npc-dialog-text"></p>
+    <div id="npcDialogOptions" class="npc-dialog-options"></div>
+  </div>
+</div>
+
+<div id="encounterFlash"><span>⚔️ EM BATALHA! ⚔️</span></div>
+
+<script src="js/core/constants.js"></script>
+<script src="js/core/state.js"></script>
+<script src="js/core/rng.js"></script>
+<script src="js/core/geometry.js"></script>
+<script src="js/core/rules.js"></script>
+<script src="js/core/clock.js"></script>
+<script src="js/core/persistence.js"></script>
+<script src="js/core/viewport.js"></script>
+<script src="js/core/canvas-resolution.js"></script>
+<script src="js/core/isometric.js"></script>
+<script src="js/core/commands.js"></script>
+<script src="js/ui-feedback.js"></script>
+<script src="js/data/audio-assets.js"></script>
+<script src="js/data/abilities.js"></script>
+<script src="js/ui-hud.js"></script>
+<script src="js/data/mobs.js"></script>
+<script src="js/data/items.js"></script>
+<script src="js/data/economy.js"></script>
+<script src="js/data/maps.js"></script>
+<script src="js/data/quests.js"></script>
+<script src="js/data/npcs.js"></script>
+<script src="js/data/fimbria-canonical.js"></script>
+<script src="js/data/map01-visual.js"></script>
+<script src="js/data/map02-visual.js"></script>
+<script src="js/data/map03-visual.js"></script>
+<script src="js/data/map04-visual.js"></script>
+<script src="js/data/map05-visual.js"></script>
+<script src="js/data/map06-visual.js"></script>
+<script src="js/data/map07-visual.js"></script>
+<script src="js/data/map08-visual.js"></script>
+<script src="js/data/map09-visual.js"></script>
+<script src="js/data/map10-visual.js"></script>
+<script src="js/data/map11-visual.js"></script>
+<script src="js/data/fimbria-runtime.js"></script>
+<script src="js/data/visual-assets.js"></script>
+<script src="js/data/character-assets.js"></script>
+<script src="js/core/asset-loader.js"></script>
+<script src="js/systems/quests.js"></script>
+<script src="js/systems/npcs.js"></script>
+<script src="js/systems/consumables.js"></script>
+<script src="js/systems/economy.js"></script>
+<script src="js/systems/world.js"></script>
+<script src="js/systems/fimbria-quest-adapter.js"></script>
+<script src="js/systems/fimbria-inspections.js"></script>
+<script src="js/systems/map-gates.js"></script>
+<script src="js/systems/boss.js"></script>
+<script src="js/systems/combat-effects.js"></script>
+<script src="js/systems/ability-preview.js"></script>
+<script src="js/systems/local-authority.js"></script>
+<script src="js/systems/combat-ai.js"></script>
+  <script src="js/systems/sineira-strategy.js"></script>
+  <script src="js/systems/fimbria-narrative.js"></script>
+  <script src="js/systems/entity-animation.js"></script>
+  <script src="js/systems/audio-manager.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

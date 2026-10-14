@@ -1,0 +1,1989 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Tactical RPG Web v11 - Iniciativa, Relógio de Turno &amp; Arena 12x12</title>
+<style>
+  :root{
+    --bg:#1b1f27;
+    --panel:#232833;
+    --panel2:#2b3140;
+    --accent:#5aa9ff;
+    --accent2:#ffb95a;
+    --danger:#ff5a5a;
+    --ok:#5aff8a;
+    --xp:#c084ff;
+    --grid-empty:#3a4152;
+    --grid-empty2:#333a49;
+    --grid-obstacle:#5a5248;
+    --ow-grass1:#3a5a40;
+    --ow-grass2:#345339;
+    --ow-tree:#22381f;
+    --mob-fire:#ff9a4d;
+    --text:#e7ebf3;
+    --muted:#9aa3b5;
+    --r-comum:#9aa3b5;
+    --r-incomum:#5aff8a;
+    --r-raro:#5aa9ff;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{
+    height:100%; margin:0; overflow:hidden;
+    background:var(--bg); color:var(--text); font-family:'Segoe UI',Roboto,Arial,sans-serif;
+  }
+  body{ display:flex; flex-direction:column; }
+
+  /* =========================================================================================
+     TELA: MENU PRINCIPAL
+     ========================================================================================= */
+  #mainMenuScreen{
+    flex:1; display:flex; align-items:center; justify-content:center; padding:20px;
+    background:
+      radial-gradient(circle at 30% 20%, rgba(90,169,255,0.12), transparent 45%),
+      radial-gradient(circle at 75% 80%, rgba(192,132,255,0.12), transparent 45%),
+      var(--bg);
+  }
+  .menu-card{
+    background:var(--panel); border-radius:16px; padding:36px 32px; text-align:center;
+    max-width:420px; width:100%; box-shadow:0 16px 50px rgba(0,0,0,0.55); border:1px solid #333c4d;
+  }
+  .menu-title{ font-size:26px; margin:0 0 4px 0; color:var(--accent2); letter-spacing:1px; font-weight:800; }
+  .menu-subtitle{ font-size:12px; color:var(--muted); margin:0 0 26px 0; }
+  .menu-progress{
+    background:#12141a; border-radius:8px; padding:10px 14px; margin-bottom:24px; font-size:11.5px;
+    color:var(--muted); text-align:left; display:flex; justify-content:space-between; flex-wrap:wrap; gap:4px;
+  }
+  .menu-progress b{color:var(--xp);}
+  .menu-buttons{ display:flex; flex-direction:column; gap:12px; }
+  .menu-buttons button{
+    border:none; border-radius:10px; cursor:pointer; font-weight:bold; font-family:inherit; min-height:50px;
+  }
+  #startExploreBtn{
+    font-size:17px; background:linear-gradient(135deg,#5aa9ff,#8a5aff); color:#0c1420;
+    box-shadow:0 8px 20px rgba(90,169,255,0.35); letter-spacing:.5px;
+  }
+  #startExploreBtn:active{ transform:translateY(1px); }
+  .menu-secondary-row{ display:flex; gap:10px; }
+  .menu-secondary-row button{
+    flex:1; font-size:13px; background:var(--panel2); color:var(--text); border:1px solid #444c5e;
+  }
+  .menu-secondary-row button:hover{ border-color:var(--accent); background:#323a4a; }
+  .menu-footer{ margin-top:20px; font-size:9.5px; color:var(--muted); }
+
+  /* =========================================================================================
+     LAYOUT COMPARTILHADO
+     ========================================================================================= */
+  #overworldScreen, #gameScreen{ flex:1; display:none; flex-direction:column; min-height:0; padding:10px 14px; }
+
+  h1{ font-size:16px; margin:0 0 8px 0; color:var(--accent2); letter-spacing:.5px; flex:0 0 auto; }
+
+  .app{ display:flex; gap:16px; flex:1 1 auto; min-height:0; }
+  .board-wrap{ flex:0 0 auto; display:flex; align-items:center; justify-content:center; }
+  #boardCanvas, #overworldCanvas{
+    background:var(--panel); border:3px solid #10131a; border-radius:8px; cursor:pointer;
+    box-shadow:0 8px 24px rgba(0,0,0,0.5);
+    width:min(58vh, 58vw, 520px); height:min(58vh, 58vw, 520px);
+    aspect-ratio:1/1; touch-action:none;
+  }
+
+  .panel{
+    flex:1 1 360px; max-width:380px; min-width:280px;
+    display:flex; flex-direction:column; gap:6px; min-height:0;
+  }
+
+  /* ---- Relógio de turno (topo da interface de combate) ---- */
+  .turn-timer-row{ flex:0 0 auto; display:flex; align-items:center; gap:8px; }
+  .turn-timer-track{ flex:1; height:10px; background:#12141a; border-radius:6px; overflow:hidden; border:1px solid #000; }
+  .turn-timer-fill{ height:100%; background:linear-gradient(90deg,#5aff8a,#ffcf5a,#ff5a5a); transition:width 1s linear; }
+  .turn-timer-val{ font-size:11px; font-weight:bold; color:var(--accent2); min-width:30px; text-align:right; }
+
+  .turn-banner{ flex:0 0 auto; text-align:center; font-weight:bold; font-size:13.5px; padding:7px; border-radius:6px; }
+  .turn-player{background:rgba(90,169,255,0.2); color:var(--accent); border:1px solid var(--accent);}
+  .turn-boar{background:rgba(255,90,90,0.2); color:var(--danger); border:1px solid var(--danger);}
+
+  .unit-row{ flex:0 0 auto; display:flex; gap:6px; flex-wrap:wrap; }
+  .unit-card{ background:var(--panel2); border-radius:6px; padding:7px 9px; flex:1 1 45%; min-width:120px; transition:opacity .2s; }
+  .unit-card.dead{ opacity:0.35; }
+  .unit-card h3{margin:0 0 5px 0; font-size:11.5px; display:flex; justify-content:space-between; align-items:center;}
+  .level-badge{background:#12141a; border:1px solid var(--xp); color:var(--xp); font-size:9px; padding:1px 5px; border-radius:10px;}
+  .stat-row{display:flex; align-items:center; gap:5px; margin-bottom:3px; font-size:10px;}
+  .stat-label{width:24px; color:var(--muted); font-weight:bold;}
+  .bar-bg{flex:1; height:9px; background:#12141a; border-radius:4px; overflow:hidden; border:1px solid #000;}
+  .bar-fill{height:100%; transition:width .25s ease;}
+  .fill-hp{background:linear-gradient(90deg,#ff5a5a,#ff9a5a);}
+  .fill-pa{background:linear-gradient(90deg,#5aa9ff,#5ad4ff);}
+  .fill-pm{background:linear-gradient(90deg,#5aff8a,#9cff5a);}
+  .stat-value{width:38px; text-align:right; font-size:9.5px; color:var(--muted);}
+
+  .abilities{ flex:0 0 auto; display:flex; flex-direction:column; gap:4px; }
+  button.ability{
+    background:var(--panel2); color:var(--text); border:1px solid #444c5e; border-radius:6px;
+    padding:6px 9px; text-align:left; cursor:pointer; font-size:11.5px; transition:all .15s;
+  }
+  button.ability .key{
+    display:inline-block; background:#12141a; border:1px solid #555; border-radius:4px;
+    padding:0 5px; margin-right:6px; font-size:10px; color:var(--accent2);
+  }
+  button.ability b{color:var(--accent2);}
+  button.ability .cost{float:right; color:var(--muted); font-size:10px;}
+  button.ability:hover:not(:disabled){border-color:var(--accent); background:#323a4a;}
+  button.ability.active{border-color:var(--ok); background:rgba(90,255,138,0.15); box-shadow:0 0 8px rgba(90,255,138,0.3);}
+  button.ability:disabled{opacity:0.4; cursor:not-allowed;}
+
+  .hint{flex:0 0 auto; font-size:10.5px; color:var(--muted); min-height:14px;}
+
+  .controls{flex:0 0 auto; display:flex; flex-direction:column; gap:4px;}
+  .controls .row{display:flex; gap:5px;}
+  .controls button{
+    flex:1; padding:8px 4px; border:none; border-radius:6px; font-weight:bold; cursor:pointer; font-size:10.5px;
+    min-height:38px;
+  }
+  #endTurnBtn{background:var(--accent); color:#0c1420;}
+  #endTurnBtn:hover{background:#78bbff;}
+  #charBtn, #charBtnOverworld{background:var(--xp); color:#0c1420;}
+  #charBtn:hover, #charBtnOverworld:hover{background:#d3a6ff;}
+  #invBtn, #invBtnOverworld{background:var(--accent2); color:#0c1420;}
+  #invBtn:hover, #invBtnOverworld:hover{background:#ffca80;}
+  #menuBtn, #menuBtnOverworld{background:#3a4152; color:var(--text); font-size:10px;}
+  #menuBtn:hover, #menuBtnOverworld:hover{background:#4a5468;}
+  #resetBtn{background:#444c5e; color:var(--text); font-size:9.5px;}
+  #resetBtn:hover{background:#555f75;}
+
+  .legend{flex:0 0 auto; display:flex; gap:6px; font-size:9px; color:var(--muted); flex-wrap:wrap;}
+  .legend span{display:flex; align-items:center; gap:3px;}
+  .legend .dot{width:9px;height:9px;border-radius:2px;display:inline-block;}
+
+  #log{
+    flex:1 1 auto; min-height:0; background:#12141a; border-radius:6px; padding:7px;
+    overflow-y:auto; font-size:10.5px; color:var(--muted); border:1px solid #000;
+  }
+  #log div{margin-bottom:3px; line-height:1.3;}
+  #log .sys{color:var(--accent2);}
+  #log .dmg{color:var(--danger);}
+  #log .heal{color:var(--ok);}
+  #log .move{color:#9ecbff;}
+  #log .xp{color:var(--xp);}
+  #log .timer{color:#ffcf5a;}
+
+  /* ---------- MODAIS ---------- */
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(0,0,0,0.78); display:none;
+    align-items:center; justify-content:center; z-index:60;
+  }
+  .modal-box{
+    position:relative; background:var(--panel); padding:24px 28px; border-radius:12px; text-align:center;
+    box-shadow:0 10px 40px rgba(0,0,0,0.6); max-width:380px; width:90%;
+  }
+  .modal-box h2{margin:0 0 10px 0; font-size:20px;}
+  .close-x{
+    position:absolute; top:8px; right:10px; background:none; border:none; color:var(--muted);
+    font-size:20px; cursor:pointer; line-height:1; padding:4px;
+  }
+  .close-x:hover{color:var(--danger);}
+  .modal-box button.primary{
+    margin-top:16px; padding:10px 22px; border:none; border-radius:6px; background:var(--accent);
+    color:#0c1420; font-weight:bold; cursor:pointer; font-size:13px; width:100%;
+  }
+  .modal-box button.primary:hover{background:#78bbff;}
+  .modal-box button.secondary{
+    margin-top:10px; padding:9px 20px; border:1px solid #444c5e; border-radius:6px; background:transparent;
+    color:var(--text); cursor:pointer; font-size:12px; display:block; width:100%;
+  }
+  .modal-box button.secondary:hover{ background:var(--panel2); }
+
+  #rewardBox{ background:#12141a; border-radius:8px; padding:10px 14px; margin-top:10px; text-align:left; font-size:12.5px; }
+  #rewardBox div{margin-bottom:4px;}
+  .level-up-banner{
+    text-align:center; font-weight:bold; font-size:16px; color:var(--xp); margin-bottom:8px;
+    animation:pulse 0.9s ease-in-out infinite;
+  }
+  @keyframes pulse{ 0%{transform:scale(1);} 50%{transform:scale(1.08);} 100%{transform:scale(1);} }
+
+  .char-box{ max-width:400px; text-align:left; }
+  .char-box h2{text-align:center;}
+  .char-level{text-align:center; font-size:14px; color:var(--xp); font-weight:bold; margin-bottom:4px;}
+  .xp-bar-bg{height:12px; background:#12141a; border-radius:6px; overflow:hidden; border:1px solid #000;}
+  .xp-bar-fill{height:100%; background:linear-gradient(90deg,#c084ff,#8a5aff); transition:width .3s ease;}
+  .xp-text{text-align:center; font-size:10.5px; color:var(--muted); margin:4px 0 10px 0;}
+  .points-available{ text-align:center; font-size:12px; font-weight:bold; color:var(--ok); margin-bottom:10px; }
+  .stats-list{display:flex; flex-direction:column; gap:8px;}
+  .stat-line{
+    background:var(--panel2); border-radius:6px; padding:8px 10px;
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .stat-name{font-size:12.5px;}
+  .stat-desc{display:block; font-size:9.5px; color:var(--muted); margin-top:2px;}
+  .stat-controls{display:flex; align-items:center; gap:8px;}
+  .stat-num{font-size:15px; font-weight:bold; color:var(--accent2); min-width:20px; text-align:center;}
+  .plus-btn{
+    width:26px; height:26px; border-radius:50%; border:none; background:var(--ok); color:#0c1420;
+    font-weight:bold; font-size:15px; cursor:pointer; line-height:1;
+  }
+  .plus-btn:hover{background:#79ffab;}
+
+  .equip-section{ display:flex; flex-direction:column; gap:6px; margin-bottom:14px; }
+  .equip-slot{
+    background:var(--panel2); border-radius:6px; padding:8px 10px;
+    display:flex; align-items:center; justify-content:space-between; gap:8px; font-size:11.5px;
+  }
+  .equip-slot-label{ color:var(--muted); min-width:70px; font-weight:bold; }
+  .equip-slot-value{ flex:1; }
+  .equip-bonus{ display:block; font-size:9.5px; color:var(--ok); margin-top:1px; }
+  .equip-empty{ color:var(--muted); font-style:italic; }
+  .unequip-btn{
+    background:transparent; border:1px solid var(--danger); color:var(--danger); border-radius:5px;
+    padding:4px 8px; font-size:9.5px; cursor:pointer; white-space:nowrap;
+  }
+  .unequip-btn:hover{ background:rgba(255,90,90,0.15); }
+  .section-divider{ border:none; border-top:1px solid #333c4d; margin:10px 0; }
+
+  .inv-box{ max-width:420px; }
+  .inv-grid{ display:grid; grid-template-columns:repeat(4, 1fr); gap:8px; margin-top:6px; }
+  .inv-slot{
+    aspect-ratio:1/1; background:#12141a; border:2px solid #333c4d; border-radius:8px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    position:relative; cursor:default;
+  }
+  .inv-slot.empty{ opacity:0.35; }
+  .inv-slot.filled{ cursor:help; }
+  .inv-slot.rarity-comum{ border-color:var(--r-comum); }
+  .inv-slot.rarity-incomum{ border-color:var(--r-incomum); box-shadow:0 0 6px rgba(90,255,138,0.35); }
+  .inv-slot.rarity-raro{ border-color:var(--r-raro); box-shadow:0 0 6px rgba(90,169,255,0.35); }
+  .inv-icon{font-size:22px;}
+  .inv-qty{
+    position:absolute; bottom:2px; right:5px; font-size:10px; font-weight:bold; color:var(--text);
+    background:rgba(0,0,0,0.55); border-radius:4px; padding:0 4px;
+  }
+  .inv-empty-msg{ text-align:center; color:var(--muted); font-size:11px; margin-top:10px; }
+
+  .inv-action-panel{
+    margin-top:12px; background:#12141a; border:1px solid #333c4d; border-radius:8px;
+    padding:10px 12px; text-align:left; font-size:11.5px;
+  }
+  .ia-name{ font-weight:bold; font-size:13px; margin-bottom:2px; }
+  .ia-rarity{ font-size:10px; font-weight:bold; margin-bottom:6px; }
+  .ia-desc{ color:var(--muted); line-height:1.35; margin-bottom:8px; }
+  .ia-bonus{ color:var(--ok); font-weight:bold; margin-bottom:8px; }
+  .ia-equip-btn{
+    width:100%; padding:9px; border:none; border-radius:6px; background:var(--ok); color:#0c1420;
+    font-weight:bold; cursor:pointer; font-size:12.5px;
+  }
+  .ia-equip-btn:hover{ background:#79ffab; }
+
+  #itemTooltip{
+    position:fixed; z-index:100; display:none; pointer-events:none;
+    background:#0c1420; border:1px solid #444c5e; border-radius:8px; padding:8px 12px;
+    max-width:220px; font-size:11px; box-shadow:0 6px 20px rgba(0,0,0,0.6);
+  }
+  #itemTooltip .tt-name{font-weight:bold; font-size:12.5px; margin-bottom:2px;}
+  #itemTooltip .tt-rarity{font-size:10px; margin-bottom:6px; font-weight:bold;}
+  #itemTooltip .tt-desc{color:var(--muted); line-height:1.35;}
+
+  #encounterFlash{
+    position:fixed; inset:0; z-index:90; display:none; align-items:center; justify-content:center;
+    background:rgba(0,0,0,0); transition:background .35s ease; pointer-events:none;
+  }
+  #encounterFlash.show{ background:rgba(0,0,0,0.86); }
+  #encounterFlash span{
+    font-size:26px; font-weight:900; color:var(--danger); letter-spacing:2px;
+    text-shadow:0 0 18px rgba(255,90,90,0.7); opacity:0; transform:scale(0.7);
+    transition:opacity .3s ease, transform .3s ease; text-align:center; padding:0 20px;
+  }
+  #encounterFlash.show span{ opacity:1; transform:scale(1); }
+</style>
+</head>
+<body>
+
+<!-- =========================================================================================
+     TELA 1: MENU PRINCIPAL (GAME_STATES.MENU)
+     ========================================================================================= -->
+<div id="mainMenuScreen">
+  <div class="menu-card">
+    <h1 class="menu-title">⚔ TACTICAL RPG WEB ⚔</h1>
+    <p class="menu-subtitle">Explore o mundo, enfrente Javalis e Cogumelos Mágicos em combate tático</p>
+    <div class="menu-progress" id="menuProgressInfo"></div>
+    <div class="menu-buttons">
+      <button id="startExploreBtn">🗺️ EXPLORAR MUNDO</button>
+      <div class="menu-secondary-row">
+        <button id="charBtnMenu">👤 PERSONAGEM</button>
+        <button id="invBtnMenu">🎒 INVENTÁRIO</button>
+      </div>
+    </div>
+    <div class="menu-footer">Seu progresso (nível, atributos, itens e equipamentos) fica salvo entre sessões.</div>
+  </div>
+</div>
+
+<!-- =========================================================================================
+     TELA 2: OVERWORLD / EXPLORAÇÃO (GAME_STATES.OVERWORLD)
+     ========================================================================================= -->
+<div id="overworldScreen">
+  <h1>🗺️ <span id="mapNameLabel">Vila de Entrada</span></h1>
+  <div class="app">
+    <div class="board-wrap"><canvas id="overworldCanvas" width="480" height="480"></canvas></div>
+    <div class="panel">
+      <div id="owHint" class="hint">Toque em uma célula para andar. Toque em um mob para lutar!</div>
+
+      <div class="controls">
+        <div class="row">
+          <button id="charBtnOverworld">👤 Personagem [C]</button>
+          <button id="invBtnOverworld">🎒 Inventário [I]</button>
+        </div>
+        <div class="row"><button id="menuBtnOverworld">🏠 Menu Principal</button></div>
+      </div>
+
+      <div class="legend">
+        <span><span class="dot" style="background:var(--accent)"></span>Você</span>
+        <span><span class="dot" style="background:var(--danger)"></span>Javali (corpo a corpo)</span>
+        <span><span class="dot" style="background:var(--mob-fire)"></span>Cogumelo (à distância)</span>
+        <span><span class="dot" style="background:var(--ow-tree)"></span>Árvore (obstáculo)</span>
+      </div>
+
+      <div id="log"><div class="sys">Bem-vindo à Vila de Entrada! Cuidado: há mobs por perto.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- =========================================================================================
+     TELA 3: COMBATE (GAME_STATES.COMBAT) — arena 12x12, fila de iniciativa, relógio de turno
+     ========================================================================================= -->
+<div id="gameScreen">
+  <h1>⚔ COMBATE — Arena 12x12 ⚔</h1>
+  <div class="app">
+    <div class="board-wrap">
+      <canvas id="boardCanvas" width="480" height="480"></canvas>
+    </div>
+
+    <div class="panel">
+      <!-- Relógio de turno: 30s regressivos, força "Passar Turno" ao zerar -->
+      <div class="turn-timer-row">
+        <div class="turn-timer-track"><div id="turnTimerBar" class="turn-timer-fill" style="width:100%"></div></div>
+        <span id="turnTimerVal" class="turn-timer-val">30s</span>
+      </div>
+      <div id="turnBanner" class="turn-banner turn-player">Turno: Jogador</div>
+
+      <!-- Cartões de combatentes: gerados dinamicamente (suporta N unidades) -->
+      <div class="unit-row" id="combatantsRow"></div>
+
+      <div class="abilities">
+        <button class="ability" id="btnGolpe"><span class="key">1</span><b>Golpe Pesado</b> — 35-45, corpo a corpo<span class="cost">4 PA</span></button>
+        <button class="ability" id="btnAvanco"><span class="key">2</span><b>Avanço Impactante</b> — investida (até 3)<span class="cost">3 PA</span></button>
+        <button class="ability" id="btnCruz"><span class="key">3</span><b>Explosão em Cruz</b> — AoE cruz, alcance 3<span class="cost">4 PA</span></button>
+        <button class="ability" id="btnLanca"><span class="key">4</span><b>Arremesso de Lança</b> — distância 2-3<span class="cost">3 PA</span></button>
+      </div>
+      <div class="hint" id="hint">Movimento livre: clique numa célula verde. 1-4 habilidades, C ficha, I mochila, ESC cancela.</div>
+
+      <div class="controls">
+        <div class="row"><button id="endTurnBtn">Passar Turno</button></div>
+        <div class="row">
+          <button id="charBtn">👤 Personagem [C]</button>
+          <button id="invBtn">🎒 Inventário [I]</button>
+        </div>
+        <div class="row"><button id="menuBtn">🏠 Menu Principal</button></div>
+        <div class="row"><button id="resetBtn">Reiniciar Tudo (zera progresso)</button></div>
+      </div>
+
+      <div class="legend">
+        <span><span class="dot" style="background:var(--accent)"></span>Jogador</span>
+        <span><span class="dot" style="background:var(--grid-obstacle)"></span>Pedra</span>
+        <span><span class="dot" style="background:rgba(90,255,138,0.6)"></span>Movimento</span>
+        <span><span class="dot" style="background:rgba(120,90,255,0.6)"></span>Alcance</span>
+        <span><span class="dot" style="background:rgba(255,90,90,0.6)"></span>AoE</span>
+      </div>
+
+      <div id="combatLog"><div class="sys">Bem-vindo! Calculando iniciativa...</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DE FIM DE BATALHA (Vitória/Derrota) -->
+<div id="overlay" class="modal-overlay">
+  <div class="modal-box">
+    <h2 id="overlayTitle">Fim de Jogo</h2>
+    <p id="overlayText"></p>
+    <div id="rewardBox" style="display:none;">
+      <div id="levelUpBanner" class="level-up-banner" style="display:none;">🎉 LEVEL UP! 🎉</div>
+      <div>XP Ganho: <b id="xpGained" style="color:var(--xp);"></b></div>
+      <div>Itens obtidos: <b id="lootList" style="color:var(--accent2);"></b></div>
+    </div>
+    <button class="primary" id="continueExploringBtn">🗺️ Voltar ao Mapa</button>
+    <button class="secondary" id="backToMenuBtn">🏠 Voltar ao Menu Principal</button>
+  </div>
+</div>
+
+<!-- MODAL DE FICHA DO PERSONAGEM -->
+<div id="characterModal" class="modal-overlay">
+  <div class="modal-box char-box">
+    <button class="close-x" data-close="char">✕</button>
+    <h2>👤 Ficha do Personagem</h2>
+    <div class="char-level">Nível <span id="charLevel">1</span></div>
+    <div class="xp-bar-bg"><div id="xpBarFill" class="xp-bar-fill" style="width:0%"></div></div>
+    <div id="xpText" class="xp-text">0/100 XP</div>
+    <div id="pointsAvailable" class="points-available"></div>
+    <div class="equip-section" id="equipSection"></div>
+    <hr class="section-divider">
+    <div class="stats-list" id="statsList"></div>
+  </div>
+</div>
+
+<!-- MODAL DE INVENTÁRIO -->
+<div id="inventoryModal" class="modal-overlay">
+  <div class="modal-box inv-box">
+    <button class="close-x" data-close="inventory">✕</button>
+    <h2>🎒 Inventário</h2>
+    <div class="inv-grid" id="inventoryGrid"></div>
+    <div id="invActionPanel" class="inv-action-panel" style="display:none;"></div>
+    <div id="invEmptyMsg" class="inv-empty-msg" style="display:none;">Sua mochila está vazia. Derrote inimigos para conseguir itens!</div>
+  </div>
+</div>
+
+<div id="itemTooltip">
+  <div class="tt-name" id="ttName"></div>
+  <div class="tt-rarity" id="ttRarity"></div>
+  <div class="tt-desc" id="ttDesc"></div>
+</div>
+
+<div id="encounterFlash"><span>⚔️ EM BATALHA! ⚔️</span></div>
+
+<script>
+/* =========================================================================================
+   TACTICAL RPG WEB v11 - Estilo Dofus/Wakfu
+   Arquivo único: HTML + CSS + JS.
+
+   NOVIDADES DESTA VERSÃO (sobre a v10) — RELÓGIO DE TURNO + ARQUITETURA MULTI-UNIDADE:
+   1) RELÓGIO DE TURNO: 30s regressivos por turno (jogador OU mob), visível no topo
+      do painel de combate. Ao zerar, força "Passar Turno" automaticamente
+      (`forceEndTurnByTimeout`). O timer é pausado enquanto um modal (Ficha/
+      Inventário) está aberto, e reinicia a cada novo turno.
+   2) FILA DE INICIATIVA (`game.combatants[]` + `game.turnOrder[]`): o combate não
+      é mais um 1v1 engessado. Todas as unidades (jogador + mobs) vivem no mesmo
+      array; a ordem de ação é calculada uma vez no início da luta com base na
+      Agilidade de cada combatente (`computeInitiativeOrder`), e `advanceTurn()`
+      percorre essa fila ciclicamente, pulando quem já morreu.
+   3) ARENA 12x12: o tabuleiro de combate cresceu de 8x8 para 12x12 células
+      (`COMBAT_GRID_SIZE`), com posições de spawn e obstáculos redistribuídos.
+      O Overworld continua em 8x8 — os dois módulos agora usam constantes de
+      grade/célula independentes (`OW_*` vs `COMBAT_*`).
+   4) ENCONTROS EM GRUPO: ao tocar em um mob no Overworld, `startEncounter` tenta
+      puxar um segundo mob próximo (raio 2) para a mesma batalha — uma
+      demonstração concreta de que a arena já suporta múltiplas unidades de
+      uma vez, preparando o terreno para PvE em grupo / PvP no futuro.
+   5) Mobs, equipamentos e loot mantidos da v10, com pequenos ajustes para
+      funcionar com o array genérico de combatentes.
+   ========================================================================================= */
+
+// =========================================================================================
+// MÁQUINA DE ESTADOS DO JOGO
+// =========================================================================================
+const GAME_STATES = { MENU:'MENU', OVERWORLD:'OVERWORLD', COMBAT:'COMBAT' };
+let currentState = GAME_STATES.MENU;
+
+function setGameState(newState){
+  currentState = newState;
+  document.getElementById('mainMenuScreen').style.display = (newState===GAME_STATES.MENU) ? 'flex' : 'none';
+  document.getElementById('overworldScreen').style.display = (newState===GAME_STATES.OVERWORLD) ? 'flex' : 'none';
+  document.getElementById('gameScreen').style.display = (newState===GAME_STATES.COMBAT) ? 'flex' : 'none';
+  if(newState===GAME_STATES.MENU) renderMenuProgress();
+}
+function renderMenuProgress(){
+  const itemCount = Object.values(playerState.inventory).reduce((a,b)=>a+b,0);
+  document.getElementById('menuProgressInfo').innerHTML =
+    `<span>Nível <b>${playerState.level}</b></span>` +
+    `<span>XP <b>${playerState.xp}/${playerState.xpNextLevel}</b></span>` +
+    `<span>Itens <b>${itemCount}</b></span>` +
+    `<span>Pontos <b>${playerState.pontosDisponiveis}</b></span>`;
+}
+
+// =========================================================================================
+// CONSTANTES DE GRADE — Overworld (OW_*) e Combate (COMBAT_*) são independentes
+// =========================================================================================
+const OW_GRID_SIZE = 8;
+const OW_CELL = 60;
+const COMBAT_GRID_SIZE = 12; // arena expandida, preparada para mais unidades
+const COMBAT_CELL = 40;      // 12 * 40 = 480px, mesma resolução de canvas de antes
+const TURN_DURATION_SEC = 30;
+
+function inBoundsSized(x,y,size){ return x>=0 && x<size && y>=0 && y<size; }
+function inBoundsOW(x,y){ return inBoundsSized(x,y,OW_GRID_SIZE); }
+function inBoundsCombat(x,y){ return inBoundsSized(x,y,COMBAT_GRID_SIZE); }
+
+// =========================================================================================
+// TABELA DE DADOS DAS HABILIDADES (combate)
+// =========================================================================================
+const ABILITIES = {
+  golpe: {
+    name: 'Golpe Pesado', paCost: 4, minRange: 1, maxRange: 1, element: 'terra',
+    requiresLoS: true, targetsEnemyOnly: true, damage: [35, 45],
+    aoe: (center) => [center]
+  },
+  cruz: {
+    name: 'Explosão em Cruz', paCost: 4, minRange: 0, maxRange: 3, element: 'fogo',
+    requiresLoS: true, targetsEnemyOnly: false, damage: [25, 32],
+    aoe: (center) => crossCells(center)
+  },
+  lanca: {
+    name: 'Arremesso de Lança', paCost: 3, minRange: 2, maxRange: 3, element: 'terra',
+    requiresLoS: true, targetsEnemyOnly: true, damage: [18, 26],
+    aoe: (center) => [center]
+  }
+};
+const KEY_TO_MODE = { '1':'golpe', '2':'avanco', '3':'cruz', '4':'lanca' };
+function crossCells(center){
+  const offsets = [[0,0],[1,0],[-1,0],[2,0],[-2,0],[0,1],[0,-1],[0,2],[0,-2]];
+  return offsets.map(([ox,oy]) => ({x: center.x+ox, y: center.y+oy}));
+}
+
+// =========================================================================================
+// BANCO DE DADOS DE MOBS (atributos + IA + Agilidade para iniciativa)
+// =========================================================================================
+const MOB_TEMPLATES = {
+  javali: {
+    name:'Javali Selvagem', element:'terra', hp:80, maxHp:80, pa:6, maxPa:6, pm:3, maxPm:3,
+    xpReward:45, ai:'melee', agilidade:4,
+    attackRange:1, attackCost:3, attackDmg:15, attacksPerTurn:2
+  },
+  cogumelo: {
+    name:'Cogumelo Mágico', element:'fogo', hp:55, maxHp:55, pa:6, maxPa:6, pm:2, maxPm:2,
+    xpReward:55, ai:'ranged', agilidade:12,
+    attackMinRange:3, attackMaxRange:5, attackCost:4, attackDmg:18, attacksPerTurn:1
+  }
+};
+const MOB_VISUALS = {
+  javali:   { emoji:'🐗', colorVar:'--danger' },
+  cogumelo: { emoji:'🍄', colorVar:'--mob-fire' }
+};
+function getMobVisual(mobType){ return MOB_VISUALS[mobType] || MOB_VISUALS.javali; }
+
+// =========================================================================================
+// BANCO DE DADOS DE ITENS + TABELAS DE LOOT
+// =========================================================================================
+const ITEM_DB = {
+  couro_javali:    { name:'Couro de Javali',   icon:'🟫', rarity:'Comum',   desc:'Pele resistente e áspera. Usada para confeccionar armaduras leves.' },
+  dente_afiado:    { name:'Dente Afiado',      icon:'🦷', rarity:'Incomum', desc:'Presa afiada como uma navalha. Ingrediente valioso para armas rústicas.' },
+  presa_robusta:   { name:'Presa Robusta',     icon:'🦴', rarity:'Incomum', desc:'Presa grande e densa, muito procurada por ferreiros da região.' },
+  pata_javali:     { name:'Pata de Javali',    icon:'🐾', rarity:'Comum',   desc:'Pata do javali, usada em rituais tribais e na culinária local.' },
+  carne_suculenta: { name:'Carne Suculenta',   icon:'🍖', rarity:'Raro',    desc:'Corte nobre e fresco. Restaura energias quando consumido após a batalha.' },
+  esporo_brilhante: { name:'Esporo Brilhante', icon:'✨', rarity:'Comum',  desc:'Um esporo luminoso e levemente quente ao toque.' },
+  nucleo_flamejante:{ name:'Núcleo Flamejante', icon:'🔥', rarity:'Raro',  desc:'Núcleo instável que ainda emite calor intenso mesmo fora do corpo do cogumelo.' },
+  chapeu_couro: {
+    name:'Chapéu de Couro', icon:'🎩', rarity:'Incomum',
+    desc:'Um chapéu resistente feito com couro de javali curtido. Protege a cabeça em combate.',
+    equip:{ slot:'hat', bonus:{ hp:20 }, bonusLabel:'+20 HP Máximo' }
+  },
+  espada_madeira: {
+    name:'Espada de Madeira', icon:'🗡️', rarity:'Comum',
+    desc:'Uma espada de treino simples, mas ainda assim cortante o suficiente para lutar.',
+    equip:{ slot:'weapon', bonus:{ forca:3 }, bonusLabel:'+3 Força' }
+  },
+  cajado_magico: {
+    name:'Cajado Mágico', icon:'🪄', rarity:'Raro',
+    desc:'Cajado entalhado que canaliza a energia flamejante extraída do núcleo do cogumelo.',
+    equip:{ slot:'weapon', bonus:{ inteligencia:8 }, bonusLabel:'+8 Inteligência' }
+  },
+  anel_forca: {
+    name:'Anel de Força', icon:'💍', rarity:'Raro',
+    desc:'Um anel simples que fortalece os músculos de quem o usa.',
+    equip:{ slot:'ring', bonus:{ forca:5 }, bonusLabel:'+5 Força' }
+  },
+  anel_magico: {
+    name:'Anel Mágico', icon:'💫', rarity:'Raro',
+    desc:'Anel enfeitiçado que amplifica os poderes arcanos do seu portador.',
+    equip:{ slot:'ring', bonus:{ inteligencia:5 }, bonusLabel:'+5 Inteligência' }
+  }
+};
+const RARITY_CLASS = { 'Comum':'rarity-comum', 'Incomum':'rarity-incomum', 'Raro':'rarity-raro' };
+const LOOT_TABLES = {
+  javali:   { materials:['couro_javali','dente_afiado','presa_robusta','pata_javali','carne_suculenta'],
+              equipChance:0.35, equipPool:['chapeu_couro','anel_forca','espada_madeira'] },
+  cogumelo: { materials:['esporo_brilhante','nucleo_flamejante'],
+              equipChance:0.40, equipPool:['cajado_magico','anel_magico'] }
+};
+
+// =========================================================================================
+// PROGRESSÃO DO JOGADOR (persistente)
+// =========================================================================================
+const STAT_INFO = {
+  vitalidade:   {label:'Vitalidade',   desc:'+10 HP Máximo por ponto'},
+  forca:        {label:'Força',        desc:'+1% Dano Terra/Físico por ponto'},
+  inteligencia: {label:'Inteligência', desc:'+1% Dano de Fogo/Cura por ponto'},
+  agilidade:    {label:'Agilidade',    desc:'+0.5% Crítico por ponto e define a ordem de iniciativa'}
+};
+function createInitialPlayerState(){
+  return {
+    level:1, xp:0, xpNextLevel:100, pontosDisponiveis:0,
+    stats:{ vitalidade:0, forca:0, inteligencia:0, agilidade:0 },
+    inventory:{},
+    equipment:{ hat:null, weapon:null, ring:null }
+  };
+}
+let playerState = createInitialPlayerState();
+
+function grantXP(amount){
+  playerState.xp += amount;
+  let leveledUp = false;
+  while(playerState.xp >= playerState.xpNextLevel){
+    playerState.xp -= playerState.xpNextLevel;
+    playerState.level += 1;
+    playerState.xpNextLevel = Math.round(playerState.xpNextLevel * 1.5);
+    playerState.pontosDisponiveis += 5;
+    leveledUp = true;
+  }
+  return leveledUp;
+}
+
+function getEffectiveStats(){
+  const eff = {
+    vitalidade: playerState.stats.vitalidade, forca: playerState.stats.forca,
+    inteligencia: playerState.stats.inteligencia, agilidade: playerState.stats.agilidade,
+    flatHpBonus: 0
+  };
+  Object.values(playerState.equipment).forEach(itemId=>{
+    if(!itemId) return;
+    const item = ITEM_DB[itemId];
+    if(!item || !item.equip) return;
+    const bonus = item.equip.bonus || {};
+    if(bonus.hp) eff.flatHpBonus += bonus.hp;
+    if(bonus.forca) eff.forca += bonus.forca;
+    if(bonus.inteligencia) eff.inteligencia += bonus.inteligencia;
+    if(bonus.agilidade) eff.agilidade += bonus.agilidade;
+    if(bonus.vitalidade) eff.vitalidade += bonus.vitalidade;
+  });
+  return eff;
+}
+function calcPlayerMaxHp(){
+  const eff = getEffectiveStats();
+  return 100 + eff.vitalidade*10 + eff.flatHpBonus;
+}
+function syncPlayerMaxHp(){
+  if(!game) return;
+  const player = getPlayerCombatant();
+  if(!player) return;
+  const newMax = calcPlayerMaxHp();
+  const delta = newMax - player.maxHp;
+  player.maxHp = newMax;
+  player.hp = Math.max(0, Math.min(player.hp + delta, newMax));
+}
+function allocatePoint(stat){
+  if(playerState.pontosDisponiveis<=0) return;
+  playerState.stats[stat] += 1;
+  playerState.pontosDisponiveis -= 1;
+  if(stat==='vitalidade') syncPlayerMaxHp();
+  renderCharacterModal();
+  if(currentState===GAME_STATES.COMBAT) updateSidePanel();
+  if(currentState===GAME_STATES.MENU) renderMenuProgress();
+}
+function addItemsToInventory(loot){
+  loot.forEach(({id,qty})=>{ playerState.inventory[id] = (playerState.inventory[id]||0) + qty; });
+}
+function playerDealsDamage(baseDamage, element){
+  const eff = getEffectiveStats();
+  const attrKey = element==='fogo' ? 'inteligencia' : 'forca';
+  const attrValue = eff[attrKey];
+  let dmg = baseDamage * (1 + attrValue/100);
+  const critChance = eff.agilidade * 0.005;
+  const isCrit = Math.random() < critChance;
+  if(isCrit) dmg *= 1.5;
+  return { dmg: Math.round(dmg), isCrit, attrValue, attrLabel: STAT_INFO[attrKey].label };
+}
+function equipItem(itemId){
+  const item = ITEM_DB[itemId];
+  if(!item || !item.equip) return;
+  if(!playerState.inventory[itemId] || playerState.inventory[itemId]<=0) return;
+  playerState.inventory[itemId] -= 1;
+  if(playerState.inventory[itemId]<=0) delete playerState.inventory[itemId];
+  const slot = item.equip.slot;
+  const previous = playerState.equipment[slot];
+  if(previous){ playerState.inventory[previous] = (playerState.inventory[previous]||0) + 1; }
+  playerState.equipment[slot] = itemId;
+  syncPlayerMaxHp();
+  renderCharacterModal();
+  renderInventoryModal();
+  if(currentState===GAME_STATES.COMBAT) updateSidePanel();
+}
+function unequipItem(slot){
+  const itemId = playerState.equipment[slot];
+  if(!itemId) return;
+  playerState.equipment[slot] = null;
+  playerState.inventory[itemId] = (playerState.inventory[itemId]||0) + 1;
+  syncPlayerMaxHp();
+  renderCharacterModal();
+  renderInventoryModal();
+  if(currentState===GAME_STATES.COMBAT) updateSidePanel();
+}
+
+// =========================================================================================
+// UTILITÁRIOS GENÉRICOS (BFS, LoS, Bresenham)
+// =========================================================================================
+function manhattan(a,b){ return Math.abs(a.x-b.x)+Math.abs(a.y-b.y); }
+function bfsGeneric(startX,startY,isBlocked,gridSize){
+  const dist=new Map(), parent=new Map();
+  const key=(x,y)=>x+','+y;
+  dist.set(key(startX,startY),0);
+  const queue=[[startX,startY]];
+  const dirs=[[1,0],[-1,0],[0,1],[0,-1]];
+  while(queue.length){
+    const [cx,cy]=queue.shift();
+    const cd=dist.get(key(cx,cy));
+    for(const [dx,dy] of dirs){
+      const nx=cx+dx, ny=cy+dy;
+      if(!inBoundsSized(nx,ny,gridSize)) continue;
+      if(isBlocked(nx,ny)) continue;
+      const k=key(nx,ny);
+      if(!dist.has(k)){ dist.set(k,cd+1); parent.set(k,key(cx,cy)); queue.push([nx,ny]); }
+    }
+  }
+  return {dist,parent};
+}
+function reconstructPath(parent, startX,startY, targetX,targetY){
+  const key=(x,y)=>x+','+y;
+  const path=[];
+  let cur=key(targetX,targetY);
+  const startKey=key(startX,startY);
+  if(!parent.has(cur) && cur!==startKey) return null;
+  while(cur!==startKey){
+    const [x,y]=cur.split(',').map(Number);
+    path.unshift({x,y});
+    cur=parent.get(cur);
+    if(cur===undefined) return null;
+  }
+  return path;
+}
+function getLineCells(x0,y0,x1,y1){
+  const cells=[];
+  let dx=Math.abs(x1-x0), dy=Math.abs(y1-y0);
+  let sx = x0<x1 ? 1 : -1, sy = y0<y1 ? 1 : -1;
+  let err = dx-dy, x=x0, y=y0;
+  while(true){
+    cells.push({x,y});
+    if(x===x1 && y===y1) break;
+    const e2 = 2*err;
+    if(e2 > -dy){ err -= dy; x += sx; }
+    if(e2 <  dx){ err += dx; y += sy; }
+  }
+  return cells;
+}
+function randInt(min,max){ return Math.floor(Math.random()*(max-min+1))+min; }
+function getCssVar(varName){ return getComputedStyle(document.documentElement).getPropertyValue(varName).trim(); }
+function cellFromClientXY(canvasEl, clientX, clientY, cellSize){
+  const rect=canvasEl.getBoundingClientRect();
+  const scaleX = canvasEl.width/rect.width, scaleY=canvasEl.height/rect.height;
+  const mx=(clientX-rect.left)*scaleX, my=(clientY-rect.top)*scaleY;
+  return { x:Math.floor(mx/cellSize), y:Math.floor(my/cellSize) };
+}
+
+// =========================================================================================
+// NOTIFICAÇÃO DE TRANSIÇÃO "⚔️ EM BATALHA!"
+// =========================================================================================
+function showEncounterFlash(onDone){
+  const el = document.getElementById('encounterFlash');
+  el.style.display='flex';
+  requestAnimationFrame(()=>{ el.classList.add('show'); });
+  setTimeout(()=>{
+    el.classList.remove('show');
+    setTimeout(()=>{ el.style.display='none'; onDone(); }, 350);
+  }, 650);
+}
+
+// =========================================================================================
+// MÓDULO DE OVERWORLD (mapa 8x8 de exploração)
+// =========================================================================================
+const overworldCanvas = document.getElementById('overworldCanvas');
+const owCtx = overworldCanvas.getContext('2d');
+
+const mapDatabase = {
+  "0,0": {
+    name: "Vila de Entrada",
+    terrainRows: [
+      ".T......",
+      "........",
+      "..T.....",
+      "........",
+      "........",
+      "........",
+      "....T...",
+      "........"
+    ],
+    exits: { right: "1,0" },
+    mobs: [ { type:'javali', x:5, y:3 }, { type:'javali', x:2, y:2 } ]
+  },
+  "1,0": {
+    name: "Floresta dos Javalis",
+    terrainRows: [
+      ".T.T.T.T",
+      "........",
+      "T.T...T.",
+      "........",
+      "..T...T.",
+      "........",
+      "T.T.T...",
+      "........"
+    ],
+    exits: { left: "0,0" },
+    mobs: [ { type:'javali', x:5, y:2 }, { type:'javali', x:2, y:5 }, { type:'cogumelo', x:6, y:6 } ]
+  }
+};
+
+function getMap(mapId){ return mapDatabase[mapId]; }
+function isOverworldObstacle(map,x,y){ return map.terrainRows[y][x]==='T'; }
+
+let overworldState = {
+  currentMapId: "0,0",
+  player: { x:1, y:4 },
+  mapRuntime: {},
+  moving: false,
+  moveInterval: null,
+  currentEncounterMobIds: null, // agora é uma LISTA de ids (suporta encontros em grupo)
+  pendingReturn: null
+};
+let mobMoveTimer = null;
+const MIN_ALIVE_MOBS = 2;
+const MAX_MOB_SLOTS  = 4;
+
+function ensureMapRuntimeState(mapId){
+  if(overworldState.mapRuntime[mapId]) return;
+  const map = getMap(mapId);
+  overworldState.mapRuntime[mapId] = {
+    mobs: map.mobs.map((m,i)=>({ id:`${mapId}_mob_${i}`, type:m.type, x:m.x, y:m.y, isAlive:true, engaged:false }))
+  };
+  ensureMinimumMobs(mapId);
+}
+function getCurrentMap(){ return getMap(overworldState.currentMapId); }
+function getCurrentRuntime(){ return overworldState.mapRuntime[overworldState.currentMapId]; }
+function getMobAt(x,y){
+  const runtime=getCurrentRuntime();
+  if(!runtime) return null;
+  return runtime.mobs.find(m=>m.isAlive && !m.engaged && m.x===x && m.y===y) || null;
+}
+function ensureMinimumMobs(mapId){
+  const map = getMap(mapId);
+  if(!map.mobs || map.mobs.length===0) return;
+  const runtime = overworldState.mapRuntime[mapId];
+  if(!runtime) return;
+  const aliveCount = runtime.mobs.filter(m=>m.isAlive && !m.engaged).length;
+  if(aliveCount >= MIN_ALIVE_MOBS) return;
+  if(runtime.mobs.length >= MAX_MOB_SLOTS) return;
+  const cell = findRandomFreeCell(map, runtime);
+  if(!cell) return;
+  const availableTypes = [...new Set(map.mobs.map(m=>m.type))];
+  const randomType = availableTypes[randInt(0, availableTypes.length-1)];
+  runtime.mobs.push({
+    id: `${mapId}_mob_spawn_${runtime.mobs.length}_${Date.now()}`,
+    type: randomType, x: cell.x, y: cell.y, isAlive:true, engaged:false
+  });
+}
+
+function updateMapNameLabel(){ document.getElementById('mapNameLabel').textContent = getCurrentMap().name; }
+function updateOverworldHint(text){ document.getElementById('owHint').textContent = text; }
+
+function enterOverworld(){
+  ensureMapRuntimeState(overworldState.currentMapId);
+  updateMapNameLabel();
+  updateOverworldHint('Toque em uma célula para andar. Toque em um mob para lutar!');
+  setGameState(GAME_STATES.OVERWORLD);
+  startMobMovementTimer();
+}
+function changeMap(newMapId, enterSide){
+  overworldState.currentMapId = newMapId;
+  ensureMapRuntimeState(newMapId);
+  overworldState.player.x = (enterSide==='left') ? 0 : OW_GRID_SIZE-1;
+  ensureMinimumMobs(newMapId);
+  updateMapNameLabel();
+  updateOverworldHint(`Você chegou em: ${getCurrentMap().name}`);
+}
+function bfsOverworldPath(map, start, target){
+  const {dist,parent} = bfsGeneric(start.x, start.y, (x,y)=>isOverworldObstacle(map,x,y), OW_GRID_SIZE);
+  const k = target.x+','+target.y;
+  if(!dist.has(k)) return null;
+  return reconstructPath(parent, start.x, start.y, target.x, target.y);
+}
+function moveAlongPath(path){
+  if(overworldState.moving || path.length===0) return;
+  overworldState.moving = true;
+  let i=0;
+  overworldState.moveInterval = setInterval(()=>{
+    if(i>=path.length){ stopMoving(); return; }
+    const step = path[i]; i++;
+    overworldState.player.x = step.x;
+    overworldState.player.y = step.y;
+    const mobHere = getMobAt(step.x, step.y);
+    if(mobHere){ stopMoving(); startEncounter(mobHere); return; }
+    const map = getCurrentMap();
+    if(step.x===OW_GRID_SIZE-1 && map.exits.right){ stopMoving(); changeMap(map.exits.right,'left'); return; }
+    if(step.x===0 && map.exits.left){ stopMoving(); changeMap(map.exits.left,'right'); return; }
+  }, 160);
+}
+function stopMoving(){
+  if(overworldState.moveInterval) clearInterval(overworldState.moveInterval);
+  overworldState.moveInterval=null;
+  overworldState.moving=false;
+}
+function handleOverworldClick(x,y){
+  if(currentState!==GAME_STATES.OVERWORLD || overworldState.moving) return;
+  if(!inBoundsOW(x,y)) return;
+  const map = getCurrentMap();
+  if(isOverworldObstacle(map,x,y)){ updateOverworldHint('Não é possível atravessar essa árvore.'); return; }
+  const path = bfsOverworldPath(map, overworldState.player, {x,y});
+  if(!path){ updateOverworldHint('Não há caminho livre até essa célula.'); return; }
+  if(path.length===0) return;
+  moveAlongPath(path);
+}
+function moveMobsRandomly(){
+  if(currentState!==GAME_STATES.OVERWORLD) return;
+  ensureMinimumMobs(overworldState.currentMapId);
+  const runtime = getCurrentRuntime();
+  if(!runtime) return;
+  const map = getCurrentMap();
+  const dirs=[[1,0],[-1,0],[0,1],[0,-1]];
+  for(const mob of runtime.mobs){
+    if(!mob.isAlive || mob.engaged) continue;
+    if(Math.random()>0.7) continue;
+    const [dx,dy] = dirs[randInt(0,3)];
+    const nx=mob.x+dx, ny=mob.y+dy;
+    if(!inBoundsOW(nx,ny) || isOverworldObstacle(map,nx,ny)) continue;
+    mob.x=nx; mob.y=ny;
+    if(nx===overworldState.player.x && ny===overworldState.player.y){ startEncounter(mob); return; }
+  }
+}
+function startMobMovementTimer(){ stopMobMovementTimer(); mobMoveTimer=setInterval(moveMobsRandomly, 3000); }
+function stopMobMovementTimer(){ if(mobMoveTimer){ clearInterval(mobMoveTimer); mobMoveTimer=null; } }
+function findRandomFreeCell(map, runtime){
+  for(let tries=0; tries<30; tries++){
+    const x=randInt(0,OW_GRID_SIZE-1), y=randInt(0,OW_GRID_SIZE-1);
+    if(isOverworldObstacle(map,x,y)) continue;
+    if(x===overworldState.player.x && y===overworldState.player.y) continue;
+    if(runtime.mobs.some(m=>m.isAlive && m.x===x && m.y===y)) continue;
+    return {x,y};
+  }
+  return null;
+}
+function scheduleRespawn(mapId, mobId){
+  const delay = randInt(5000, 10000);
+  setTimeout(()=>{
+    const runtime = overworldState.mapRuntime[mapId];
+    if(!runtime) return;
+    const mob = runtime.mobs.find(m=>m.id===mobId);
+    if(!mob) return;
+    const map = getMap(mapId);
+    const cell = findRandomFreeCell(map, runtime);
+    if(cell){ mob.x=cell.x; mob.y=cell.y; }
+    mob.isAlive = true;
+    mob.engaged = false;
+  }, delay);
+}
+
+// =========================================================================================
+// GATILHO DE COMBATE (Overworld -> Combate) — agora suporta ENCONTROS EM GRUPO
+// =========================================================================================
+// startEncounter: engaja o mob tocado e, se houver outro mob livre a até 2
+// células de distância, também o puxa para a mesma luta — uma demonstração
+// concreta do combate multi-unidade (1 jogador vs até 2 mobs simultâneos).
+function startEncounter(primaryMob){
+  overworldState.pendingReturn = { mapId: overworldState.currentMapId, x: overworldState.player.x, y: overworldState.player.y };
+  primaryMob.engaged = true;
+  const groupIds = [primaryMob.id];
+
+  const runtime = getCurrentRuntime();
+  if(runtime){
+    const nearby = runtime.mobs.find(m=> m.id!==primaryMob.id && m.isAlive && !m.engaged && manhattan(m, overworldState.player)<=2);
+    if(nearby){ nearby.engaged=true; groupIds.push(nearby.id); }
+  }
+  overworldState.currentEncounterMobIds = groupIds;
+
+  const mobsSpec = groupIds.map(id=>{
+    const m = runtime.mobs.find(mm=>mm.id===id);
+    return { id: m.id, type: m.type };
+  });
+
+  stopMobMovementTimer();
+  showEncounterFlash(()=>{ startCombat(mobsSpec); });
+}
+
+// returnToOverworldAfterCombat: resolve o destino de CADA mob envolvido no
+// encontro (derrotado -> respawn agendado; sobrevivente -> volta a vagar).
+function returnToOverworldAfterCombat(){
+  const runtime = getCurrentRuntime();
+  const ids = overworldState.currentEncounterMobIds || [];
+  let anyDefeated = false;
+  ids.forEach(id=>{
+    const mob = runtime && runtime.mobs.find(m=>m.id===id);
+    if(!mob) return;
+    const combatant = game && game.combatants.find(c=>c.id===id);
+    const defeated = !!(combatant && combatant.hp<=0);
+    if(defeated){
+      anyDefeated = true;
+      mob.isAlive=false; mob.engaged=false;
+      scheduleRespawn(overworldState.currentMapId, mob.id);
+    } else {
+      mob.engaged=false;
+    }
+  });
+  overworldState.currentEncounterMobIds=null;
+
+  resetCombatState();
+
+  document.getElementById('overlay').style.display='none';
+  ensureMinimumMobs(overworldState.currentMapId);
+  updateMapNameLabel();
+  updateOverworldHint(anyDefeated
+    ? 'Você retornou à exploração. Os mobs derrotados devem reaparecer em breve!'
+    : 'Você retornou à exploração. Continue procurando por desafios!');
+  setGameState(GAME_STATES.OVERWORLD);
+  startMobMovementTimer();
+}
+
+function renderOverworldFrame(now){
+  owCtx.clearRect(0,0,overworldCanvas.width,overworldCanvas.height);
+  const map = getCurrentMap();
+  for(let y=0;y<OW_GRID_SIZE;y++){
+    for(let x=0;x<OW_GRID_SIZE;x++){
+      const px=x*OW_CELL, py=y*OW_CELL;
+      const isTree = isOverworldObstacle(map,x,y);
+      owCtx.fillStyle = (x+y)%2===0 ? getCssVar('--ow-grass1') : getCssVar('--ow-grass2');
+      owCtx.fillRect(px,py,OW_CELL,OW_CELL);
+      owCtx.strokeStyle='rgba(0,0,0,0.25)';
+      owCtx.strokeRect(px+0.5,py+0.5,OW_CELL-1,OW_CELL-1);
+      if(isTree){
+        owCtx.fillStyle=getCssVar('--ow-tree');
+        owCtx.beginPath();
+        owCtx.moveTo(px+OW_CELL/2, py+8);
+        owCtx.lineTo(px+OW_CELL-10, py+OW_CELL-14);
+        owCtx.lineTo(px+10, py+OW_CELL-14);
+        owCtx.closePath();
+        owCtx.fill();
+        owCtx.fillStyle='#5a3d2b';
+        owCtx.fillRect(px+OW_CELL/2-3, py+OW_CELL-16, 6, 12);
+      }
+    }
+  }
+  const runtime = getCurrentRuntime();
+  if(runtime){
+    runtime.mobs.forEach((mob,idx)=>{
+      if(!mob.isAlive || mob.engaged) return;
+      const bob = Math.sin(now/280 + idx)*3;
+      const visual = getMobVisual(mob.type);
+      drawOverworldToken(mob.x, mob.y, bob, getCssVar(visual.colorVar), visual.emoji);
+    });
+  }
+  drawOverworldToken(overworldState.player.x, overworldState.player.y, 0, getCssVar('--accent'), '🧙');
+}
+function drawOverworldToken(gx,gy,yOffset,color,emoji){
+  const cx=gx*OW_CELL+OW_CELL/2, cy=gy*OW_CELL+OW_CELL/2+yOffset;
+  owCtx.beginPath();
+  owCtx.arc(cx,cy,OW_CELL*0.32,0,Math.PI*2);
+  owCtx.fillStyle=color;
+  owCtx.fill();
+  owCtx.lineWidth=2;
+  owCtx.strokeStyle='rgba(0,0,0,0.6)';
+  owCtx.stroke();
+  owCtx.font='24px sans-serif';
+  owCtx.textAlign='center';
+  owCtx.textBaseline='middle';
+  owCtx.fillText(emoji, cx, cy+1);
+}
+
+overworldCanvas.addEventListener('click',(e)=>{
+  const {x,y}=cellFromClientXY(overworldCanvas, e.clientX, e.clientY, OW_CELL);
+  handleOverworldClick(x,y);
+});
+overworldCanvas.addEventListener('touchstart',(e)=>{
+  if(currentState!==GAME_STATES.OVERWORLD) return;
+  const touch=e.touches[0];
+  if(!touch) return;
+  e.preventDefault();
+  const {x,y}=cellFromClientXY(overworldCanvas, touch.clientX, touch.clientY, OW_CELL);
+  handleOverworldClick(x,y);
+}, {passive:false});
+
+// =========================================================================================
+// ESTADO DE COMBATE — ARQUITETURA MULTI-UNIDADE (combatants[] + fila de iniciativa)
+// =========================================================================================
+const canvas = document.getElementById('boardCanvas');
+const ctx = canvas.getContext('2d');
+let game = null;
+
+const PLAYER_SPAWN = { x:2, y:10 };
+const MOB_SPAWNS_BY_COUNT = {
+  1: [ {x:9,y:1} ],
+  2: [ {x:9,y:1}, {x:10,y:3} ]
+};
+const COMBAT_OBSTACLES = [[5,5],[6,5],[5,6],[6,6],[2,2],[9,9],[3,8],[8,3]];
+
+// getCombatantById / getPlayerCombatant / getAliveMobs / getUnitAt: acessores
+// genéricos usados por toda a lógica de combate — a mesma referência de objeto
+// (não cópias) é compartilhada entre `game.combatants` e `game.player`.
+function getCombatantById(id){ return game.combatants.find(c=>c.id===id); }
+function getPlayerCombatant(){ return game.combatants.find(c=>c.side==='player'); }
+function getAliveMobs(){ return game.combatants.filter(c=>c.side==='mob' && c.hp>0); }
+function getUnitAt(x,y){ return game.combatants.find(c=>c.hp>0 && c.x===x && c.y===y) || null; }
+function isObstacle(x,y){ return game.board[y][x]==='obstacle'; }
+
+// computeInitiativeOrder: ordena os IDs dos combatentes por Agilidade
+// (jogador via getEffectiveStats, mobs via MOB_TEMPLATES), com um pequeno
+// desempate aleatório para evitar empates determinísticos.
+function computeInitiativeOrder(combatants){
+  const scored = combatants.map(c=>{
+    const agi = c.side==='player' ? getEffectiveStats().agilidade : (MOB_TEMPLATES[c.mobType].agilidade || 0);
+    return { id:c.id, score: agi + Math.random()*0.01 };
+  });
+  scored.sort((a,b)=>b.score-a.score);
+  return scored.map(s=>s.id);
+}
+
+// createInitialState: monta a arena 12x12 e a lista de combatentes a partir de
+// `mobsSpec` (array de {id,type}) — id vem do Overworld quando disponível,
+// garantindo correspondência 1:1 entre o mob no mapa e o combatente na luta.
+function createInitialState(mobsSpec){
+  const board = [];
+  for(let y=0;y<COMBAT_GRID_SIZE;y++){ const row=[]; for(let x=0;x<COMBAT_GRID_SIZE;x++) row.push('empty'); board.push(row); }
+  COMBAT_OBSTACLES.forEach(([x,y])=>{ board[y][x]='obstacle'; });
+
+  const playerMaxHp = calcPlayerMaxHp();
+  const playerCombatant = {
+    id:'player', side:'player', name:'Jogador',
+    x:PLAYER_SPAWN.x, y:PLAYER_SPAWN.y, hp:playerMaxHp, maxHp:playerMaxHp,
+    pa:6, maxPa:6, pm:4, maxPm:4,
+    golpeCooldown:0, golpeAvailable:true, usedLanca:false, sprite:null
+  };
+
+  const spawnPositions = MOB_SPAWNS_BY_COUNT[mobsSpec.length] || MOB_SPAWNS_BY_COUNT[1];
+  const mobCombatants = mobsSpec.map((spec,i)=>{
+    const template = MOB_TEMPLATES[spec.type];
+    const pos = spawnPositions[i] || spawnPositions[spawnPositions.length-1];
+    return {
+      id: spec.id, side:'mob', mobType: spec.type, name: template.name,
+      x: pos.x, y: pos.y, hp: template.hp, maxHp: template.maxHp,
+      pa: template.pa, maxPa: template.maxPa, pm: template.pm, maxPm: template.maxPm
+    };
+  });
+
+  const combatants = [playerCombatant, ...mobCombatants];
+  const turnOrder = computeInitiativeOrder(combatants);
+
+  return {
+    board, combatants, turnOrder, turnIndex:0, turnNumber:1,
+    mode:null, hoverCell:null, gameOver:false, floatingTexts:[],
+    player: playerCombatant, // referência de conveniência (MESMO objeto)
+    avancoPaths:null
+  };
+}
+
+// startCombat: aceita tanto um array [{id,type}] (fluxo normal via Overworld)
+// quanto uma string solta (compatibilidade/testes) — nesse caso gera um id sintético.
+function startCombat(mobsSpec){
+  const spec = Array.isArray(mobsSpec)
+    ? mobsSpec
+    : [{ id:`mob_solo_${Date.now()}`, type: mobsSpec || 'javali' }];
+  game = createInitialState(spec);
+  clearLog();
+  const mobNames = game.combatants.filter(c=>c.side==='mob').map(c=>c.name).join(' e ');
+  const firstName = getCombatantById(game.turnOrder[0]).side==='player' ? 'Jogador' : getCombatantById(game.turnOrder[0]).name;
+  logCombat('sys', `${mobNames} apareceu! Iniciativa calculada — ${firstName} começa.`);
+  setGameState(GAME_STATES.COMBAT);
+  startTurnFor(getCurrentCombatant());
+}
+
+function backToMenu(){
+  if(game && !game.gameOver && overworldState.currentEncounterMobIds){
+    const runtime=getCurrentRuntime();
+    overworldState.currentEncounterMobIds.forEach(id=>{
+      const mob = runtime && runtime.mobs.find(m=>m.id===id);
+      if(mob) mob.engaged=false;
+    });
+    overworldState.currentEncounterMobIds=null;
+  }
+  stopMobMovementTimer();
+  resetCombatState();
+  closeAllModals();
+  document.getElementById('overlay').style.display='none';
+  setGameState(GAME_STATES.MENU);
+}
+function resetGame(){
+  closeAllModals();
+  document.getElementById('overlay').style.display='none';
+  playerState = createInitialPlayerState();
+  overworldState = { currentMapId:"0,0", player:{x:1,y:4}, mapRuntime:{}, moving:false, moveInterval:null, currentEncounterMobIds:null, pendingReturn:null };
+  resetCombatState();
+  clearLog();
+  logCombat('sys','Nova partida iniciada do zero. Progresso do personagem reiniciado.');
+}
+// resetCombatState: zera `game`, log, timer de turno e a UI de combate por completo.
+function resetCombatState(){
+  game = null;
+  clearTurnTimer();
+  clearLog();
+  ['btnGolpe','btnAvanco','btnCruz','btnLanca'].forEach(id=>{
+    const el = document.getElementById(id);
+    el.classList.remove('active');
+    el.disabled = true;
+  });
+  document.getElementById('endTurnBtn').disabled = true;
+  document.getElementById('combatantsRow').innerHTML='';
+  const banner = document.getElementById('turnBanner');
+  banner.textContent = 'Turno: Jogador';
+  banner.className = 'turn-banner turn-player';
+  document.getElementById('turnTimerBar').style.width='100%';
+  document.getElementById('turnTimerVal').textContent = `${TURN_DURATION_SEC}s`;
+}
+
+function bfs(startX,startY, mover){
+  return bfsGeneric(startX,startY, (x,y)=>{
+    if(isObstacle(x,y)) return true;
+    const occ=getUnitAt(x,y);
+    return !!(occ && occ!==mover);
+  }, COMBAT_GRID_SIZE);
+}
+function hasLineOfSight(fromX,fromY,toX,toY){
+  const cells = getLineCells(fromX,fromY,toX,toY);
+  for(let i=1;i<cells.length-1;i++){
+    const c = cells[i];
+    if(!inBoundsCombat(c.x,c.y)) return false;
+    if(isObstacle(c.x,c.y)) return false;
+    if(getUnitAt(c.x,c.y)) return false;
+  }
+  return true;
+}
+
+// =========================================================================================
+// RELÓGIO DE TURNO — 30s regressivos; força "Passar Turno" ao zerar
+// =========================================================================================
+let turnTimerInterval = null;
+let turnTimeLeft = TURN_DURATION_SEC;
+function startTurnTimer(){
+  clearTurnTimer();
+  turnTimeLeft = TURN_DURATION_SEC;
+  updateTurnTimerDisplay();
+  turnTimerInterval = setInterval(()=>{
+    if(activeModal) return; // pausa enquanto o jogador consulta Ficha/Inventário
+    turnTimeLeft--;
+    updateTurnTimerDisplay();
+    if(turnTimeLeft<=0){
+      clearTurnTimer();
+      forceEndTurnByTimeout();
+    }
+  }, 1000);
+}
+function clearTurnTimer(){ if(turnTimerInterval){ clearInterval(turnTimerInterval); turnTimerInterval=null; } }
+function updateTurnTimerDisplay(){
+  const valEl=document.getElementById('turnTimerVal');
+  const barEl=document.getElementById('turnTimerBar');
+  if(valEl) valEl.textContent = `${Math.max(0,turnTimeLeft)}s`;
+  if(barEl) barEl.style.width = Math.max(0,(turnTimeLeft/TURN_DURATION_SEC)*100)+'%';
+}
+// forceEndTurnByTimeout: chamado quando o relógio zera — cancela o modo de
+// habilidade em aberto (se for turno do jogador) e passa a vez adiante.
+function forceEndTurnByTimeout(){
+  if(!game || game.gameOver) return;
+  const current = getCurrentCombatant();
+  if(!current) return;
+  const name = current.side==='player' ? 'Jogador' : current.name;
+  logCombat('timer', `⏱️ Tempo esgotado! Turno de ${name} passado automaticamente.`);
+  if(current.side==='player'){ game.mode=null; game.hoverCell=null; }
+  advanceTurn();
+}
+
+// =========================================================================================
+// RENDERIZAÇÃO DO COMBATE (arena 12x12)
+// =========================================================================================
+function render(now){
+  now = now || performance.now();
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  const highlights = computeHighlights();
+  for(let y=0;y<COMBAT_GRID_SIZE;y++){
+    for(let x=0;x<COMBAT_GRID_SIZE;x++){
+      const px=x*COMBAT_CELL, py=y*COMBAT_CELL;
+      let color=(x+y)%2===0 ? getCssVar('--grid-empty') : getCssVar('--grid-empty2');
+      if(isObstacle(x,y)) color=getCssVar('--grid-obstacle');
+      const hl = highlights.get(x+','+y);
+      if(hl) color = hl;
+      ctx.fillStyle=color;
+      ctx.fillRect(px,py,COMBAT_CELL,COMBAT_CELL);
+      ctx.strokeStyle='rgba(0,0,0,0.35)';
+      ctx.lineWidth=1;
+      ctx.strokeRect(px+0.5,py+0.5,COMBAT_CELL-1,COMBAT_CELL-1);
+      if(isObstacle(x,y)){
+        ctx.fillStyle='rgba(0,0,0,0.25)';
+        ctx.beginPath();
+        ctx.arc(px+COMBAT_CELL/2, py+COMBAT_CELL/2, COMBAT_CELL*0.28, 0, Math.PI*2);
+        ctx.fill();
+      }
+    }
+  }
+  // desenha TODOS os combatentes vivos (arquitetura genérica, não apenas 1v1)
+  game.combatants.forEach(c=>{
+    if(c.hp<=0) return;
+    if(c.side==='player') drawUnitVisual(c, getCssVar('--accent'), 'J');
+    else { const v=getMobVisual(c.mobType); drawUnitVisual(c, getCssVar(v.colorVar), v.emoji); }
+  });
+  updateFloatingTexts(now);
+  drawFloatingTexts(now);
+  updateSidePanel();
+}
+function drawUnitVisual(unit, color, letter){
+  const cx=unit.x*COMBAT_CELL+COMBAT_CELL/2, cy=unit.y*COMBAT_CELL+COMBAT_CELL/2;
+  if(unit.sprite){
+    ctx.drawImage(unit.sprite, unit.x*COMBAT_CELL, unit.y*COMBAT_CELL, COMBAT_CELL, COMBAT_CELL);
+  } else {
+    ctx.beginPath();
+    ctx.arc(cx,cy,COMBAT_CELL*0.36,0,Math.PI*2);
+    ctx.fillStyle=color;
+    ctx.fill();
+    ctx.lineWidth=2;
+    ctx.strokeStyle='rgba(0,0,0,0.6)';
+    ctx.stroke();
+    ctx.fillStyle='#0c1420';
+    ctx.font='bold 15px sans-serif';
+    ctx.textAlign='center';
+    ctx.textBaseline='middle';
+    ctx.fillText(letter, cx, cy+1);
+  }
+  const barW=COMBAT_CELL*0.8, barH=5;
+  const bx=cx-barW/2, by=unit.y*COMBAT_CELL+3;
+  ctx.fillStyle='#12141a';
+  ctx.fillRect(bx,by,barW,barH);
+  const pct=Math.max(0,unit.hp/unit.maxHp);
+  ctx.fillStyle = pct>0.5 ? '#5aff8a' : (pct>0.25 ? '#ffcf5a' : '#ff5a5a');
+  ctx.fillRect(bx,by,barW*pct,barH);
+  ctx.strokeStyle='rgba(0,0,0,0.5)';
+  ctx.strokeRect(bx,by,barW,barH);
+}
+
+function computeHighlights(){
+  const map = new Map();
+  const current = getCurrentCombatant();
+  if(game.gameOver || !current || current.side!=='player') return map;
+  const p = current;
+
+  if(game.mode===null){
+    if(p.pm>0){
+      const {dist} = bfs(p.x,p.y,p);
+      dist.forEach((d,key)=>{
+        if(d>0 && d<=p.pm){
+          const [x,y]=key.split(',').map(Number);
+          if(!getUnitAt(x,y)) map.set(x+','+y, 'rgba(90,255,138,0.45)');
+        }
+      });
+    }
+  }
+  else if(game.mode==='avanco'){
+    const paths = computeAvancoPaths();
+    game.avancoPaths = paths;
+    Object.values(paths).forEach(info=>{
+      info.cells.forEach((c,i)=>{
+        const isLast = i===info.cells.length-1;
+        map.set(c.x+','+c.y, (isLast && info.hitUnit) ? 'rgba(255,150,60,0.65)' : 'rgba(255,150,60,0.35)');
+      });
+    });
+  }
+  else if(ABILITIES[game.mode]){
+    const ability = ABILITIES[game.mode];
+    for(let y=0;y<COMBAT_GRID_SIZE;y++){
+      for(let x=0;x<COMBAT_GRID_SIZE;x++){
+        const d = manhattan(p,{x,y});
+        if(d<ability.minRange || d>ability.maxRange) continue;
+        const losOk = !ability.requiresLoS || hasLineOfSight(p.x,p.y,x,y);
+        map.set(x+','+y, losOk ? 'rgba(120,90,255,0.30)' : 'rgba(120,120,120,0.35)');
+      }
+    }
+    if(game.hoverCell){
+      const {x,y} = game.hoverCell;
+      const d = manhattan(p,{x,y});
+      const inRange = d>=ability.minRange && d<=ability.maxRange;
+      const losOk = !ability.requiresLoS || hasLineOfSight(p.x,p.y,x,y);
+      if(inRange && losOk){
+        ability.aoe({x,y}).forEach(c=>{
+          if(inBoundsCombat(c.x,c.y)) map.set(c.x+','+c.y, 'rgba(255,90,90,0.55)');
+        });
+      }
+    }
+  }
+  return map;
+}
+function computeAvancoPaths(){
+  const p = getCurrentCombatant();
+  const dirs={ N:[0,-1], S:[0,1], L:[1,0], O:[-1,0] };
+  const result={};
+  Object.entries(dirs).forEach(([key,[dx,dy]])=>{
+    const cells=[];
+    let hitUnit=null;
+    for(let i=1;i<=3;i++){
+      const nx=p.x+dx*i, ny=p.y+dy*i;
+      if(!inBoundsCombat(nx,ny) || isObstacle(nx,ny)) break;
+      const occ=getUnitAt(nx,ny);
+      if(occ){
+        if(occ.side==='mob'){ cells.push({x:nx,y:ny}); hitUnit=occ; }
+        break;
+      }
+      cells.push({x:nx,y:ny});
+    }
+    if(cells.length>0) result[key]={dir:[dx,dy], cells, hitUnit};
+  });
+  return result;
+}
+
+// =========================================================================================
+// FLOATING TEXT
+// =========================================================================================
+function spawnFloatingText(gridX,gridY,text,color){
+  game.floatingTexts.push({ x:gridX*COMBAT_CELL+COMBAT_CELL/2+(Math.random()*14-7), y:gridY*COMBAT_CELL+COMBAT_CELL/2, text, color, born:performance.now(), duration:1000 });
+}
+function updateFloatingTexts(now){ game.floatingTexts = game.floatingTexts.filter(ft => (now-ft.born) < ft.duration); }
+function drawFloatingTexts(now){
+  ctx.save();
+  ctx.font='bold 14px sans-serif';
+  ctx.textAlign='center';
+  game.floatingTexts.forEach(ft=>{
+    const age = now-ft.born;
+    const progress = Math.min(1, age/ft.duration);
+    ctx.globalAlpha = Math.max(0,1-progress);
+    const yOffset = -progress*36;
+    ctx.strokeStyle='rgba(0,0,0,0.65)'; ctx.lineWidth=3;
+    ctx.strokeText(ft.text, ft.x, ft.y+yOffset);
+    ctx.fillStyle=ft.color;
+    ctx.fillText(ft.text, ft.x, ft.y+yOffset);
+  });
+  ctx.restore();
+  ctx.globalAlpha=1;
+}
+function applyDamage(unit, dmg){ unit.hp=Math.max(0,unit.hp-dmg); spawnFloatingText(unit.x,unit.y,`-${dmg} HP`,'#ff5a5a'); }
+function applyHeal(unit, amount){ const before=unit.hp; unit.hp=Math.min(unit.maxHp,unit.hp+amount); spawnFloatingText(unit.x,unit.y,`+${unit.hp-before} HP`,'#5aff8a'); }
+
+// =========================================================================================
+// PAINEL LATERAL — cartões de combatentes gerados dinamicamente (N unidades)
+// =========================================================================================
+function updateSidePanel(){
+  const row = document.getElementById('combatantsRow');
+  row.innerHTML = game.combatants.map(c=>{
+    const dead = c.hp<=0;
+    let nameHtml;
+    if(c.side==='player'){
+      nameHtml = `🧙 Jogador <span class="level-badge">Nv. ${playerState.level}</span>`;
+    } else {
+      const v = getMobVisual(c.mobType);
+      nameHtml = `${v.emoji} ${c.name}`;
+    }
+    return `<div class="unit-card ${dead?'dead':''}">
+      <h3><span>${nameHtml}</span></h3>
+      <div class="stat-row"><span class="stat-label">HP</span><div class="bar-bg"><div class="bar-fill fill-hp" style="width:${Math.max(0,(c.hp/c.maxHp)*100)}%"></div></div><span class="stat-value">${Math.max(0,c.hp)}/${c.maxHp}</span></div>
+      <div class="stat-row"><span class="stat-label">PA</span><div class="bar-bg"><div class="bar-fill fill-pa" style="width:${Math.max(0,(c.pa/c.maxPa)*100)}%"></div></div><span class="stat-value">${Math.max(0,c.pa)}/${c.maxPa}</span></div>
+      <div class="stat-row"><span class="stat-label">PM</span><div class="bar-bg"><div class="bar-fill fill-pm" style="width:${Math.max(0,(c.pm/c.maxPm)*100)}%"></div></div><span class="stat-value">${Math.max(0,c.pm)}/${c.maxPm}</span></div>
+    </div>`;
+  }).join('');
+
+  const current = getCurrentCombatant();
+  const banner=document.getElementById('turnBanner');
+  if(current){
+    const isPlayerTurn = current.side==='player';
+    banner.textContent = `Rodada ${game.turnNumber} — Vez de ${isPlayerTurn ? 'Jogador' : current.name}`;
+    banner.className = isPlayerTurn ? 'turn-banner turn-player' : 'turn-banner turn-boar';
+  }
+
+  const p = getPlayerCombatant();
+  const isPlayerTurnNow = current && current.side==='player' && !game.gameOver;
+  document.getElementById('btnGolpe').disabled = !isPlayerTurnNow || p.pa<4 || !p.golpeAvailable;
+  document.getElementById('btnAvanco').disabled = !isPlayerTurnNow || p.pa<3;
+  document.getElementById('btnCruz').disabled = !isPlayerTurnNow || p.pa<4;
+  document.getElementById('btnLanca').disabled = !isPlayerTurnNow || p.pa<3 || p.usedLanca;
+  document.getElementById('endTurnBtn').disabled = !isPlayerTurnNow;
+
+  ['btnGolpe','btnAvanco','btnCruz','btnLanca'].forEach(id=> document.getElementById(id).classList.remove('active'));
+  const modeToBtn={golpe:'btnGolpe',avanco:'btnAvanco',cruz:'btnCruz',lanca:'btnLanca'};
+  if(game.mode && modeToBtn[game.mode]) document.getElementById(modeToBtn[game.mode]).classList.add('active');
+
+  let hintTxt='Movimento livre: clique numa célula verde. 1-4 habilidades, C ficha, I mochila, ESC cancela.';
+  if(game.mode==='golpe') hintTxt='[Golpe Pesado] Clique num alvo adjacente com LoS livre. ESC cancela.';
+  if(game.mode==='avanco') hintTxt='[Avanço] Clique em uma célula destacada para avançar naquela direção. ESC cancela.';
+  if(game.mode==='cruz') hintTxt='[Explosão em Cruz] Passe o mouse para pré-visualizar a área. ESC cancela.';
+  if(game.mode==='lanca') hintTxt='[Lança] Alvo a 2-3 células com LoS livre. ESC cancela.';
+  if(!isPlayerTurnNow) hintTxt = game.gameOver ? 'Partida encerrada.' : 'Aguarde a vez do próximo combatente...';
+  document.getElementById('hint').textContent=hintTxt;
+}
+function logCombat(cls,msg){
+  const div=document.createElement('div'); div.className=cls; div.textContent=msg;
+  const logEl=document.getElementById('combatLog');
+  logEl.appendChild(div); logEl.scrollTop=logEl.scrollHeight;
+}
+function clearLog(){ const el=document.getElementById('combatLog'); if(el) el.innerHTML=''; }
+
+// =========================================================================================
+// GERENCIADOR DE MODAIS (Ficha e Inventário)
+// =========================================================================================
+let activeModal = null;
+function closeAllModals(){
+  document.getElementById('characterModal').style.display='none';
+  document.getElementById('inventoryModal').style.display='none';
+  hideTooltip();
+  activeModal=null;
+}
+function openModal(name){
+  closeAllModals();
+  activeModal=name;
+  if(name==='char'){ document.getElementById('characterModal').style.display='flex'; renderCharacterModal(); }
+  else if(name==='inventory'){ document.getElementById('inventoryModal').style.display='flex'; renderInventoryModal(); }
+}
+function toggleModal(name){ if(activeModal===name) closeAllModals(); else openModal(name); }
+
+function renderCharacterModal(){
+  document.getElementById('charLevel').textContent = playerState.level;
+  document.getElementById('xpText').textContent = `${playerState.xp}/${playerState.xpNextLevel} XP`;
+  document.getElementById('xpBarFill').style.width = Math.min(100,(playerState.xp/playerState.xpNextLevel)*100)+'%';
+  const pts = playerState.pontosDisponiveis;
+  document.getElementById('pointsAvailable').textContent = pts>0 ? `✨ ${pts} ponto(s) de atributo disponível(is)` : 'Nenhum ponto disponível no momento';
+  renderEquipmentSlots();
+  const list=document.getElementById('statsList');
+  list.innerHTML='';
+  Object.entries(STAT_INFO).forEach(([key,info])=>{
+    const row=document.createElement('div');
+    row.className='stat-line';
+    row.innerHTML = `<div class="stat-name">${info.label}<span class="stat-desc">${info.desc}</span></div>
+      <div class="stat-controls"><span class="stat-num">${playerState.stats[key]}</span>${pts>0?`<button class="plus-btn" data-stat="${key}">+</button>`:''}</div>`;
+    list.appendChild(row);
+  });
+  list.querySelectorAll('.plus-btn').forEach(btn=>{ btn.onclick=()=>allocatePoint(btn.getAttribute('data-stat')); });
+}
+const EQUIP_SLOT_LABELS = { hat:'🎩 Chapéu', weapon:'⚔️ Arma', ring:'💍 Anel' };
+function renderEquipmentSlots(){
+  const container = document.getElementById('equipSection');
+  container.innerHTML = Object.entries(EQUIP_SLOT_LABELS).map(([slot,label])=>{
+    const itemId = playerState.equipment[slot];
+    const item = itemId ? ITEM_DB[itemId] : null;
+    const valueHtml = item
+      ? `${item.icon} ${item.name}<span class="equip-bonus">${item.equip.bonusLabel}</span>`
+      : `<span class="equip-empty">Vazio</span>`;
+    return `<div class="equip-slot">
+        <div class="equip-slot-label">${label}</div>
+        <div class="equip-slot-value">${valueHtml}</div>
+        ${item ? `<button class="unequip-btn" data-slot="${slot}">Remover</button>` : ''}
+      </div>`;
+  }).join('');
+  container.querySelectorAll('.unequip-btn').forEach(btn=>{ btn.onclick = ()=> unequipItem(btn.getAttribute('data-slot')); });
+}
+
+const INVENTORY_SLOTS = 16;
+let selectedInventoryItemId = null;
+function renderInventoryModal(){
+  const grid = document.getElementById('inventoryGrid');
+  grid.innerHTML='';
+  selectedInventoryItemId = null;
+  document.getElementById('invActionPanel').style.display='none';
+  const entries = Object.entries(playerState.inventory).filter(([id,qty])=>qty>0);
+  document.getElementById('invEmptyMsg').style.display = entries.length===0 ? 'block' : 'none';
+  for(let i=0;i<INVENTORY_SLOTS;i++){
+    const slot=document.createElement('div'); slot.className='inv-slot';
+    const entry=entries[i];
+    if(entry){
+      const [id,qty]=entry; const item=ITEM_DB[id];
+      slot.classList.add('filled', RARITY_CLASS[item.rarity]);
+      slot.innerHTML = `<div class="inv-icon">${item.icon}</div><div class="inv-qty">x${qty}</div>`;
+      slot.addEventListener('mouseenter',(e)=>showTooltip(e,item));
+      slot.addEventListener('mousemove', moveTooltip);
+      slot.addEventListener('mouseleave', hideTooltip);
+      slot.addEventListener('click', ()=> selectInventoryItem(id));
+    } else { slot.classList.add('empty'); }
+    grid.appendChild(slot);
+  }
+}
+function selectInventoryItem(id){
+  selectedInventoryItemId = id;
+  const item = ITEM_DB[id];
+  const panel = document.getElementById('invActionPanel');
+  panel.style.display='block';
+  panel.innerHTML = `
+    <div class="ia-name">${item.icon} ${item.name}</div>
+    <div class="ia-rarity" style="color:${getCssVar('--r-'+item.rarity.toLowerCase())}">${item.rarity}</div>
+    <div class="ia-desc">${item.desc}</div>
+    ${item.equip
+      ? `<div class="ia-bonus">${item.equip.bonusLabel} (slot: ${EQUIP_SLOT_LABELS[item.equip.slot]})</div>
+         <button class="ia-equip-btn" id="iaEquipBtn">Equipar</button>`
+      : ''}
+  `;
+  if(item.equip){ document.getElementById('iaEquipBtn').onclick = ()=>{ equipItem(id); }; }
+}
+function showTooltip(e,item){
+  const tt=document.getElementById('itemTooltip');
+  document.getElementById('ttName').textContent = item.name;
+  const rarityEl=document.getElementById('ttRarity');
+  rarityEl.textContent = item.rarity;
+  rarityEl.style.color = getCssVar(`--r-${item.rarity.toLowerCase()}`);
+  document.getElementById('ttDesc').textContent = item.desc;
+  tt.style.display='block';
+  moveTooltip(e);
+}
+function moveTooltip(e){
+  const tt=document.getElementById('itemTooltip');
+  const offset=16;
+  let left=e.clientX+offset, top=e.clientY+offset;
+  const rect=tt.getBoundingClientRect();
+  if(left+rect.width>window.innerWidth) left=e.clientX-rect.width-offset;
+  if(top+rect.height>window.innerHeight) top=e.clientY-rect.height-offset;
+  tt.style.left=left+'px'; tt.style.top=top+'px';
+}
+function hideTooltip(){ document.getElementById('itemTooltip').style.display='none'; }
+
+document.getElementById('charBtn').onclick = ()=>toggleModal('char');
+document.getElementById('invBtn').onclick  = ()=>toggleModal('inventory');
+document.getElementById('charBtnMenu').onclick = ()=>toggleModal('char');
+document.getElementById('invBtnMenu').onclick  = ()=>toggleModal('inventory');
+document.getElementById('charBtnOverworld').onclick = ()=>toggleModal('char');
+document.getElementById('invBtnOverworld').onclick  = ()=>toggleModal('inventory');
+document.querySelectorAll('.close-x').forEach(btn=>{ btn.onclick = closeAllModals; });
+
+// =========================================================================================
+// AÇÕES DO JOGADOR NO COMBATE
+// =========================================================================================
+function setMode(mode){
+  const current = getCurrentCombatant();
+  if(!current || current.side!=='player' || game.gameOver) return;
+  game.mode = (game.mode===mode) ? null : mode;
+  game.hoverCell=null;
+}
+document.getElementById('btnGolpe').onclick  = ()=>setMode('golpe');
+document.getElementById('btnAvanco').onclick = ()=>setMode('avanco');
+document.getElementById('btnCruz').onclick   = ()=>setMode('cruz');
+document.getElementById('btnLanca').onclick  = ()=>setMode('lanca');
+document.getElementById('endTurnBtn').onclick= ()=>endPlayerTurn();
+document.getElementById('resetBtn').onclick  = ()=>resetGame();
+document.getElementById('continueExploringBtn').onclick = ()=>returnToOverworldAfterCombat();
+document.getElementById('menuBtn').onclick   = ()=>backToMenu();
+document.getElementById('menuBtnOverworld').onclick = ()=>backToMenu();
+document.getElementById('backToMenuBtn').onclick = ()=>backToMenu();
+document.getElementById('startExploreBtn').onclick = ()=>enterOverworld();
+
+document.addEventListener('keydown',(e)=>{
+  if(e.key==='c' || e.key==='C'){ toggleModal('char'); return; }
+  if(e.key==='i' || e.key==='I'){ toggleModal('inventory'); return; }
+  if(activeModal){ if(e.key==='Escape') closeAllModals(); return; }
+  if(currentState!==GAME_STATES.COMBAT || !game) return;
+  const current = getCurrentCombatant();
+  if(!current || current.side!=='player' || game.gameOver) return;
+  if(KEY_TO_MODE[e.key]){ setMode(KEY_TO_MODE[e.key]); }
+  else if(e.key==='Escape'){ game.mode=null; game.hoverCell=null; }
+});
+
+function handleBoardInteraction(x,y){
+  if(currentState!==GAME_STATES.COMBAT || !game) return;
+  if(activeModal) return;
+  const current = getCurrentCombatant();
+  if(!current || current.side!=='player' || game.gameOver) return;
+  if(!inBoundsCombat(x,y)) return;
+  if(game.mode===null) tryMove(x,y);
+  else if(game.mode==='avanco') tryAvanco(x,y);
+  else if(ABILITIES[game.mode]) tryCastAbility(game.mode,x,y);
+}
+canvas.addEventListener('mousemove',(e)=>{
+  if(currentState!==GAME_STATES.COMBAT || !game) return;
+  const {x,y}=cellFromClientXY(canvas, e.clientX, e.clientY, COMBAT_CELL);
+  game.hoverCell = inBoundsCombat(x,y) ? {x,y} : null;
+});
+canvas.addEventListener('mouseleave',()=>{ if(game) game.hoverCell=null; });
+canvas.addEventListener('click',(e)=>{ const {x,y}=cellFromClientXY(canvas, e.clientX, e.clientY, COMBAT_CELL); handleBoardInteraction(x,y); });
+canvas.addEventListener('touchstart',(e)=>{
+  if(currentState!==GAME_STATES.COMBAT || !game) return;
+  const touch=e.touches[0]; if(!touch) return;
+  e.preventDefault();
+  const {x,y}=cellFromClientXY(canvas, touch.clientX, touch.clientY, COMBAT_CELL);
+  game.hoverCell = inBoundsCombat(x,y) ? {x,y} : null;
+  handleBoardInteraction(x,y);
+}, {passive:false});
+
+function tryMove(x,y){
+  const p = getCurrentCombatant();
+  if(p.pm<=0) return;
+  if(getUnitAt(x,y)){ logCombat('sys','Célula ocupada.'); return; }
+  const {dist}=bfs(p.x,p.y,p);
+  const d=dist.get(x+','+y);
+  if(d===undefined || d===0 || d>p.pm) return;
+  p.x=x; p.y=y; p.pm-=d;
+  logCombat('move',`Jogador se move (${d} PM usados).`);
+}
+
+function tryCastAbility(key, clickX, clickY){
+  const ability = ABILITIES[key];
+  const p = getCurrentCombatant();
+  if(p.pa < ability.paCost){ logCombat('sys','PA insuficiente.'); return; }
+  if(key==='golpe' && !p.golpeAvailable){ logCombat('sys','Golpe Pesado está em recarga.'); return; }
+  if(key==='lanca' && p.usedLanca){ logCombat('sys','Arremesso de Lança já foi usado neste turno.'); return; }
+  const d = manhattan(p, {x:clickX,y:clickY});
+  if(d < ability.minRange || d > ability.maxRange){ logCombat('sys','Alvo fora de alcance.'); return; }
+  if(ability.requiresLoS && !hasLineOfSight(p.x,p.y,clickX,clickY)){ logCombat('sys','Sem linha de visão até essa célula.'); return; }
+  if(ability.targetsEnemyOnly){
+    const t = getUnitAt(clickX,clickY);
+    if(!t || t.side!=='mob'){ logCombat('sys','Nenhum alvo válido nessa célula.'); return; }
+  }
+  const baseDmg = randInt(ability.damage[0], ability.damage[1]);
+  const { dmg, isCrit, attrValue, attrLabel } = playerDealsDamage(baseDmg, ability.element);
+  const affectedCells = ability.aoe({x:clickX,y:clickY});
+  let hitCount=0;
+  affectedCells.forEach(c=>{
+    if(!inBoundsCombat(c.x,c.y)) return;
+    const unit = getUnitAt(c.x,c.y);
+    if(unit){
+      applyDamage(unit, dmg);
+      hitCount++;
+      const nome = unit.side==='player' ? 'Jogador' : unit.name;
+      let extra = attrValue>0 ? ` (${attrLabel} +${attrValue}%)` : '';
+      if(isCrit) extra += ' 💥CRÍTICO!';
+      logCombat('dmg', `Jogador usou ${ability.name} causando ${dmg} de dano em ${nome}${extra}.`);
+    }
+  });
+  if(hitCount===0) logCombat('sys', `${ability.name} não atingiu nenhuma unidade.`);
+  p.pa -= ability.paCost;
+  if(key==='golpe'){ p.golpeCooldown=1; p.golpeAvailable=false; }
+  if(key==='lanca'){ p.usedLanca=true; }
+  game.mode=null;
+  checkVictory();
+}
+
+function tryAvanco(x,y){
+  const p = getCurrentCombatant();
+  if(p.pa<3){ logCombat('sys','PA insuficiente para Avanço Impactante.'); return; }
+  const paths = game.avancoPaths || computeAvancoPaths();
+  let chosen=null;
+  Object.values(paths).forEach(info=>{ if(info.cells.some(c=>c.x===x && c.y===y)) chosen=info; });
+  if(!chosen){ logCombat('sys','Direção inválida para Avanço.'); return; }
+  const base=20;
+  const stepsMoved = chosen.cells.length - (chosen.hitUnit ? 1 : 0);
+  const dest = chosen.hitUnit ? chosen.cells[chosen.cells.length-2] : chosen.cells[chosen.cells.length-1];
+  if(dest){ p.x=dest.x; p.y=dest.y; }
+  p.pa-=3;
+  if(chosen.hitUnit){
+    const actualSteps = dest ? stepsMoved : 0;
+    const blocked = 3-actualSteps;
+    const baseDmg = Math.round(base + base*0.5*blocked);
+    const { dmg, isCrit, attrValue, attrLabel } = playerDealsDamage(baseDmg, 'terra');
+    applyDamage(chosen.hitUnit, dmg);
+    let extra = attrValue>0 ? ` (${attrLabel} +${attrValue}%)` : '';
+    if(isCrit) extra += ' 💥CRÍTICO!';
+    logCombat('dmg',`Jogador usou Avanço Impactante causando ${dmg} de dano em ${chosen.hitUnit.name} (bloqueado em ${blocked} célula(s))${extra}.`);
+  } else {
+    logCombat('move','Avanço Impactante: jogador avançou sem colidir com nenhum inimigo.');
+  }
+  game.mode=null;
+  game.avancoPaths=null;
+  checkVictory();
+}
+
+// =========================================================================================
+// FLUXO DE TURNOS — fila de iniciativa genérica
+// =========================================================================================
+function endPlayerTurn(){
+  const current = getCurrentCombatant();
+  if(!current || current.side!=='player' || game.gameOver) return;
+  game.mode=null; game.hoverCell=null;
+  logCombat('sys','--- Fim do turno do Jogador ---');
+  advanceTurn();
+}
+
+// advanceTurn: avança o ponteiro na fila de iniciativa, pulando combatentes
+// mortos, e inicia o turno de quem for o próximo (jogador OU mob).
+function advanceTurn(){
+  clearTurnTimer();
+  if(game.gameOver) return;
+  let attempts=0;
+  do {
+    game.turnIndex = (game.turnIndex+1) % game.turnOrder.length;
+    attempts++;
+  } while(!isCombatantAliveInOrder(game.turnOrder[game.turnIndex]) && attempts<=game.turnOrder.length);
+  if(game.turnIndex===0) game.turnNumber++;
+  startTurnFor(getCurrentCombatant());
+}
+function isCombatantAliveInOrder(id){ const c=getCombatantById(id); return c && c.hp>0; }
+function getCurrentCombatant(){ return game.combatants.find(c=>c.id===game.turnOrder[game.turnIndex]); }
+
+// startTurnFor: restaura PA/PM do combatente ativo, reinicia o relógio de
+// turno e, se for um mob, dispara sua IA após um pequeno delay de "leitura".
+function startTurnFor(c){
+  if(!c || game.gameOver) return;
+  c.pa = c.maxPa; c.pm = c.maxPm;
+  startTurnTimer();
+  if(c.side==='player'){
+    c.usedLanca=false;
+    c.golpeAvailable = (c.golpeCooldown===0);
+    if(c.golpeCooldown>0) c.golpeCooldown--;
+    logCombat('sys', `Turno ${game.turnNumber} — Jogador começa.`);
+    updateSidePanel();
+  } else {
+    logCombat('sys', `Turno de ${c.name} começa.`);
+    updateSidePanel();
+    setTimeout(()=>runMobTurn(c), 500);
+  }
+}
+
+// =========================================================================================
+// IA DOS MOBS — dispatcher genérico (melee/ranged) recebendo o combatente ativo
+// =========================================================================================
+function runMobTurn(mobCombatant){
+  if(game.gameOver || mobCombatant.hp<=0){ advanceTurn(); return; }
+  const template = MOB_TEMPLATES[mobCombatant.mobType];
+  if(template.ai==='ranged') runRangedMobAI(mobCombatant, template);
+  else runMeleeMobAI(mobCombatant, template);
+}
+
+function runMeleeMobAI(b, template){
+  const p = getPlayerCombatant();
+  const distBefore = manhattan(b,p);
+  if(distBefore <= template.attackRange){
+    logCombat('sys', `${template.name} já está ao alcance; nenhum deslocamento necessário.`);
+  } else if(b.pm>0){
+    const targetCell = findBestAdjacentCell(b,p);
+    if(targetCell){
+      const {parent} = bfs(b.x,b.y,b);
+      const path = reconstructPath(parent, b.x,b.y, targetCell.x,targetCell.y);
+      if(path && path.length>0){
+        const steps = Math.min(path.length, b.pm);
+        const dest = path[steps-1];
+        b.x=dest.x; b.y=dest.y; b.pm-=steps;
+        logCombat('move',`${template.name} moveu ${steps} célula(s) em direção ao jogador.`);
+      }
+    } else { logCombat('sys', `${template.name} não encontrou caminho válido até o jogador.`); }
+  }
+  setTimeout(()=>meleeAttackPhase(b, template, 0), 600);
+}
+function meleeAttackPhase(b, template, count){
+  if(game.gameOver) return;
+  const p = getPlayerCombatant();
+  const dist = manhattan(b,p);
+  const canAttack = dist<=template.attackRange && b.pa>=template.attackCost && count<template.attacksPerTurn && p.hp>0;
+  if(canAttack){
+    b.pa-=template.attackCost;
+    applyDamage(p, template.attackDmg);
+    logCombat('dmg',`${template.name} ataca! -${template.attackDmg} HP no Jogador.`);
+    if(p.hp<=0){ checkVictory(); return; }
+    setTimeout(()=>meleeAttackPhase(b,template,count+1), 650);
+  } else { setTimeout(advanceTurn, 400); }
+}
+
+function runRangedMobAI(b, template){
+  const p = getPlayerCombatant();
+  const dist = manhattan(b,p);
+  if(dist < template.attackMinRange && b.pm>0){
+    const {dist:reach} = bfs(b.x,b.y,b);
+    let best=null, bestScore=-Infinity;
+    reach.forEach((d,key)=>{
+      if(d===0 || d>b.pm) return;
+      const [x,y]=key.split(',').map(Number);
+      if(getUnitAt(x,y)) return;
+      const score = manhattan({x,y}, p);
+      if(score>bestScore){ bestScore=score; best={x,y,d}; }
+    });
+    if(best){ b.x=best.x; b.y=best.y; b.pm-=best.d; logCombat('move', `${template.name} recua para manter distância.`); }
+  }
+  else if(dist > template.attackMaxRange && b.pm>0){
+    const {dist:reach} = bfs(b.x,b.y,b);
+    let best=null, bestScore=Infinity;
+    reach.forEach((d,key)=>{
+      if(d===0 || d>b.pm) return;
+      const [x,y]=key.split(',').map(Number);
+      if(getUnitAt(x,y)) return;
+      const score = manhattan({x,y}, p);
+      if(score>=template.attackMinRange && score<bestScore){ bestScore=score; best={x,y,d}; }
+    });
+    if(best){ b.x=best.x; b.y=best.y; b.pm-=best.d; logCombat('move', `${template.name} se aproxima para alcançar o alvo.`); }
+  }
+  setTimeout(()=>rangedAttackPhase(b, template, 0), 600);
+}
+function rangedAttackPhase(b, template, count){
+  if(game.gameOver) return;
+  const p = getPlayerCombatant();
+  const dist = manhattan(b,p);
+  const inRange = dist>=template.attackMinRange && dist<=template.attackMaxRange;
+  const losOk = hasLineOfSight(b.x,b.y,p.x,p.y);
+  const canAttack = inRange && losOk && b.pa>=template.attackCost && count<template.attacksPerTurn && p.hp>0;
+  if(canAttack){
+    b.pa-=template.attackCost;
+    applyDamage(p, template.attackDmg);
+    logCombat('dmg',`${template.name} lança um projétil flamejante! -${template.attackDmg} HP no Jogador.`);
+    if(p.hp<=0){ checkVictory(); return; }
+    setTimeout(()=>rangedAttackPhase(b,template,count+1), 650);
+  } else { setTimeout(advanceTurn, 400); }
+}
+
+function findBestAdjacentCell(mover, target){
+  const dirs=[[1,0],[-1,0],[0,1],[0,-1]];
+  const candidates=[];
+  dirs.forEach(([dx,dy])=>{
+    const nx=target.x+dx, ny=target.y+dy;
+    if(inBoundsCombat(nx,ny) && !isObstacle(nx,ny) && !getUnitAt(nx,ny)) candidates.push({x:nx,y:ny});
+  });
+  if(candidates.length===0) return null;
+  const {dist}=bfs(mover.x,mover.y,mover);
+  let best=null, bestDist=Infinity;
+  candidates.forEach(c=>{ const d=dist.get(c.x+','+c.y); if(d!==undefined && d<bestDist){ bestDist=d; best=c; } });
+  return best;
+}
+
+// =========================================================================================
+// FIM DE BATALHA (vitória quando TODOS os mobs caem; derrota se o jogador cai)
+// =========================================================================================
+function rollLoot(mobType){
+  const table = LOOT_TABLES[mobType] || LOOT_TABLES.javali;
+  const results = [];
+  const shuffledMaterials = table.materials.slice().sort(()=>Math.random()-0.5);
+  const distinctCount = Math.min(randInt(1,2), shuffledMaterials.length);
+  shuffledMaterials.slice(0,distinctCount).forEach(id=> results.push({ id, qty: randInt(1,2) }));
+  if(Math.random() < table.equipChance){
+    const eq = table.equipPool[randInt(0, table.equipPool.length-1)];
+    results.push({ id: eq, qty: 1 });
+  }
+  return results;
+}
+function checkVictory(){
+  if(game.gameOver) return;
+  const aliveMobs = getAliveMobs();
+  const player = getPlayerCombatant();
+  if(aliveMobs.length===0){ game.gameOver=true; clearTurnTimer(); handleVictory(); }
+  else if(player.hp<=0){ game.gameOver=true; clearTurnTimer(); handleDefeat(); }
+}
+// handleVictory: soma XP e loot de CADA mob derrotado nesta batalha (grupo ou solo).
+function handleVictory(){
+  const defeatedMobs = game.combatants.filter(c=>c.side==='mob');
+  let totalXp = 0;
+  let allLoot = [];
+  defeatedMobs.forEach(mob=>{
+    const template = MOB_TEMPLATES[mob.mobType];
+    totalXp += template.xpReward;
+    const loot = rollLoot(mob.mobType);
+    addItemsToInventory(loot);
+    allLoot = allLoot.concat(loot);
+  });
+  const leveledUp = grantXP(totalXp);
+  const lootText = allLoot.map(({id,qty}) => `${ITEM_DB[id].icon} ${ITEM_DB[id].name} x${qty}`).join(', ') || 'nenhum item desta vez';
+
+  document.getElementById('overlayTitle').textContent='Vitória!';
+  document.getElementById('overlayText').textContent = defeatedMobs.length>1
+    ? `Você derrotou ${defeatedMobs.length} inimigos!`
+    : `${defeatedMobs[0].name} foi derrotado.`;
+  document.getElementById('rewardBox').style.display='block';
+  document.getElementById('levelUpBanner').style.display = leveledUp ? 'block' : 'none';
+  document.getElementById('xpGained').textContent = `+${totalXp} XP`;
+  document.getElementById('lootList').textContent = lootText;
+  document.getElementById('overlay').style.display='flex';
+  logCombat('xp', `Vitória! +${totalXp} XP. Itens adicionados ao inventário: ${lootText}.`);
+  if(leveledUp) logCombat('xp', `🎉 LEVEL UP! Jogador agora é nível ${playerState.level} (+5 pontos de atributo).`);
+}
+function handleDefeat(){
+  document.getElementById('overlayTitle').textContent='Derrota...';
+  document.getElementById('overlayText').textContent='Você foi derrotado em combate.';
+  document.getElementById('rewardBox').style.display='none';
+  document.getElementById('overlay').style.display='flex';
+  logCombat('sys','Derrota. Nenhum XP ganho nesta batalha.');
+}
+
+// =========================================================================================
+// LOOP PRINCIPAL (requestAnimationFrame)
+// =========================================================================================
+function gameLoop(now){
+  if(currentState===GAME_STATES.OVERWORLD){
+    renderOverworldFrame(now);
+  } else if(currentState===GAME_STATES.COMBAT && game){
+    render(now);
+  }
+  requestAnimationFrame(gameLoop);
+}
+
+// ---------- INICIALIZAÇÃO ----------
+resetCombatState();
+setGameState(GAME_STATES.MENU);
+requestAnimationFrame(gameLoop);
+</script>
+</body>
+</html>

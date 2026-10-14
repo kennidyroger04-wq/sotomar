@@ -1,0 +1,297 @@
+/* Sotomar menu skin. All selectors are scoped to the initial screen. */
+#mainMenuScreen.sotomar-menu {
+  --sotomar-deep-blue:#0e1a28;
+  --sotomar-amber:#f0b85c;
+  --sotomar-gold:#d8a13f;
+  --sotomar-gold-light:#ffe3a3;
+  --sotomar-cream:#f5ead2;
+  --sotomar-wood:#2a1b0f;
+  --sotomar-display:"Palatino Linotype","Book Antiqua",Palatino,Georgia,"Times New Roman",serif;
+  position:relative;
+  isolation:isolate;
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  flex:1 0 100dvh;
+  min-height:100dvh;
+  width:100%;
+  padding:0;
+  overflow:hidden;
+  color:var(--sotomar-cream);
+  background:var(--sotomar-deep-blue);
+  font-family:var(--sotomar-display);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+#mainMenuScreen .sotomar-menu__background,
+#mainMenuScreen .sotomar-menu__shade {
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+}
+
+#mainMenuScreen .sotomar-menu__background {
+  z-index:-2;
+  background:var(--sotomar-deep-blue) url("../assets/menu/sotomar-fimbria-menu.png") 72% 50% / cover no-repeat;
+  transform-origin:70% 50%;
+  animation:sotomar-bg-settle 2.6s cubic-bezier(.2,.7,.2,1) both;
+}
+
+#mainMenuScreen .sotomar-menu__shade {
+  z-index:-1;
+  background:
+    linear-gradient(90deg,rgba(8,15,24,.82) 0%,rgba(8,15,24,.66) 24%,rgba(8,15,24,.28) 42%,rgba(8,15,24,0) 60%),
+    radial-gradient(120% 90% at 100% 50%,transparent 55%,rgba(6,12,20,.35) 100%),
+    linear-gradient(0deg,rgba(6,12,20,.40) 0%,transparent 26%);
+}
+
+#mainMenuScreen .sotomar-menu__content {
+  width:min(380px,calc(100% - 56px));
+  margin-left:clamp(28px,7vw,128px);
+  padding:48px 0;
+  text-align:left;
+}
+
+#mainMenuScreen .sotomar-menu__logo {display:inline-block;max-width:100%;margin:0 0 18px;}
+#mainMenuScreen .sotomar-menu__title {
+  margin:0;
+  padding-right:.1em;
+  color:var(--sotomar-cream);
+  background:linear-gradient(180deg,#fff6df 0%,var(--sotomar-cream) 38%,var(--sotomar-amber) 100%);
+  background-clip:text;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  font-family:var(--sotomar-display);
+  font-size:clamp(3rem,5.4vw,5.2rem);
+  font-weight:700;
+  letter-spacing:.1em;
+  line-height:1;
+  white-space:nowrap;
+  filter:drop-shadow(0 2px 0 rgba(42,27,15,.65)) drop-shadow(0 6px 18px rgba(0,0,0,.55));
+}
+#mainMenuScreen .sotomar-menu__subtitle {
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin:12px 0 0;
+  color:var(--sotomar-amber);
+  font-family:var(--sotomar-display);
+  font-size:clamp(.95rem,1.5vw,1.2rem);
+  font-weight:400;
+  letter-spacing:.62em;
+  text-shadow:0 1px 8px rgba(0,0,0,.7);
+}
+#mainMenuScreen .sotomar-menu__subtitle::after {
+  content:"";
+  flex:1;
+  height:1px;
+  background:linear-gradient(90deg,rgba(240,184,92,.75),rgba(240,184,92,0));
+}
+#mainMenuScreen .sotomar-menu__tagline {
+  max-width:30ch;
+  margin:0 0 34px;
+  color:rgba(245,234,210,.84);
+  font-size:clamp(1rem,1.25vw,1.15rem);
+  font-style:italic;
+  line-height:1.55;
+  text-shadow:0 1px 10px rgba(0,0,0,.8);
+}
+#mainMenuScreen .sotomar-menu__actions {display:flex;flex-direction:column;gap:14px;}
+#mainMenuScreen .sotomar-button {
+  position:relative;
+  display:flex;
+  align-items:center;
+  width:100%;
+  min-height:46px;
+  margin:0;
+  border:0;
+  color:var(--sotomar-cream);
+  font-family:var(--sotomar-display);
+  font-weight:700;
+  text-align:left;
+  cursor:pointer;
+  transition:transform .22s ease,box-shadow .28s ease,background .28s ease,border-color .28s ease,color .28s ease,filter .28s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+#mainMenuScreen .sotomar-button:focus-visible {outline:2px solid var(--sotomar-gold-light);outline-offset:3px;}
+#mainMenuScreen .sotomar-button--primary {
+  justify-content:center;
+  min-height:66px;
+  padding:0 28px;
+  overflow:hidden;
+  border-radius:3px;
+  color:var(--sotomar-wood);
+  background:linear-gradient(180deg,#f8d489 0%,var(--sotomar-amber) 46%,#c98a2b 100%);
+  box-shadow:0 0 0 1px rgba(255,227,163,.9),0 0 0 4px rgba(20,12,4,.55),0 0 0 5px rgba(216,161,63,.55),0 12px 28px rgba(0,0,0,.5),0 0 26px rgba(240,184,92,.22);
+  font-size:1.12rem;
+  letter-spacing:.2em;
+  text-align:center;
+  text-shadow:0 1px 0 rgba(255,234,178,.55);
+}
+#mainMenuScreen .sotomar-button--primary::before {
+  position:absolute;
+  inset:5px;
+  border:1px solid rgba(90,52,12,.45);
+  border-radius:2px;
+  content:"";
+  pointer-events:none;
+}
+#mainMenuScreen .sotomar-button--primary::after {
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:-60%;
+  width:45%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.5),transparent);
+  content:"";
+  opacity:0;
+  pointer-events:none;
+  transform:skewX(-18deg);
+}
+#mainMenuScreen .sotomar-button--primary:hover,
+#mainMenuScreen .sotomar-button--primary:focus-visible {
+  transform:translateY(-2px);
+  filter:brightness(1.06) saturate(1.05);
+  box-shadow:0 0 0 1px #fff0c4,0 0 0 4px rgba(20,12,4,.55),0 0 0 5px rgba(255,227,163,.85),0 16px 34px rgba(0,0,0,.55),0 0 40px rgba(240,184,92,.48);
+}
+#mainMenuScreen .sotomar-button--primary:hover::after,
+#mainMenuScreen .sotomar-button--primary:focus-visible::after {opacity:1;animation:sotomar-sheen .9s ease-out both;}
+#mainMenuScreen .sotomar-button--primary:active {transform:translateY(1px) scale(.992);filter:brightness(.96);}
+#mainMenuScreen .sotomar-menu__secondary {display:flex;flex-direction:column;gap:8px;width:86%;}
+#mainMenuScreen .sotomar-button--secondary {
+  min-height:46px;
+  padding:0 20px 0 22px;
+  border:1px solid rgba(216,161,63,.3);
+  border-left:2px solid rgba(216,161,63,.55);
+  border-radius:2px;
+  background:linear-gradient(90deg,rgba(14,26,40,.62),rgba(14,26,40,.3));
+  box-shadow:0 6px 16px rgba(0,0,0,.3);
+  font-size:.9rem;
+  font-weight:600;
+  letter-spacing:.2em;
+  -webkit-backdrop-filter:blur(5px);
+  backdrop-filter:blur(5px);
+}
+#mainMenuScreen .sotomar-button--secondary::before {
+  position:absolute;
+  top:50%;
+  left:9px;
+  width:6px;
+  height:6px;
+  background:var(--sotomar-amber);
+  content:"";
+  box-shadow:0 0 8px rgba(240,184,92,.9);
+  transform:translateY(-50%) rotate(45deg) scale(0);
+  transition:transform .22s ease;
+}
+#mainMenuScreen .sotomar-button--secondary:hover,
+#mainMenuScreen .sotomar-button--secondary:focus-visible {
+  transform:translateX(6px);
+  border-color:rgba(240,184,92,.85);
+  color:var(--sotomar-gold-light);
+  background:linear-gradient(90deg,rgba(30,40,52,.78),rgba(18,30,44,.42));
+  box-shadow:0 8px 20px rgba(0,0,0,.4),0 0 20px rgba(240,184,92,.2);
+}
+#mainMenuScreen .sotomar-button--secondary:hover::before,
+#mainMenuScreen .sotomar-button--secondary:focus-visible::before {transform:translateY(-50%) rotate(45deg) scale(1);}
+#mainMenuScreen .sotomar-button--secondary:active {transform:translateX(6px) scale(.99);background:linear-gradient(90deg,rgba(60,46,24,.75),rgba(30,24,14,.45));}
+#mainMenuScreen .sotomar-menu__summary {
+  display:flex;
+  flex-wrap:wrap;
+  align-items:flex-end;
+  gap:0;
+  margin:30px 0 0;
+  padding:0;
+  font-size:.82rem;
+  text-shadow:0 1px 8px rgba(0,0,0,.85);
+}
+#mainMenuScreen .sotomar-menu__stat {
+  position:relative;
+  display:flex;
+  align-items:baseline;
+  gap:6px;
+  padding:0 16px 6px;
+}
+#mainMenuScreen .sotomar-menu__stat:first-child {padding-left:0;}
+#mainMenuScreen .sotomar-menu__stat + .sotomar-menu__stat::before {
+  position:absolute;
+  top:15%;
+  left:0;
+  width:1px;
+  height:70%;
+  background:rgba(245,234,210,.22);
+  content:"";
+}
+#mainMenuScreen .sotomar-menu__stat dt {margin:0;color:rgba(245,234,210,.62);letter-spacing:.04em;}
+#mainMenuScreen .sotomar-menu__stat dd {margin:0;color:var(--sotomar-amber);font-weight:700;font-variant-numeric:tabular-nums;}
+#mainMenuScreen .sotomar-menu__stat--xp {padding-bottom:8px;}
+#mainMenuScreen .sotomar-menu__xp-track {
+  position:absolute;
+  right:16px;
+  bottom:0;
+  left:16px;
+  height:2px;
+  overflow:hidden;
+  border-radius:2px;
+  background:rgba(245,234,210,.16);
+}
+#mainMenuScreen .sotomar-menu__xp-track i {display:block;width:0;height:100%;background:linear-gradient(90deg,var(--sotomar-gold),var(--sotomar-gold-light));box-shadow:0 0 8px rgba(240,184,92,.8);}
+#mainMenuScreen .sotomar-menu__footer {margin:12px 0 0;color:rgba(245,234,210,.68);font-size:.78rem;text-shadow:0 1px 8px rgba(0,0,0,.85);}
+#mainMenuScreen .sotomar-menu__sr-only {position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+
+@keyframes sotomar-bg-settle {from{transform:scale(1.05);filter:brightness(.7);}to{transform:scale(1);filter:brightness(1);}}
+@keyframes sotomar-sheen {from{left:-60%;}to{left:130%;}}
+
+@media (max-height:700px) and (min-width:721px) {
+  #mainMenuScreen .sotomar-menu__content {padding:24px 0;}
+  #mainMenuScreen .sotomar-menu__tagline {margin-bottom:22px;}
+  #mainMenuScreen .sotomar-button--primary {min-height:58px;}
+  #mainMenuScreen .sotomar-button--secondary {min-height:40px;}
+  #mainMenuScreen .sotomar-menu__summary {margin-top:20px;}
+}
+
+@media (min-width:1800px) {
+  #mainMenuScreen .sotomar-menu__content {width:min(420px,calc(100% - 56px));}
+}
+
+@media (max-width:720px) {
+  #mainMenuScreen.sotomar-menu {align-items:flex-end;justify-content:center;overflow-y:auto;}
+  #mainMenuScreen .sotomar-menu__background {background-position:66% 30%;}
+  #mainMenuScreen .sotomar-menu__shade {
+    background:linear-gradient(0deg,rgba(8,15,24,.94) 0%,rgba(8,15,24,.82) 40%,rgba(8,15,24,.3) 68%,rgba(8,15,24,0) 88%);
+  }
+  #mainMenuScreen .sotomar-menu__content {
+    width:100%;
+    max-width:420px;
+    margin:0 auto;
+    padding:32vh 20px max(24px,env(safe-area-inset-bottom));
+    text-align:center;
+  }
+  #mainMenuScreen .sotomar-menu__title {font-size:clamp(2.8rem,15vw,4rem);}
+  #mainMenuScreen .sotomar-menu__subtitle {justify-content:center;}
+  #mainMenuScreen .sotomar-menu__subtitle::before {
+    flex:0 0 34px;
+    height:1px;
+    background:linear-gradient(90deg,transparent,rgba(240,184,92,.75));
+    content:"";
+  }
+  #mainMenuScreen .sotomar-menu__subtitle::after {flex:0 0 34px;background:linear-gradient(90deg,rgba(240,184,92,.75),transparent);}
+  #mainMenuScreen .sotomar-menu__tagline {max-width:28ch;margin:0 auto 24px;}
+  #mainMenuScreen .sotomar-button--primary {min-height:60px;}
+  #mainMenuScreen .sotomar-menu__secondary {display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;}
+  #mainMenuScreen .sotomar-button--secondary {justify-content:center;min-height:50px;padding:0 8px;border-left-width:1px;font-size:.76rem;letter-spacing:.12em;text-align:center;}
+  #mainMenuScreen .sotomar-button--secondary::before {display:none;}
+  #mainMenuScreen .sotomar-button--secondary:hover,
+  #mainMenuScreen .sotomar-button--secondary:focus-visible,
+  #mainMenuScreen .sotomar-button--secondary:active {transform:none;}
+  #mainMenuScreen .sotomar-menu__summary {justify-content:center;margin-top:20px;}
+}
+
+@media (prefers-reduced-motion:reduce) {
+  #mainMenuScreen .sotomar-menu__background {animation:none;}
+  #mainMenuScreen .sotomar-button {transition:none;}
+  #mainMenuScreen .sotomar-button--primary:hover::after,
+  #mainMenuScreen .sotomar-button--primary:focus-visible::after {animation:none;opacity:0;}
+  #mainMenuScreen .sotomar-button--secondary::before {transition:none;}
+}
