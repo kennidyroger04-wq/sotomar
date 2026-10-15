@@ -52,4 +52,4 @@ Os mapas são módulos JavaScript (`js/data/maps.js`, `fimbria-runtime.js` e `ma
 
 ## Revalidação G18C — 2026-10-15
 
-O inventário acima foi revalidado na branch derivada de `operation/g18b` (`6abb5fb0683a7287026b4413afc9e2c14590c755`). Permanecem ausentes os mesmos **20 PNGs Kenney e 4 licenças**. A arte original G18C substituiu a casa no runtime Godot e integrou um Cascudo-de-cal; ela não foi copiada para os manifests JavaScript, então a falha da suíte JS original continua reproduzível após 362 checks. Consulte `MATRIZ_MIGRACAO_KENNEY.md` e `RELATORIO_G18C.md` para a separação entre runtime Godot e legado.
+O inventário acima foi revalidado na branch derivada de `operation/g18b` (`6abb5fb0683a7287026b4413afc9e2c14590c755`). Permanecem ausentes os mesmos **20 PNGs Kenney e 4 licenças**. A arte original G18C substituiu casas de Caieira, integrou idle do Cascudo-de-cal e da Mira no runtime Godot; ela não foi copiada para os manifests JavaScript, então a falha da suíte JS original continua reproduzível após 362 checks. Consulte `MATRIZ_MIGRACAO_KENNEY.md` e `RELATORIO_G18C.md` para a separação entre runtime Godot e legado.

@@ -18,7 +18,7 @@ Revalidação de `js/data/visual-assets.js`, `js/data/character-assets.js`, `js/
 | `VIS_LOW_WALL` | `assets/vendor/kenney/sketch-town/Tiles/castle_wall_E.png` | Muro | Kenney Sketch Town | Não | Sim | **Ausente** | Nenhum asset original modular de muro pronto | PENDENTE produção |
 | `VIS_MASONRY_STRUCTURE` | `assets/vendor/kenney/isometric-buildings/PNG/buildingTiles_032.png` | Alvenaria/estrutura | Kenney Isometric Buildings | Não | Sim | **Ausente** | Nenhum asset original de ruína/alvenaria modular pronto | PENDENTE produção |
 | `VIS_CHAR_PLAYER` | `assets/vendor/kenney/tiny-dungeon/Tiles/tile_0087.png` | Protagonista | Kenney Tiny Dungeon | Não | Sim, legado | **Ausente** | Wayfarer G03/G05 e guerreiros G06 existem no Godot; manifest JS não migrado | PENDENTE migração JS |
-| `VIS_NPC_MIRA` | `assets/vendor/kenney/tiny-dungeon/Tiles/tile_0084.png` | Mira | Kenney Tiny Dungeon | Não | Sim | **Ausente** | Nenhum sprite individual de NPC | PENDENTE produção |
+| `VIS_NPC_MIRA` | `assets/vendor/kenney/tiny-dungeon/Tiles/tile_0084.png` | Mira | Kenney Tiny Dungeon | Não | Sim | **Ausente** | `godot/assets/characters/npc_mira_g18c/mira_idle.png` | Godot integrado; JS pendente |
 | `VIS_NPC_LIA` | `assets/vendor/kenney/tiny-dungeon/Tiles/tile_0099.png` | Lia | Kenney Tiny Dungeon | Não | Sim | **Ausente** | Nenhum sprite individual de NPC | PENDENTE produção |
 | `VIS_NPC_NILO` | `assets/vendor/kenney/tiny-dungeon/Tiles/tile_0088.png` | Nilo | Kenney Tiny Dungeon | Não | Sim | **Ausente** | Nenhum sprite individual de NPC | PENDENTE produção |
 | `VIS_NPC_BRAM` | `assets/vendor/kenney/tiny-dungeon/Tiles/tile_0100.png` | Bram | Kenney Tiny Dungeon | Não | Sim | **Ausente** | Nenhum sprite individual de NPC | PENDENTE produção |

@@ -18,7 +18,7 @@ Atualizado em 2026-10-15. Este catálogo separa o que a fonte documenta das deci
 | MAP_09 Pedras Brancas | Nome; encontro da Coruja-muda está deferido, acesso sem saída canônica. | Afloramentos de pedra clara e fauna silenciosa; posicionamento não definido. | Não | Tiles G03 existentes | Pendente |
 | MAP_10 Boca do Grotão | Nome e rota registrada. | Transição para pedra/caverna com exposição ao Sereno sem presumir causa do fenômeno. | Não | Tiles G03 existentes | Pendente |
 | MAP_11 Arena da Sineira | Elementos canônicos: selo central, cravas, colunas, canais de Sereno, cal antiga e plataformas laterais; coordenadas TBD. | Cenário vivo e não maligno; ancoragem/movimentação da Sineira continua aberta. | Não | Não; cena continua provisória | Pendente |
-| NPC Mira | Guarda da Estrada, papel de quest e falas canônicas existentes. Aparência não descrita. | Silhueta de guarda com equipamento de estrada simples. | Não | Placeholder atual | Pendente |
+| NPC Mira | Guarda da Estrada, papel de quest e falas canônicas existentes. Aparência não descrita. | Guarda de estrada amigável, roupa de viagem verde-azulada/ocre, broquel de madeira e broche. Interpretação visual. | Sim, idle direcional 4×4 | Sim, marker MAP_01, sem alterar diálogo/célula | Pendente |
 | NPC Lia | Exploradora, fala de trilhas existente. Aparência não descrita. | Silhueta leve de exploradora com bolsa/mapa. | Não | Placeholder atual | Pendente |
 | NPC Nilo | Curandeiro, falas de serviço canônicas. Aparência não descrita. | Ervas/estojo de curandeiro, sem definir uniforme ou idade. | Não | Placeholder atual | Pendente |
 | NPC Bram | Comerciante; a fala atual diz que ainda não negocia. Aparência não descrita. | Silhueta de comerciante de estrada; sem ícones de transação até existir serviço ativo. | Não | Placeholder atual | Pendente |
@@ -39,13 +39,17 @@ Atualizado em 2026-10-15. Este catálogo separa o que a fonte documenta das deci
 | ID | Arquivos | Dimensão/origem | Pivô/uso | Estado |
 |---|---|---|---|---|
 | `CRE_CASCUDO_DE_CAL` | `godot/art/source/generated_g18c/cascudo_de_cal_idle_master.png`, `godot/assets/characters/cascudo_g18c/cascudo_de_cal_idle.png`, `godot/resources/animations/cascudo_de_cal_g18c.tres`, metadados `.json` | PNG RGBA 1122×1402, prancha 4×4 (regiões 280×350) | Base inferior central por região; escala de render 0,36; 4 orientações idle | Integrado e testado; movimento/ataque/hurt/resolução pendentes |
+| `NPC_MIRA` | `godot/art/source/generated_g18c/mira_idle_master.png`, `godot/assets/characters/npc_mira_g18c/mira_idle.png`, `godot/resources/animations/mira_g18c.tres`, `godot/resources/art/mira_g18c.json` | PNG RGBA 1122×1402, prancha 4×4 (regiões 280×350) | Base inferior central por região; escala de mundo 0,22; 4 orientações idle | Integrado ao marker canônico de MAP_01; outras NPCs pendentes |
 | `VIS_HOUSE_SMALL` — interpretação Caieira | `godot/art/source/generated_g18c/caieira_lime_cottage_master.png`, `godot/assets/props/g18c/caieira_lime_cottage.png`, `godot/resources/art/cottage_caieira_g18c.json` | PNG RGBA 1327×1200 | Base central inferior; escala 0,11; respeita a célula atual | Integrado às 3 casas de MAP_01; revisão visual humana pendente |
 
 Masters e cópias runtime foram conferidos como cópias byte a byte. As imagens vêm de geração original com ImageGen, sem imagem de referência, sem arte oficial de Dofus e sem pacote de terceiros.
 
+Os masters desta fatia são PNGs raster sem camadas; os briefs de geração estão preservados em `godot/art/source/generated_g18c/prompts.md`. Não foi produzido vetor/arquivo layered editável nem esses assets foram aprovados como arte final.
+
 ## Contact sheets e capturas
 
 - Prancha original de orientações idle do Cascudo: `reports/g18c/contact-sheets/cascudo_de_cal_4_directions_idle.png`.
+- Prancha original de orientações idle da Mira: `reports/g18c/contact-sheets/mira_4_directions_idle.png`.
 - Comparação das casas/props atuais: `godot/reviews/g18c/contact-sheet-props-existing.png`.
 - `godot/reviews/g18c/contact-sheet-terrain-existing.png` registra amostra de tiles existentes G03.
 - `godot/reviews/g18c/contact-sheet-equipment-existing.png` e `godot/reviews/g18c/contact-sheet-character-sample.png` são pranchas de revisão de recursos já existentes, não novos assets.
