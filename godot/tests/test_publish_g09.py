@@ -23,9 +23,15 @@ def main() -> int:
     hosting = firebase["hosting"]
     check("Godot_v${version}-stable_linux.x86_64.zip" in workflow and "version='4.6.3'" in workflow and "Godot_v${version}-stable_export_templates.tpz" in workflow, "CI pins matching Godot 4.6.3 engine and export templates")
     check("pull_request:" in workflow and "branches: [main]" in workflow, "pull requests and main updates build without needing deployment credentials")
-    check("github.event_name == 'workflow_dispatch' && inputs.publish == true && github.ref == 'refs/heads/main'" in workflow, "external publication is explicitly gated to manual dispatch from main")
-    check("FIREBASE_SERVICE_ACCOUNT" in workflow and "FIREBASE_PROJECT_ID" in workflow, "deployment reads credentials and project ID from GitHub secret/variable bindings")
+    check("github.event_name == 'workflow_dispatch' && inputs.publish == true" in workflow, "external publication is only possible after a manual dispatch with publish=true")
+    check("FIREBASE_SERVICE_ACCOUNT" in workflow and "projectId: sotomar-eaf2c" in workflow, "deployment uses the protected service-account secret and the configured Firebase project ID")
     check(hosting["public"] == "build/web" and "**/node_modules/**" in hosting["ignore"], "hosting serves the export directory rather than the private project tree")
+    project_aliases = json.loads((ROOT / ".firebaserc").read_text())["projects"]
+    check(project_aliases.get("default") == "sotomar-eaf2c", "Firebase CLI defaults to the configured Sotomar project")
+    headers = {entry["source"]: {h["key"]: h["value"] for h in entry["headers"]} for entry in hosting["headers"]}
+    check(headers["index.html"].get("Cache-Control") == "no-cache", "the entry page revalidates so deployments do not leave a stale app bundle")
+    check("immutable" not in json.dumps(hosting["headers"]), "fixed-name Godot runtime files are not cached as immutable across deployments")
+    check(not hosting.get("rewrites"), "static Godot assets are not hidden behind a generic SPA rewrite")
     result = subprocess.run([sys.executable, str(ROOT / "tools/validate_g09_web_export.py"), str(ROOT / "build/web")], text=True, capture_output=True)
     check(result.returncode == 0 and "MiB" in result.stdout, "current export passes required-file, nonempty-file, and source-exclusion validation")
     check("4.6.3" in workflow and "permissions:" in workflow and "contents: read" in workflow, "workflow uses read-only repository permission and the engine version required by the project")

@@ -1,0 +1,92 @@
+{
+  "url": "http://127.0.0.1:8993/index.html",
+  "title": "Sotomar - Fímbria (protótipo 2D)",
+  "canvas": true,
+  "runtimeFiles": [
+    {
+      "url": "http://127.0.0.1:8993/index.js",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8993/index.pck",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:8993/index.wasm",
+      "status": 200
+    }
+  ],
+  "viewports": [
+    {
+      "viewport": "360x800",
+      "canvas": {
+        "width": 360,
+        "height": 800,
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 360,
+          "height": 800,
+          "top": 0,
+          "right": 360,
+          "bottom": 800,
+          "left": 0
+        }
+      }
+    },
+    {
+      "viewport": "390x844",
+      "canvas": {
+        "width": 390,
+        "height": 844,
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 844,
+          "top": 0,
+          "right": 390,
+          "bottom": 844,
+          "left": 0
+        }
+      }
+    },
+    {
+      "viewport": "844x390",
+      "canvas": {
+        "width": 844,
+        "height": 390,
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 844,
+          "height": 390,
+          "top": 0,
+          "right": 844,
+          "bottom": 390,
+          "left": 0
+        }
+      }
+    },
+    {
+      "viewport": "1280x720",
+      "canvas": {
+        "width": 1280,
+        "height": 720,
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1280,
+          "height": 720,
+          "top": 0,
+          "right": 1280,
+          "bottom": 720,
+          "left": 0
+        }
+      }
+    }
+  ],
+  "browser": "Chromium with headless SwiftShader WebGL",
+  "physicalSafariTest": "not performed; requires a real iPhone/iOS Safari",
+  "errors": []
+}
