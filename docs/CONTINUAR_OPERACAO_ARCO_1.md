@@ -44,7 +44,7 @@ O JavaScript original continua bloqueado em `js/tests/run-tests.js:501` por asse
 
 - Branch de arte: `operation/g18c-art`, criada a partir do SHA G18B `6abb5fb0683a7287026b4413afc9e2c14590c755`.
 - Checkpoint inicial remoto: `checkpoint/g18c-start` e tag `checkpoint-g18c-start-20261015`.
-- Primeiro checkpoint de arte enviado: `2a43a797317029a3228fefde2eacf27a5f86d180` (`feat(art): integrate Caieira cottage and Cascudo idle`). Relatórios e matriz G18C entram no commit seguinte.
+- Primeiro checkpoint de arte enviado: `2a43a797317029a3228fefde2eacf27a5f86d180` (`feat(art): integrate Caieira cottage and Cascudo idle`). Relatório, catálogo, matriz e continuidade G18C foram registrados em commit separado.
 - Arte desta fatia: casa de Caieira (`VIS_HOUSE_SMALL`) e idle do Cascudo (`CRE_CASCUDO_DE_CAL`) integrados ao Godot. Capturas Web em `reports/g18c/captures/`; contact sheets de revisão em `godot/reviews/g18c/` e `reports/g18c/contact-sheets/`.
 - Foram reexecutados os 17 testes `godot/tests/test_*.gd`, cinco scripts Python, sete scripts JavaScript auxiliares, verificações de registries, importação Godot e export Web. As 50 novas verificações estão em `godot/tests/test_assets_g18c.gd`; `test_iso_board.gd` valida pivôs/escalas por categoria.
 - Chromium: a regressão ENC_05 G18B concluiu habilidade e retorno à exploração sem erros; `godot/tools/capture_combat_cascudo_g18c.js` abre/captura ENC_01 com o Cascudo original. Servir `build/web` em porta livre e passar URL/diretório a esses scripts. Teste Chromium emulado, sem alegação de teste físico.
