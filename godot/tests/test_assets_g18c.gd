@@ -59,8 +59,9 @@ func _run() -> void:
 	]}
 	board.configure(state, player_frames)
 	var creature: AnimatedSprite2D = board.sprites.get("CRE_CASCUDO_DE_CAL_01")
+	var combat_creature_frames := load("res://resources/animations/cre_cascudo_de_cal_g18d.tres") as SpriteFrames
 	_check(creature != null, "Cascudo combat participant uses original art in the existing board")
-	_check(creature != null and creature.sprite_frames == frames and creature.offset == Vector2(0, -175), "combat renderer preserves SpriteFrames and feet pivot")
+	_check(creature != null and creature.sprite_frames == combat_creature_frames and creature.offset == Vector2(0, -214), "combat renderer uses complete G18D SpriteFrames and feet pivot; G18C source remains preserved")
 	_check(creature != null and creature.animation.begins_with("idle_"), "combat starts the directional idle loop")
 	var map_file := FileAccess.open("res://resources/maps/map_registry.json", FileAccess.READ)
 	var map_registry: Dictionary = JSON.parse_string(map_file.get_as_text())	if map_file != null else {}

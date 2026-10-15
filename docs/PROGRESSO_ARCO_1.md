@@ -21,6 +21,7 @@
 | G18A — consolidação/mobile | IMPLEMENTADO parcialmente; regressões TESTADAS; Web VALIDADO tecnicamente | Reflow da interface, controles de inventário/equipamento/consumível, cura de Nilo, backup visual e auditoria de lacunas. G15/G16 permanecem parciais; sem publicação, teste físico ou aprovação artística. Ver `RELATORIO_G18A.md`. |
 | G18B — combate/paridade | IMPLEMENTADO; TESTADO; Web VALIDADO no fluxo ENC_05 | Lança, veneno, Golpe, vitória e retorno à exploração passaram no Chromium mobile emulado; 69 testes G18B, regressões G01–G18A e export Web. Gatilhos narrativos, derrota Web/retry e contratos especiais seguem pendentes. Ver `RELATORIO_G18B.md`. |
 | G18C — produção visual | PARCIAL; IMPLEMENTADO/TESTADO | Casa original nas três células de Caieira; Cascudo com idle direcional no board G10/ENC_01; Mira com idle próprio no marker de MAP_01. 17 GDScript, 5 Python, 7 JS auxiliares, export Web e Chromium passaram. Lia/Nilo/Bram, seis espécies comuns, especiais, muros/ponte/ruínas e FX únicos pendem. JS legado ainda exige Kenney ausente. Ver `RELATORIO_G18C.md`. |
+| G18D — fábrica e criaturas comuns | PARCIAL; IMPLEMENTADO/TESTADO tecnicamente | Fábrica JSON/Pillow gerou cinco ações × quatro orientações × quatro quadros para sete espécies, integrada ao board G10; 560 quadros distintos, 1.010 verificações GDScript. NPCs restantes, cenários/FX adicionais, especiais, revisão artística, captura/export final e Kenney JS pendem. Ver `RELATORIO_G18D.md` e `PROGRESSO_ASSETS_ARCO_1.md`. |
 
 ## Limites atuais
 
@@ -29,6 +30,7 @@
 - Não houve publicação externa, teste em dispositivo físico ou aprovação humana de arte/diversão.
 - `node js/tests/run-tests.js` segue falhando na verificação de recursos ausentes: 362 checks antecedem a falha em `js/tests/run-tests.js:501`; a auditoria atual registra 20 PNGs e 4 licenças ausentes em `ASSETS_AUSENTES.md`.
 - G18C confirmou novamente os 20 PNGs e quatro licenças Kenney ausentes. A exportação ativa Godot não os carrega, mas a migração dos manifests JS não foi concluída. Nenhum caminho ausente foi ocultado.
+- G18D ainda não substitui os manifests do JavaScript legado; o teste original permanece separado e não foi enfraquecido.
 
 ## Atualização G18B
 

@@ -4,6 +4,11 @@ const Logic = preload("res://scripts/iso_board_logic.gd")
 const PropPlaceholder = preload("res://scripts/prop_placeholder.gd")
 const NpcMarker = preload("res://scripts/npc_marker.gd")
 const MIRA_FRAMES := preload("res://resources/animations/mira_g18c.tres") as SpriteFrames
+const NPC_FRAMES := {
+	"exploradora_lia": preload("res://resources/animations/npc_lia_g18d.tres"),
+	"curandeiro_nilo": preload("res://resources/animations/npc_nilo_g18d.tres"),
+	"mercador_bram": preload("res://resources/animations/npc_bram_g18d.tres")
+}
 const TREE_TEXTURE := "res://assets/props/g03/tree_mosswood.png"
 const ROCK_TEXTURE := "res://assets/props/g03/rock_moss_stone.png"
 const COTTAGE_TEXTURE := "res://assets/props/g18c/caieira_lime_cottage.png"
@@ -41,12 +46,22 @@ func _add_npc(data: Dictionary) -> void:
 		sprite.scale = Vector2.ONE * 0.22
 		sprite.play()
 		marker.add_child(sprite)
+	elif NPC_FRAMES.has(marker.npc_id):
+		marker.has_illustrated_sprite = true
+		var sprite := AnimatedSprite2D.new()
+		sprite.name = "OriginalNPCSprite"
+		sprite.sprite_frames = NPC_FRAMES[marker.npc_id]
+		sprite.animation = "idle_front"
+		sprite.offset = Vector2(0, -214)
+		sprite.scale = Vector2.ONE * 0.36
+		sprite.play()
+		marker.add_child(sprite)
 	var cell := Vector2i(int(data.x), int(data.y))
 	marker.position = Logic.cell_to_screen(cell, origin)
 	marker.z_index = cell.x + cell.y + 1
 	marker.set_meta("logical_cell", cell)
 	marker.set_meta("npc_id", marker.npc_id)
-	marker.set_meta("visual_status", "original_proposal_idle") if marker.has_illustrated_sprite else marker.set_meta("visual_status", "placeholder")
+	marker.set_meta("visual_status", "original_proposal_idle_walk" if NPC_FRAMES.has(marker.npc_id) else "original_proposal_idle") if marker.has_illustrated_sprite else marker.set_meta("visual_status", "placeholder")
 	add_child(marker)
 
 func _add_map_prop(data: Dictionary) -> void:

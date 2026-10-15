@@ -1,5 +1,17 @@
 # Continuidade da Operação Sotomar/Fímbria
 
+## Continuidade após G18D
+
+- Branch ativa: `operation/g18d-sprite-factory`, derivada de `operation/g18c-art` em `e82f371da4917ab4f9f0736dba32fbbab9a9bdba`; não fazer merge automático em `main`.
+- Checkpoint recuperável antes da G18D: tag `checkpoint-g18d-start-20261015` e branch `checkpoint/g18c-start`.
+- A fábrica `godot/tools/sprite_factory/build_g18d.py` lê JSONs de `godot/art/source/sprite_factory/specs/`, renderiza PNGs e gera masters/quadros/contact sheets/GIFs. Em seguida, o script Godot `godot/tools/sprite_factory/build_godot_resources.gd` constrói os SpriteFrames.
+- Set das sete criaturas comuns está no board G10: 560 quadros, 140 animações direcionais, testes Python/GDScript. As propostas de anatomia não são cânone nem arte aprovada.
+- Lia/Nilo/Bram agora têm módulo humanoide, idle/walk e integração nos markers MAP_01; revisar as propostas visuais. Prosseguir com cenários modulares/FX próprios, depois especiais, sem tocar células, falas, regras ou gatilhos canônicos.
+- Sineira (cágado vivo e não maligno), Coruja-muda deferida e estados do Sereno continuam sem mecânica visual inventada. Variantes comuns usam sprite da espécie-base.
+- Kenney no JavaScript legado continua separado: não alterar manifests sem substituir cada ID por arte correspondente e validar licenças/origem.
+- Capturas G18D, caso disponíveis, ficam em `reports/g18d/captures/`; nenhum teste físico ou aprovação artística humana deve ser afirmado.
+- Consulte `RELATORIO_G18D.md`, `FABRICA_SPRITES.md`, `CATALOGO_VISUAL_ARCO_1.md` e `PROGRESSO_ASSETS_ARCO_1.md`.
+
 ## Checkpoint recuperável
 
 - Última missão: G18B integrou as cinco habilidades comuns, efeitos/IA e combate Web até vitória ENC_05 e retorno à exploração. G16 segue dependente do contrato canônico da Sineira/encerramento.

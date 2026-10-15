@@ -2,8 +2,26 @@ extends Node2D
 
 const Rules = preload("res://scripts/combat_rules_g10.gd")
 const FxScript = preload("res://scripts/combat_fx_g05.gd")
-const CASCUDO_FRAMES := preload("res://resources/animations/cascudo_de_cal_g18c.tres") as SpriteFrames
-const CASCUDO_ID := "CRE_CASCUDO_DE_CAL"
+const CREATURE_FRAMES := {
+	"CRE_CASCUDO_DE_CAL": preload("res://resources/animations/cre_cascudo_de_cal_g18d.tres"),
+	"CRE_PAPA_MEL": preload("res://resources/animations/cre_papa_mel_g18d.tres"),
+	"CRE_TOPETAO": preload("res://resources/animations/cre_topetao_g18d.tres"),
+	"CRE_FIANDEIRA": preload("res://resources/animations/cre_fiandeira_g18d.tres"),
+	"CRE_SAPO_DE_POCA": preload("res://resources/animations/cre_sapo_de_poca_g18d.tres"),
+	"CRE_LERDO_DE_MUSGO": preload("res://resources/animations/cre_lerdo_de_musgo_g18d.tres"),
+	"CRE_FAREJADOR_DE_BREJO": preload("res://resources/animations/cre_farejador_de_brejo_g18d.tres")
+}
+const CREATURE_BASE_IDS := {
+	"CRE_CASCUDO_DE_CAL_ENCHARCADO": "CRE_CASCUDO_DE_CAL",
+	"CRE_PAPA_MEL_ORVALHADO": "CRE_PAPA_MEL",
+	"CRE_TOPETAO_MAREJADO": "CRE_TOPETAO",
+	"CRE_FIANDEIRA_MAREJADA": "CRE_FIANDEIRA",
+	"CRE_FIANDEIRA_ENCHARCADA": "CRE_FIANDEIRA",
+	"CRE_SAPO_DE_POCA_MAREJADO": "CRE_SAPO_DE_POCA",
+	"CRE_LERDO_DE_MUSGO_MAREJADO": "CRE_LERDO_DE_MUSGO",
+	"CRE_LERDO_DE_MUSGO_ENCHARCADO": "CRE_LERDO_DE_MUSGO",
+	"CRE_FAREJADOR_DE_BREJO_MAREJADO": "CRE_FAREJADOR_DE_BREJO"
+}
 const TILE_W := 60.0
 const TILE_H := 30.0
 var cell_scale := 1.0
@@ -31,11 +49,15 @@ func configure(state: Dictionary, player_frames: SpriteFrames) -> void:
 	add_child(player_sprite)
 	sprites["player"] = player_sprite
 	for unit: Dictionary in combat.get("units", []):
-		if String(unit.get("side", "")) != "mob" or String(unit.get("canonical_id", "")) != CASCUDO_ID:
+		if String(unit.get("side", "")) != "mob":
 			continue
-		var creature_sprite := _make_sprite(CASCUDO_FRAMES, "Cascudo_" + String(unit.get("id", "")))
-		creature_sprite.offset = Vector2(0, -175)
-		creature_sprite.scale = Vector2.ONE * 0.36
+		var canonical_id := String(unit.get("canonical_id", ""))
+		var base_id := String(CREATURE_BASE_IDS.get(canonical_id, canonical_id))
+		if not CREATURE_FRAMES.has(base_id):
+			continue
+		var creature_sprite := _make_sprite(CREATURE_FRAMES[base_id], "Creature_" + String(unit.get("id", "")))
+		creature_sprite.offset = Vector2(0, -214)
+		creature_sprite.scale = Vector2.ONE * 0.5
 		creature_sprite.play("idle_front")
 		add_child(creature_sprite)
 		sprites[String(unit.get("id", ""))] = creature_sprite
@@ -63,14 +85,15 @@ func _process(_delta: float) -> void:
 		if sprite:
 			sprite.position = cell_to_local(Vector2i(int(unit.x), int(unit.y)))
 			sprite.z_index = int(unit.x) + int(unit.y) + 1
-			if String(unit.get("canonical_id", "")) == CASCUDO_ID:
+			if String(unit.get("side", "")) == "mob":
 				var player: Dictionary = combat.units[0]
 				var dx := int(player.x) - int(unit.x)
 				var dy := int(player.y) - int(unit.y)
 				var facing := "right" if abs(dx) > abs(dy) and dx > 0 else "left" if abs(dx) > abs(dy) else "front" if dy > 0 else "back"
-				var animation := "idle_" + facing
-				if sprite.animation != animation:
-					sprite.play(animation)
+				if sprite.animation.begins_with("idle_") or not sprite.is_playing():
+					var animation := "idle_" + facing
+					if sprite.animation != animation:
+						sprite.play(animation)
 
 func cell_to_local(cell: Vector2i) -> Vector2:
 	return origin + Vector2((cell.x - cell.y) * TILE_W * cell_scale * 0.5, (cell.x + cell.y) * TILE_H * cell_scale * 0.5)
@@ -169,6 +192,14 @@ func animate_player(action: String, direction := "se") -> void:
 	if sprite.sprite_frames.has_animation(animation_name):
 		sprite.animation = animation_name
 		sprite.play()
+
+func animate_unit_action(unit_id: String, action: String, direction := "front") -> void:
+	var sprite: AnimatedSprite2D = sprites.get(unit_id)
+	if sprite == null:
+		return
+	var animation_name := "%s_%s" % [action, direction]
+	if sprite.sprite_frames.has_animation(animation_name):
+		sprite.play(animation_name)
 
 func direction_from_step(step: Vector2i) -> String:
 	if step.x > 0:

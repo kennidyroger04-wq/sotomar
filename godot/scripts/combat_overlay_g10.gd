@@ -304,6 +304,12 @@ func _try_cast(actor: Dictionary, ability_id: String, target_cell: Vector2i, pla
 			if String(event.get("target_id", "")) == "player" and event.type == "DAMAGE_APPLIED":
 				board.trigger_fx("damage_flash", _cell(combat.units[0]))
 	for event: Dictionary in result.events:
+		if String(event.get("type", "")) == "DAMAGE_APPLIED":
+			var hit_unit := _unit_by_id(String(event.get("target_id", "")))
+			if not hit_unit.is_empty() and String(hit_unit.get("side", "")) == "mob":
+				var face_delta := _cell(actor) - _cell(hit_unit)
+				var facing := "right" if abs(face_delta.x) > abs(face_delta.y) and face_delta.x > 0 else "left" if abs(face_delta.x) > abs(face_delta.y) else "front" if face_delta.y > 0 else "back"
+				board.animate_unit_action(String(hit_unit.id), "defeat" if int(hit_unit.hp) <= 0 else "hurt", facing)
 		if String(event.get("type", "")) == "STATUS_APPLIED":
 			var status_target := _unit_by_id(String(event.get("target_id", "")))
 			if not status_target.is_empty():
@@ -392,11 +398,16 @@ func _enemy_turn() -> void:
 		foe.pm = int(foe.pm) - route.size()
 		current_direction = board.direction_from_step(destination - old_cell)
 		board.animate_player("walk", current_direction)
+		var walk_delta := destination - old_cell
+		var mob_facing := "right" if abs(walk_delta.x) > abs(walk_delta.y) and walk_delta.x > 0 else "left" if abs(walk_delta.x) > abs(walk_delta.y) else "front" if walk_delta.y > 0 else "back"
+		board.animate_unit_action(String(foe.id), "walk", mob_facing)
 	var ability_id := String(plan.ability.get("id", ""))
 	var target_cell: Vector2i = plan.target
 	var result := effects_engine.cast(combat, String(foe.id), ability_id, target_cell)
 	if result.get("ok", false):
 		log_label.text = "%s usa %s." % [String(foe.get("name", foe.id)), String(plan.ability.get("name", ability_id))]
+		var enemy_facing := "right" if abs(target_cell.x - int(foe.x)) > abs(target_cell.y - int(foe.y)) and target_cell.x > int(foe.x) else "left" if abs(target_cell.x - int(foe.x)) > abs(target_cell.y - int(foe.y)) else "front" if target_cell.y > int(foe.y) else "back"
+		board.animate_unit_action(String(foe.id), "attack", enemy_facing)
 		if ability_id == "fortificar":
 			board.trigger_fx("shield_block", _cell(foe))
 		else:

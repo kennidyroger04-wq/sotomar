@@ -1,0 +1,22 @@
+{
+  "url": "http://127.0.0.1:8992/index.html",
+  "state": {
+    "canvas": true,
+    "title": "Sotomar - Fímbria (protótipo 2D)"
+  },
+  "errors": [],
+  "map_id": "MAP_01",
+  "npcs": [
+    "NPC_MIRA",
+    "NPC_LIA",
+    "NPC_NILO",
+    "NPC_BRAM"
+  ],
+  "captures": [
+    "reports/g18d/captures/map01-npcs-360x800.png",
+    "reports/g18d/captures/map01-npcs-390x844.png",
+    "reports/g18d/captures/map01-npcs-844x390.png",
+    "reports/g18d/captures/map01-npcs-1280x720.png"
+  ],
+  "validation": "Chromium Web emulation only; no physical device claim"
+}

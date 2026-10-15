@@ -1,0 +1,28 @@
+{
+  "url": "http://127.0.0.1:8992/index.html",
+  "state": {
+    "canvas": true,
+    "title": "Sotomar - Fímbria (protótipo 2D)"
+  },
+  "errors": [],
+  "viewports": [
+    [
+      360,
+      800
+    ],
+    [
+      390,
+      844
+    ],
+    [
+      844,
+      390
+    ],
+    [
+      1280,
+      720
+    ]
+  ],
+  "encounter": "ENC_05 Topetão",
+  "validation": "Chromium Web render; screenshots captured during combat; no physical device claim"
+}
