@@ -5,6 +5,8 @@ const SceneryScript = preload("res://scripts/scenery_layer.gd")
 const LogicScript = preload("res://scripts/iso_board_logic.gd")
 const FRAMES_PATH := "res://resources/animations/cascudo_de_cal_g18c.tres"
 const TEXTURE_PATH := "res://assets/characters/cascudo_g18c/cascudo_de_cal_idle.png"
+const MIRA_FRAMES_PATH := "res://resources/animations/mira_g18c.tres"
+const MIRA_TEXTURE_PATH := "res://assets/characters/npc_mira_g18c/mira_idle.png"
 var checks := 0
 
 func _initialize() -> void:
@@ -34,6 +36,20 @@ func _run() -> void:
 	_check(FileAccess.file_exists("res://resources/animations/cascudo_de_cal_g18c.json"), "animation and pivot metadata are retained")
 	_check(FileAccess.get_file_as_bytes("res://art/source/generated_g18c/cascudo_de_cal_idle_master.png") == FileAccess.get_file_as_bytes(TEXTURE_PATH), "Cascudo runtime atlas is byte-identical to its source master")
 	_check(FileAccess.get_file_as_bytes("res://art/source/generated_g18c/caieira_lime_cottage_master.png") == FileAccess.get_file_as_bytes("res://assets/props/g18c/caieira_lime_cottage.png"), "Caieira runtime prop is byte-identical to its source master")
+	var mira_image := Image.load_from_file(ProjectSettings.globalize_path(MIRA_TEXTURE_PATH))
+	_check(mira_image != null and mira_image.get_size() == Vector2i(1122, 1402), "Mira atlas dimensions are exact")
+	_check(mira_image != null and mira_image.get_format() == Image.FORMAT_RGBA8 and mira_image.get_pixel(0, 0).a == 0.0, "Mira atlas has RGBA transparency")
+	var mira_frames := load(MIRA_FRAMES_PATH) as SpriteFrames
+	_check(mira_frames != null, "Mira SpriteFrames resource resolves")
+	if mira_frames != null:
+		for direction in ["front", "left", "back", "right"]:
+			var animation: String = "idle_" + direction
+			_check(mira_frames.has_animation(animation), "%s animation exists" % animation)
+			_check(mira_frames.get_frame_count(animation) == 4 and mira_frames.get_animation_loop(animation), "%s has a looping four-frame idle" % animation)
+			for frame_index in 4:
+				var texture := mira_frames.get_frame_texture(animation, frame_index) as AtlasTexture
+				_check(texture != null and texture.region.size == Vector2(280, 350), "%s frame %d uses the shared atlas region" % [animation, frame_index])
+	_check(FileAccess.get_file_as_bytes("res://art/source/generated_g18c/mira_idle_master.png") == FileAccess.get_file_as_bytes(MIRA_TEXTURE_PATH), "Mira runtime atlas is byte-identical to its source master")
 	var board := BoardScript.new()
 	root.add_child(board)
 	var player_frames := load("res://resources/combat/wayfarer_combat_g05.tres") as SpriteFrames
@@ -66,7 +82,14 @@ func _run() -> void:
 				expected_cell = Vector2i(int(source_prop.x), int(source_prop.y))
 		_check(expected_cell.x >= 0 and Vector2i(prop.get_meta("logical_cell")) == expected_cell and prop.position == LogicScript.cell_to_screen(expected_cell, Vector2.ZERO), "cottage retains its authored cell and depth anchor")
 	_check(house_count == 3, "all three Caieira house placeholders use the same original asset ID")
-	if checks == 50:
+	var mira_marker: Node2D = scenery.get_node_or_null("NPC_guarda_mira")
+	var mira_sprite := mira_marker.get_node_or_null("MiraSprite") as AnimatedSprite2D if mira_marker != null else null
+	_check(mira_marker != null and String(mira_marker.get_meta("visual_status", "")) == "original_proposal_idle", "Mira canonical NPC marker identifies the proposed original art status")
+	_check(mira_sprite != null and mira_sprite.sprite_frames == mira_frames, "Mira original idle is attached to the existing NPC marker")
+	_check(mira_sprite != null and mira_sprite.scale.is_equal_approx(Vector2.ONE * 0.22) and mira_sprite.offset == Vector2(0, -175) and mira_sprite.animation == "idle_front", "Mira uses the shared feet pivot, world scale, and directional idle")
+	_check(mira_marker != null and Vector2i(mira_marker.get_meta("logical_cell")) == Vector2i(1, 1) and mira_marker.z_index == 3, "Mira keeps the existing authored logical cell and depth")
+	_check(FileAccess.file_exists("res://resources/art/mira_g18c.json"), "Mira provenance and pivot metadata are retained")
+	if checks == 83:
 		print("G18C asset technical checks: %d passed" % checks)
 		quit(0)
 	else:

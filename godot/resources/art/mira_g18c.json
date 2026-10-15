@@ -1,0 +1,41 @@
+{
+  "id": "NPC_MIRA",
+  "entity": "Mira, Guarda da Estrada",
+  "canon_source": "js/data/npcs.js; role and dialogue only",
+  "canon_description": "Road guard; the source does not specify face, age, hair, clothing or shield.",
+  "visual_proposal": "Approachable watchwoman in teal and ochre travel clothes, wooden buckler, brass road badge, dark tied hair.",
+  "status": {
+    "art": "PRODUCED",
+    "integration": "INTEGRATED_IDLE_ONLY",
+    "owner_approval": "PENDING"
+  },
+  "source": "res://art/source/generated_g18c/mira_idle_master.png",
+  "runtime": "res://assets/characters/npc_mira_g18c/mira_idle.png",
+  "size": [
+    1122,
+    1402
+  ],
+  "format": "RGBA",
+  "frame_region": [
+    280,
+    350
+  ],
+  "grid": [
+    4,
+    4
+  ],
+  "directions": [
+    "front",
+    "left",
+    "back",
+    "right"
+  ],
+  "frames_per_direction": 4,
+  "pivot": {
+    "x": 140,
+    "y": 350,
+    "meaning": "bottom center of atlas frame, character feet"
+  },
+  "scale": 0.22,
+  "license": "Original generated asset; no third-party source art was used."
+}

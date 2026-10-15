@@ -1,0 +1,138 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/characters/npc_mira_g18c/mira_idle.png" id="1_kaisk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8kfll"]
+atlas = ExtResource("1_kaisk")
+region = Rect2(560, 0, 280, 350)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i1qc3"]
+atlas = ExtResource("1_kaisk")
+region = Rect2(560, 350, 280, 350)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5lrpv"]
+atlas = ExtResource("1_kaisk")
+region = Rect2(560, 700, 280, 350)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sdo2t"]
+atlas = ExtResource("1_kaisk")
+region = Rect2(560, 1050, 280, 350)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ko7ro"]
+atlas = ExtResource("1_kaisk")
+region = Rect2(0, 0, 280, 350)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x1pu8"]
+atlas = ExtResource("1_kaisk")
+region = Rect2(0, 350, 280, 350)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ah8jp"]
+atlas = ExtResource("1_kaisk")
+region = Rect2(0, 700, 280, 350)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j40w8"]
+atlas = ExtResource("1_kaisk")
+region = Rect2(0, 1050, 280, 350)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gawln"]
+atlas = ExtResource("1_kaisk")
+region = Rect2(280, 0, 280, 350)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d65y3"]
+atlas = ExtResource("1_kaisk")
+region = Rect2(280, 350, 280, 350)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tbyiq"]
+atlas = ExtResource("1_kaisk")
+region = Rect2(280, 700, 280, 350)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5fkdp"]
+atlas = ExtResource("1_kaisk")
+region = Rect2(280, 1050, 280, 350)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y8iq8"]
+atlas = ExtResource("1_kaisk")
+region = Rect2(840, 0, 280, 350)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hgjk7"]
+atlas = ExtResource("1_kaisk")
+region = Rect2(840, 350, 280, 350)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i84hc"]
+atlas = ExtResource("1_kaisk")
+region = Rect2(840, 700, 280, 350)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hccuh"]
+atlas = ExtResource("1_kaisk")
+region = Rect2(840, 1050, 280, 350)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8kfll")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i1qc3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5lrpv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sdo2t")
+}],
+"loop": true,
+"name": &"idle_back",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ko7ro")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x1pu8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ah8jp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j40w8")
+}],
+"loop": true,
+"name": &"idle_front",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gawln")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d65y3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tbyiq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5fkdp")
+}],
+"loop": true,
+"name": &"idle_left",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y8iq8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hgjk7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i84hc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hccuh")
+}],
+"loop": true,
+"name": &"idle_right",
+"speed": 3.0
+}]

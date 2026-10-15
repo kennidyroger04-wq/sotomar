@@ -3,6 +3,7 @@ extends Node2D
 const Logic = preload("res://scripts/iso_board_logic.gd")
 const PropPlaceholder = preload("res://scripts/prop_placeholder.gd")
 const NpcMarker = preload("res://scripts/npc_marker.gd")
+const MIRA_FRAMES := preload("res://resources/animations/mira_g18c.tres") as SpriteFrames
 const TREE_TEXTURE := "res://assets/props/g03/tree_mosswood.png"
 const ROCK_TEXTURE := "res://assets/props/g03/rock_moss_stone.png"
 const COTTAGE_TEXTURE := "res://assets/props/g18c/caieira_lime_cottage.png"
@@ -30,12 +31,22 @@ func _add_npc(data: Dictionary) -> void:
 	marker.npc_id = String(data.id)
 	marker.display_name = String(data.name)
 	marker.role = String(data.role)
+	if marker.npc_id == "guarda_mira":
+		marker.has_illustrated_sprite = true
+		var sprite := AnimatedSprite2D.new()
+		sprite.name = "MiraSprite"
+		sprite.sprite_frames = MIRA_FRAMES
+		sprite.animation = "idle_front"
+		sprite.offset = Vector2(0, -175)
+		sprite.scale = Vector2.ONE * 0.22
+		sprite.play()
+		marker.add_child(sprite)
 	var cell := Vector2i(int(data.x), int(data.y))
 	marker.position = Logic.cell_to_screen(cell, origin)
 	marker.z_index = cell.x + cell.y + 1
 	marker.set_meta("logical_cell", cell)
 	marker.set_meta("npc_id", marker.npc_id)
-	marker.set_meta("visual_status", "placeholder")
+	marker.set_meta("visual_status", "original_proposal_idle") if marker.has_illustrated_sprite else marker.set_meta("visual_status", "placeholder")
 	add_child(marker)
 
 func _add_map_prop(data: Dictionary) -> void:
