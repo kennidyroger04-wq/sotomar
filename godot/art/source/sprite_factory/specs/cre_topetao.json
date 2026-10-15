@@ -1,0 +1,14 @@
+{
+  "id": "CRE_TOPETAO",
+  "name": "Topetão",
+  "family": "crest_beast",
+  "canon": "Name, NORMAL/MAREJADO exposure and melee profile only; anatomy is not documented.",
+  "proposal": "Compact sturdy beast with a clearly separated upright feather-like crest and broad paws.",
+  "palette": [
+    "#c97852",
+    "#81444a",
+    "#543746",
+    "#f0b87e"
+  ],
+  "build": "crest"
+}

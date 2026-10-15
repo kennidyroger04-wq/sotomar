@@ -1,0 +1,19 @@
+{
+  "id": "NPC_NILO",
+  "name": "Nilo, Curandeiro",
+  "family": "humanoid",
+  "profile": "nilo",
+  "build": "humanoid",
+  "actions": [
+    "idle",
+    "walk"
+  ],
+  "canon": "NPC curandeiro; fala/serviço de recuperação de HP documentados. Aparência física não documentada.",
+  "proposal": "Proposta de curandeiro viajante com faixa clara, bolsa de ervas e bastão de trilha; não adiciona serviço nem item.",
+  "palette": [
+    "#5b806d",
+    "#3c6055",
+    "#41484a",
+    "#d7d0a0"
+  ]
+}

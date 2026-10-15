@@ -1,0 +1,14 @@
+{
+  "id": "CRE_LERDO_DE_MUSGO",
+  "name": "Lerdo-de-musgo",
+  "family": "slow_gastropod",
+  "canon": "Name, MAREJADO/ENCHARCADO exposures and support profile only; anatomy is not documented.",
+  "proposal": "Large gliding snail-like body with a layered mossy shell and planted eye stalks; no new support mechanic implied.",
+  "palette": [
+    "#79935b",
+    "#a58b59",
+    "#536b47",
+    "#d2c98b"
+  ],
+  "build": "slug"
+}

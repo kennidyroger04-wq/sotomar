@@ -1,0 +1,85 @@
+{
+  "id": "CRE_LERDO_DE_MUSGO",
+  "name": "Lerdo-de-musgo",
+  "canon_description": "Name, MAREJADO/ENCHARCADO exposures and support profile only; anatomy is not documented.",
+  "visual_proposal": "Large gliding snail-like body with a layered mossy shell and planted eye stalks; no new support mechanic implied.",
+  "family": "slow_gastropod",
+  "source_spec": "res://art/source/sprite_factory/specs/cre_lerdo_de_musgo.json",
+  "frame_size": [
+    192,
+    224
+  ],
+  "pivot_feet": [
+    96,
+    214
+  ],
+  "directions": [
+    "front",
+    "left",
+    "back",
+    "right"
+  ],
+  "actions": {
+    "idle": {
+      "path": "res://assets/characters/cre_lerdo_de_musgo_g18d/cre_lerdo_de_musgo_idle.png",
+      "fps": 4,
+      "loop": true,
+      "frames_per_direction": 4,
+      "atlas_layout": "columns=front,left,back,right; rows=frame index"
+    },
+    "walk": {
+      "path": "res://assets/characters/cre_lerdo_de_musgo_g18d/cre_lerdo_de_musgo_walk.png",
+      "fps": 8,
+      "loop": true,
+      "frames_per_direction": 4,
+      "atlas_layout": "columns=front,left,back,right; rows=frame index"
+    },
+    "attack": {
+      "path": "res://assets/characters/cre_lerdo_de_musgo_g18d/cre_lerdo_de_musgo_attack.png",
+      "fps": 8,
+      "loop": false,
+      "frames_per_direction": 4,
+      "atlas_layout": "columns=front,left,back,right; rows=frame index"
+    },
+    "hurt": {
+      "path": "res://assets/characters/cre_lerdo_de_musgo_g18d/cre_lerdo_de_musgo_hurt.png",
+      "fps": 8,
+      "loop": false,
+      "frames_per_direction": 4,
+      "atlas_layout": "columns=front,left,back,right; rows=frame index"
+    },
+    "defeat": {
+      "path": "res://assets/characters/cre_lerdo_de_musgo_g18d/cre_lerdo_de_musgo_defeat.png",
+      "fps": 5,
+      "loop": false,
+      "frames_per_direction": 4,
+      "atlas_layout": "columns=front,left,back,right; rows=frame index"
+    }
+  },
+  "sprite_frames": "res://resources/animations/cre_lerdo_de_musgo_g18d.tres",
+  "quality": {
+    "unique_frames": true
+  },
+  "master_sheets": [
+    "res://art/source/sprite_factory/creatures/cre_lerdo_de_musgo/cre_lerdo_de_musgo_idle_master.png",
+    "res://art/source/sprite_factory/creatures/cre_lerdo_de_musgo/cre_lerdo_de_musgo_walk_master.png",
+    "res://art/source/sprite_factory/creatures/cre_lerdo_de_musgo/cre_lerdo_de_musgo_attack_master.png",
+    "res://art/source/sprite_factory/creatures/cre_lerdo_de_musgo/cre_lerdo_de_musgo_hurt_master.png",
+    "res://art/source/sprite_factory/creatures/cre_lerdo_de_musgo/cre_lerdo_de_musgo_defeat_master.png"
+  ],
+  "review": {
+    "contact_sheet": "reports/g18d/contact-sheets/cre_lerdo_de_musgo.png",
+    "gifs": [
+      "reports/g18d/gifs/cre_lerdo_de_musgo_idle.gif",
+      "reports/g18d/gifs/cre_lerdo_de_musgo_walk.gif",
+      "reports/g18d/gifs/cre_lerdo_de_musgo_attack.gif"
+    ]
+  },
+  "integrity": {
+    "frame_count": 80,
+    "unique_frame_count": 80,
+    "duplicates": [],
+    "transparent_frames": [],
+    "pivot_outliers": []
+  }
+}

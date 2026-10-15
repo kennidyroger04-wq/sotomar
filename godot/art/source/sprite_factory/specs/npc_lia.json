@@ -1,0 +1,19 @@
+{
+  "id": "NPC_LIA",
+  "name": "Lia, Exploradora",
+  "family": "humanoid",
+  "profile": "lia",
+  "build": "humanoid",
+  "actions": [
+    "idle",
+    "walk"
+  ],
+  "canon": "NPC exploradora; canônica: falas sobre trilhas e missões registradas em js/data/npcs.js. Aparência física não documentada.",
+  "proposal": "Proposta de viajante com capuz curto, bolsa de ombro e rolo de mapa; sem presumir idade ou uniforme.",
+  "palette": [
+    "#547d79",
+    "#385c5d",
+    "#3c4148",
+    "#d4b477"
+  ]
+}

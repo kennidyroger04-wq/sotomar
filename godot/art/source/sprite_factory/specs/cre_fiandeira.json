@@ -1,0 +1,14 @@
+{
+  "id": "CRE_FIANDEIRA",
+  "name": "Fiandeira",
+  "family": "arachnid",
+  "canon": "Name, NORMAL/MAREJADO/ENCHARCADO exposures and ranged_control profile; anatomy and web mechanics are not documented.",
+  "proposal": "Eight-legged small arthropod with two ribbon-like tactile feelers; no web or new behavior is implied.",
+  "palette": [
+    "#778f75",
+    "#526b60",
+    "#344b4b",
+    "#c5d5a2"
+  ],
+  "build": "spider"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "CRE_CASCUDO_DE_CAL",
+  "name": "Cascudo-de-cal",
+  "family": "arthropod",
+  "canon": "Small, robust burrowing creature is the G18C visual proposal; canon itself records name, NORMAL/ENCHARCADO and melee profile.",
+  "proposal": "Segmented pale-limestone beetle, ochre markings, curious antennae; continues G18C motif.",
+  "palette": [
+    "#d9c38b",
+    "#b9894e",
+    "#76523b",
+    "#f1dc9d"
+  ],
+  "build": "beetle"
+}

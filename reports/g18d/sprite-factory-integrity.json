@@ -1,0 +1,192 @@
+{
+  "generator": "godot/tools/sprite_factory/build_g18d.py",
+  "renderer": "Pillow 2x supersampling, deterministic Python vector primitives",
+  "frame_size": [
+    192,
+    224
+  ],
+  "pivot_feet": [
+    96,
+    214
+  ],
+  "directions": [
+    "front",
+    "left",
+    "back",
+    "right"
+  ],
+  "actions": [
+    "idle",
+    "walk",
+    "attack",
+    "hurt",
+    "defeat"
+  ],
+  "species": [
+    {
+      "id": "CRE_CASCUDO_DE_CAL",
+      "family": "arthropod",
+      "actions": [
+        "idle",
+        "walk",
+        "attack",
+        "hurt",
+        "defeat"
+      ],
+      "frames": 80,
+      "unique": 80,
+      "duplicate_cycles": [],
+      "transparent": [],
+      "pivot_outliers": [],
+      "seconds": 3.96
+    },
+    {
+      "id": "CRE_FAREJADOR_DE_BREJO",
+      "family": "scent_hound",
+      "actions": [
+        "idle",
+        "walk",
+        "attack",
+        "hurt",
+        "defeat"
+      ],
+      "frames": 80,
+      "unique": 80,
+      "duplicate_cycles": [],
+      "transparent": [],
+      "pivot_outliers": [],
+      "seconds": 3.64
+    },
+    {
+      "id": "CRE_FIANDEIRA",
+      "family": "arachnid",
+      "actions": [
+        "idle",
+        "walk",
+        "attack",
+        "hurt",
+        "defeat"
+      ],
+      "frames": 80,
+      "unique": 80,
+      "duplicate_cycles": [],
+      "transparent": [],
+      "pivot_outliers": [],
+      "seconds": 8.01
+    },
+    {
+      "id": "CRE_LERDO_DE_MUSGO",
+      "family": "slow_gastropod",
+      "actions": [
+        "idle",
+        "walk",
+        "attack",
+        "hurt",
+        "defeat"
+      ],
+      "frames": 80,
+      "unique": 80,
+      "duplicate_cycles": [],
+      "transparent": [],
+      "pivot_outliers": [],
+      "seconds": 7.06
+    },
+    {
+      "id": "CRE_PAPA_MEL",
+      "family": "quadruped_forager",
+      "actions": [
+        "idle",
+        "walk",
+        "attack",
+        "hurt",
+        "defeat"
+      ],
+      "frames": 80,
+      "unique": 80,
+      "duplicate_cycles": [],
+      "transparent": [],
+      "pivot_outliers": [],
+      "seconds": 6.56
+    },
+    {
+      "id": "CRE_SAPO_DE_POCA",
+      "family": "amphibian",
+      "actions": [
+        "idle",
+        "walk",
+        "attack",
+        "hurt",
+        "defeat"
+      ],
+      "frames": 80,
+      "unique": 80,
+      "duplicate_cycles": [],
+      "transparent": [],
+      "pivot_outliers": [],
+      "seconds": 5.46
+    },
+    {
+      "id": "CRE_TOPETAO",
+      "family": "crest_beast",
+      "actions": [
+        "idle",
+        "walk",
+        "attack",
+        "hurt",
+        "defeat"
+      ],
+      "frames": 80,
+      "unique": 80,
+      "duplicate_cycles": [],
+      "transparent": [],
+      "pivot_outliers": [],
+      "seconds": 5.56
+    },
+    {
+      "id": "NPC_BRAM",
+      "family": "humanoid",
+      "actions": [
+        "idle",
+        "walk"
+      ],
+      "frames": 32,
+      "unique": 32,
+      "duplicate_cycles": [],
+      "transparent": [],
+      "pivot_outliers": [],
+      "seconds": 2.49
+    },
+    {
+      "id": "NPC_LIA",
+      "family": "humanoid",
+      "actions": [
+        "idle",
+        "walk"
+      ],
+      "frames": 32,
+      "unique": 32,
+      "duplicate_cycles": [],
+      "transparent": [],
+      "pivot_outliers": [],
+      "seconds": 2.26
+    },
+    {
+      "id": "NPC_NILO",
+      "family": "humanoid",
+      "actions": [
+        "idle",
+        "walk"
+      ],
+      "frames": 32,
+      "unique": 32,
+      "duplicate_cycles": [],
+      "transparent": [],
+      "pivot_outliers": [],
+      "seconds": 2.38
+    }
+  ],
+  "total_frames": 656,
+  "total_unique_frames": 656,
+  "elapsed_seconds": 47.4,
+  "status": "generated; artistic review pending"
+}

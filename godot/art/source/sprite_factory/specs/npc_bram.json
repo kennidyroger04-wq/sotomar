@@ -1,0 +1,19 @@
+{
+  "id": "NPC_BRAM",
+  "name": "Bram, Comerciante",
+  "family": "humanoid",
+  "profile": "bram",
+  "build": "humanoid",
+  "actions": [
+    "idle",
+    "walk"
+  ],
+  "canon": "NPC comerciante; fala atual diz que ainda não negocia. Aparência física não documentada.",
+  "proposal": "Proposta de viajante robusto com avental de estrada e embrulho de viagem; sem sinal de loja ou ação de comércio.",
+  "palette": [
+    "#9a6c4a",
+    "#76503f",
+    "#464248",
+    "#d6ae6d"
+  ]
+}

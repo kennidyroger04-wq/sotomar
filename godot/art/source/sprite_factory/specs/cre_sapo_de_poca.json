@@ -1,0 +1,14 @@
+{
+  "id": "CRE_SAPO_DE_POCA",
+  "name": "Sapo-de-poça",
+  "family": "amphibian",
+  "canon": "Name, MAREJADO exposure and control profile; no additional anatomy or effects are documented.",
+  "proposal": "Broad, low amphibian with long hind legs, smooth teal skin and raised eyes.",
+  "palette": [
+    "#6aa99a",
+    "#43847d",
+    "#315963",
+    "#c9df9c"
+  ],
+  "build": "frog"
+}

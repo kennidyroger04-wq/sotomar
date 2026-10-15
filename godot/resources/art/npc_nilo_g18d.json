@@ -1,0 +1,60 @@
+{
+  "id": "NPC_NILO",
+  "name": "Nilo, Curandeiro",
+  "canon_description": "NPC curandeiro; fala/serviço de recuperação de HP documentados. Aparência física não documentada.",
+  "visual_proposal": "Proposta de curandeiro viajante com faixa clara, bolsa de ervas e bastão de trilha; não adiciona serviço nem item.",
+  "family": "humanoid",
+  "source_spec": "res://art/source/sprite_factory/specs/npc_nilo.json",
+  "frame_size": [
+    192,
+    224
+  ],
+  "pivot_feet": [
+    96,
+    214
+  ],
+  "directions": [
+    "front",
+    "left",
+    "back",
+    "right"
+  ],
+  "actions": {
+    "idle": {
+      "path": "res://assets/characters/npc_nilo_g18d/npc_nilo_idle.png",
+      "fps": 4,
+      "loop": true,
+      "frames_per_direction": 4,
+      "atlas_layout": "columns=front,left,back,right; rows=frame index"
+    },
+    "walk": {
+      "path": "res://assets/characters/npc_nilo_g18d/npc_nilo_walk.png",
+      "fps": 8,
+      "loop": true,
+      "frames_per_direction": 4,
+      "atlas_layout": "columns=front,left,back,right; rows=frame index"
+    }
+  },
+  "sprite_frames": "res://resources/animations/npc_nilo_g18d.tres",
+  "quality": {
+    "unique_frames": true
+  },
+  "master_sheets": [
+    "res://art/source/sprite_factory/creatures/npc_nilo/npc_nilo_idle_master.png",
+    "res://art/source/sprite_factory/creatures/npc_nilo/npc_nilo_walk_master.png"
+  ],
+  "review": {
+    "contact_sheet": "reports/g18d/contact-sheets/npc_nilo.png",
+    "gifs": [
+      "reports/g18d/gifs/npc_nilo_idle.gif",
+      "reports/g18d/gifs/npc_nilo_walk.gif"
+    ]
+  },
+  "integrity": {
+    "frame_count": 32,
+    "unique_frame_count": 32,
+    "duplicates": [],
+    "transparent_frames": [],
+    "pivot_outliers": []
+  }
+}

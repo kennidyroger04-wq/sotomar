@@ -1,0 +1,14 @@
+{
+  "id": "CRE_PAPA_MEL",
+  "name": "Papa-mel",
+  "family": "quadruped_forager",
+  "canon": "Name, NORMAL/ORVALHADO exposure and melee profile only; no documented anatomy or diet.",
+  "proposal": "Low, round browsing mammal with broad muzzle and amber cheek ruffs; the name is not treated as proof of diet.",
+  "palette": [
+    "#d98b49",
+    "#a75639",
+    "#613b36",
+    "#f4c978"
+  ],
+  "build": "forager"
+}

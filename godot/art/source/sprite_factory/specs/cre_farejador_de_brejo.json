@@ -1,0 +1,14 @@
+{
+  "id": "CRE_FAREJADOR_DE_BREJO",
+  "name": "Farejador-de-brejo",
+  "family": "scent_hound",
+  "canon": "Name, MAREJADO exposure and pack profile only; no species or anatomy is documented.",
+  "proposal": "Lean marshland quadruped with long muzzle, lowered nose and large ears; not a real-world species claim.",
+  "palette": [
+    "#92765c",
+    "#675748",
+    "#443f42",
+    "#ceb48a"
+  ],
+  "build": "hound"
+}

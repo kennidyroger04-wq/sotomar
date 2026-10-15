@@ -1,0 +1,85 @@
+{
+  "id": "CRE_CASCUDO_DE_CAL",
+  "name": "Cascudo-de-cal",
+  "canon_description": "Small, robust burrowing creature is the G18C visual proposal; canon itself records name, NORMAL/ENCHARCADO and melee profile.",
+  "visual_proposal": "Segmented pale-limestone beetle, ochre markings, curious antennae; continues G18C motif.",
+  "family": "arthropod",
+  "source_spec": "res://art/source/sprite_factory/specs/cre_cascudo_de_cal.json",
+  "frame_size": [
+    192,
+    224
+  ],
+  "pivot_feet": [
+    96,
+    214
+  ],
+  "directions": [
+    "front",
+    "left",
+    "back",
+    "right"
+  ],
+  "actions": {
+    "idle": {
+      "path": "res://assets/characters/cre_cascudo_de_cal_g18d/cre_cascudo_de_cal_idle.png",
+      "fps": 4,
+      "loop": true,
+      "frames_per_direction": 4,
+      "atlas_layout": "columns=front,left,back,right; rows=frame index"
+    },
+    "walk": {
+      "path": "res://assets/characters/cre_cascudo_de_cal_g18d/cre_cascudo_de_cal_walk.png",
+      "fps": 8,
+      "loop": true,
+      "frames_per_direction": 4,
+      "atlas_layout": "columns=front,left,back,right; rows=frame index"
+    },
+    "attack": {
+      "path": "res://assets/characters/cre_cascudo_de_cal_g18d/cre_cascudo_de_cal_attack.png",
+      "fps": 8,
+      "loop": false,
+      "frames_per_direction": 4,
+      "atlas_layout": "columns=front,left,back,right; rows=frame index"
+    },
+    "hurt": {
+      "path": "res://assets/characters/cre_cascudo_de_cal_g18d/cre_cascudo_de_cal_hurt.png",
+      "fps": 8,
+      "loop": false,
+      "frames_per_direction": 4,
+      "atlas_layout": "columns=front,left,back,right; rows=frame index"
+    },
+    "defeat": {
+      "path": "res://assets/characters/cre_cascudo_de_cal_g18d/cre_cascudo_de_cal_defeat.png",
+      "fps": 5,
+      "loop": false,
+      "frames_per_direction": 4,
+      "atlas_layout": "columns=front,left,back,right; rows=frame index"
+    }
+  },
+  "sprite_frames": "res://resources/animations/cre_cascudo_de_cal_g18d.tres",
+  "quality": {
+    "unique_frames": true
+  },
+  "master_sheets": [
+    "res://art/source/sprite_factory/creatures/cre_cascudo_de_cal/cre_cascudo_de_cal_idle_master.png",
+    "res://art/source/sprite_factory/creatures/cre_cascudo_de_cal/cre_cascudo_de_cal_walk_master.png",
+    "res://art/source/sprite_factory/creatures/cre_cascudo_de_cal/cre_cascudo_de_cal_attack_master.png",
+    "res://art/source/sprite_factory/creatures/cre_cascudo_de_cal/cre_cascudo_de_cal_hurt_master.png",
+    "res://art/source/sprite_factory/creatures/cre_cascudo_de_cal/cre_cascudo_de_cal_defeat_master.png"
+  ],
+  "review": {
+    "contact_sheet": "reports/g18d/contact-sheets/cre_cascudo_de_cal.png",
+    "gifs": [
+      "reports/g18d/gifs/cre_cascudo_de_cal_idle.gif",
+      "reports/g18d/gifs/cre_cascudo_de_cal_walk.gif",
+      "reports/g18d/gifs/cre_cascudo_de_cal_attack.gif"
+    ]
+  },
+  "integrity": {
+    "frame_count": 80,
+    "unique_frame_count": 80,
+    "duplicates": [],
+    "transparent_frames": [],
+    "pivot_outliers": []
+  }
+}
