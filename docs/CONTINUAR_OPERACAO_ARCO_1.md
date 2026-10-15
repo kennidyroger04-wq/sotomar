@@ -39,3 +39,15 @@ O combate agora executa as cinco habilidades comuns por `CombatEffectsG18B` no o
 ENC_01 e ENC_05 mantêm os gatilhos provisórios já existentes. ENC_02–ENC_12 podem ser montados tecnicamente a partir do catálogo para testes, mas não ganharam gatilhos. Recompensas/repetição indefinidas permanecem sem inferência. A Sineira e Coruja-muda estão fora da implementação comum até existir contrato canônico suficiente. Não promover a G15 como integralmente completa para esses contratos.
 
 O JavaScript original continua bloqueado em `js/tests/run-tests.js:501` por assets Kenney ausentes (362 verificações passaram antes da falha). Não alterar o teste nem esconder a falta dos assets; consultar `ASSETS_AUSENTES.md`.
+
+## Continuidade após G18C
+
+- Branch de arte: `operation/g18c-art`, criada a partir do SHA G18B `6abb5fb0683a7287026b4413afc9e2c14590c755`.
+- Checkpoint inicial remoto: `checkpoint/g18c-start` e tag `checkpoint-g18c-start-20261015`.
+- Primeiro checkpoint de arte enviado: `2a43a797317029a3228fefde2eacf27a5f86d180` (`feat(art): integrate Caieira cottage and Cascudo idle`). Relatórios e matriz G18C entram no commit seguinte.
+- Arte desta fatia: casa de Caieira (`VIS_HOUSE_SMALL`) e idle do Cascudo (`CRE_CASCUDO_DE_CAL`) integrados ao Godot. Capturas Web em `reports/g18c/captures/`; contact sheets de revisão em `godot/reviews/g18c/` e `reports/g18c/contact-sheets/`.
+- Foram reexecutados os 17 testes `godot/tests/test_*.gd`, cinco scripts Python, sete scripts JavaScript auxiliares, verificações de registries, importação Godot e export Web. As 50 novas verificações estão em `godot/tests/test_assets_g18c.gd`; `test_iso_board.gd` valida pivôs/escalas por categoria.
+- Chromium: a regressão ENC_05 G18B concluiu habilidade e retorno à exploração sem erros; `godot/tools/capture_combat_cascudo_g18c.js` abre/captura ENC_01 com o Cascudo original. Servir `build/web` em porta livre e passar URL/diretório a esses scripts. Teste Chromium emulado, sem alegação de teste físico.
+- A suíte JS original continua falhando em `js/tests/run-tests.js:501` depois de 362 verificações por 20 PNGs/4 licenças ausentes; caminhos exatos em `MATRIZ_MIGRACAO_KENNEY.md`. Os 16 OGG/licenças de áudio foram preservados.
+- Próximos lotes: sprite individual de Mira com idle e pivô; muro/alvenaria de Caieira; depois as outras seis criaturas comuns como espécies diferentes, NPCs restantes, cenários regionais, especiais, efeitos e ícones. Migrar manifests JS só quando existirem correspondentes reais por ID.
+- Não mesclado em `main`, sem publicação externa. Revisão artística e aprovação pelo proprietário continuam pendentes.

@@ -20,6 +20,7 @@
 | G17 — save/continuidade | IMPLEMENTADO, TESTADO; arquivo Web VALIDADO em emulação | Schema v1, journal dois slots, checksum, migração JS V2; exportação, seletor de arquivo Web, prévia/confirm/cancel, cópia pré-importação recuperável e reload testados no Chromium. Sem teste físico de celular. Ver `RELATORIO_G17.md` e `RELATORIO_G18A.md`. |
 | G18A — consolidação/mobile | IMPLEMENTADO parcialmente; regressões TESTADAS; Web VALIDADO tecnicamente | Reflow da interface, controles de inventário/equipamento/consumível, cura de Nilo, backup visual e auditoria de lacunas. G15/G16 permanecem parciais; sem publicação, teste físico ou aprovação artística. Ver `RELATORIO_G18A.md`. |
 | G18B — combate/paridade | IMPLEMENTADO; TESTADO; Web VALIDADO no fluxo ENC_05 | Lança, veneno, Golpe, vitória e retorno à exploração passaram no Chromium mobile emulado; 69 testes G18B, regressões G01–G18A e export Web. Gatilhos narrativos, derrota Web/retry e contratos especiais seguem pendentes. Ver `RELATORIO_G18B.md`. |
+| G18C — produção visual | PARCIAL; IMPLEMENTADO/TESTADO | Casa original integrada nos três props de Caieira; Cascudo-de-cal com idle direcional no board G10/ENC_01. 17 GDScript, 5 Python, 7 JS auxiliares, export Web e Chromium passaram na repetição registrada. NPCs e seis espécies comuns, Sineira/Coruja-muda, muros/ponte/ruínas e FX específicos continuam pendentes. JS legado ainda exige Kenney ausente. Ver `RELATORIO_G18C.md`. |
 
 ## Limites atuais
 
@@ -27,10 +28,15 @@
 - JavaScript original é a fonte de compatibilidade e permanece sem alteração.
 - Não houve publicação externa, teste em dispositivo físico ou aprovação humana de arte/diversão.
 - `node js/tests/run-tests.js` segue falhando na verificação de recursos ausentes: 362 checks antecedem a falha em `js/tests/run-tests.js:501`; a auditoria atual registra 20 PNGs e 4 licenças ausentes em `ASSETS_AUSENTES.md`.
+- G18C confirmou novamente os 20 PNGs e quatro licenças Kenney ausentes. A exportação ativa Godot não os carrega, mas a migração dos manifests JS não foi concluída. Nenhum caminho ausente foi ocultado.
 
 ## Atualização G18B
 
 As cinco habilidades comuns e os perfis de IA com regra canônica estão implementados e cobertos por fixtures JavaScript/Godot. Os 12 encontros têm cenários técnicos montáveis; só ENC_01/05 conservam acesso provisório pelo mundo. A Sineira/Coruja-muda, repetição/recompensas sem política canônica, derrota/retry Web e inspeção física permanecem **PENDENTES**. A vitória ENC_05 em Chromium emulado retornou à exploração sem erro de console/rede. Nenhum conteúdo foi publicado e a árvore JS de produção não foi alterada.
+
+## Atualização G18C — fatia visual recuperável
+
+Casa de Caieira e idle do Cascudo-de-cal foram produzidos e integrados; veja `RELATORIO_G18C.md` e `CATALOGO_VISUAL_ARCO_1.md`. Não marcar arte aprovada nem G18C concluída. Mira/Lia/Nilo/Bram, demais espécies, especiais, estruturas regionais, efeitos e ícones seguem pendentes. A suíte JS original continua falhando nos assets ausentes depois de 362 verificações.
 # Atualização G18B — combate tático
 
 - **IMPLEMENTADO:** ações comuns de G15 (Golpe, Avanço, Cruz, Lança e Fortificar) ligadas ao overlay G10; efeitos temporários; seleção determinística da IA; definições técnicas ENC_01–ENC_12.
