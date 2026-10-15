@@ -5,6 +5,8 @@ var kind := "tree"
 func _draw() -> void:
 	if kind.ends_with("_placeholder"):
 		_draw_placeholder()
+	elif kind == "house":
+		return
 	elif kind == "tree":
 		_draw_shadow(Vector2(0, -5), Vector2(22, 7))
 	elif kind == "rock":

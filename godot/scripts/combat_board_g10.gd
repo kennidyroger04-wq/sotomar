@@ -2,6 +2,8 @@ extends Node2D
 
 const Rules = preload("res://scripts/combat_rules_g10.gd")
 const FxScript = preload("res://scripts/combat_fx_g05.gd")
+const CASCUDO_FRAMES := preload("res://resources/animations/cascudo_de_cal_g18c.tres") as SpriteFrames
+const CASCUDO_ID := "CRE_CASCUDO_DE_CAL"
 const TILE_W := 60.0
 const TILE_H := 30.0
 var cell_scale := 1.0
@@ -28,6 +30,15 @@ func configure(state: Dictionary, player_frames: SpriteFrames) -> void:
 	player_sprite.scale = Vector2.ONE * 0.43
 	add_child(player_sprite)
 	sprites["player"] = player_sprite
+	for unit: Dictionary in combat.get("units", []):
+		if String(unit.get("side", "")) != "mob" or String(unit.get("canonical_id", "")) != CASCUDO_ID:
+			continue
+		var creature_sprite := _make_sprite(CASCUDO_FRAMES, "Cascudo_" + String(unit.get("id", "")))
+		creature_sprite.offset = Vector2(0, -175)
+		creature_sprite.scale = Vector2.ONE * 0.36
+		creature_sprite.play("idle_front")
+		add_child(creature_sprite)
+		sprites[String(unit.get("id", ""))] = creature_sprite
 	for effect_id in ["physical_slash", "impact", "shield_block", "damage_flash", "defeat_marker"]:
 		var effect := Node2D.new()
 		effect.name = "FX_" + effect_id
@@ -52,6 +63,14 @@ func _process(_delta: float) -> void:
 		if sprite:
 			sprite.position = cell_to_local(Vector2i(int(unit.x), int(unit.y)))
 			sprite.z_index = int(unit.x) + int(unit.y) + 1
+			if String(unit.get("canonical_id", "")) == CASCUDO_ID:
+				var player: Dictionary = combat.units[0]
+				var dx := int(player.x) - int(unit.x)
+				var dy := int(player.y) - int(unit.y)
+				var facing := "right" if abs(dx) > abs(dy) and dx > 0 else "left" if abs(dx) > abs(dy) else "front" if dy > 0 else "back"
+				var animation := "idle_" + facing
+				if sprite.animation != animation:
+					sprite.play(animation)
 
 func cell_to_local(cell: Vector2i) -> Vector2:
 	return origin + Vector2((cell.x - cell.y) * TILE_W * cell_scale * 0.5, (cell.x + cell.y) * TILE_H * cell_scale * 0.5)
@@ -98,7 +117,8 @@ func _draw() -> void:
 		if String(foe.get("side", "")) != "mob" or int(foe.get("hp", 0)) <= 0:
 			continue
 		var foe_pos := cell_to_local(Vector2i(int(foe.x), int(foe.y)))
-		_draw_enemy(foe_pos, String(foe.get("canonical_id", "")))
+		if not sprites.has(String(foe.get("id", ""))):
+			_draw_enemy(foe_pos, String(foe.get("canonical_id", "")))
 		draw_string(font, foe_pos + Vector2(-48, 28) * cell_scale, "%d/%d" % [foe.hp, foe.max_hp], HORIZONTAL_ALIGNMENT_CENTER, 96 * cell_scale, int(13 * cell_scale), Color.WHITE)
 
 func unit_at(cell: Vector2i) -> Dictionary:
@@ -137,7 +157,7 @@ func _make_sprite(frames: SpriteFrames, node_name: String) -> AnimatedSprite2D:
 	sprite.sprite_frames = frames
 	sprite.centered = true
 	sprite.offset = Vector2(0, -72)
-	sprite.animation = "idle_se"
+	sprite.animation = "idle_se" if frames.has_animation("idle_se") else "idle_front"
 	sprite.play()
 	return sprite
 

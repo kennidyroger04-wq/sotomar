@@ -75,8 +75,13 @@ func _scenery_positions_align(scene: Node) -> bool:
 		if prop.z_index != cell.x + cell.y + 1:
 			return false
 		var sprite := prop.get_node_or_null("IllustratedSprite") as Sprite2D
-		if sprite != null and (sprite.centered or sprite.scale != Vector2(0.5, 0.5)):
-			return false
+		if sprite != null:
+			var asset_id := String(prop.get_meta("asset_id", ""))
+			var expected_scale := 0.11 if asset_id == "VIS_HOUSE_SMALL" else 0.5
+			var texture_size := sprite.texture.get_size()
+			var expected_position := Vector2(-texture_size.x * expected_scale * 0.5, -texture_size.y * expected_scale)
+			if sprite.centered or not sprite.scale.is_equal_approx(Vector2.ONE * expected_scale) or not sprite.position.is_equal_approx(expected_position):
+				return false
 	return scene.scenery.get_child_count() == scene.map_data.props.size() + scene.map_data.npcs.size()
 
 func _test_projection_round_trip() -> void:

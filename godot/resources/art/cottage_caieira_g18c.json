@@ -1,0 +1,26 @@
+{
+  "asset_id": "VIS_HOUSE_SMALL",
+  "entity": "Caieira cottage",
+  "canon_source": "MAP_01 Caieira in the Godot map registry",
+  "canon_description": "Caieira is a canonical settlement. Architecture/materials are unspecified in source.",
+  "visual_proposal": "Limewashed stone cottage with dark timber framing, ochre tile roof, wooden door and dried herbs.",
+  "status": {
+    "art": "PRODUCED",
+    "godot_integration": "INTEGRATED",
+    "owner_approval": "PENDING"
+  },
+  "source": "res://art/source/generated_g18c/caieira_lime_cottage_master.png",
+  "runtime": "res://assets/props/g18c/caieira_lime_cottage.png",
+  "size": [
+    1312,
+    1199
+  ],
+  "format": "RGBA",
+  "pivot": {
+    "x": 656,
+    "y": 1199,
+    "meaning": "bottom center of building footprint"
+  },
+  "scale": 0.11,
+  "license": "Original generated asset; no third-party source art was used."
+}

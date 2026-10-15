@@ -1,0 +1,28 @@
+{
+  "id": "CRE_CASCUDO_DE_CAL",
+  "entity": "Cascudo-de-cal",
+  "canon_source": "js/data/fimbria-canonical.js and js/data/mobs.js",
+  "canon_description": "The repository defines the species identity, combat stats and status variants. It does not prescribe shell anatomy, markings or facial expression.",
+  "visual_proposal": "Small robust burrowing creature with chalk-limestone segmented plates, ochre marks, antennae and curious eyes.",
+  "status": {
+    "art": "PRODUCED",
+    "godot_integration": "INTEGRATED_IDLE_ONLY",
+    "owner_approval": "PENDING"
+  },
+  "source": "res://art/source/generated_g18c/cascudo_de_cal_idle_master.png",
+  "runtime_atlas": "res://assets/characters/cascudo_g18c/cascudo_de_cal_idle.png",
+  "sheet_size": [1122, 1402],
+  "frame_region": [280, 350],
+  "grid": [4, 4],
+  "directions": ["front", "left", "back", "right"],
+  "actions": {
+    "idle": {"rows": 4, "frames_per_direction": 4, "fps": 3, "loop": true},
+    "walk": null,
+    "attack": null,
+    "hurt": null,
+    "death": null
+  },
+  "pivot": {"x": 140, "y": 350, "meaning": "bottom center of each atlas region; actor position is the feet/base"},
+  "scale": 0.36,
+  "license": "Original generated asset; no third-party source art was used."
+}

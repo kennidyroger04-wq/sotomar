@@ -5,6 +5,7 @@ const PropPlaceholder = preload("res://scripts/prop_placeholder.gd")
 const NpcMarker = preload("res://scripts/npc_marker.gd")
 const TREE_TEXTURE := "res://assets/props/g03/tree_mosswood.png"
 const ROCK_TEXTURE := "res://assets/props/g03/rock_moss_stone.png"
+const COTTAGE_TEXTURE := "res://assets/props/g18c/caieira_lime_cottage.png"
 
 var origin := Vector2.ZERO
 var map_width := 10
@@ -58,6 +59,8 @@ func _add_prop_sprite(prop: Node2D, asset_id: String) -> void:
 		texture_path = TREE_TEXTURE
 	elif asset_id == "VIS_ROCKS_GRASS":
 		texture_path = ROCK_TEXTURE
+	elif asset_id == "VIS_HOUSE_SMALL":
+		texture_path = COTTAGE_TEXTURE
 	if texture_path.is_empty():
 		return
 	var texture := load(texture_path) as Texture2D
@@ -68,15 +71,16 @@ func _add_prop_sprite(prop: Node2D, asset_id: String) -> void:
 	sprite.name = "IllustratedSprite"
 	sprite.texture = texture
 	sprite.centered = false
-	sprite.position = Vector2(-texture.get_width() * 0.25, -texture.get_height() * 0.5)
-	sprite.scale = Vector2(0.5, 0.5)
+	var scale_value := 0.11 if asset_id == "VIS_HOUSE_SMALL" else 0.5
+	sprite.position = Vector2(-texture.get_width() * scale_value * 0.5, -texture.get_height() * scale_value)
+	sprite.scale = Vector2.ONE * scale_value
 	prop.add_child(sprite)
 
 func _kind_for_asset(asset_id: String) -> String:
 	match asset_id:
 		"VIS_TREE_SMALL": return "tree"
 		"VIS_ROCKS_GRASS": return "rock"
-		"VIS_HOUSE_SMALL": return "house_placeholder"
+		"VIS_HOUSE_SMALL": return "house"
 		"VIS_MASONRY_STRUCTURE": return "masonry_placeholder"
 		"VIS_LOW_WALL": return "wall_placeholder"
 		_: return "bush_placeholder"

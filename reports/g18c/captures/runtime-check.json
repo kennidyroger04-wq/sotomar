@@ -1,0 +1,28 @@
+{
+  "url": "http://127.0.0.1:8992/index.html",
+  "canvas": true,
+  "title": "Sotomar - Fímbria (protótipo 2D)",
+  "errors": [],
+  "viewports": [
+    [
+      "mobile-portrait-390x844",
+      390,
+      844
+    ],
+    [
+      "mobile-landscape-844x390",
+      844,
+      390
+    ],
+    [
+      "mobile-small-360x800",
+      360,
+      800
+    ],
+    [
+      "desktop-1280x720",
+      1280,
+      720
+    ]
+  ]
+}
